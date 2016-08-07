@@ -8,12 +8,9 @@
 
 #import "PunchListTableViewController.h"
 #import "PunchListTableViewCell.h"
-#import "RestfulOperating.h"
 
 @interface PunchListTableViewController ()
 
-// save data for userPunchListData from webservice
-@property (nonatomic,strong) NSDictionary* punchListData;
 // list data
 @property (nonatomic,strong) NSMutableArray* objects;
 
@@ -24,9 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    RestfulOperating *restfuloper = [RestfulOperating alloc];
-    self.punchListData = restfuloper.getUserPunchListData;
-    [self reloadView:self.punchListData];
+    [self startRequest];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -67,6 +62,26 @@
     return cell;
 }
 
+-(void)startRequest
+{
+    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"192.168.0.6" customHeaderFields:nil];
+    MKNetworkOperation *op = [engine operationWithPath:@"api/labourTimeList" params:nil httpMethod:@"GET" ssl:NO];
+    
+    
+    [op addCompletionHandler:^(MKNetworkOperation *operation) {
+        
+        NSLog(@"responseData : %@", [operation responseString]);
+        NSData *data  = [operation responseData];
+        NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        [self reloadView:resDict];
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError* err) {
+        NSLog(@"MKNetwork request error : %@", [err localizedDescription]);
+    }];
+    [engine enqueueOperation:op];
+    
+}
+
 -(void)reloadView:(NSDictionary*)res
 {
     NSNumber *resultCodeObj = [res objectForKey:@"ResultCode"];
@@ -76,7 +91,7 @@
         [self.tableView reloadData];
     } else {
         NSString *errorStr = [resultCodeObj stringValue];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误信息"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"error for webservice"
                                                             message:errorStr
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
