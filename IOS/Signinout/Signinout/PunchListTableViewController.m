@@ -38,12 +38,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+
     return self.objects.count;
 }
 
@@ -64,8 +64,8 @@
 
 -(void)startRequest
 {
-    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"192.168.0.6" customHeaderFields:nil];
-    MKNetworkOperation *op = [engine operationWithPath:@"api/labourTimeList" params:nil httpMethod:@"GET" ssl:NO];
+    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"www.maiasoft.tk" customHeaderFields:nil];
+    MKNetworkOperation *op = [engine operationWithPath:@"api/labourTimeList" params:nil httpMethod:@"GET" ssl:YES];
     
     
     [op addCompletionHandler:^(MKNetworkOperation *operation) {
@@ -90,13 +90,21 @@
         self.objects = [res objectForKey:@"labList"];
         [self.tableView reloadData];
     } else {
-        NSString *errorStr = [resultCodeObj stringValue];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"error for webservice"
-                                                            message:errorStr
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
-        [alertView show];
+        NSString *errorStr = [@"Return code:" stringByAppendingString:[resultCodeObj stringValue]];
+
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Not data" message:errorStr preferredStyle:UIAlertControllerStyleAlert ];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"Close"
+                                    style:UIAlertActionStyleCancel
+                                    handler:^(UIAlertAction * action) {
+                                        //Handle your yes please button action here
+                                    }];
+        
+        [alert addAction:yesButton];
+
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
