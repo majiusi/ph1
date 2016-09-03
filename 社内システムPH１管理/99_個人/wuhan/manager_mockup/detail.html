@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>一覧</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+    </head>
+    
+    <body>
+        <form action="detail.html">
+            <div id="divContent">
+                <table id="tblInfo">
+                    <tr>
+                        <td>ユーザー：</td>
+                        <td id="tdUId">呉翰</td>
+                        <td>課：</td>
+                        <td id="tdUId">1</td>
+                        <td>月：</td>
+                        <td id="tdUId">201608</td>
+                        <td>ステータス：</td>
+                        <td id="tdUId">承認待ち</td>
+                    </tr>
+                    <tr>
+                        <td>予定出勤日数：</td>
+                        <td id="tdUId">22</td>
+                        <td>実績出勤日数：</td>
+                        <td id="tdUId">21</td>
+                        <td>予定出勤時間：</td>
+                        <td id="tdUId">176</td>
+                        <td>実績出勤時間：</td>
+                        <td id="tdUId">168</td>
+                    </tr>
+                </table>
+            </div>
+
+            <br />
+
+            <div id="divDetail">
+                <table id="tblLInfo">
+                    <tr>
+                        <th class="field">日付</th>
+                        <th class="field">曜日</th>
+                        <th class="field">休日祝日</th>
+                        <th class="field">出勤時間</th>
+                        <th class="field">退勤時間</th>
+                        <th class="field">昼休憩時間</th>
+                        <th class="field">夜休憩時間</th>
+                        <th class="field">控除時間</th>
+                        <th class="field">勤務時間</th>
+                        <th class="field">事由</th>
+                        <th class="field"></th>
+                    </tr>
+                    <tr>
+                        <td class="field">2016-08-01</td>
+                        <td class="field">月</td>
+                        <td class="field"></td>
+                        <td class="field">9:30</td>
+                        <td class="field">18:30</td>
+                        <td class="field">1:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">8:00</td>
+                        <td class="field"></td>
+                        <td class="field"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field_even">2016-08-02</td>
+                        <td class="field_even">火</td>
+                        <td class="field_even"></td>
+                        <td class="field_even">9:30</td>
+                        <td class="field_even">18:30</td>
+                        <td class="field_even">1:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">8:00</td>
+                        <td class="field_even"></td>
+                        <td class="field_even"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field">2016-08-03</td>
+                        <td class="field">水</td>
+                        <td class="field"></td>
+                        <td class="field">9:30</td>
+                        <td class="field">18:30</td>
+                        <td class="field">1:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">8:00</td>
+                        <td class="field"></td>
+                        <td class="field"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field_even">2016-08-04</td>
+                        <td class="field_even">木</td>
+                        <td class="field_even"></td>
+                        <td class="field_even">9:30</td>
+                        <td class="field_even">18:30</td>
+                        <td class="field_even">1:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">8:00</td>
+                        <td class="field_even"></td>
+                        <td class="field_even"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field">2016-08-05</td>
+                        <td class="field">金</td>
+                        <td class="field"></td>
+                        <td class="field">9:30</td>
+                        <td class="field">18:30</td>
+                        <td class="field">1:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">8:00</td>
+                        <td class="field"></td>
+                        <td class="field"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field_even">2016-08-06</td>
+                        <td class="field_even">土</td>
+                        <td class="field_even">休日</td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field">2016-08-07</td>
+                        <td class="field">日</td>
+                        <td class="field">休日</td>
+                        <td class="field">9:30</td>
+                        <td class="field">18:30</td>
+                        <td class="field">1:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">8:00</td>
+                        <td class="field"></td>
+                        <td class="field"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field_even">2016-08-08</td>
+                        <td class="field_even">月</td>
+                        <td class="field_even"></td>
+                        <td class="field_even">9:30</td>
+                        <td class="field_even">18:30</td>
+                        <td class="field_even">1:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">8:00</td>
+                        <td class="field_even"></td>
+                        <td class="field_even"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field">2016-08-09</td>
+                        <td class="field">火</td>
+                        <td class="field"></td>
+                        <td class="field">9:30</td>
+                        <td class="field">18:30</td>
+                        <td class="field">1:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">0:00</td>
+                        <td class="field">8:00</td>
+                        <td class="field"></td>
+                        <td class="field"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field_even">2016-08-10</td>
+                        <td class="field_even">水</td>
+                        <td class="field_even"></td>
+                        <td class="field_even">9:30</td>
+                        <td class="field_even">18:30</td>
+                        <td class="field_even">1:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">0:00</td>
+                        <td class="field_even">8:00</td>
+                        <td class="field_even"></td>
+                        <td class="field_even"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field">2016-08-11</td>
+                        <td class="field">木</td>
+                        <td class="field">山の日</td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field_even">2016-08-12</td>
+                        <td class="field_even">金</td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even">夏休み</td>
+                        <td class="field_even"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field">2016-08-13</td>
+                        <td class="field">土</td>
+                        <td class="field">休日</td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"></td>
+                        <td class="field"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="field_even">2016-08-14</td>
+                        <td class="field_even">日</td>
+                        <td class="field_even">休日</td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"></td>
+                        <td class="field_even"><input type="submit" id="btnModify" value="修正" title="修正" class="button" onClick="alert('修正を行いますか？');" /></td>
+                    </tr>
+                </table>
+            </div>
+
+            <br />
+            <div id="divButton">
+                <table id="tblSubmit">
+                    <tr>
+                        <td>
+                            <input type="submit" id="btnLogin" value="承認" title="承認" class="button" />
+                        </td>
+                        <td>
+                            <input type="submit" id="btnLogin" value="出力" title="出力" class="button" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </body>
+</html>

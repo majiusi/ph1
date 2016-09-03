@@ -1,0 +1,388 @@
+* {
+margin: 0px;
+padding: 0px;
+}
+
+body {
+background-color: #FFFFF0;
+margin: 10px;
+}
+
+#divContainer {
+font-family: verdana, Simsun;
+text-align: center;
+width: 600px;
+position: absolute;
+top: 200px;
+}
+
+.sys_time {
+font-family: verdana, Simsun;
+font-size: 9pt;
+color: #0000FF;
+}
+
+.info {
+font-family: verdana, Simsun;
+font-weight: 600;
+font-size: 14pt;
+color: #FF0000;
+margin-top: 5px;
+}
+
+.msg {
+font-family: verdana, Simsun;
+font-weight: 400;
+font-size: 10pt;
+color: #FF0000;
+margin: 10px 0px 5px 2px;
+}
+
+.field {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #000000;
+background-color: #FFFFF0;
+border-style: none;
+text-align: right;
+}
+
+.field_error {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #000000;
+background-color: #FCE1E1;
+border-style: none;
+text-align: right;
+}
+
+.field_err {
+color: #FF0000;
+font-weight: bold;
+}
+
+.field_ok, .field_even {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #000000;
+background-color: #D8FAD7;
+border-style: none;
+text-align: right;
+}
+
+.navi {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #0000FF;
+background-color: #FFFFF0;
+margin-top: 10px;
+margin-left: 6px;
+}
+
+em {
+color: #FF0000;
+margin: 5px;
+}
+
+.errormsg {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #FF0000;
+background-color: #FFFFF0;
+border-style: none;
+text-align: right;
+}
+
+.text_normal,
+.text_focus,
+.text_error,
+.text_login_normal,
+.text_login_focus,
+.text_login_error,
+.select_auth_normal {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #000000;
+background-color: #FFFFFF;
+border-width: 1px;
+border-color: grey;
+border-top-style: inset;
+border-bottom-style: outset;
+border-left-style: inset;
+border-right-style: outset;
+text-align: left;
+width: 180px;
+}
+
+.text_focus,
+.text_login_focus {
+background-color: #FFFFAA;
+}
+
+.text_error,
+.text_login_error {
+background-color: #FFAACC;
+}
+
+.text_login_normal,
+.text_login_focus,
+.text_login_error {
+width: 120px;
+}
+
+.select_auth_normal {
+width: 80px;
+}
+
+.date {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #000000;
+background-color: #FFFFFF;
+border-width: 1px;
+border-color: grey;
+border-top-style: inset;
+border-bottom-style: outset;
+border-left-style: inset;
+border-right-style: outset;
+text-align: left;
+width: 40px;
+}
+
+.button {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #FFFFFF;
+background-color: #AA2808;
+border-top-style: groove;
+border-bottom-style: ridge;
+border-left-style: groove;
+border-right-style: ridge;
+margin-left: 15px;
+}
+
+.button_detail {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #FFFFFF;
+background-color: #AA2808;
+margin-left: 15px;
+}
+
+.link {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #0000FF;
+margin-top: 10px;
+margin-left: 15px;
+}
+
+#divInfo {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #000000;
+width: 300px;
+border: none;
+}
+
+.fieldset {
+margin-top: 10px;
+border-top: 1px ridge;
+border-left: none;
+border-right: none;
+border-bottom: none;
+}
+
+.legend {
+font-family: verdana, Simsun;
+font-size: 9pt;
+color: #0000FF;
+}
+
+#tblLInfo, #tblDInfo {
+font-family: verdana, Simhei;
+margin-top: 10px;
+margin-left: 20px;
+border-collapse: collapse;
+border-top: none;
+border-left: 1px solid;
+border-right: 1px solid;
+border-bottom: none;
+table-layout: fixed;
+}
+
+#tblLInfo th, #tblDInfo th {
+padding-left: 5px;
+padding-right: 5px;
+width: 100px;
+height: 20px;
+text-align: left;
+background-color: #FFFF99;
+border-top: 1px solid #CC9900;
+border-bottom : 1px solid #CC9900;
+}
+
+#tblLInfo td, #tblDInfo td {
+padding-left: 5px;
+padding-right: 5px;
+width: 100px;
+height: 20px;
+text-align: left;
+border-top: 1px solid #CC9900;
+border-bottom: 1px solid #CC9900;
+word-break: break-all;
+word-wrap: break-word; 
+}
+
+#tblInfo td {
+padding-left: 5px;
+padding-right: 5px;
+width: 120px;
+height: 20px;
+text-align: left;
+word-break: break-all;
+word-wrap: break-word; 
+}
+
+.div_mod_init,
+.div_mod_show {
+font-family: verdana, Simsun;
+font-size: 10pt;
+color: #000000;
+position: absolute;
+left: 0px;
+top: 0px;
+visibility: hidden;
+width: 0px;
+border: 1px solid #CC9900;
+}
+
+.div_mod_show {
+visibility: visible;
+width: 150px;
+background-color: #FFFFAA;
+}
+
+.div_mod_title {
+font-size: 8pt;
+color: #CC9900;
+background-color: #FFFFAA;
+width: 152px;
+border-bottom : 1px solid #CC9900;
+position: relative;
+}
+
+#divModTitle label {
+float: left;
+margin: 3px;
+}
+
+#divModTitle img {
+float: right;
+margin: 2px;
+}
+
+.div_mod_item {
+font-size: 10pt;
+width: 150px;
+}
+
+.text_mod_normal,
+.text_mod_error,
+.text_mod_year_normal,
+.text_mod_year_error,
+.text_mod_month_normal,
+.text_mod_month_error,
+.text_mod_date_normal,
+.text_mod_date_error {
+font-size: 10pt;
+color: #000000;
+background-color: #FFFFFF;
+border: 1px solid #CC9900;
+text-align: left;
+width: 140px;
+margin: 5px;
+}
+
+.text_mod_year_normal,
+.text_mod_year_error {
+width: 30px;
+}
+
+.text_mod_month_normal,
+.text_mod_month_error {
+width: 18px;
+}
+
+.text_mod_date_normal,
+.text_mod_date_error {
+width: 18px;
+}
+
+.text_mod_error,
+.text_mod_year_error,
+.text_mod_month_error,
+.text_mod_date_error {
+background-color: #FFAACC;
+}
+
+.div_mod_submit {
+font-size: 8pt;
+color: #CC9900;
+background-color: #FFFFAA;
+width: 140px;
+height: 18px;
+margin: 0px 5px 5px 5px;
+position: relative;
+}
+
+#btnModOK,
+#btnModCancel {
+font-size: 8pt;
+color: #CC9900;
+background-color: #FFFFAA;
+width: 30px;
+border : 1px solid #CC9900;
+}
+
+#btnModOK {
+position: absolute;
+right: 32px;
+}
+
+#btnModCancel {
+position: absolute;
+right: 0px;
+}
+
+.mod_error {
+font-size: 8pt;
+color: #FF0000;
+padding-top: 2px;
+}
+
+.textarea_mod_normal,
+.textarea_mod_error {
+font-size: 10pt;
+color: #000000;
+background-color: #FFFFFF;
+border: 1px solid #CC9900;
+text-align: left;
+width: 140px;
+margin: 5px;
+overflow: visible;
+}
+
+.textarea_mod_error {
+background-color: #FFAACC;
+}
+
+.mod_sex,
+.mod_birthday {
+color: #CC9900;
+padding-bottom: 5px;
+}
+
+.field_btn {
+	width: 60px;
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>一覧</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+    </head>
+    
+    <body>
+        <form action="detail.html">
+            <div id="divContent">
+                <div id="divSearch">
+                    <table id="tblLogin">
+                        <tr>
+                            <td class="field">
+                                <label id="lblMonth">
+                                    月：
+                                </label>
+                            </td>
+                            <td id="tdUId">
+                                <input type="text" id="txtMonth" title="月" class="text_login_normal" />
+                            </td>
+                            <td class="field">
+                                <label id="lblMonth">
+                                    ステータス：
+                                </label>
+                            </td>
+                            <td id="tdUId">
+                                <input type="text" id="txtStatus" title="ステータス" class="text_login_normal" />
+                            </td>
+                            <td class="field">
+                                <label id="lblSection">
+                                    課：
+                                </label>
+                            </td>
+                            <td id="tdUId">
+                                <input type="text" id="txtSection" title="課" class="text_login_normal" />
+                            </td>
+                            <td class="field">
+                                <label id="lblUser">
+                                    ユーザー：
+                                </label>
+                            </td>
+                            <td id="tdUId">
+                                <input type="text" id="txtUser" title="ユーザー" class="text_login_normal" />
+                            </td>
+                            <td id="tdUId">
+                                <input type="submit" id="btnSearch" value="検索" title="検索" class="button" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <br />
+
+                <div id="divList">
+                    <table id="tblLInfo">
+                        <tr>
+                            <th class="field_btn">
+                                <input type="checkbox" />
+                            </th>
+                            <th class="field">ユーザー</th>
+                            <th class="field">課</th>
+                            <th class="field">月</th>
+                            <th class="field">予定出勤日数</th>
+                            <th class="field">実績出勤日数</th>
+                            <th class="field">予定出勤時間</th>
+                            <th class="field">実績出勤時間</th>
+                            <th class="field">ステータス</th>
+                            <th class="field_btn"></th>
+                            <th class="field_btn"></th>
+                            <th class="field_btn"></th>
+                        </tr>
+                        <tr>
+                            <td class="field_error field_btn">
+                                <input type="checkbox" />
+                            </td>
+                            <td class="field_error">呉翰</td>
+                            <td class="field_error">1</td>
+                            <td class="field_error">201608</td>
+                            <td class="field_error">22</td>
+                            <td class="field_error field_err">21</td>
+                            <td class="field_error">176</td>
+                            <td class="field_error field_err">168</td>
+                            <td class="field_error">承認待ち</td>
+                            <td class="field_error field_btn"><input type="submit" value="詳細" class="button_detail" /></td>
+                            <td class="field_error field_btn"><input type="button" value="承認" class="button_detail" onclick="alert('承認を行いますか？');" /></td>
+                            <td class="field_error field_btn"><input type="button" value="出力" class="button_detail" onclick="alert('レポートを出力しました。');" /></td>
+                        </tr>
+                        <tr>
+                            <td class="field_btn">
+                                <input type="checkbox" />
+                            </td>
+                            <td class="field">韓氷</td>
+                            <td class="field">1</td>
+                            <td class="field">201608</td>
+                            <td class="field">22</td>
+                            <td class="field">22</td>
+                            <td class="field">176</td>
+                            <td class="field">186</td>
+                            <td class="field">承認待ち</td>
+                            <td class="field_btn"><input type="submit" value="詳細" class="button_detail" /></td>
+                            <td class="field_btn"><input type="button" value="承認" class="button_detail" onclick="alert('承認を行いますか？');" /></td>
+                            <td class="field_btn"><input type="button" value="出力" class="button_detail" onclick="alert('レポートを出力しました。');" /></td>
+                        </tr>
+                        <tr>
+                            <td class="field_ok field_btn">
+                                <input type="checkbox" />
+                            </td>
+                            <td class="field_ok">閻暁寧</td>
+                            <td class="field_ok">1</td>
+                            <td class="field_ok">201608</td>
+                            <td class="field_ok">22</td>
+                            <td class="field_ok">22</td>
+                            <td class="field_ok">176</td>
+                            <td class="field_ok">196</td>
+                            <td class="field_ok">承認済み</td>
+                            <td class="field_ok field_btn"><input type="submit" value="詳細" class="button_detail" /></td>
+                            <td class="field_ok field_btn"></td>
+                            <td class="field_ok field_btn"><input type="button" value="出力" class="button_detail" onclick="alert('レポートを出力しました。');" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
