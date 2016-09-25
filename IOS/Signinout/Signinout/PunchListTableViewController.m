@@ -66,6 +66,7 @@
 {
     MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"www.maiasoft.tk" customHeaderFields:nil];
     MKNetworkOperation *op = [engine operationWithPath:@"api/labourTimeList" params:nil httpMethod:@"GET" ssl:YES];
+    [op setUsername:@"ycx" password:@"ycx" basicAuth:YES];
     
     
     [op addCompletionHandler:^(MKNetworkOperation *operation) {
