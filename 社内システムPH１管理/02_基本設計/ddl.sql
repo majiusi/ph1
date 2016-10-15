@@ -1,9 +1,8 @@
 ﻿CREATE OR REPLACE TABLE users ( /* ユーザー */
-  user_id varchar(10) NOT NULL COMMENT 'ユーザーID',
   employee_id varchar(10) NOT NULL UNIQUE KEY COMMENT '社員ID',
   name varchar(20) NOT NULL UNIQUE KEY COMMENT 'ユーザー名',
   pwd varchar(256) NOT NULL COMMENT 'パスワード',
-  auth_id varchar(10) NOT NULL UNIQUE KEY COMMENT '権限ID',
+  auth_id varchar(10) NOT NULL COMMENT '権限ID',
   last_login_at datetime NOT NULL COMMENT '最後登録時間',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
   create_by varchar(10) NOT NULL COMMENT '登録者',
@@ -11,7 +10,7 @@
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`user_id`)
+  PRIMARY KEY(`employee_id`)
 );
 
 CREATE OR REPLACE TABLE authority ( /* 権限 */
@@ -77,8 +76,8 @@ CREATE OR REPLACE TABLE dispatches ( /* 派遣 */
   employee_id varchar(10) NOT NULL UNIQUE KEY COMMENT '社員ID',
   customer_id varchar(10) NOT NULL COMMENT '顧客ID',
   site_id tinyint(10) NOT NULL COMMENT '現場ID',
-  start_date date NOT NULL UNIQUE KEY COMMENT '派遣開始日',
-  end_date date NOT NULL UNIQUE KEY COMMENT '派遣終了日',
+  start_date date NOT NULL COMMENT '派遣開始日',
+  end_date date COMMENT '派遣終了日',
   fixed_monthly_hours int(3) COMMENT '固定勤務時間',
   report_day int(2) NOT NULL COMMENT '勤務提出日',
   work_start_time char(4) NOT NULL COMMENT '出勤時間',
