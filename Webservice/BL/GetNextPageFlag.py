@@ -1,0 +1,50 @@
+# _*_ coding: utf-8 _*_
+#!/usr/bin/env python
+###################################
+#description: 画面表示フラグ取得
+#author: Yaochenxu
+#date: 2016/10/10
+###################################
+import logging, datetime
+from Entity import Attendances
+from flask import Flask, request, jsonify, g
+
+# initialization
+app = Flask(__name__)
+app.config.from_object('config')
+logger = logging.getLogger('MaiaService.BL.GetNextPageFlag')
+
+def get_next_page_flag():
+
+    logger.info('get_next_page_flag() start.')
+    try:
+        # 社員ID、当日の日付により、勤務情報を取得
+        attendances = Attendances.Attendance()
+        attendances.clear_query_cache()
+        attendances = attendances.query.filter_by(
+            employee_id=g.user.employee_id, date=datetime.date.today()).first()
+
+        # 次画面のフラグを算出
+        if attendances is None:
+            page_flag = 1
+            result_code = 0
+        elif attendances.start_time is not None and attendances.end_time is None:
+            page_flag = 2
+            result_code = 0
+        elif attendances.end_time is not None and attendances.report_end_time is None:
+            page_flag = 3
+            result_code = 0    
+        elif attendances.end_time is not None and attendances.report_end_time is not None:
+            page_flag = 4
+            result_code = 0    
+        else:
+            page_flag = -1
+            result_code = -1
+
+        logger.info('get_next_page_flag() end.')
+        return (jsonify({'result_code':result_code ,'page_flag': page_flag}))
+    except Exception, e:
+        logger.error(e)
+        return (jsonify({'result_code':-1 ,'page_flag': -1}))
+
+
