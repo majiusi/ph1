@@ -2,3 +2,5 @@
 IOS/.DS_Store
 
 IOS/Signinout/.DS_Store
+
+*.pyc
