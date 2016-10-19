@@ -31,8 +31,12 @@ class Authority(db.Model):
     update_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP"))
     update_cnt = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))
 
-    def save_authority(new_authority):
-        logger.info('save_authority() start.')
-        db.session.add(new_authority)
-        db.session.commit()
-        logger.info('save_authority() end.')
+    def add_authority(new_authority):
+        try:
+            logger.info('add_authority() start.')
+            db.session.add(new_authority)
+            db.session.commit()
+            logger.info('add_authority() end.')
+        except Exception, e:
+            db.session.rollback()
+            raise e

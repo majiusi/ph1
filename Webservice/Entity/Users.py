@@ -43,12 +43,20 @@ class User(db.Model):
         return pwd_context.verify(password, self.pwd)
 
     def add_user(new_user):
-        logger.info('save_user() start.')
-        db.session.add(new_user)
-        db.session.commit()
-        logger.info('save_user() end.')
+        try:
+            logger.info('save_user() start.')
+            db.session.add(new_user)
+            db.session.commit()
+            logger.info('save_user() end.')
+        except Exception, e:
+            db.session.rollback()
+            raise e
 
     def update_user(self):
-        logger.info('update_user() start.')
-        db.session.commit()
-        logger.info('update_user() end.')
+        try:
+            logger.info('update_user() start.')
+            db.session.commit()
+            logger.info('update_user() end.')
+        except Exception, e:
+            db.session.rollback()
+            raise e

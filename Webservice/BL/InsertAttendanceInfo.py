@@ -29,6 +29,8 @@ def put_attendance_info():
 
         # 出勤情報設定
         attendances = Attendances.Attendance()
+        attendances.clear_query_cache()
+        
         attendances.dispatch_id = dispatch_id
         attendances.employee_id = g.user.employee_id
         attendances.date = datetime.datetime.now()
@@ -41,7 +43,7 @@ def put_attendance_info():
         attendances.update_by = g.user.employee_id
         attendances.update_at = datetime.datetime.now()
 
-        Attendances.Attendance.save_attendances(attendances)
+        Attendances.Attendance.add_attendances(attendances)
 
         logger.info('put_attendance_info() end.')
         return (jsonify({'result_code':0 }))

@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"end",
+				"end_time"
+			],
+			[
+				"fi",
+				"first"
+			],
+			[
+				"ex",
+				"extract"
+			],
+			[
+				"tu",
+				"True"
+			],
+			[
 				"tyr",
 				"try	Try/Except"
 			],
@@ -56,7 +72,20 @@
 	},
 	"file_history":
 	[
-		"/Users/yaochenxu/mySource/tmp/maia 3/BL/CreateUser.py",
+		"/Users/yaochenxu/github/ph1/Webservice/maiaCheckinout_Python.sublime-workspace",
+		"/Users/yaochenxu/mySource/maia/Entity/Employees.py",
+		"/Users/yaochenxu/mySource/maia/Entity/Dispatches.py",
+		"/Users/yaochenxu/mySource/maia/logging.conf",
+		"/Users/yaochenxu/mySource/maia/Entity/__init__.py",
+		"/Users/yaochenxu/mySource/maia/server_manual.txt",
+		"/Users/yaochenxu/mySource/maia/maiaCheckinout_Python.sublime-workspace",
+		"/Users/yaochenxu/mySource/maia/BL/curl.txt",
+		"/Users/yaochenxu/mySource/maia/Utility/untitled.html",
+		"/Users/yaochenxu/mySource/maia/Utility/Jholiday.py",
+		"/Users/yaochenxu/mySource/maia/config.py",
+		"/Users/yaochenxu/mySource/maia/Entity/UserEntity.py",
+		"/Users/yaochenxu/mySource/maia/DB/Entity.py",
+		"/Users/yaochenxu/mySource/maia/Entity/Tables.py",
 		"/Users/yaochenxu/mySource/tmp/maia/Utility/UserAuth.py",
 		"/Users/yaochenxu/mySource/maia.bak/Utility/UserAuth.py",
 		"/Users/yaochenxu/mySource/maia/MaiaCheckinoutWebService.py",
@@ -64,8 +93,6 @@
 		"/Users/yaochenxu/mySource/maia/Entity/Users.py",
 		"/Users/yaochenxu/mySource/maia/Entity/districts.py",
 		"/Users/yaochenxu/mySource/maia/Entity/employments.py",
-		"/Users/yaochenxu/mySource/maia/Entity/Employees.py",
-		"/Users/yaochenxu/mySource/maia/Entity/Dispatches.py",
 		"/Users/yaochenxu/mySource/maia/Entity/Attendances.py",
 		"/Users/yaochenxu/mySource/maia/Entity/Authority.py",
 		"/Users/yaochenxu/mySource/maia/Entity/entity的副本 21.py",
@@ -82,15 +109,12 @@
 		"/Users/yaochenxu/mySource/maia/Entity/authority.py",
 		"/Users/yaochenxu/mySource/maia/Entity/entity的副本.py",
 		"/Users/yaochenxu/mySource/maia/Entity/entity.py",
-		"/Users/yaochenxu/mySource/maia/Entity/UserEntity.py",
-		"/Users/yaochenxu/mySource/maia/logging.conf",
 		"/Users/yaochenxu/mySource/maia/BL/GetUserLaborList.py",
 		"/Users/yaochenxu/mySource/maia/Utility/logging.conf",
 		"/Users/yaochenxu/mySource/maia/Utility/maiaCheckInOutService.log",
 		"/Users/yaochenxu/mySource/maia/Utility/tst.log",
 		"/Users/yaochenxu/mySource/maia/Utility/MaiaLogging.py",
 		"/Users/yaochenxu/mySource/maia/BL/CreateUser.py",
-		"/Users/yaochenxu/mySource/maia/config.py",
 		"/Users/yaochenxu/mySource/maia/BL/__init__.py",
 		"/Users/yaochenxu/mySource/maia/maiaCheckinoutWebService.py",
 		"/Users/yaochenxu/mySource/maiaCheckinoutWebService副本.py",
@@ -99,7 +123,6 @@
 		"/Users/yaochenxu/mySource/maia/Utility/UserAuth.py",
 		"/Users/yaochenxu/mySource/maia/Dao/__init__.py",
 		"/Users/yaochenxu/mySource/maia/Dao/Users.py",
-		"/Users/yaochenxu/mySource/maia/Entity/__init__.py",
 		"/Users/yaochenxu/mySource/maia/Entity/User.py",
 		"/Users/yaochenxu/mySource/maia/Dao/GetUserInfo.py",
 		"/Users/yaochenxu/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/95608C72-BDFD-4ECA-94CA-D043E2D2E025/api.py",
@@ -131,9 +154,14 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"holiday_name",
+			"start_time",
+			"Db",
+			"ResultCode",
+			"last_login_at",
 			"username",
 			"attendances",
 			"employee",
@@ -170,6 +198,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"result_code",
 			"user_name",
 			"db.text(",
 			"(db.String",

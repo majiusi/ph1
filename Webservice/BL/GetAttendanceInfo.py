@@ -39,16 +39,32 @@ def get_attendance_info_by_year_month():
 
         # 月間出勤情報リスト取得
         for element in attendances:
+            # NULL対策
+            report_start_time = ''
+            report_end_time = ''
+            report_exclusive_minutes = 0
+            report_total_minutes = 0
+
+            if element.report_start_time is not None:
+                report_start_time = element.report_start_time.strftime('%H:%M:%S')
+            if element.report_end_time is not None:
+                report_end_time = element.report_end_time.strftime('%H:%M:%S')
+            if element.exclusive_minutes is not None:
+                report_exclusive_minutes = element.exclusive_minutes
+            if element.total_minutes is not None:
+                report_total_minutes = element.total_minutes
+
+            # 出力編集
             result_dict = {'work_date':element.date.strftime('%Y-%m-%d'),
             'which_day':Jholiday.get_which_day(element.date),
-            'report_start_time':element.report_start_time.strftime('%H:%M:%S'),
-            'report_end_time':element.report_end_time.strftime('%H:%M:%S'),
-            'report_exclusive_minutes':element.exclusive_minutes,
-            'report_total_minutes':element.total_minutes
+            'report_start_time':report_start_time,
+            'report_end_time':report_end_time,
+            'report_exclusive_minutes':report_exclusive_minutes,
+            'report_total_minutes':report_total_minutes
             }
             
             # 出勤時間合計
-            total_hours = total_hours + element.total_minutes
+            total_hours = total_hours + report_total_minutes
             # 月間出勤情報リストに追加
             monthly_work_time_list.append(result_dict)        
 

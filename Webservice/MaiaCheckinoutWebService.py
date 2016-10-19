@@ -52,10 +52,16 @@ def get_attendance_info_by_year_month():
     return GetAttendanceInfo.get_attendance_info_by_year_month()
 
 # パンチ開始情報submit
-@app.route('/api/MAS0000050')
+@app.route('/api/MAS0000050', methods=['POST'])
 @auth.login_required
 def put_attendance_info():
     return InsertAttendanceInfo.put_attendance_info()
+
+# パンチ終了情報submit
+@app.route('/api/MAS0000060', methods=['POST'])
+@auth.login_required
+def modify_attendance_info():
+    return UpdateAttendanceInfo.modify_attendance_info()
 
 @app.route('/api/users/<int:id>')
 def get_user(id):

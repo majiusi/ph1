@@ -46,13 +46,29 @@ class Attendance(db.Model):
     update_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP"))
     update_cnt = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))
 
-    def save_attendances(new_attendances):
-        logger.info('save_attendances() start.')
-        db.session.add(new_attendances)
-        db.session.commit()
-        logger.info('save_attendances() end.')
-    
+    def add_attendances(new_attendances):
+        try:
+            logger.info('add_attendances() start.')
+            db.session.add(new_attendances)
+            db.session.commit()
+            logger.info('add_attendances() end.')
+        except Exception, e:
+            db.session.rollback()
+            raise e
+          
+    def update_attendances(self):
+        try:
+            logger.info('update_attendances() start.')
+            db.session.commit()
+            logger.info('update_attendances() end.')
+        except Exception, e:
+            db.session.rollback()
+            raise e
+
     def clear_query_cache(self):
         db.session.commit()
+
+    def clear_cache(self):
+        db.session.flush()
 
 

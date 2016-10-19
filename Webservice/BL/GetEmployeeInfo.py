@@ -27,7 +27,9 @@ def get_employee_info():
 
         # 出勤時間、退勤時間の取得
         start_time = attendances.start_time.strftime('%H:%M:%S')
-        end_time = attendances.end_time.strftime('%H:%M:%S')
+        end_time = ''
+        if attendances.end_time is not None:
+            end_time = attendances.end_time.strftime('%H:%M:%S')
 
         # 派遣情報取得
         dispatch = Dispatches.Dispatch()
@@ -49,14 +51,6 @@ def get_employee_info():
         name_jp = employee.name_jp
         # 権限ID  
         auth_id = g.user.auth_id
-        #attendances = attendances.query.filter(
-        #    Attendances.Attendance.employee_id==g.user.employee_id,
-        #    extract('year',Attendances.Attendance.date)==datetime.date.today().year,
-        #    extract('month',Attendances.Attendance.date)==datetime.date.today().month).all()
-
-        #for element in attendances:
-        #    print(element.employee_id)
-        
 
         logger.info('get_employee_info() end.')
         return (jsonify(
