@@ -31,6 +31,21 @@ def get_employee_info():
         if attendances.end_time is not None:
             end_time = attendances.end_time.strftime('%H:%M:%S')
 
+        # レポート用当日出勤時間、当日退勤時間、当日控除時間、当日合計時間の取得
+        report_start_time = ''
+        report_end_time = ''
+        report_exclusive_minutes = 0
+        report_total_minutes = 0
+
+        if attendances.report_start_time is not None:
+            report_start_time = attendances.report_start_time.strftime('%H:%M:%S')
+        if attendances.report_end_time is not None:
+            report_end_time = attendances.report_end_time.strftime('%H:%M:%S')
+        if attendances.exclusive_minutes is not None:
+            report_exclusive_minutes = attendances.exclusive_minutes
+        if attendances.total_minutes is not None:
+            report_total_minutes = attendances.total_minutes
+
         # 派遣情報取得
         dispatch = Dispatches.Dispatch()
         dispatch.clear_query_cache()
@@ -61,7 +76,12 @@ def get_employee_info():
             'default_work_end_time':default_work_end_time,
             'default_except_minutes':default_except_minutes,
             'start_time':start_time,
-            'end_time':end_time}))
+            'end_time':end_time,
+            'report_start_time':report_start_time,
+            'report_end_time':report_end_time,
+            'report_exclusive_minutes':report_exclusive_minutes,
+            'report_total_minutes':report_total_minutes
+            }))
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 }))

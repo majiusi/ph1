@@ -26,3 +26,5 @@ curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"s
 
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"end_longitude":35.68,"end_latitude":139.85,"end_spot_name":"東京都江東く1-1"}' http://localhost:5000/api/MAS0000060
 
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"report_start_time":"09:00:00","report_end_time":"18:30:00","report_exclusive_minutes":60,"report_total_minutes":510}' http://localhost:5000/api/MAS0000070
+

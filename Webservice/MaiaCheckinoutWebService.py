@@ -54,14 +54,20 @@ def get_attendance_info_by_year_month():
 # パンチ開始情報submit
 @app.route('/api/MAS0000050', methods=['POST'])
 @auth.login_required
-def put_attendance_info():
-    return InsertAttendanceInfo.put_attendance_info()
+def insert_attendance_work_start_info():
+    return ModifyAttendanceInfo.insert_attendance_work_start_info()
 
 # パンチ終了情報submit
 @app.route('/api/MAS0000060', methods=['POST'])
 @auth.login_required
-def modify_attendance_info():
-    return UpdateAttendanceInfo.modify_attendance_info()
+def update_attendance_work_end_info():
+    return ModifyAttendanceInfo.update_attendance_work_end_info()
+
+# レポート出勤情報submit
+@app.route('/api/MAS0000070', methods=['POST'])
+@auth.login_required
+def update_attendance_report_info():
+    return ModifyAttendanceInfo.update_attendance_report_info()
 
 @app.route('/api/users/<int:id>')
 def get_user(id):

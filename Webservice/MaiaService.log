@@ -445,3 +445,340 @@
 2016-10-19 23:17:38,835 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
 2016-10-19 23:17:38,838 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
 2016-10-19 23:17:38,838 - MaiaService.BL.UpdateAttendanceInfo - INFO - modify_attendance_info() end.
+2016-10-21 21:15:14,222 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:15:14,225 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:15:14,787 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:15:14,790 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:15:14,792 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:15:14,792 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:15:14,792 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() start.
+2016-10-21 21:15:14,801 - MaiaService.BL.GetEmployeeInfo - ERROR - 'NoneType' object has no attribute 'start_time'
+2016-10-21 21:15:43,800 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:15:43,800 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:15:43,977 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:15:43,979 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:15:43,981 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:15:43,981 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:15:43,981 - MaiaService.BL.InsertAttendanceInfo - INFO - put_attendance_info() start.
+2016-10-21 21:15:43,993 - MaiaService.Entity.Attendances - INFO - add_attendances() start.
+2016-10-21 21:15:43,996 - MaiaService.Entity.Attendances - INFO - add_attendances() end.
+2016-10-21 21:15:43,996 - MaiaService.BL.InsertAttendanceInfo - INFO - put_attendance_info() end.
+2016-10-21 21:15:47,517 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:15:47,517 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:15:47,676 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:15:47,679 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:15:47,681 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:15:47,681 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:15:47,681 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() start.
+2016-10-21 21:15:47,692 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() end.
+2016-10-21 21:17:29,713 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:17:29,713 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:17:29,876 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:17:29,879 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:17:29,880 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:17:29,881 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:17:29,881 - MaiaService.BL.UpdateAttendanceInfo - INFO - modify_attendance_info() start.
+2016-10-21 21:17:29,884 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 21:17:29,886 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 21:17:29,886 - MaiaService.BL.UpdateAttendanceInfo - INFO - modify_attendance_info() end.
+2016-10-21 21:17:38,965 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:17:38,965 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:17:39,118 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:17:39,121 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:17:39,123 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:17:39,123 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:17:39,123 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() start.
+2016-10-21 21:17:39,132 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() end.
+2016-10-21 21:19:22,861 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:19:22,861 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:19:23,006 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:19:23,009 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:19:23,011 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:19:23,011 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:19:23,011 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() start.
+2016-10-21 21:19:23,018 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() end.
+2016-10-21 21:20:18,518 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:20:18,518 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:20:18,662 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:20:18,664 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:20:18,666 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:20:18,667 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:20:18,667 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() start.
+2016-10-21 21:20:18,673 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() end.
+2016-10-21 21:20:48,448 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 21:20:48,448 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 21:20:48,597 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 21:20:48,600 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 21:20:48,602 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 21:20:48,602 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 21:20:48,602 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() start.
+2016-10-21 21:20:48,608 - MaiaService.BL.GetEmployeeInfo - INFO - get_employee_info() end.
+2016-10-21 23:14:02,974 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:14:02,976 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:14:03,533 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:14:03,537 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:14:03,539 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:14:03,539 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:14:03,539 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:14:03,547 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:16:29,923 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:16:29,923 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:16:30,188 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:16:30,191 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:16:30,193 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:16:30,193 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:16:30,193 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:16:30,202 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:16:30,202 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:19:40,753 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:19:40,753 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:19:41,331 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:19:41,334 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:19:41,336 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:19:41,336 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:19:41,337 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:19:41,345 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:19:41,345 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:20:11,744 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:20:11,744 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:20:11,996 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:20:11,999 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:20:12,001 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:20:12,001 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:20:12,001 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:20:12,012 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:20:12,013 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:23:06,281 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:23:06,282 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:23:06,849 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:23:06,852 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:23:06,855 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:23:06,855 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:23:06,855 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:23:06,863 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:23:06,864 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:28:06,337 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:28:06,337 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:28:06,852 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:28:06,855 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:28:06,857 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:28:06,857 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:28:06,858 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:28:06,866 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:28:06,866 - MaiaService.BL.ModifyAttendanceInfo - ERROR - global name 'report_start_time' is not defined
+2016-10-21 23:28:43,583 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:28:43,583 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:28:43,838 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:28:43,841 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:28:43,843 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:28:43,843 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:28:43,843 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:28:43,851 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:28:43,852 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:29:39,729 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:29:39,730 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:29:39,988 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:29:39,991 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:29:39,993 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:29:39,993 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:29:39,993 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:29:40,002 - MaiaService.BL.ModifyAttendanceInfo - ERROR - global name 'date_string' is not defined
+2016-10-21 23:30:26,115 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:30:26,115 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:30:26,360 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:30:26,363 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:30:26,365 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:30:26,366 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:30:26,366 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:30:26,375 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:31:26,623 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:31:26,624 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:31:26,795 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:31:26,797 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:31:26,799 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:31:26,799 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:31:26,799 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_work_end_info() start.
+2016-10-21 23:31:26,802 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:31:26,805 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:31:26,805 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_work_end_info() end.
+2016-10-21 23:33:14,509 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:33:14,509 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:33:14,678 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:33:14,680 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:33:14,684 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:33:14,684 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:33:14,684 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:33:14,687 - MaiaService.BL.ModifyAttendanceInfo - INFO - 18:30
+2016-10-21 23:33:14,687 - MaiaService.BL.ModifyAttendanceInfo - ERROR - global name 'report_start_time' is not defined
+2016-10-21 23:35:17,560 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:35:17,560 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:35:17,809 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:35:17,812 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:35:17,815 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:35:17,815 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:35:17,815 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:35:17,823 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:35:17,823 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00
+2016-10-21 23:35:17,824 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30
+2016-10-21 23:35:17,830 - MaiaService.BL.ModifyAttendanceInfo - ERROR - time data '2016-10-21 09:00' does not match format '%Y-%m-%d %H:%M:%S'
+2016-10-21 23:37:26,049 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:37:26,050 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:37:26,574 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:37:26,577 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:37:26,579 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:37:26,579 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:37:26,579 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:37:26,587 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:37:26,588 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:38:31,201 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:38:31,201 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:38:31,459 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:38:31,462 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:38:31,464 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:38:31,465 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:38:31,465 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:38:31,473 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:38:31,473 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:39:25,747 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:39:25,747 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:39:26,012 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:39:26,015 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:39:26,017 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:39:26,017 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:39:26,017 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:39:26,025 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:39:26,026 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:40:25,723 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:40:25,723 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:40:25,992 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:40:25,995 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:40:25,997 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:40:25,997 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:40:25,997 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:40:26,005 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:40:26,006 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00:00
+2016-10-21 23:40:26,006 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30:00
+2016-10-21 23:40:26,012 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:40:26,014 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:40:26,014 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
+2016-10-21 23:43:50,633 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:43:50,633 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:43:50,805 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:43:50,808 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:43:50,810 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:43:50,810 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:43:50,810 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:43:50,814 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:43:50,815 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:44:44,537 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:44:44,537 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:44:44,795 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:44:44,799 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:44:44,801 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:44:44,801 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:44:44,801 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:44:44,810 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:45:24,451 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:45:24,451 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:45:24,701 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:45:24,704 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:45:24,706 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:45:24,706 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:45:24,706 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:45:24,714 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:45:24,718 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:45:24,718 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:46:06,727 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:46:06,727 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:46:06,891 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:46:06,894 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:46:06,897 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:46:06,897 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:46:06,898 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:46:06,901 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:46:06,901 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:46:06,901 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00:00
+2016-10-21 23:46:06,902 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30:00
+2016-10-21 23:46:06,906 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:46:06,910 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:46:06,910 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
+2016-10-21 23:50:30,607 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:50:30,608 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:50:30,762 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:50:30,768 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:50:30,771 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:50:30,772 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:50:30,772 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:50:30,775 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:50:30,776 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:50:30,777 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00:00
+2016-10-21 23:50:30,777 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30:00
+2016-10-21 23:50:30,777 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:50:30,779 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:50:30,779 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
+2016-10-21 23:50:50,156 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:50:50,156 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:50:50,322 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:50:50,324 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:50:50,326 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:50:50,326 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:50:50,326 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:50:50,329 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:50:50,329 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:50:50,330 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00:00
+2016-10-21 23:50:50,330 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30:00
+2016-10-21 23:50:50,331 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:50:50,334 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:50:50,335 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
+2016-10-21 23:51:23,981 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:51:23,982 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:51:24,154 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:51:24,156 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:51:24,158 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:51:24,158 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:51:24,159 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:51:24,161 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:51:24,162 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:51:24,162 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00:00
+2016-10-21 23:51:24,162 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30:00
+2016-10-21 23:51:24,163 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:51:24,164 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:51:24,164 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
+2016-10-21 23:51:53,818 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:51:53,818 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:51:53,981 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:51:53,985 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:51:53,986 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:51:53,987 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:51:53,987 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:51:53,989 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:51:53,990 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:51:53,990 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00:00
+2016-10-21 23:51:53,990 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30:00
+2016-10-21 23:51:53,991 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:51:53,992 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:51:53,992 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
+2016-10-21 23:52:07,087 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:52:07,087 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:52:07,253 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:52:07,255 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:52:07,258 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:52:07,258 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:52:07,258 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:52:07,261 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:52:07,262 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:52:07,262 - MaiaService.BL.ModifyAttendanceInfo - ERROR - 400: Bad Request
+2016-10-21 23:52:31,503 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-21 23:52:31,503 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-21 23:52:31,670 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-21 23:52:31,673 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-21 23:52:31,675 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-21 23:52:31,675 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-21 23:52:31,675 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() start.
+2016-10-21 23:52:31,678 - MaiaService.BL.ModifyAttendanceInfo - INFO - <Request 'http://localhost:5000/api/MAS0000070' [POST]>
+2016-10-21 23:52:31,678 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 
+2016-10-21 23:52:31,679 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 09:00:00
+2016-10-21 23:52:31,679 - MaiaService.BL.ModifyAttendanceInfo - INFO - 2016-10-21 18:30:00
+2016-10-21 23:52:31,679 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
+2016-10-21 23:52:31,681 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
+2016-10-21 23:52:31,681 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
