@@ -43,9 +43,9 @@ def insert_attendance_work_start_info():
         attendances.start_longitude = request.json.get('start_longitude')
         attendances.start_latitude = request.json.get('start_latitude')
         attendances.start_spot_name = request.json.get('start_spot_name')
-        attendances.create_by = g.user.employee_id
+        attendances.create_by = g.user.name
         attendances.create_at = datetime.datetime.now()
-        attendances.update_by = g.user.employee_id
+        attendances.update_by = g.user.name
         attendances.update_at = datetime.datetime.now()
 
         Attendances.Attendance.add_attendances(attendances)
@@ -76,7 +76,7 @@ def update_attendance_work_end_info():
         attendances.end_longitude = request.json.get('end_longitude')
         attendances.end_latitude = request.json.get('end_latitude')
         attendances.end_spot_name = request.json.get('end_spot_name')
-        attendances.update_by = g.user.employee_id
+        attendances.update_by = g.user.name
         attendances.update_at = datetime.datetime.now()
         attendances.update_cnt = attendances.update_cnt + 1
 
@@ -115,7 +115,7 @@ def update_attendance_report_info():
         attendances.report_end_time = datetime.datetime.strptime(report_end_time, "%Y-%m-%d %H:%M:%S")
         attendances.exclusive_minutes = request.json.get('report_exclusive_minutes')
         attendances.total_minutes = request.json.get('report_total_minutes')
-        attendances.update_by = g.user.employee_id
+        attendances.update_by = g.user.name
         attendances.update_at = datetime.datetime.now()
         attendances.update_cnt = attendances.update_cnt + 1
 

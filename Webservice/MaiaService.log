@@ -782,3 +782,159 @@
 2016-10-21 23:52:31,679 - MaiaService.Entity.Attendances - INFO - update_attendances() start.
 2016-10-21 23:52:31,681 - MaiaService.Entity.Attendances - INFO - update_attendances() end.
 2016-10-21 23:52:31,681 - MaiaService.BL.ModifyAttendanceInfo - INFO - update_attendance_report_info() end.
+2016-10-22 10:34:52,362 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 10:34:52,367 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 10:34:53,212 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:34:53,216 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:34:53,218 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 10:34:53,218 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 10:34:53,218 - MaiaService.BL.ChangeUserPwd - INFO - change_user_password() start.
+2016-10-22 10:34:53,219 - MaiaService.BL.ChangeUserPwd - ERROR - global name 'g' is not defined
+2016-10-22 10:35:27,126 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 10:35:27,127 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 10:35:27,699 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:35:27,702 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:35:27,704 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 10:35:27,704 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 10:35:27,704 - MaiaService.BL.ChangeUserPwd - INFO - change_user_password() start.
+2016-10-22 10:35:27,706 - MaiaService.BL.ChangeUserPwd - ERROR - ユーザ存在
+2016-10-22 10:36:03,112 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 10:36:03,113 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 10:36:03,375 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:36:03,378 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:36:03,380 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 10:36:03,380 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 10:36:03,380 - MaiaService.BL.ChangeUserPwd - INFO - change_user_password() start.
+2016-10-22 10:36:03,525 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:36:03,528 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:36:03,528 - MaiaService.BL.ChangeUserPwd - INFO - change_user_password() end.
+2016-10-22 10:36:55,267 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 10:36:55,267 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 10:37:41,843 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 10:37:41,843 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 10:37:42,002 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:37:42,005 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:37:42,006 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 10:37:42,007 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 10:37:42,007 - MaiaService.BL.ChangeUserPwd - INFO - change_user_password() start.
+2016-10-22 10:37:42,154 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:37:42,156 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:37:42,156 - MaiaService.BL.ChangeUserPwd - INFO - change_user_password() end.
+2016-10-22 10:56:51,427 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 10:56:51,427 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 10:56:51,957 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:56:51,961 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:56:51,963 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 10:56:51,963 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 10:56:51,963 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 10:56:52,105 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:56:52,108 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:56:52,108 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() end.
+2016-10-22 10:59:29,377 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 10:59:29,377 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 10:59:29,885 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:59:29,889 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:59:29,891 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 10:59:29,891 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 10:59:29,892 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 10:59:30,035 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 10:59:30,038 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 10:59:30,038 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() end.
+2016-10-22 11:01:59,458 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:01:59,458 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:01:59,713 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:01:59,749 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:01:59,752 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:01:59,753 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:01:59,753 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:01:59,755 - MaiaService.BL.ChangeUserPwd - INFO - 1
+2016-10-22 11:01:59,915 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:01:59,918 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:01:59,919 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() end.
+2016-10-22 11:03:08,769 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:03:08,769 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:03:09,047 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:03:09,052 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:03:09,054 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:03:09,054 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:03:09,054 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:03:09,056 - MaiaService.BL.ChangeUserPwd - INFO - 1
+2016-10-22 11:03:09,056 - MaiaService.BL.ChangeUserPwd - ERROR - 権限たりない
+2016-10-22 11:04:39,315 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:04:39,315 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:04:39,508 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:04:39,511 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:04:39,513 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:04:39,513 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:04:39,513 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:04:39,515 - MaiaService.BL.ChangeUserPwd - INFO - 2
+2016-10-22 11:04:39,515 - MaiaService.BL.ChangeUserPwd - ERROR - 権限たりない
+2016-10-22 11:05:00,520 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:05:00,520 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:05:00,710 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:05:00,713 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:05:00,715 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:05:00,715 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:05:00,715 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:05:00,717 - MaiaService.BL.ChangeUserPwd - INFO - 2
+2016-10-22 11:05:00,717 - MaiaService.BL.ChangeUserPwd - ERROR - 権限たりない
+2016-10-22 11:05:25,297 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:05:25,297 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:05:25,805 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:05:25,808 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:05:25,810 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:05:25,810 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:05:25,810 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:05:25,812 - MaiaService.BL.ChangeUserPwd - INFO - 2
+2016-10-22 11:05:25,812 - MaiaService.BL.ChangeUserPwd - ERROR - 権限たりない
+2016-10-22 11:06:00,243 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:06:00,243 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:06:00,418 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:06:00,421 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:06:00,423 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:06:00,423 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:06:00,423 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:06:00,425 - MaiaService.BL.ChangeUserPwd - INFO - 2
+2016-10-22 11:06:00,425 - MaiaService.BL.ChangeUserPwd - ERROR - 権限たりない
+2016-10-22 11:06:24,057 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:06:24,057 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:06:24,311 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:06:24,315 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:06:24,317 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:06:24,317 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:06:24,317 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:06:24,319 - MaiaService.BL.ChangeUserPwd - INFO - 2
+2016-10-22 11:06:24,460 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:06:24,462 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:06:24,463 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() end.
+2016-10-22 11:07:27,294 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:07:27,295 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:07:27,463 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:07:27,466 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:07:27,468 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:07:27,468 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:07:27,469 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:07:27,470 - MaiaService.BL.ChangeUserPwd - INFO - 3
+2016-10-22 11:07:27,606 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:07:27,609 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:07:27,609 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() end.
+2016-10-22 11:07:34,125 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:07:34,126 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:07:34,282 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:07:34,285 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:07:34,286 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:07:34,287 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:07:34,287 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:07:34,288 - MaiaService.BL.ChangeUserPwd - INFO - 1
+2016-10-22 11:07:34,289 - MaiaService.BL.ChangeUserPwd - ERROR - 権限たりない
+2016-10-22 11:07:50,816 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-22 11:07:50,816 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-22 11:07:50,980 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:07:50,985 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:07:50,988 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-22 11:07:50,988 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-22 11:07:50,989 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() start.
+2016-10-22 11:07:50,991 - MaiaService.BL.ChangeUserPwd - INFO - 3
+2016-10-22 11:07:51,134 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-22 11:07:51,136 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-22 11:07:51,136 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() end.

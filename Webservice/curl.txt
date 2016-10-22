@@ -28,3 +28,8 @@ curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"e
 
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"report_start_time":"09:00:00","report_end_time":"18:30:00","report_exclusive_minutes":60,"report_total_minutes":510}' http://localhost:5000/api/MAS0000070
 
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"new_pwd1":"mapw0011","new_pwd2":"mapw0011"}' http://localhost:5000/api/MAS0000080
+
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"user_name_for_changed":"wuhan","new_pwd1":"mapw001","new_pwd2":"mapw001"}' http://localhost:5000/api/MAS1000010
+
+

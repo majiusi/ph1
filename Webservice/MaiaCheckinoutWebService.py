@@ -26,6 +26,10 @@ def unauthorized():
 # WebService　URI声明（BL ロジック呼出し開始）
 ####################################################################
 
+########################################################
+# 社員用 Service
+################
+
 # ログイン認証を行い、トーケンを戻す
 @app.route('/api/MAS0000010')
 @auth.login_required
@@ -68,6 +72,23 @@ def update_attendance_work_end_info():
 @auth.login_required
 def update_attendance_report_info():
     return ModifyAttendanceInfo.update_attendance_report_info()
+
+# パスワード更新(社員用)
+@app.route('/api/MAS0000080', methods=['POST'])
+@auth.login_required
+def change_password_for_employee():
+    return ChangeUserPwd.change_password_for_employee()
+
+
+########################################################
+# 管理者用 Service
+################
+# パスワード更新()
+@app.route('/api/MAS1000010', methods=['POST'])
+@auth.login_required
+def change_password_for_Manager():
+    return ChangeUserPwd.change_password_for_Manager()
+    
 
 @app.route('/api/users/<int:id>')
 def get_user(id):
