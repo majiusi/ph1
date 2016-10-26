@@ -1,5 +1,6 @@
 ﻿CREATE OR REPLACE TABLE users ( /* ユーザー */
-  employee_id varchar(10) NOT NULL UNIQUE KEY COMMENT '社員ID',
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
+  employee_id varchar(10) NOT NULL COMMENT '社員ID',
   name varchar(20) NOT NULL UNIQUE KEY COMMENT 'ユーザー名',
   pwd varchar(256) NOT NULL COMMENT 'パスワード',
   auth_id varchar(10) NOT NULL COMMENT '権限ID',
@@ -10,10 +11,11 @@
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`employee_id`)
+  PRIMARY KEY(`enterprise_id`, `employee_id`)
 );
 
 CREATE OR REPLACE TABLE authority ( /* 権限 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   authority_id varchar(10) NOT NULL COMMENT '権限ID',
   name varchar(20) NOT NULL COMMENT '名称',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
@@ -22,10 +24,11 @@ CREATE OR REPLACE TABLE authority ( /* 権限 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`authority_id`)
+  PRIMARY KEY(`enterprise_id`, `authority_id`)
 );
 
 CREATE OR REPLACE TABLE employees ( /* 社員 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   employee_id varchar(10) NOT NULL COMMENT '社員ID',
   name_in_law varchar(20) NOT NULL COMMENT '常用名',
   name_cn varchar(20) NOT NULL COMMENT '中国語名',
@@ -41,10 +44,11 @@ CREATE OR REPLACE TABLE employees ( /* 社員 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`employee_id`)
+  PRIMARY KEY(`enterprise_id`, `employee_id`)
 );
 
 CREATE OR REPLACE TABLE departments ( /* 部 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   department_id varchar(10) NOT NULL COMMENT '部ID',
   name varchar(100) NOT NULL COMMENT '名称',
   chief_employee_id varchar(10) NOT NULL COMMENT '部長ID',
@@ -54,10 +58,11 @@ CREATE OR REPLACE TABLE departments ( /* 部 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`department_id`)
+  PRIMARY KEY(`enterprise_id`, `department_id`)
 );
 
 CREATE OR REPLACE TABLE sections ( /* 課 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   section_id varchar(10) NOT NULL COMMENT '課ID',
   department_id varchar(10) NOT NULL COMMENT '部ID',
   name varchar(100) NOT NULL COMMENT '名称',
@@ -68,10 +73,11 @@ CREATE OR REPLACE TABLE sections ( /* 課 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`section_id`)
+  PRIMARY KEY(`enterprise_id`, `section_id`)
 );
 
 CREATE OR REPLACE TABLE dispatches ( /* 派遣 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   dispatch_id varchar(10) NOT NULL COMMENT '派遣ID',
   employee_id varchar(10) NOT NULL UNIQUE KEY COMMENT '社員ID',
   customer_id varchar(10) NOT NULL COMMENT '顧客ID',
@@ -90,10 +96,11 @@ CREATE OR REPLACE TABLE dispatches ( /* 派遣 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`dispatch_id`)
+  PRIMARY KEY(`enterprise_id`, `dispatch_id`)
 );
 
 CREATE OR REPLACE TABLE attendances ( /* 勤務 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   dispatch_id varchar(10) NOT NULL COMMENT '派遣ID',
   date date NOT NULL COMMENT '日付',
   employee_id varchar(10) NOT NULL COMMENT '社員ID',
@@ -117,10 +124,11 @@ CREATE OR REPLACE TABLE attendances ( /* 勤務 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`dispatch_id`, `date`)
+  PRIMARY KEY(`enterprise_id`, `dispatch_id`, `date`)
 );
 
 CREATE OR REPLACE TABLE attendance_supervision ( /* 勤務承認 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   dispatch_id varchar(10) NOT NULL COMMENT '派遣ID',
   month date NOT NULL COMMENT '月',
   status_id varchar(10) NOT NULL COMMENT 'ステータスID',
@@ -132,11 +140,12 @@ CREATE OR REPLACE TABLE attendance_supervision ( /* 勤務承認 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`dispatch_id`, `month`)
+  PRIMARY KEY(`enterprise_id`, `dispatch_id`, `month`)
 );
 
 CREATE OR REPLACE TABLE customers ( /* 顧客 */
-  id varchar(10) NOT NULL COMMENT 'ID',
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
+  customer_id varchar(10) NOT NULL COMMENT '顧客ID',
   spot_id varchar(10) NOT NULL COMMENT 'スポットID',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
   create_by varchar(10) NOT NULL COMMENT '登録者',
@@ -144,11 +153,12 @@ CREATE OR REPLACE TABLE customers ( /* 顧客 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`id`)
+  PRIMARY KEY(`enterprise_id`, `customer_id`)
 );
 
 CREATE OR REPLACE TABLE sites ( /* 現場 */
-  id varchar(10) NOT NULL COMMENT 'ID',
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
+  site_id varchar(10) NOT NULL COMMENT '現場ID',
   spot_id varchar(10) NOT NULL COMMENT 'スポットID',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
   create_by varchar(10) NOT NULL COMMENT '登録者',
@@ -156,10 +166,11 @@ CREATE OR REPLACE TABLE sites ( /* 現場 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`id`)
+  PRIMARY KEY(`enterprise_id`, `site_id`)
 );
 
 CREATE OR REPLACE TABLE spots ( /* スポット */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   spot_id varchar(10) NOT NULL COMMENT 'スポットID',
   type_id varchar(10) NOT NULL COMMENT '種類ID',
   name varchar(100) NOT NULL COMMENT '名称',
@@ -178,10 +189,11 @@ CREATE OR REPLACE TABLE spots ( /* スポット */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`spot_id`)
+  PRIMARY KEY(`enterprise_id`, `spot_id`)
 );
 
 CREATE OR REPLACE TABLE prefectures ( /* 県 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   prefecture_id varchar(10) NOT NULL COMMENT '県ID',
   name varchar(100) NOT NULL COMMENT '名称',
   name_kana varchar(200) NOT NULL COMMENT 'カナ名称',
@@ -191,10 +203,11 @@ CREATE OR REPLACE TABLE prefectures ( /* 県 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`prefecture_id`)
+  PRIMARY KEY(`enterprise_id`, `prefecture_id`)
 );
 
 CREATE OR REPLACE TABLE districts ( /* 区 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   district_id varchar(10) NOT NULL COMMENT '区ID',
   prefecture_id varchar(10) NOT NULL COMMENT '県ID',
   name varchar(100) NOT NULL COMMENT '名称',
@@ -205,10 +218,11 @@ CREATE OR REPLACE TABLE districts ( /* 区 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`district_id`)
+  PRIMARY KEY(`enterprise_id`, `district_id`)
 );
 
 CREATE OR REPLACE TABLE vacations ( /* 休憩 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   vacation_id varchar(10) NOT NULL COMMENT '休憩ID',
   name varchar(20) NOT NULL COMMENT '名称',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
@@ -217,10 +231,11 @@ CREATE OR REPLACE TABLE vacations ( /* 休憩 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`vacation_id`)
+  PRIMARY KEY(`enterprise_id`, `vacation_id`)
 );
 
 CREATE OR REPLACE TABLE modifications ( /* 修正 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   modification_id varchar(10) NOT NULL COMMENT '修正ID',
   name varchar(20) NOT NULL COMMENT '名称',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
@@ -229,10 +244,11 @@ CREATE OR REPLACE TABLE modifications ( /* 修正 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`modification_id`)
+  PRIMARY KEY(`enterprise_id`, `modification_id`)
 );
 
 CREATE OR REPLACE TABLE status ( /* ステータス */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   status_id varchar(10) NOT NULL COMMENT 'ステータスID',
   name varchar(20) NOT NULL COMMENT '名称',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
@@ -241,10 +257,11 @@ CREATE OR REPLACE TABLE status ( /* ステータス */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`status_id`)
+  PRIMARY KEY(`enterprise_id`, `status_id`)
 );
 
 CREATE OR REPLACE TABLE codes ( /* コード */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   code_id varchar(10) NOT NULL COMMENT 'コードID',
   type varchar(20) NOT NULL COMMENT '種類',
   code varchar(20) NOT NULL COMMENT '値',
@@ -255,10 +272,11 @@ CREATE OR REPLACE TABLE codes ( /* コード */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`code_id`)
+  PRIMARY KEY(`enterprise_id`, `code_id`)
 );
 
 CREATE OR REPLACE TABLE holidays ( /* 祝日 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   date date NOT NULL COMMENT '日付',
   no int(2) NOT NULL COMMENT '枝番',
   type_id varchar(10) NOT NULL COMMENT '種類ID',
@@ -269,10 +287,11 @@ CREATE OR REPLACE TABLE holidays ( /* 祝日 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`date`, `no`)
+  PRIMARY KEY(`enterprise_id`, `date`, `no`)
 );
 
 CREATE OR REPLACE TABLE employments ( /* 雇用 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   employment_id varchar(10) NOT NULL COMMENT '雇用ID',
   employee_id varchar(10) NOT NULL COMMENT '社員ID',
   section_id varchar(10) COMMENT '課ID',
@@ -292,10 +311,11 @@ CREATE OR REPLACE TABLE employments ( /* 雇用 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`employment_id`)
+  PRIMARY KEY(`enterprise_id`, `employment_id`)
 );
 
 CREATE OR REPLACE TABLE bonus_penalty ( /* 賞罰 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   bonus_penalty_id varchar(10) NOT NULL COMMENT '賞罰ID',
   type tinyint(1) NOT NULL COMMENT '種類',
   name varchar(100) NOT NULL COMMENT '名称',
@@ -308,10 +328,11 @@ CREATE OR REPLACE TABLE bonus_penalty ( /* 賞罰 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`bonus_penalty_id`)
+  PRIMARY KEY(`enterprise_id`, `bonus_penalty_id`)
 );
 
 CREATE OR REPLACE TABLE exclusives ( /* 控除 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   exclusive_id varchar(10) NOT NULL COMMENT '控除ID',
   name varchar(100) NOT NULL COMMENT '名称',
   start_date date NOT NULL COMMENT '開始日',
@@ -323,10 +344,11 @@ CREATE OR REPLACE TABLE exclusives ( /* 控除 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`exclusive_id`)
+  PRIMARY KEY(`enterprise_id`, `exclusive_id`)
 );
 
 CREATE OR REPLACE TABLE ensurance ( /* 保険 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   ensurance_id varchar(10) NOT NULL COMMENT '保険ID',
   name varchar(100) NOT NULL COMMENT '名称',
   start_date date NOT NULL COMMENT '開始日',
@@ -338,10 +360,11 @@ CREATE OR REPLACE TABLE ensurance ( /* 保険 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`ensurance_id`)
+  PRIMARY KEY(`enterprise_id`, `ensurance_id`)
 );
 
 CREATE OR REPLACE TABLE payroll ( /* 支払 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   payroll_id varchar(10) NOT NULL COMMENT '支払ID',
   branch_id varchar(10) NOT NULL COMMENT '支店ID',
   card_no varchar(30) NOT NULL COMMENT 'カード番号',
@@ -352,10 +375,11 @@ CREATE OR REPLACE TABLE payroll ( /* 支払 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`payroll_id`)
+  PRIMARY KEY(`enterprise_id`, `payroll_id`)
 );
 
 CREATE OR REPLACE TABLE branches ( /* 支店 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   branch_id varchar(10) NOT NULL COMMENT '支店ID',
   bank_id varchar(10) NOT NULL COMMENT '銀行ID',
   name varchar(100) NOT NULL COMMENT '名称',
@@ -365,10 +389,11 @@ CREATE OR REPLACE TABLE branches ( /* 支店 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`branch_id`)
+  PRIMARY KEY(`enterprise_id`, `branch_id`)
 );
 
 CREATE OR REPLACE TABLE banks ( /* 銀行 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   bank_id varchar(10) NOT NULL COMMENT '銀行ID',
   name varchar(100) NOT NULL COMMENT '名称',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
@@ -377,10 +402,11 @@ CREATE OR REPLACE TABLE banks ( /* 銀行 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`bank_id`)
+  PRIMARY KEY(`enterprise_id`, `bank_id`)
 );
 
 CREATE OR REPLACE TABLE notifications ( /* 通知 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   notification_id varchar(10) NOT NULL COMMENT '通知ID',
   title varchar(50) NOT NULL COMMENT 'タイトル',
   content varchar(1000) NOT NULL COMMENT '中身',
@@ -392,10 +418,11 @@ CREATE OR REPLACE TABLE notifications ( /* 通知 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`notification_id`)
+  PRIMARY KEY(`enterprise_id`, `notification_id`)
 );
 
 CREATE OR REPLACE TABLE votes ( /* 投票 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   vote_id varchar(10) NOT NULL COMMENT '投票ID',
   title varchar(50) NOT NULL COMMENT 'タイトル',
   content varchar(1000) NOT NULL COMMENT '中身',
@@ -410,6 +437,6 @@ CREATE OR REPLACE TABLE votes ( /* 投票 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`vote_id`)
+  PRIMARY KEY(`enterprise_id`, `vote_id`)
 );
 
