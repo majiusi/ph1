@@ -7,7 +7,7 @@
 ###################################
 import logging, datetime
 from Entity import Users
-from flask import Flask, g
+from flask import Flask, request, g
 from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
 
@@ -49,9 +49,10 @@ class LonginAuth:
 
         # first try to authenticate by token
         user = LonginAuth.verify_auth_token(username_or_token)
+        enterprise_id = request.json.get('enterprise_id')
         if not user:
             # try to authenticate with username/password
-            user = Users.User.query.filter_by(name=username_or_token).first()
+            user = Users.User.query.filter_by(enterprise_id=enterprise_id,name=username_or_token).first()
             if not user or not user.verify_password(password):
                 return False
 

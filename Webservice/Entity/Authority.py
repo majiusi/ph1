@@ -22,6 +22,7 @@ db = SQLAlchemy(app)
 class Authority(db.Model):
     __tablename__ = 'authority'
 
+    enterprise_id = db.Column(db.String(10), primary_key=True, nullable=False)
     authority_id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(20), nullable=False)
     valid = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))

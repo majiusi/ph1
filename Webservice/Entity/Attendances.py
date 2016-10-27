@@ -22,6 +22,7 @@ db = SQLAlchemy(app)
 class Attendance(db.Model):
     __tablename__ = 'attendances'
 
+    enterprise_id = db.Column(db.String(10), primary_key=True, nullable=False)
     dispatch_id = db.Column(db.String(10), primary_key=True, nullable=False)
     date = db.Column(db.Date, primary_key=True, nullable=False)
     employee_id = db.Column(db.String(10), nullable=False)

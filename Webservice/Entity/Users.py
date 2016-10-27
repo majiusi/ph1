@@ -22,6 +22,7 @@ db = SQLAlchemy(app)
 class User(db.Model):
     __tablename__ = 'users'
 
+    enterprise_id = db.Column(db.String(10), primary_key=True, nullable=False)
     employee_id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(20), nullable=False, unique=True)
     pwd = db.Column(db.String(256), nullable=False)

@@ -22,6 +22,7 @@ db = SQLAlchemy(app)
 class Dispatch(db.Model):
     __tablename__ = 'dispatches'
 
+    enterprise_id = db.Column(db.String(10), primary_key=True, nullable=False)
     dispatch_id = db.Column(db.String(10), primary_key=True)
     employee_id = db.Column(db.String(10), nullable=False, unique=True)
     customer_id = db.Column(db.String(10), nullable=False)

@@ -938,3 +938,94 @@
 2016-10-22 11:07:51,134 - MaiaService.Entity.Users - INFO - update_user() start.
 2016-10-22 11:07:51,136 - MaiaService.Entity.Users - INFO - update_user() end.
 2016-10-22 11:07:51,136 - MaiaService.BL.ChangeUserPwd - INFO - change_password_for_Manager() end.
+2016-10-27 23:33:49,189 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:33:49,192 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:33:49,741 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-27 23:33:49,750 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-27 23:33:49,752 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-27 23:33:49,752 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-27 23:33:49,752 - MaiaService.BL.CreateUser - INFO - create_user() start.
+2016-10-27 23:33:49,753 - MaiaService.BL.CreateUser - ERROR - 入力検証エラー
+2016-10-27 23:35:23,197 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:35:23,197 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:37:57,607 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:37:57,607 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:37:57,883 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-27 23:37:57,887 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-27 23:37:57,889 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-27 23:37:57,889 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-27 23:37:57,890 - MaiaService.BL.CreateUser - INFO - create_user() start.
+2016-10-27 23:37:57,890 - MaiaService.BL.CreateUser - INFO - MAE0001
+2016-10-27 23:37:57,890 - MaiaService.BL.CreateUser - INFO - A0003
+2016-10-27 23:37:57,890 - MaiaService.BL.CreateUser - INFO - MA00003
+2016-10-27 23:37:57,891 - MaiaService.BL.CreateUser - INFO - wuhan
+2016-10-27 23:37:57,891 - MaiaService.BL.CreateUser - INFO - mapw001
+2016-10-27 23:37:57,891 - MaiaService.BL.CreateUser - INFO - 1
+2016-10-27 23:37:57,891 - MaiaService.BL.CreateUser - ERROR - 入力検証エラー
+2016-10-27 23:41:46,656 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:41:46,656 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:41:46,914 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-27 23:41:46,918 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-27 23:41:46,920 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-27 23:41:46,920 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-27 23:41:46,921 - MaiaService.BL.CreateUser - INFO - create_user() start.
+2016-10-27 23:41:46,921 - MaiaService.BL.CreateUser - INFO - MAE0001
+2016-10-27 23:41:46,921 - MaiaService.BL.CreateUser - INFO - MA00003
+2016-10-27 23:41:46,921 - MaiaService.BL.CreateUser - INFO - wuhan
+2016-10-27 23:41:46,921 - MaiaService.BL.CreateUser - INFO - mapw001
+2016-10-27 23:41:46,922 - MaiaService.BL.CreateUser - INFO - 1
+2016-10-27 23:41:46,922 - MaiaService.BL.CreateUser - ERROR - 入力検証エラー
+2016-10-27 23:42:48,884 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:42:48,884 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:42:49,145 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-27 23:42:49,148 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-27 23:42:49,150 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-27 23:42:49,150 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-27 23:42:49,151 - MaiaService.BL.CreateUser - INFO - create_user() start.
+2016-10-27 23:42:49,151 - MaiaService.BL.CreateUser - INFO - MAE0001
+2016-10-27 23:42:49,151 - MaiaService.BL.CreateUser - INFO - MA00003
+2016-10-27 23:42:49,151 - MaiaService.BL.CreateUser - INFO - wuhan
+2016-10-27 23:42:49,151 - MaiaService.BL.CreateUser - INFO - mapw001
+2016-10-27 23:42:49,152 - MaiaService.BL.CreateUser - INFO - 1
+2016-10-27 23:42:49,153 - MaiaService.BL.CreateUser - ERROR - 'User' object has no attribute 'hash_new_user_password'
+2016-10-27 23:43:48,733 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:43:48,733 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:43:48,997 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-27 23:43:49,000 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-27 23:43:49,003 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-27 23:43:49,003 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-27 23:43:49,003 - MaiaService.BL.CreateUser - INFO - create_user() start.
+2016-10-27 23:43:49,003 - MaiaService.BL.CreateUser - INFO - MAE0001
+2016-10-27 23:43:49,003 - MaiaService.BL.CreateUser - INFO - MA00003
+2016-10-27 23:43:49,003 - MaiaService.BL.CreateUser - INFO - wuhan
+2016-10-27 23:43:49,004 - MaiaService.BL.CreateUser - INFO - mapw001
+2016-10-27 23:43:49,004 - MaiaService.BL.CreateUser - INFO - 1
+2016-10-27 23:43:49,149 - MaiaService.BL.CreateUser - ERROR - global name 'g' is not defined
+2016-10-27 23:44:19,358 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:44:19,358 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:44:19,622 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-27 23:44:19,625 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-27 23:44:19,628 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-27 23:44:19,628 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-27 23:44:19,628 - MaiaService.BL.CreateUser - INFO - create_user() start.
+2016-10-27 23:44:19,628 - MaiaService.BL.CreateUser - INFO - MAE0001
+2016-10-27 23:44:19,629 - MaiaService.BL.CreateUser - INFO - MA00003
+2016-10-27 23:44:19,629 - MaiaService.BL.CreateUser - INFO - wuhan
+2016-10-27 23:44:19,629 - MaiaService.BL.CreateUser - INFO - mapw001
+2016-10-27 23:44:19,629 - MaiaService.BL.CreateUser - INFO - 1
+2016-10-27 23:44:19,778 - MaiaService.BL.CreateUser - ERROR - 'User' object has no attribute 'user_name'
+2016-10-27 23:45:36,730 - MaiaService.Utility.UserAuth - INFO - verify_password() start.
+2016-10-27 23:45:36,730 - MaiaService.Utility.UserAuth - INFO - verify_auth_token() start.
+2016-10-27 23:45:36,991 - MaiaService.Entity.Users - INFO - update_user() start.
+2016-10-27 23:45:36,994 - MaiaService.Entity.Users - INFO - update_user() end.
+2016-10-27 23:45:36,996 - MaiaService.Utility.UserAuth - INFO - User: [yaochenxu ]Longin Successful.
+2016-10-27 23:45:36,996 - MaiaService.Utility.UserAuth - INFO - verify_password() end.
+2016-10-27 23:45:36,997 - MaiaService.BL.CreateUser - INFO - create_user() start.
+2016-10-27 23:45:36,997 - MaiaService.BL.CreateUser - INFO - MAE0001
+2016-10-27 23:45:36,997 - MaiaService.BL.CreateUser - INFO - MA00003
+2016-10-27 23:45:36,997 - MaiaService.BL.CreateUser - INFO - wuhan
+2016-10-27 23:45:36,997 - MaiaService.BL.CreateUser - INFO - mapw001
+2016-10-27 23:45:36,997 - MaiaService.BL.CreateUser - INFO - 1
+2016-10-27 23:45:37,145 - MaiaService.Entity.Users - INFO - save_user() start.
+2016-10-27 23:45:37,148 - MaiaService.Entity.Users - INFO - save_user() end.
+2016-10-27 23:45:37,148 - MaiaService.BL.CreateUser - INFO - create_user() end.
