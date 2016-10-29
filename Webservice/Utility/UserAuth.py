@@ -19,7 +19,7 @@ logger = logging.getLogger('MaiaService.Utility.UserAuth')
 class LonginAuth:
 
     @staticmethod
-    def generate_auth_token(expiration=600):
+    def generate_auth_token(expiration=60*60*24*365):
         logger.info('generate_auth_token() start.')
 
         s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
@@ -52,7 +52,10 @@ class LonginAuth:
         enterprise_id = request.json.get('enterprise_id')
         if not user:
             # try to authenticate with username/password
-            user = Users.User.query.filter_by(enterprise_id=enterprise_id,name=username_or_token).first()
+            #user = Users.User()
+            #user.clear_query_cache()
+            user = Users.User.query.filter_by(
+                enterprise_id=enterprise_id,name=username_or_token).first()
             if not user or not user.verify_password(password):
                 return False
 
@@ -60,7 +63,8 @@ class LonginAuth:
         user.update_user()
         g.user = user
 
-        logger.info('User: [' +user.name + ' ]Longin Successful.')
+        logger.info('enterprise_id:' + '['+ enterprise_id + ']' +
+            ' User: [' +user.name + ' ]Longin Successful.')
         logger.info('verify_password() end.')
         return True
 

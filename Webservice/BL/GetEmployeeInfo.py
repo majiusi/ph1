@@ -22,7 +22,7 @@ def get_employee_info():
         # 社員ID、システム日付により、当日の勤務情報を取得
         attendances = Attendances.Attendance()
         attendances.clear_query_cache()
-        attendances = attendances.query.filter_by(
+        attendances = attendances.query.filter_by(enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,date=datetime.date.today()).first()
 
         # 出勤時間、退勤時間の取得
@@ -49,7 +49,7 @@ def get_employee_info():
         # 派遣情報取得
         dispatch = Dispatches.Dispatch()
         dispatch.clear_query_cache()
-        dispatch = dispatch.query.filter_by(
+        dispatch = dispatch.query.filter_by(enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,end_date=None).first()
 
         # ディフォルト出勤時間、退勤時間、控除分数
@@ -60,7 +60,8 @@ def get_employee_info():
         # 社員情報取得
         employee = Employees.Employee()
         employee.clear_query_cache()
-        employee = employee.query.filter_by(employee_id=g.user.employee_id).first()
+        employee = employee.query.filter_by(enterprise_id=g.user.enterprise_id,
+            employee_id=g.user.employee_id).first()
 
         # 日本語名
         name_jp = employee.name_jp

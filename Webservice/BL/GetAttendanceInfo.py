@@ -27,6 +27,7 @@ def get_attendance_info_by_year_month():
         attendances = Attendances.Attendance()
         attendances.clear_query_cache()
         attendances = attendances.query.filter(
+            Attendances.Attendance.enterprise_id==g.user.enterprise_id,
             Attendances.Attendance.employee_id==g.user.employee_id,
             extract('year',Attendances.Attendance.date)==search_year,
             extract('month',Attendances.Attendance.date)==search_month).all()

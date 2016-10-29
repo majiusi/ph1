@@ -21,7 +21,7 @@ def get_next_page_flag():
         # 社員ID、当日の日付により、勤務情報を取得
         attendances = Attendances.Attendance()
         attendances.clear_query_cache()
-        attendances = attendances.query.filter_by(
+        attendances = attendances.query.filter_by(enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id, date=datetime.date.today()).first()
 
         # 次画面のフラグを算出

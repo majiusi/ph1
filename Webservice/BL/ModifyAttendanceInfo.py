@@ -28,7 +28,9 @@ def insert_attendance_work_start_info():
         dispatch = Dispatches.Dispatch()
         dispatch.clear_query_cache()
         dispatch = dispatch.query.filter_by(
+            enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,end_date=None).first()
+
         # 派遣ID
         dispatch_id = dispatch.dispatch_id
 
@@ -37,6 +39,7 @@ def insert_attendance_work_start_info():
         attendances.clear_query_cache()
 
         attendances.dispatch_id = dispatch_id
+        attendances.enterprise_id = g.user.enterprise_id
         attendances.employee_id = g.user.employee_id
         attendances.date = datetime.datetime.now()
         attendances.start_time = datetime.datetime.now()
@@ -69,6 +72,7 @@ def update_attendance_work_end_info():
         attendances = Attendances.Attendance()
         attendances.clear_query_cache()
         attendances = attendances.query.filter_by(
+            enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,date=datetime.date.today()).first()
 
         # 出勤情報更新
@@ -101,6 +105,7 @@ def update_attendance_report_info():
         attendances = Attendances.Attendance()
         attendances.clear_query_cache()
         attendances = attendances.query.filter_by(
+            enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,date=datetime.date.today()).first()
         logger.info(request)
         # 出勤時間の前に年月日を付け

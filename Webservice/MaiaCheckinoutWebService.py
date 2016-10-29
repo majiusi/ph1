@@ -34,8 +34,9 @@ def unauthorized():
 @app.route('/api/MAS0000010')
 @auth.login_required
 def get_auth_token():
-    token = UserAuth.LonginAuth.generate_auth_token(600)
-    return jsonify({'result_code':0, 'token': token.decode('ascii'), 'duration': 600})
+    # トーケン有効期間ディフォルト一年
+    token = UserAuth.LonginAuth.generate_auth_token()
+    return jsonify({'result_code':0, 'token': token.decode('ascii'), 'duration': 60*60*24*365})
 
 # 画面表示フラグ取得
 @app.route('/api/MAS0000020')
@@ -83,12 +84,17 @@ def change_password_for_employee():
 ########################################################
 # 管理者用 Service
 ################
-# パスワード更新()
+# パスワード更新(管理者用)
 @app.route('/api/MAS1000010', methods=['POST'])
 @auth.login_required
 def change_password_for_Manager():
     return ChangeUserPwd.change_password_for_Manager()
     
+# ユーザー新規登録
+@app.route('/api/MAS1000020', methods=['POST'])
+@auth.login_required
+def new_user():
+    return CreateUser.create_user()
 
 @app.route('/api/users/<int:id>')
 def get_user(id):
@@ -107,11 +113,7 @@ def get_persional_labour_time_list():
 def get_resource():
     return jsonify({'data': 'Hello, %s!' % g.user.username})
 
-# ユーザー新規登録
-@app.route('/api/create_user', methods=['POST'])
-@auth.login_required
-def new_user():
-    return CreateUser.create_user()
+
 ####################################################################
 # WebService　URI声明（BL ロジック呼出し終了）
 ####################################################################

@@ -61,3 +61,6 @@ class User(db.Model):
         except Exception, e:
             db.session.rollback()
             raise e
+
+    def clear_query_cache(self):
+        db.session.commit()

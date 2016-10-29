@@ -31,7 +31,8 @@ def change_password_for_employee():
             logger.error('入力検証エラー')
             return (jsonify({'result_code':-1}))
 
-        user = Users.User.query.filter_by(name=g.user.name).first()
+        user = Users.User.query.filter_by(
+            enterprise_id=g.user.enterprise_id,name=g.user.name).first()
         if user is None:
             logger.error('ユーザ存在しない')
             return  (jsonify({'result_code':-1}))
@@ -66,7 +67,8 @@ def change_password_for_Manager():
             logger.error('入力検証エラー')
             return (jsonify({'result_code':-1}))
 
-        user = Users.User.query.filter_by(name=user_name_for_changed).first()
+        user = Users.User.query.filter_by(
+            enterprise_id=g.user.enterprise_id,name=user_name_for_changed).first()
         if user is None:
             logger.error('ユーザ存在しない')
             return  (jsonify({'result_code':-1}))
