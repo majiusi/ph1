@@ -69,7 +69,4 @@ class Attendance(db.Model):
     def clear_query_cache(self):
         db.session.commit()
 
-    def clear_cache(self):
-        db.session.flush()
-
 

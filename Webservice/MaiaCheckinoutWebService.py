@@ -89,29 +89,12 @@ def change_password_for_employee():
 @auth.login_required
 def change_password_for_Manager():
     return ChangeUserPwd.change_password_for_Manager()
-    
+
 # ユーザー新規登録
 @app.route('/api/MAS1000020', methods=['POST'])
 @auth.login_required
 def new_user():
     return CreateUser.create_user()
-
-@app.route('/api/users/<int:id>')
-def get_user(id):
-    user = User.query.get(id)
-    if not user:
-        abort(400)
-    return jsonify({'username': user.username})
-
-@app.route('/api/persional_labor_time_list')
-def get_persional_labour_time_list():
-    return GetUserLaborList.get_persional_labour_time_list()
-
-
-@app.route('/api/resource')
-@auth.login_required
-def get_resource():
-    return jsonify({'data': 'Hello, %s!' % g.user.username})
 
 
 ####################################################################
