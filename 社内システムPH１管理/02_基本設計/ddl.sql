@@ -1,4 +1,9 @@
-﻿CREATE OR REPLACE TABLE users ( /* ユーザー */
+﻿#CREATE DATABASE maiaDB
+#CHARACTER SET 'utf8'
+#COLLATE 'utf8_general_ci';
+
+
+CREATE OR REPLACE TABLE users ( /* ユーザー */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   employee_id varchar(10) NOT NULL COMMENT '社員ID',
   name varchar(20) NOT NULL UNIQUE KEY COMMENT 'ユーザー名',
@@ -12,7 +17,7 @@
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `employee_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE authority ( /* 権限 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -25,7 +30,7 @@ CREATE OR REPLACE TABLE authority ( /* 権限 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `authority_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE employees ( /* 社員 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -45,7 +50,7 @@ CREATE OR REPLACE TABLE employees ( /* 社員 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `employee_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE departments ( /* 部 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -59,7 +64,7 @@ CREATE OR REPLACE TABLE departments ( /* 部 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `department_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE sections ( /* 課 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -74,7 +79,7 @@ CREATE OR REPLACE TABLE sections ( /* 課 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `section_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE dispatches ( /* 派遣 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -97,7 +102,7 @@ CREATE OR REPLACE TABLE dispatches ( /* 派遣 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `dispatch_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE attendances ( /* 勤務 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -125,7 +130,7 @@ CREATE OR REPLACE TABLE attendances ( /* 勤務 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `dispatch_id`, `date`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE attendance_supervision ( /* 勤務承認 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -141,7 +146,7 @@ CREATE OR REPLACE TABLE attendance_supervision ( /* 勤務承認 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `dispatch_id`, `month`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE customers ( /* 顧客 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -154,7 +159,7 @@ CREATE OR REPLACE TABLE customers ( /* 顧客 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `customer_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE sites ( /* 現場 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -167,7 +172,7 @@ CREATE OR REPLACE TABLE sites ( /* 現場 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `site_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE spots ( /* スポット */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -190,7 +195,7 @@ CREATE OR REPLACE TABLE spots ( /* スポット */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `spot_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE prefectures ( /* 県 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -204,7 +209,7 @@ CREATE OR REPLACE TABLE prefectures ( /* 県 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `prefecture_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE districts ( /* 区 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -219,7 +224,7 @@ CREATE OR REPLACE TABLE districts ( /* 区 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `district_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE vacations ( /* 休憩 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -232,7 +237,7 @@ CREATE OR REPLACE TABLE vacations ( /* 休憩 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `vacation_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE modifications ( /* 修正 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -245,7 +250,7 @@ CREATE OR REPLACE TABLE modifications ( /* 修正 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `modification_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE status ( /* ステータス */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -258,7 +263,7 @@ CREATE OR REPLACE TABLE status ( /* ステータス */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `status_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE codes ( /* コード */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -273,7 +278,7 @@ CREATE OR REPLACE TABLE codes ( /* コード */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `code_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE holidays ( /* 祝日 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -288,7 +293,7 @@ CREATE OR REPLACE TABLE holidays ( /* 祝日 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `date`, `no`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE employments ( /* 雇用 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -312,7 +317,7 @@ CREATE OR REPLACE TABLE employments ( /* 雇用 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `employment_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE bonus_penalty ( /* 賞罰 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -329,7 +334,7 @@ CREATE OR REPLACE TABLE bonus_penalty ( /* 賞罰 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `bonus_penalty_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE exclusives ( /* 控除 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -345,7 +350,7 @@ CREATE OR REPLACE TABLE exclusives ( /* 控除 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `exclusive_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE ensurance ( /* 保険 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -361,7 +366,7 @@ CREATE OR REPLACE TABLE ensurance ( /* 保険 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `ensurance_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE payroll ( /* 支払 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -376,7 +381,7 @@ CREATE OR REPLACE TABLE payroll ( /* 支払 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `payroll_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE branches ( /* 支店 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -390,7 +395,7 @@ CREATE OR REPLACE TABLE branches ( /* 支店 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `branch_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE banks ( /* 銀行 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -403,7 +408,7 @@ CREATE OR REPLACE TABLE banks ( /* 銀行 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `bank_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE notifications ( /* 通知 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -419,7 +424,7 @@ CREATE OR REPLACE TABLE notifications ( /* 通知 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `notification_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE votes ( /* 投票 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
@@ -438,5 +443,5 @@ CREATE OR REPLACE TABLE votes ( /* 投票 */
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `vote_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
