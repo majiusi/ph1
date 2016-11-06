@@ -1,4 +1,4 @@
-# _*_ coding: utf-8 _*_
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 ###################################
 #description: 社員＆勤務基本情報取得

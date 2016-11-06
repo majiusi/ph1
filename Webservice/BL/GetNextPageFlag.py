@@ -1,4 +1,4 @@
-# _*_ coding: utf-8 _*_
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 ###################################
 #description: 画面表示フラグ取得

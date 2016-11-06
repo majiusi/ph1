@@ -1,9 +1,10 @@
 local PC
-scp ./maia.zip maiasoft@www.maiasoft.tk:maia.zip
+scp ./WebService.zip maiasoft@54.199.240.10:WebService.zip
 maiasoft@www.maiasoft.tk's password: 
 
 
 remote server
+ssh maiasoft@54.199.240.10
 [maiasoft@ip-172-31-30-207 ~]$ pwd
 /home/maiasoft
 [maiasoft@ip-172-31-30-207 ~]$ ls -l

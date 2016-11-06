@@ -1,4 +1,4 @@
-# _*_ coding: utf-8 _*_
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 from flask import Flask, abort, request, jsonify, g, url_for, make_response
 from flask_httpauth import HTTPBasicAuth

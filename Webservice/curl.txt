@@ -11,7 +11,9 @@ curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"u
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"user_id":"A0001","employee_id":"MA00001","user_name":"yaochenxu","password":"mapw001","auth_id":"1"}' http://localhost:5000/api/create_user
 
 
-############# test command #################
+http://54.199.240.10
+
+############# test command for localhost #################
 # change password for manager rule
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","user_name_for_changed":"wuhan","new_pwd1":"mapw001","new_pwd2":"mapw001"}' http://localhost:5000/api/MAS1000010
 
@@ -36,5 +38,22 @@ curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"e
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","new_pwd1":"mapw0011","new_pwd2":"mapw0011"}' http://localhost:5000/api/MAS0000080
 
 
+############# test command for Server #################
+replace above [http://localhost:5000/api/xxx] to [http://54.199.240.10/api/xxxx]
 
+curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001"}' http://54.199.240.10/api/MAS0000010
+
+curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001"}' http://54.199.240.10/api/MAS0000020
+
+curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001"}' http://54.199.240.10/api/MAS0000030
+
+curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","search_year":"2016","search_month":"10"}' http://54.199.240.10/api/MAS0000040
+
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","start_longitude":35.67,"start_latitude":139.84,"start_spot_name":"東京都江東く"}' http://54.199.240.10/api/MAS0000050
+
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","end_longitude":35.68,"end_latitude":139.85,"end_spot_name":"東京都江東く1-1"}' http://54.199.240.10/api/MAS0000060
+
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","report_start_time":"09:00:00","report_end_time":"18:30:00","report_exclusive_minutes":60,"report_total_minutes":510}' http://54.199.240.10/api/MAS0000070
+
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","new_pwd1":"mapw0011","new_pwd2":"mapw0011"}' http://54.199.240.10/api/MAS0000080
 
