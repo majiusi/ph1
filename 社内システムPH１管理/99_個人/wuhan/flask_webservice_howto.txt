@@ -1,0 +1,22 @@
+Windows 7 64-bit
+
+to install flask:
+1. install python 2.7
+2. install easy_install (https://pypi.python.org/pypi/setuptools#downloads)
+3. easy_install virtualenv
+4. virtualenv <my_virtual_dir>
+5. cd <my_virtual_dir>
+6. activate.bat
+7. easy_install flask
+
+to run MaiaCheckinoutWebservice.py:
+1. easy_install flask-httpauth
+2. easy_install flask_sqlalchemy
+3. easy_install passlib
+4. modify config.py,
+   changing logging.config.fileConfig(xxx) to your path
+   changing SQLALCHEMY_DATABASE_URI to your mysql connection
+5. install mysql-python (https://pypi.python.org/pypi/MySQL-python/1.2.5, encountered python not found in registry problem)
+   (http://www.codegood.com/archives/129, old but worked for me)
+   or easy_install mysql-python (encountered config-win.h problem)
+   install ms vc++ compiler for python 2.7 if necessary (aka.ms/vcpython27, or https://www.microsoft.com/en-us/download/details.aspx?id=44266)
