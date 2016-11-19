@@ -5,19 +5,20 @@
 #author: Yaochenxu
 #date: 2016/10/09
 ###################################
-import MySQLdb
+import DBTransaction
 import logging, datetime
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Date, DateTime, Integer, Numeric, String, text
 from sqlalchemy import extract
+
 # initialization
 app = Flask(__name__)
 app.config.from_object('config')
 logger = logging.getLogger('MaiaService.Entity.Attendances')
 
 # extensions
-db = SQLAlchemy(app)
+db = DBTransaction.session_open()
 
 class Attendance(db.Model):
     __tablename__ = 'attendances'
@@ -46,27 +47,5 @@ class Attendance(db.Model):
     update_by = db.Column(db.String(10), nullable=False)
     update_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP"))
     update_cnt = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))
-
-    def add_attendances(new_attendances):
-        try:
-            logger.info('add_attendances() start.')
-            db.session.add(new_attendances)
-            db.session.commit()
-            logger.info('add_attendances() end.')
-        except Exception, e:
-            db.session.rollback()
-            raise e
-          
-    def update_attendances(self):
-        try:
-            logger.info('update_attendances() start.')
-            db.session.commit()
-            logger.info('update_attendances() end.')
-        except Exception, e:
-            db.session.rollback()
-            raise e
-
-    def clear_query_cache(self):
-        db.session.commit()
 
 

@@ -6,7 +6,7 @@
 #date: 2016/10/10
 ###################################
 import logging, datetime
-from Entity import Attendances
+from Entity import DBTransaction, Attendances
 from flask import Flask, request, jsonify, g
 
 # initialization
@@ -20,7 +20,6 @@ def get_next_page_flag():
     try:
         # 社員ID、当日の日付により、勤務情報を取得
         attendances = Attendances.Attendance()
-        attendances.clear_query_cache()
         attendances = attendances.query.filter_by(enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id, date=datetime.date.today()).first()
 
@@ -46,5 +45,5 @@ def get_next_page_flag():
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 ,'page_flag': -1}))
-
-
+    finally:
+        DBTransaction.session_close()

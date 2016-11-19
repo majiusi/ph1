@@ -6,7 +6,7 @@
 #date: 2016/10/22
 ###################################
 import logging, datetime
-from Entity import Users
+from Entity import DBTransaction, Users
 from flask import Flask, request, jsonify, g
 
 # initialization
@@ -41,13 +41,17 @@ def change_password_for_employee():
         user.hash_password(new_pwd1)
         user.update_by = g.user.name
         user.update_at = datetime.datetime.now()
-        user.update_user()
+        user.update_cnt = user.update_cnt + 1
+        # 新パスワードのコミット
+        DBTransaction.session_commit()
 
         logger.info('change_user_password() end.')
         return (jsonify({'result_code':0 }))
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 }))
+    finally:
+        DBTransaction.session_close()
 
 ###################################
 #-description: 管理者用パスワード更新
@@ -84,11 +88,14 @@ def change_password_for_Manager():
         user.update_by = g.user.name
         user.update_at = datetime.datetime.now()
         user.update_cnt = user.update_cnt + 1
-        user.update_user()
+        # 新パスワードのコミット
+        DBTransaction.session_commit()
 
         logger.info('change_password_for_Manager() end.')
         return (jsonify({'result_code':0 }))
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 }))
+    finally:
+        DBTransaction.session_close()
 

@@ -6,7 +6,7 @@
 #date: 2016/10/09
 ###################################
 import logging, datetime
-from Entity import Users
+from Entity import DBTransaction, Users
 from flask import Flask, request, jsonify, g
 
 # initialization
@@ -25,12 +25,6 @@ def create_user():
         new_user_password = request.json.get('new_user_password')
         new_user_auth_id = request.json.get('new_user_auth_id')
 
-        logger.info(enterprise_id)
-        logger.info(new_user_employee_id)
-        logger.info(new_user_name)
-        logger.info(new_user_password)
-        logger.info(new_user_auth_id)
-
         # 入力値検証
         if enterprise_id is None or new_user_employee_id is None or  \
            new_user_name is None or new_user_password is None or new_user_auth_id is None:
@@ -42,7 +36,7 @@ def create_user():
             logger.error('ユーザ存在')
             return  (jsonify({'result_code':-1}))
 
-        # ユーザ作成
+        # ユーザ情報作成
         newUser = Users.User(name=new_user_name)
         newUser.enterprise_id = enterprise_id
         newUser.hash_password(new_user_password)
@@ -51,13 +45,16 @@ def create_user():
         newUser.last_login_at = datetime.datetime.strptime('1900-01-01 00:00:00', '%Y-%m-%d %H:%M:%S')
         newUser.create_by = g.user.name
         newUser.update_by = g.user.name
-        # 値挿入
-        Users.User.add_user(newUser)
+        # ユーザ情報コミット
+        DBTransaction.add_table_object(newUser)
+        DBTransaction.session_commit()
 
         logger.info('create_user() end.')
         return (jsonify({'result_code':0 ,'new_user_name': new_user_name}))
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 ,'new_user_name': new_user_name}))
+    finally:
+        DBTransaction.session_close()
 
 

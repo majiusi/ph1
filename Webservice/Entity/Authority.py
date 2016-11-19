@@ -31,13 +31,3 @@ class Authority(db.Model):
     update_by = db.Column(db.String(10), nullable=False)
     update_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP"))
     update_cnt = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))
-
-    def add_authority(new_authority):
-        try:
-            logger.info('add_authority() start.')
-            db.session.add(new_authority)
-            db.session.commit()
-            logger.info('add_authority() end.')
-        except Exception, e:
-            db.session.rollback()
-            raise e

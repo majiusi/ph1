@@ -6,7 +6,8 @@
 #date: 2016/10/09
 ###################################
 import logging
-from flask import Flask
+import DBTransaction
+from flask import Flask, g
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Date, DateTime, Integer, Numeric, String, text
 from passlib.apps import custom_app_context as pwd_context
@@ -17,7 +18,7 @@ app.config.from_object('config')
 logger = logging.getLogger('MaiaService.Entity.Users')
 
 # extensions
-db = SQLAlchemy(app)
+db = DBTransaction.session_open()
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -43,24 +44,3 @@ class User(db.Model):
     def verify_password(self, password):
         return pwd_context.verify(password, self.pwd)
 
-    def add_user(new_user):
-        try:
-            logger.info('save_user() start.')
-            db.session.add(new_user)
-            db.session.commit()
-            logger.info('save_user() end.')
-        except Exception, e:
-            db.session.rollback()
-            raise e
-
-    def update_user(self):
-        try:
-            logger.info('update_user() start.')
-            db.session.commit()
-            logger.info('update_user() end.')
-        except Exception, e:
-            db.session.rollback()
-            raise e
-
-    def clear_query_cache(self):
-        db.session.commit()

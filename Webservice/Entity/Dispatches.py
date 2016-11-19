@@ -42,15 +42,3 @@ class Dispatch(db.Model):
     update_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP"))
     update_cnt = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))
 
-    def add_dispatches(new_dispatches):
-        try:
-            logger.info('add_dispatches() start.')
-            db.session.add(new_dispatches)
-            db.session.commit()
-            logger.info('add_dispatches() end.')
-        except Exception, e:
-            db.session.rollback()
-            raise e
-    
-    def clear_query_cache(self):
-        db.session.commit()

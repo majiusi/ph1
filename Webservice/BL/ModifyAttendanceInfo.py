@@ -6,7 +6,7 @@
 #date: 2016/10/16
 ###################################
 import logging, datetime
-from Entity import Attendances, Employees, Dispatches
+from Entity import DBTransaction, Attendances, Employees, Dispatches
 from sqlalchemy import extract
 from flask import Flask, request, jsonify, g
 
@@ -26,7 +26,6 @@ def insert_attendance_work_start_info():
     try:
         # 派遣情報取得
         dispatch = Dispatches.Dispatch()
-        dispatch.clear_query_cache()
         dispatch = dispatch.query.filter_by(
             enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,end_date=None).first()
@@ -34,9 +33,8 @@ def insert_attendance_work_start_info():
         # 派遣ID
         dispatch_id = dispatch.dispatch_id
 
-        # 出勤情報設定
+        # 出勤情報編集
         attendances = Attendances.Attendance()
-        attendances.clear_query_cache()
 
         attendances.dispatch_id = dispatch_id
         attendances.enterprise_id = g.user.enterprise_id
@@ -51,13 +49,17 @@ def insert_attendance_work_start_info():
         attendances.update_by = g.user.name
         attendances.update_at = datetime.datetime.now()
 
-        Attendances.Attendance.add_attendances(attendances)
+        # 出勤情報のコミット
+        DBTransaction.add_table_object(attendances)
+        DBTransaction.session_commit()
 
         logger.info('insert_attendance_work_start_info() end.')
         return (jsonify({'result_code':0 }))
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 }))
+    finally:
+        DBTransaction.session_close()
 
 ###################################
 #-description: パンチ終了情報submit
@@ -70,7 +72,6 @@ def update_attendance_work_end_info():
     try:
         # 社員ID、システム日付により、当日の勤務情報を取得
         attendances = Attendances.Attendance()
-        attendances.clear_query_cache()
         attendances = attendances.query.filter_by(
             enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,date=datetime.date.today()).first()
@@ -84,13 +85,15 @@ def update_attendance_work_end_info():
         attendances.update_at = datetime.datetime.now()
         attendances.update_cnt = attendances.update_cnt + 1
 
-        attendances.update_attendances()
+        DBTransaction.session_commit()
 
         logger.info('update_attendance_work_end_info() end.')
         return (jsonify({'result_code':0 }))
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 }))
+    finally:
+        DBTransaction.session_close()
 
 ###################################
 #-description: レポート出勤情報submit
@@ -103,7 +106,6 @@ def update_attendance_report_info():
     try:
         # 社員ID、システム日付により、当日の勤務情報を取得
         attendances = Attendances.Attendance()
-        attendances.clear_query_cache()
         attendances = attendances.query.filter_by(
             enterprise_id=g.user.enterprise_id,
             employee_id=g.user.employee_id,date=datetime.date.today()).first()
@@ -124,10 +126,12 @@ def update_attendance_report_info():
         attendances.update_at = datetime.datetime.now()
         attendances.update_cnt = attendances.update_cnt + 1
 
-        attendances.update_attendances()
+        DBTransaction.session_commit()
 
         logger.info('update_attendance_report_info() end.')
         return (jsonify({'result_code':0 }))
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 }))
+    finally:
+        DBTransaction.session_close()

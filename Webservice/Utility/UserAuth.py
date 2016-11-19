@@ -6,7 +6,7 @@
 #date: 2016/10/09
 ###################################
 import logging, datetime
-from Entity import Users
+from Entity import Users, DBTransaction
 from flask import Flask, request, g
 from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
@@ -25,20 +25,23 @@ class LonginAuth:
         s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
 
         logger.info('generate_auth_token() end.')
-        return s.dumps({'employee_id': g.user.employee_id})
+        return s.dumps({'enterprise_id': g.user.enterprise_id, 'employee_id': g.user.employee_id})
 
     @staticmethod
     def verify_auth_token(token):
         logger.info('verify_auth_token() start.')
 
-        s = Serializer(app.config['SECRET_KEY'])
         try:
+            s = Serializer(app.config['SECRET_KEY'])
             data = s.loads(token)
         except SignatureExpired:
-            return None    # valid token, but expired
+            logger.warning('valid token, but expired')
+            return None
         except BadSignature:
-            return None    # invalid token
-        user = Users.User.query.get(data['employee_id'])
+            logger.warning('invalid token')
+            return None
+        user = Users.User.query.filter_by(
+            enterprise_id=data['enterprise_id'], employee_id=data['employee_id']).first()
 
         logger.info('verify_auth_token() end.')
         return user
@@ -47,25 +50,34 @@ class LonginAuth:
     def verify_password(username_or_token, password):
         logger.info('verify_password() start.')
 
-        # first try to authenticate by token
-        user = LonginAuth.verify_auth_token(username_or_token)
-        enterprise_id = request.json.get('enterprise_id')
-        if not user:
-            # try to authenticate with username/password
-            #user = Users.User()
-            #user.clear_query_cache()
-            user = Users.User.query.filter_by(
-                enterprise_id=enterprise_id,name=username_or_token).first()
-            if not user or not user.verify_password(password):
-                return False
+        try:
+            
+            # first try to authenticate by token
+            user = LonginAuth.verify_auth_token(username_or_token)
+            enterprise_id = request.json.get('enterprise_id')
+            if not user:
+                # try to authenticate with username/password
+                user = Users.User.query.filter_by(
+                    enterprise_id=enterprise_id,name=username_or_token).first()
+                if not user or not user.verify_password(password):
+                    return False
 
-        user.last_login_at = datetime.datetime.now()
-        user.update_user()
-        g.user = user
-
-        logger.info('enterprise_id:' + '['+ enterprise_id + ']' +
-            ' User: [' +user.name + ' ]Longin Successful.')
-        logger.info('verify_password() end.')
-        return True
+            # update login time of Users Table
+            user.last_login_at = datetime.datetime.now()
+            DBTransaction.session_commit()
+            # save user info to global
+            g.user = user
+            
+            logger.info('enterprise_id:' + '['+ enterprise_id + ']' +
+                ' User: [' +user.name + ' ]Longin Successful.')
+            logger.info('verify_password() end.')
+            
+            return True
+        except Exception as e:
+            logger.error(e)
+            return False
+        finally:
+            DBTransaction.session_close()
+        
 
 

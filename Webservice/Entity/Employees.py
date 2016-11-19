@@ -38,16 +38,3 @@ class Employee(db.Model):
     update_by = db.Column(db.String(10), nullable=False)
     update_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP"))
     update_cnt = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))
-
-    def add_employees(new_employees):
-        try:
-            logger.info('add_employees() start.')
-            db.session.add(new_employees)
-            db.session.commit()
-            logger.info('add_employees() end.')
-        except Exception, e:
-            db.session.rollback()
-            raise e
-
-    def clear_query_cache(self):
-        db.session.commit()

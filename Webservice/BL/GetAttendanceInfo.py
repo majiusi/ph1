@@ -7,7 +7,7 @@
 ###################################
 import logging, datetime
 from Utility import Jholiday
-from Entity import Attendances, Employees, Dispatches
+from Entity import DBTransaction, Attendances, Employees, Dispatches
 from sqlalchemy import extract
 from flask import Flask, request, jsonify, g
 
@@ -25,7 +25,6 @@ def get_attendance_info_by_year_month():
         
         # 社員ID、パラメータの年月により、当月の勤務情報を取得
         attendances = Attendances.Attendance()
-        attendances.clear_query_cache()
         attendances = attendances.query.filter(
             Attendances.Attendance.enterprise_id==g.user.enterprise_id,
             Attendances.Attendance.employee_id==g.user.employee_id,
@@ -78,7 +77,8 @@ def get_attendance_info_by_year_month():
     except Exception, e:
         logger.error(e)
         return (jsonify({'result_code':-1 }))
-
+    finally:
+        DBTransaction.session_close()
 
 
 
