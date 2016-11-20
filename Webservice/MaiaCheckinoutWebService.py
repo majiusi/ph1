@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
-from flask import Flask, abort, request, jsonify, g, url_for, make_response
+from flask import Flask, jsonify, make_response
 from flask_httpauth import HTTPBasicAuth
-from Utility import *
+
 from BL import *
+from Utility import *
 
 # initialization
 app = Flask(__name__)
