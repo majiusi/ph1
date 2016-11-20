@@ -5,9 +5,10 @@
 # author: Yaochenxu
 # date: 2016/10/15
 ###################################
-import logging, datetime
-from sqlalchemy import extract
-from flask import Flask, request, jsonify, g
+import datetime
+import logging
+
+from flask import Flask, jsonify, g
 
 # initialization
 app = Flask(__name__)
@@ -88,6 +89,6 @@ def get_employee_info():
              }))
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code': -1}))
+        return jsonify({'result_code': -1})
     finally:
         DBTransaction.session_close()

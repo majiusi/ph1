@@ -1,4 +1,4 @@
-import os, logging
+import os
 import logging.config
 
 conf_file = os.path.split(os.path.realpath(__file__))[0] + '/logging.conf'

@@ -5,8 +5,10 @@
 # author: Yaochenxu
 # date: 2016/10/10
 ###################################
-import logging, datetime
-from flask import Flask, request, jsonify, g
+import datetime
+import logging
+
+from flask import Flask, jsonify, g
 
 # initialization
 app = Flask(__name__)
@@ -42,9 +44,9 @@ def get_next_page_flag():
             result_code = -1
 
         logger.info('get_next_page_flag() end.')
-        return (jsonify({'result_code': result_code, 'page_flag': page_flag}))
+        return jsonify({'result_code': result_code, 'page_flag': page_flag})
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code': -1, 'page_flag': -1}))
+        return jsonify({'result_code': -1, 'page_flag': -1})
     finally:
         DBTransaction.session_close()
