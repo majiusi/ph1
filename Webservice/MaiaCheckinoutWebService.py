@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 from flask import Flask, abort, request, jsonify, g, url_for, make_response
 from flask_httpauth import HTTPBasicAuth
 from Utility import *
@@ -12,15 +12,18 @@ app.config.from_object('config')
 # extensions
 auth = HTTPBasicAuth()
 
+
 # authentication callback method
 @auth.verify_password
 def verify_password(username_or_token, password):
     isPassed = UserAuth.LonginAuth.verify_password(username_or_token, password)
     return isPassed
 
+
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'result_code':-1 }), 403)
+    return make_response(jsonify({'result_code': -1}), 403)
+
 
 ####################################################################
 # WebService　URI声明（BL ロジック呼出し開始）
@@ -36,7 +39,8 @@ def unauthorized():
 def get_auth_token():
     # トーケン有効期間ディフォルト一年
     token = UserAuth.LonginAuth.generate_auth_token()
-    return jsonify({'result_code':0, 'token': token.decode('ascii'), 'duration': 60*60*24*365})
+    return jsonify({'result_code': 0, 'token': token.decode('ascii'), 'duration': 60 * 60 * 24 * 365})
+
 
 # 画面表示フラグ取得
 @app.route('/api/MAS0000020')
@@ -44,11 +48,13 @@ def get_auth_token():
 def get_next_page_flag():
     return GetNextPageFlag.get_next_page_flag()
 
+
 # 社員＆勤務基本情報取得
 @app.route('/api/MAS0000030')
 @auth.login_required
 def get_employee_info():
     return GetEmployeeInfo.get_employee_info()
+
 
 # 月間勤務情報取得
 @app.route('/api/MAS0000040')
@@ -56,11 +62,13 @@ def get_employee_info():
 def get_attendance_info_by_year_month():
     return GetAttendanceInfo.get_attendance_info_by_year_month()
 
+
 # パンチ開始情報submit
 @app.route('/api/MAS0000050', methods=['POST'])
 @auth.login_required
 def insert_attendance_work_start_info():
     return ModifyAttendanceInfo.insert_attendance_work_start_info()
+
 
 # パンチ終了情報submit
 @app.route('/api/MAS0000060', methods=['POST'])
@@ -68,11 +76,13 @@ def insert_attendance_work_start_info():
 def update_attendance_work_end_info():
     return ModifyAttendanceInfo.update_attendance_work_end_info()
 
+
 # レポート出勤情報submit
 @app.route('/api/MAS0000070', methods=['POST'])
 @auth.login_required
 def update_attendance_report_info():
     return ModifyAttendanceInfo.update_attendance_report_info()
+
 
 # パスワード更新(社員用)
 @app.route('/api/MAS0000080', methods=['POST'])
@@ -90,6 +100,7 @@ def change_password_for_employee():
 def change_password_for_Manager():
     return ChangeUserPwd.change_password_for_Manager()
 
+
 # ユーザー新規登録
 @app.route('/api/MAS1000020', methods=['POST'])
 @auth.login_required
@@ -106,6 +117,5 @@ def new_user():
 if __name__ == '__main__':
     app.run()
 
-    #app.run(host='0.0.0.0',port=8008)
-    #app.run(host='0.0.0.0',port=808,debug=True)
-
+    # app.run(host='0.0.0.0',port=8008)
+    # app.run(host='0.0.0.0',port=808,debug=True)

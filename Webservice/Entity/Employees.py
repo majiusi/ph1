@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: Table Entity Class
-#author: Yaochenxu
-#date: 2016/10/09
+# description: Table Entity Class
+# author: Yaochenxu
+# date: 2016/10/09
 ###################################
 import MySQLdb
 import logging
@@ -18,6 +18,7 @@ logger = logging.getLogger('MaiaService.Entity.Employees')
 
 # extensions
 db = SQLAlchemy(app)
+
 
 class Employee(db.Model):
     __tablename__ = 'employees'

@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: ログイン認証
-#author: Yaochenxu
-#date: 2016/10/09
+# description: ログイン認証
+# author: Yaochenxu
+# date: 2016/10/09
 ###################################
 import logging, datetime
-from Entity import Users, DBTransaction
 from flask import Flask, request, g
 from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
@@ -16,10 +15,10 @@ app = Flask(__name__)
 app.config.from_object('config')
 logger = logging.getLogger('MaiaService.Utility.UserAuth')
 
-class LonginAuth:
 
+class LonginAuth:
     @staticmethod
-    def generate_auth_token(expiration=60*60*24*365):
+    def generate_auth_token(expiration=60 * 60 * 24 * 365):
         logger.info('generate_auth_token() start.')
 
         s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
@@ -28,7 +27,7 @@ class LonginAuth:
         return s.dumps({'enterprise_id': g.user.enterprise_id, 'employee_id': g.user.employee_id})
 
     @staticmethod
-    def verify_auth_token(token):
+    def verify_auth_token(token, Users):
         logger.info('verify_auth_token() start.')
 
         try:
@@ -48,17 +47,18 @@ class LonginAuth:
 
     @staticmethod
     def verify_password(username_or_token, password):
+        from Entity import DBTransaction, Users
         logger.info('verify_password() start.')
 
         try:
-            
+
             # first try to authenticate by token
-            user = LonginAuth.verify_auth_token(username_or_token)
+            user = LonginAuth.verify_auth_token(username_or_token, Users)
             enterprise_id = request.json.get('enterprise_id')
             if not user:
                 # try to authenticate with username/password
                 user = Users.User.query.filter_by(
-                    enterprise_id=enterprise_id,name=username_or_token).first()
+                    enterprise_id=enterprise_id, name=username_or_token).first()
                 if not user or not user.verify_password(password):
                     return False
 
@@ -67,17 +67,14 @@ class LonginAuth:
             DBTransaction.session_commit()
             # save user info to global
             g.user = user
-            
-            logger.info('enterprise_id:' + '['+ enterprise_id + ']' +
-                ' User: [' +user.name + ' ]Longin Successful.')
+
+            logger.info('enterprise_id:' + '[' + enterprise_id + ']' +
+                        ' User: [' + user.name + ' ]Longin Successful.')
             logger.info('verify_password() end.')
-            
+
             return True
         except Exception as e:
             logger.error(e)
             return False
         finally:
             DBTransaction.session_close()
-        
-
-

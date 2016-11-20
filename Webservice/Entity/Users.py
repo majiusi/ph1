@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: Table Entity Class
-#author: Yaochenxu
-#date: 2016/10/09
+# description: Table Entity Class
+# author: Yaochenxu
+# date: 2016/10/09
 ###################################
 import logging
 import DBTransaction
@@ -19,6 +19,7 @@ logger = logging.getLogger('MaiaService.Entity.Users')
 
 # extensions
 db = DBTransaction.session_open()
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -43,4 +44,3 @@ class User(db.Model):
     # convert the input password and verify it by SHA256
     def verify_password(self, password):
         return pwd_context.verify(password, self.pwd)
-

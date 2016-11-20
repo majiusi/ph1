@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: ユーザ新規作成
-#author: Yaochenxu
-#date: 2016/10/09
+# description: ユーザ新規作成
+# author: Yaochenxu
+# date: 2016/10/09
 ###################################
 import logging, datetime
-from Entity import DBTransaction, Users
 from flask import Flask, request, jsonify, g
 
 # initialization
@@ -14,8 +13,9 @@ app = Flask(__name__)
 app.config.from_object('config')
 logger = logging.getLogger('MaiaService.BL.CreateUser')
 
-def create_user():
 
+def create_user():
+    from Entity import DBTransaction, Users
     logger.info('create_user() start.')
     try:
         # 入力値取得
@@ -26,15 +26,15 @@ def create_user():
         new_user_auth_id = request.json.get('new_user_auth_id')
 
         # 入力値検証
-        if enterprise_id is None or new_user_employee_id is None or  \
-           new_user_name is None or new_user_password is None or new_user_auth_id is None:
+        if enterprise_id is None or new_user_employee_id is None or \
+                        new_user_name is None or new_user_password is None or new_user_auth_id is None:
             logger.error('入力検証エラー')
-            return (jsonify({'result_code':-1}))
+            return (jsonify({'result_code': -1}))
 
-        user = Users.User.query.filter_by(enterprise_id=enterprise_id,name=new_user_name).first()
+        user = Users.User.query.filter_by(enterprise_id=enterprise_id, name=new_user_name).first()
         if user is not None:
             logger.error('ユーザ存在')
-            return  (jsonify({'result_code':-1}))
+            return (jsonify({'result_code': -1}))
 
         # ユーザ情報作成
         newUser = Users.User(name=new_user_name)
@@ -50,11 +50,9 @@ def create_user():
         DBTransaction.session_commit()
 
         logger.info('create_user() end.')
-        return (jsonify({'result_code':0 ,'new_user_name': new_user_name}))
+        return (jsonify({'result_code': 0, 'new_user_name': new_user_name}))
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code':-1 ,'new_user_name': new_user_name}))
+        return (jsonify({'result_code': -1, 'new_user_name': new_user_name}))
     finally:
         DBTransaction.session_close()
-
-

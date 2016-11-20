@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: db session class
-#author: Yaochenxu
-#date: 2016/11/19
+# description: db session class
+# author: Yaochenxu
+# date: 2016/11/19
 ###################################
-#import MySQLdb
+# import MySQLdb
 import logging
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -15,13 +15,16 @@ app = Flask(__name__)
 app.config.from_object('config')
 logger = logging.getLogger('MaiaService.Entity.DBSession')
 
+
 class DBSession:
     # extensions
     db_instance = SQLAlchemy(app)
 
+
 def session_open():
     logger.info('DBSession open.')
     return DBSession.db_instance
+
 
 def add_table_object(new_user):
     try:
@@ -41,7 +44,8 @@ def session_commit():
     except Exception, e:
         DBSession.db_instance.session.rollback()
         raise e
-      
+
+
 def session_close():
     try:
         logger.info('DBSession close.')
@@ -49,5 +53,3 @@ def session_close():
     except Exception, e:
         DBSession.db_instance.session.rollback()
         raise e
-
-

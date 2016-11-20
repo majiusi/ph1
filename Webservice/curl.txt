@@ -18,7 +18,7 @@ http://54.199.240.10
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","user_name_for_changed":"wuhan","new_pwd1":"mapw001","new_pwd2":"mapw001"}' http://localhost:5000/api/MAS1000010
 
 #create user
-curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","new_user_employee_id":"MA00003","new_user_name":"wuhan","new_user_password":"mapw001","new_user_auth_id":"1"}' http://localhost:5000/api/MAS1000020
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","new_user_employee_id":"MA00005","new_user_name":"majiusi","new_user_password":"mapw001","new_user_auth_id":"1"}' http://localhost:5000/api/MAS1000020
 
 ######## users ########
 curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001"}' http://localhost:5000/api/MAS0000010
@@ -27,7 +27,7 @@ curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"en
 
 curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001"}' http://localhost:5000/api/MAS0000030
 
-curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","search_year":"2016","search_month":"10"}' http://localhost:5000/api/MAS0000040
+curl -u yaochenxu:mapw001 -i -X GET -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","search_year":"2016","search_month":"11"}' http://localhost:5000/api/MAS0000040
 
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","start_longitude":35.67,"start_latitude":139.84,"start_spot_name":"東京都江東く"}' http://localhost:5000/api/MAS0000050
 

@@ -1,2 +1,2 @@
-__all__ = ["CreateUser","GetNextPageFlag","GetEmployeeInfo","GetAttendanceInfo",
-"ModifyAttendanceInfo","ChangeUserPwd"]
+__all__ = ["CreateUser", "GetNextPageFlag", "GetEmployeeInfo", "GetAttendanceInfo",
+           "ModifyAttendanceInfo", "ChangeUserPwd"]

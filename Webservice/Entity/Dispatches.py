@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: Table Entity Class
-#author: Yaochenxu
-#date: 2016/10/09
+# description: Table Entity Class
+# author: Yaochenxu
+# date: 2016/10/09
 ###################################
 import MySQLdb
 import logging
@@ -18,6 +18,7 @@ logger = logging.getLogger('MaiaService.Entity.Dispatches')
 
 # extensions
 db = SQLAlchemy(app)
+
 
 class Dispatch(db.Model):
     __tablename__ = 'dispatches'
@@ -41,4 +42,3 @@ class Dispatch(db.Model):
     update_by = db.Column(db.String(10), nullable=False)
     update_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP"))
     update_cnt = db.Column(db.Integer, nullable=False, server_default=db.text("'1'"))
-

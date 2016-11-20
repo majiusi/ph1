@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: 社員＆勤務基本情報取得
-#author: Yaochenxu
-#date: 2016/10/15
+# description: 社員＆勤務基本情報取得
+# author: Yaochenxu
+# date: 2016/10/15
 ###################################
 import logging, datetime
-from Entity import DBTransaction, Attendances, Employees, Dispatches
 from sqlalchemy import extract
 from flask import Flask, request, jsonify, g
 
@@ -15,14 +14,15 @@ app = Flask(__name__)
 app.config.from_object('config')
 logger = logging.getLogger('MaiaService.BL.GetEmployeeInfo')
 
-def get_employee_info():
 
+def get_employee_info():
+    from Entity import DBTransaction, Attendances, Employees, Dispatches
     logger.info('get_employee_info() start.')
     try:
         # 社員ID、システム日付により、当日の勤務情報を取得
         attendances = Attendances.Attendance()
         attendances = attendances.query.filter_by(enterprise_id=g.user.enterprise_id,
-            employee_id=g.user.employee_id,date=datetime.date.today()).first()
+                                                  employee_id=g.user.employee_id, date=datetime.date.today()).first()
 
         # 出勤時間、退勤時間
         # レポート用当日出勤時間、当日退勤時間、当日控除時間、当日合計時間
@@ -30,8 +30,8 @@ def get_employee_info():
         end_time = ''
         report_start_time = ''
         report_end_time = ''
-        report_exclusive_minutes = 999
-        report_total_minutes = 999
+        report_exclusive_minutes = ''
+        report_total_minutes = ''
         if attendances is not None:
             if attendances.start_time is not None:
                 start_time = attendances.start_time.strftime('%H:%M:%S')
@@ -49,11 +49,11 @@ def get_employee_info():
         # 派遣情報取得
         dispatch = Dispatches.Dispatch()
         dispatch = dispatch.query.filter_by(enterprise_id=g.user.enterprise_id,
-            employee_id=g.user.employee_id,end_date=None).first()
+                                            employee_id=g.user.employee_id, end_date=None).first()
         # ディフォルト出勤時間、退勤時間、控除分数
         default_work_start_time = ''
         default_work_end_time = ''
-        default_except_minutes = 999
+        default_except_minutes = ''
         if dispatch is not None:
             default_work_start_time = dispatch.work_start_time
             default_work_end_time = dispatch.work_end_time
@@ -62,34 +62,32 @@ def get_employee_info():
         # 社員情報取得
         employee = Employees.Employee()
         employee = employee.query.filter_by(enterprise_id=g.user.enterprise_id,
-            employee_id=g.user.employee_id).first()
+                                            employee_id=g.user.employee_id).first()
 
         # 日本語名、権限ID
         name_jp = ''
         auth_id = ''
-        if employee is not None:    
+        if employee is not None:
             name_jp = employee.name_jp
             auth_id = g.user.auth_id
 
         logger.info('get_employee_info() end.')
         return (jsonify(
-            {'result_code':0 ,
-            'name_jp': name_jp,
-            'auth_id':auth_id,
-            'default_work_start_time':default_work_start_time,
-            'default_work_end_time':default_work_end_time,
-            'default_except_minutes':default_except_minutes,
-            'start_time':start_time,
-            'end_time':end_time,
-            'report_start_time':report_start_time,
-            'report_end_time':report_end_time,
-            'report_exclusive_minutes':report_exclusive_minutes,
-            'report_total_minutes':report_total_minutes
-            }))
+            {'result_code': 0,
+             'name_jp': name_jp,
+             'auth_id': auth_id,
+             'default_work_start_time': default_work_start_time,
+             'default_work_end_time': default_work_end_time,
+             'default_except_minutes': default_except_minutes,
+             'start_time': start_time,
+             'end_time': end_time,
+             'report_start_time': report_start_time,
+             'report_end_time': report_end_time,
+             'report_exclusive_minutes': report_exclusive_minutes,
+             'report_total_minutes': report_total_minutes
+             }))
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code':-1 }))
+        return (jsonify({'result_code': -1}))
     finally:
         DBTransaction.session_close()
-
-

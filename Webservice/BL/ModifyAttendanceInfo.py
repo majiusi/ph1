@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 ###################################
-#description: 勤務情報編集用クラス    
-#author: Yaochenxu
-#date: 2016/10/16
+# description: 勤務情報編集用クラス
+# author: Yaochenxu
+# date: 2016/10/16
 ###################################
 import logging, datetime
-from Entity import DBTransaction, Attendances, Employees, Dispatches
 from sqlalchemy import extract
 from flask import Flask, request, jsonify, g
 
@@ -15,20 +14,22 @@ app = Flask(__name__)
 app.config.from_object('config')
 logger = logging.getLogger('MaiaService.BL.ModifyAttendanceInfo')
 
+
 ###################################
-#-description: パンチ開始情報submit
-#-author: Yaochenxu
-#-date: 2016/10/16
+# -description: パンチ開始情報submit
+# -author: Yaochenxu
+# -date: 2016/10/16
 ###################################
 def insert_attendance_work_start_info():
-
+    from Entity import DBTransaction, Attendances, Employees, Dispatches
     logger.info('insert_attendance_work_start_info() start.')
+
     try:
         # 派遣情報取得
         dispatch = Dispatches.Dispatch()
         dispatch = dispatch.query.filter_by(
             enterprise_id=g.user.enterprise_id,
-            employee_id=g.user.employee_id,end_date=None).first()
+            employee_id=g.user.employee_id, end_date=None).first()
 
         # 派遣ID
         dispatch_id = dispatch.dispatch_id
@@ -54,27 +55,29 @@ def insert_attendance_work_start_info():
         DBTransaction.session_commit()
 
         logger.info('insert_attendance_work_start_info() end.')
-        return (jsonify({'result_code':0 }))
+        return (jsonify({'result_code': 0}))
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code':-1 }))
+        return (jsonify({'result_code': -1}))
     finally:
         DBTransaction.session_close()
 
+
 ###################################
-#-description: パンチ終了情報submit
-#-author: Yaochenxu
-#-date: 2016/10/19
+# -description: パンチ終了情報submit
+# -author: Yaochenxu
+# -date: 2016/10/19
 ###################################
 def update_attendance_work_end_info():
-
+    from Entity import DBTransaction, Attendances, Employees, Dispatches
     logger.info('update_attendance_work_end_info() start.')
+
     try:
         # 社員ID、システム日付により、当日の勤務情報を取得
         attendances = Attendances.Attendance()
         attendances = attendances.query.filter_by(
             enterprise_id=g.user.enterprise_id,
-            employee_id=g.user.employee_id,date=datetime.date.today()).first()
+            employee_id=g.user.employee_id, date=datetime.date.today()).first()
 
         # 出勤情報更新
         attendances.end_time = datetime.datetime.now()
@@ -88,27 +91,28 @@ def update_attendance_work_end_info():
         DBTransaction.session_commit()
 
         logger.info('update_attendance_work_end_info() end.')
-        return (jsonify({'result_code':0 }))
+        return (jsonify({'result_code': 0}))
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code':-1 }))
+        return (jsonify({'result_code': -1}))
     finally:
         DBTransaction.session_close()
 
+
 ###################################
-#-description: レポート出勤情報submit
-#-author: Yaochenxu
-#-date: 2016/10/21
+# -description: レポート出勤情報submit
+# -author: Yaochenxu
+# -date: 2016/10/21
 ###################################
 def update_attendance_report_info():
-
+    from Entity import DBTransaction, Attendances, Employees, Dispatches
     logger.info('update_attendance_report_info() start.')
     try:
         # 社員ID、システム日付により、当日の勤務情報を取得
         attendances = Attendances.Attendance()
         attendances = attendances.query.filter_by(
             enterprise_id=g.user.enterprise_id,
-            employee_id=g.user.employee_id,date=datetime.date.today()).first()
+            employee_id=g.user.employee_id, date=datetime.date.today()).first()
         logger.info(request)
         # 出勤時間の前に年月日を付け
         date_string = datetime.datetime.now().strftime("%Y-%m-%d ")
@@ -129,9 +133,9 @@ def update_attendance_report_info():
         DBTransaction.session_commit()
 
         logger.info('update_attendance_report_info() end.')
-        return (jsonify({'result_code':0 }))
+        return (jsonify({'result_code': 0}))
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code':-1 }))
+        return (jsonify({'result_code': -1}))
     finally:
         DBTransaction.session_close()
