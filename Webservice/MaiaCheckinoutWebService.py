@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 from flask_httpauth import HTTPBasicAuth
 
 from BL import *
@@ -23,7 +23,7 @@ def verify_password(username_or_token, password):
 
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'result_code': -1}), 403)
+    return make_response(jsonify({'result_code': -999}), 403)
 
 
 ####################################################################
@@ -35,7 +35,7 @@ def unauthorized():
 ################
 
 # ログイン認証を行い、トーケンを戻す
-@app.route('/api/MAS0000010')
+@app.route('/api/MAS0000010', methods=['POST'])
 @auth.login_required
 def get_auth_token():
     # トーケン有効期間ディフォルト一年
@@ -44,21 +44,21 @@ def get_auth_token():
 
 
 # 画面表示フラグ取得
-@app.route('/api/MAS0000020')
+@app.route('/api/MAS0000020', methods=['POST'])
 @auth.login_required
 def get_next_page_flag():
     return GetNextPageFlag.get_next_page_flag()
 
 
 # 社員＆勤務基本情報取得
-@app.route('/api/MAS0000030')
+@app.route('/api/MAS0000030', methods=['POST'])
 @auth.login_required
 def get_employee_info():
     return GetEmployeeInfo.get_employee_info()
 
 
 # 月間勤務情報取得
-@app.route('/api/MAS0000040')
+@app.route('/api/MAS0000040', methods=['POST'])
 @auth.login_required
 def get_attendance_info_by_year_month():
     return GetAttendanceInfo.get_attendance_info_by_year_month()
