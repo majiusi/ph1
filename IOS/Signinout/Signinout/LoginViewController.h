@@ -1,0 +1,13 @@
+//
+//  LoginViewController.h
+//  Signinout
+//
+//  Created by yaochenxu on 2016/11/26.
+//  Copyright © 2016年 maiasoft. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface LoginViewController : UIViewController
+
+@end
