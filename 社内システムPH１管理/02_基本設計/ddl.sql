@@ -62,7 +62,7 @@ CREATE OR REPLACE TABLE duties ( /* 職務 */
   update_by varchar(10) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
-  PRIMARY KEY(`enterprise_id`, `employee_id`)
+  PRIMARY KEY(`enterprise_id`, `duty_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE OR REPLACE TABLE departments ( /* 部 */
