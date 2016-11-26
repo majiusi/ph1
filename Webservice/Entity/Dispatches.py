@@ -5,11 +5,10 @@
 # author: Yaochenxu
 # date: 2016/10/09
 ###################################
-import MySQLdb
 import logging
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Date, DateTime, Integer, Numeric, String, text
 
 # initialization
 app = Flask(__name__)
@@ -30,7 +29,7 @@ class Dispatch(db.Model):
     site_id = db.Column(db.Integer, nullable=False)
     start_date = db.Column(db.Date, nullable=False, unique=True)
     end_date = db.Column(db.Date, nullable=False, unique=True)
-    fixed_monthly_hours = db.Column(Integer)
+    fixed_monthly_hours = db.Column(db.Integer)
     report_day = db.Column(db.Integer, nullable=False)
     work_start_time = db.Column(db.String(5), nullable=False)
     work_end_time = db.Column(db.String(5), nullable=False)

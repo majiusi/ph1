@@ -5,11 +5,10 @@
 # author: Yaochenxu
 # date: 2016/10/09
 ###################################
-import MySQLdb
 import logging
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Date, DateTime, Integer, Numeric, String, text
 
 # initialization
 app = Flask(__name__)

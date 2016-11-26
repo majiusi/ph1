@@ -5,8 +5,9 @@
 # author: Yaochenxu
 # date: 2016/10/16
 ###################################
-import logging, datetime
-from sqlalchemy import extract
+import datetime
+import logging
+
 from flask import Flask, request, jsonify, g
 
 # initialization
@@ -21,7 +22,7 @@ logger = logging.getLogger('MaiaService.BL.ModifyAttendanceInfo')
 # -date: 2016/10/16
 ###################################
 def insert_attendance_work_start_info():
-    from Entity import DBTransaction, Attendances, Employees, Dispatches
+    from Entity import DBTransaction, Attendances, Dispatches
     logger.info('insert_attendance_work_start_info() start.')
 
     try:
@@ -55,10 +56,10 @@ def insert_attendance_work_start_info():
         DBTransaction.session_commit()
 
         logger.info('insert_attendance_work_start_info() end.')
-        return (jsonify({'result_code': 0}))
+        return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code': -1}))
+        return jsonify({'result_code': -1})
     finally:
         DBTransaction.session_close()
 
@@ -69,7 +70,7 @@ def insert_attendance_work_start_info():
 # -date: 2016/10/19
 ###################################
 def update_attendance_work_end_info():
-    from Entity import DBTransaction, Attendances, Employees, Dispatches
+    from Entity import DBTransaction, Attendances
     logger.info('update_attendance_work_end_info() start.')
 
     try:
@@ -91,10 +92,10 @@ def update_attendance_work_end_info():
         DBTransaction.session_commit()
 
         logger.info('update_attendance_work_end_info() end.')
-        return (jsonify({'result_code': 0}))
+        return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code': -1}))
+        return jsonify({'result_code': -1})
     finally:
         DBTransaction.session_close()
 
@@ -105,7 +106,7 @@ def update_attendance_work_end_info():
 # -date: 2016/10/21
 ###################################
 def update_attendance_report_info():
-    from Entity import DBTransaction, Attendances, Employees, Dispatches
+    from Entity import DBTransaction, Attendances
     logger.info('update_attendance_report_info() start.')
     try:
         # 社員ID、システム日付により、当日の勤務情報を取得
@@ -128,14 +129,14 @@ def update_attendance_report_info():
         attendances.total_minutes = request.json.get('report_total_minutes')
         attendances.update_by = g.user.name
         attendances.update_at = datetime.datetime.now()
-        attendances.update_cnt = attendances.update_cnt + 1
+        attendances.update_cnt += 1
 
         DBTransaction.session_commit()
 
         logger.info('update_attendance_report_info() end.')
-        return (jsonify({'result_code': 0}))
+        return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code': -1}))
+        return jsonify({'result_code': -1})
     finally:
         DBTransaction.session_close()

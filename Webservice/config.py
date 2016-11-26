@@ -1,7 +1,7 @@
-import os, sys, logging
+import os
 import logging.config
 
-conf_file = os.path.split(os.path.realpath(sys.argv[0]))[0] + '/logging.conf'
+conf_file = os.path.split(os.path.realpath(__file__))[0] + '/logging.conf'
 logging.config.fileConfig(conf_file)
 
 SECRET_KEY = 'the key of maiasoft 2016-2017.'

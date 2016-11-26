@@ -5,10 +5,11 @@
 # author: Yaochenxu
 # date: 2016/10/16
 ###################################
-import logging, datetime
-from Utility import Jholiday
-from sqlalchemy import extract
+import logging
+
 from flask import Flask, request, jsonify, g
+from sqlalchemy import extract
+from Utility import Jholiday
 
 # initialization
 app = Flask(__name__)
@@ -17,7 +18,7 @@ logger = logging.getLogger('MaiaService.BL.GetAttendanceInfo')
 
 
 def get_attendance_info_by_year_month():
-    from Entity import DBTransaction, Attendances, Employees, Dispatches
+    from Entity import DBTransaction, Attendances
     logger.info('get_attendance_info_by_year_month() start.')
     try:
         search_year = request.json.get('search_year')
@@ -76,6 +77,6 @@ def get_attendance_info_by_year_month():
              'monthly_work_time_list': monthly_work_time_list}))
     except Exception, e:
         logger.error(e)
-        return (jsonify({'result_code': -1}))
+        return jsonify({'result_code': -1})
     finally:
         DBTransaction.session_close()

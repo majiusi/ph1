@@ -5,12 +5,10 @@
 # author: Yaochenxu
 # date: 2016/10/09
 ###################################
+import logging
 import DBTransaction
-import logging, datetime
+
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Date, DateTime, Integer, Numeric, String, text
-from sqlalchemy import extract
 
 # initialization
 app = Flask(__name__)
