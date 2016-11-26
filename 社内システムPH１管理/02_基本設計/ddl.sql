@@ -52,6 +52,19 @@ CREATE OR REPLACE TABLE employees ( /* 社員 */
   PRIMARY KEY(`enterprise_id`, `employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE OR REPLACE TABLE duties ( /* 職務 */
+  enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
+  duty_id varchar(10) NOT NULL COMMENT '職務ID',
+  name varchar(20) NOT NULL COMMENT '名称',
+  valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
+  create_by varchar(10) NOT NULL COMMENT '登録者',
+  create_at datetime NOT NULL DEFAULT now() COMMENT '登録時間',
+  update_by varchar(10) NOT NULL COMMENT '更新者',
+  update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
+  update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
+  PRIMARY KEY(`enterprise_id`, `employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE OR REPLACE TABLE departments ( /* 部 */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   department_id varchar(10) NOT NULL COMMENT '部ID',
