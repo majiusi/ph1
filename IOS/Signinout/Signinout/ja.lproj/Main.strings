@@ -1,0 +1,57 @@
+
+/* Class = "UITextField"; placeholder = "ユーザ名"; ObjectID = "0DN-dj-Wl3"; */
+"0DN-dj-Wl3.placeholder" = "ユーザ名";
+
+/* Class = "UITabBarItem"; title = "PunchList"; ObjectID = "3o1-N6-MIY"; */
+"3o1-N6-MIY.title" = "PunchList";
+
+/* Class = "UIButton"; normalTitle = "ログイン"; ObjectID = "7Cf-ga-EkK"; */
+"7Cf-ga-EkK.normalTitle" = "ログイン";
+
+/* Class = "UILabel"; text = "Loaded by FirstViewController"; ObjectID = "A5M-7J-77L"; */
+"A5M-7J-77L.text" = "Loaded by FirstViewController";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "DOL-Y1-BS1"; */
+"DOL-Y1-BS1.title" = "Title";
+
+/* Class = "UITextField"; placeholder = "企業ID"; ObjectID = "EEq-I1-pIp"; */
+"EEq-I1-pIp.placeholder" = "企業ID";
+
+/* Class = "UILabel"; text = "punchDate"; ObjectID = "Ezh-GI-Ef6"; */
+"Ezh-GI-Ef6.text" = "punchDate";
+
+/* Class = "UIButton"; normalTitle = "パスワードをお忘れの方はこちら"; ObjectID = "Fb5-0J-S5t"; */
+"Fb5-0J-S5t.normalTitle" = "パスワードをお忘れの方はこちら";
+
+/* Class = "UILabel"; text = "checkinTime"; ObjectID = "GeD-77-Gq5"; */
+"GeD-77-Gq5.text" = "checkinTime";
+
+/* Class = "UILabel"; text = "First View"; ObjectID = "KQZ-1w-vlD"; */
+"KQZ-1w-vlD.text" = "First View";
+
+/* Class = "UITabBarItem"; title = "Punch"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Punch";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "bEu-RO-eYA"; */
+"bEu-RO-eYA.title" = "Title";
+
+/* Class = "UILabel"; text = "totalTime"; ObjectID = "fFc-eK-oDT"; */
+"fFc-eK-oDT.text" = "totalTime";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "jW6-HC-6nU"; */
+"jW6-HC-6nU.title" = "Title";
+
+/* Class = "UINavigationItem"; title = "勤務記録"; ObjectID = "jdn-Cj-yk8"; */
+"jdn-Cj-yk8.title" = "勤務記録";
+
+/* Class = "UITabBarItem"; title = "setup"; ObjectID = "pLf-3v-8yN"; */
+"pLf-3v-8yN.title" = "setup";
+
+/* Class = "UITextField"; placeholder = "パスワード"; ObjectID = "qIg-Lb-tWk"; */
+"qIg-Lb-tWk.placeholder" = "パスワード";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "xNI-2I-cWa"; */
+"xNI-2I-cWa.title" = "Title";
+
+/* Class = "UILabel"; text = "checkoutTime"; ObjectID = "zko-mM-2pO"; */
+"zko-mM-2pO.text" = "checkoutTime";

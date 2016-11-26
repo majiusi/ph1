@@ -31,6 +31,8 @@
 		B66709F31D503C71009B0A3A /* SigninoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B66709F21D503C71009B0A3A /* SigninoutTests.m */; };
 		B66709FE1D503C71009B0A3A /* SigninoutUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B66709FD1D503C71009B0A3A /* SigninoutUITests.m */; };
 		B6670A131D50436C009B0A3A /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6670A121D50436C009B0A3A /* SetupViewController.m */; };
+		B6B167CD1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B167CC1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m */; };
+		B6EA79CC1DE9736C00F64C9A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +100,12 @@
 		B66709FF1D503C71009B0A3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6670A111D50436C009B0A3A /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
 		B6670A121D50436C009B0A3A /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
+		B6B167CB1DE97FCC008212D8 /* LoginAfterUITabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAfterUITabBarViewController.h; sourceTree = "<group>"; };
+		B6B167CC1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAfterUITabBarViewController.m; sourceTree = "<group>"; };
+		B6B167CE1DE9A931008212D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		B6B167CF1DE9A932008212D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B6EA79CA1DE9736C00F64C9A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +223,10 @@
 				B6014DBB1D5587D20092F688 /* PunchListTableViewCell.m */,
 				B6014DB71D5587080092F688 /* PunchListTableViewController.h */,
 				B6014DB81D5587080092F688 /* PunchListTableViewController.m */,
+				B6EA79CA1DE9736C00F64C9A /* LoginViewController.h */,
+				B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */,
+				B6B167CB1DE97FCC008212D8 /* LoginAfterUITabBarViewController.h */,
+				B6B167CC1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m */,
 			);
 			path = Signinout;
 			sourceTree = "<group>";
@@ -307,7 +319,7 @@
 		B66709CA1D503C71009B0A3A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = maiasoft;
 				TargetAttributes = {
 					B66709D11D503C71009B0A3A = {
@@ -382,9 +394,11 @@
 				B6014EBD1D560EBD0092F688 /* NSData+MKBase64.m in Sources */,
 				B6014EBE1D560EBD0092F688 /* NSDate+RFC1123.m in Sources */,
 				B6670A131D50436C009B0A3A /* SetupViewController.m in Sources */,
+				B6EA79CC1DE9736C00F64C9A /* LoginViewController.m in Sources */,
 				B6014DBC1D5587D20092F688 /* PunchListTableViewCell.m in Sources */,
 				B6014EC01D560EBD0092F688 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				B6014DEC1D55B3EF0092F688 /* PunchViewController.m in Sources */,
+				B6B167CD1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m in Sources */,
 				B6014EC11D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				B6014EC21D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				B66709D71D503C71009B0A3A /* main.m in Sources */,
@@ -430,6 +444,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B66709E21D503C71009B0A3A /* Base */,
+				B6B167CE1DE9A931008212D8 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -438,6 +453,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B66709E71D503C71009B0A3A /* Base */,
+				B6B167CF1DE9A932008212D8 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -449,6 +465,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -459,8 +476,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -493,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -503,8 +523,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
