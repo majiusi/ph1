@@ -44,7 +44,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.objects.count;
+    return self.objects.count + 1;
 }
 
 
@@ -52,21 +52,34 @@
     static NSString *cellIdentifier = @"punchListCell";
     
     PunchListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    NSMutableDictionary*  dict = self.objects[indexPath.row];
-    cell.punchDate.text = [dict objectForKey:@"workdate"];
-    cell.punchCheckinTime.text = [dict objectForKey:@"checkin"];
-    cell.punchCheckoutTime.text = [dict objectForKey:@"checkout"];
-    cell.punchTotalTime.text = @"8:00";	
+    if (indexPath.row == 0) {
+        cell.punchDate.text = @"日付";
+        cell.punchCheckinTime.text = @"開始";
+        cell.punchCheckoutTime.text = @"終了";
+        cell.punchTotalTime.text = @"総時間";
+    } else {
+        NSMutableDictionary*  dict = self.objects[indexPath.row - 1];
+        cell.punchDate.text = [dict objectForKey:@"work_date"];
+        cell.punchCheckinTime.text = [dict objectForKey:@"report_start_time"];
+        cell.punchCheckoutTime.text = [dict objectForKey:@"report_end_time"];
+        cell.punchTotalTime.text = [NSString stringWithFormat:@"%@", [dict objectForKey:@"report_total_minutes"]];
+        
+    }
     
     return cell;
 }
 
 -(void)startRequest
 {
-    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"www.maiasoft.tk" customHeaderFields:nil];
-    MKNetworkOperation *op = [engine operationWithPath:@"api/labourTimeList" params:nil httpMethod:@"GET" ssl:YES];
-    [op setUsername:@"ycx" password:@"ycx" basicAuth:YES];
+    NSMutableDictionary *param=[[NSMutableDictionary alloc]init];
+    [param setValue:@"MAE0001" forKey:@"enterprise_id"];
+    [param setValue:@"2016" forKey:@"search_year"];
+    [param setValue:@"11" forKey:@"search_month"];
+    
+    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"54.199.240.10" customHeaderFields:nil];
+    MKNetworkOperation *op = [engine operationWithPath:@"api/MAS0000040" params:param httpMethod:@"POST" ssl:NO];
+    [op setUsername:@"yaochenxu" password:@"mapw001" basicAuth:YES];
+    [op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
     
     
     [op addCompletionHandler:^(MKNetworkOperation *operation) {
@@ -85,10 +98,10 @@
 
 -(void)reloadView:(NSDictionary*)res
 {
-    NSNumber *resultCodeObj = [res objectForKey:@"ResultCode"];
+    NSNumber *resultCodeObj = [res objectForKey:@"result_code"];
     if ([resultCodeObj integerValue] >=0)
     {
-        self.objects = [res objectForKey:@"labList"];
+        self.objects = [res objectForKey:@"monthly_work_time_list"];
         [self.tableView reloadData];
     } else {
         NSString *errorStr = [@"Return code:" stringByAppendingString:[resultCodeObj stringValue]];
