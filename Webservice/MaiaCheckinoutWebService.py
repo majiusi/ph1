@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
-from flask import Flask, jsonify, make_response, request
+from flask import Flask, jsonify, make_response
 from flask_httpauth import HTTPBasicAuth
 
 from BL import *
@@ -83,6 +83,13 @@ def update_attendance_work_end_info():
 @auth.login_required
 def update_attendance_report_info():
     return ModifyAttendanceInfo.update_attendance_report_info()
+
+
+# レポート出勤情報更新
+@app.route('/api/MAS0000071', methods=['POST'])
+@auth.login_required
+def update_attendance_report_info_by_date():
+    return ModifyAttendanceInfo.update_attendance_report_info_by_date()
 
 
 # パスワード更新(社員用)

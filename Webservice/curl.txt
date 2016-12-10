@@ -1,9 +1,5 @@
 curl -i -X POST -H "Content-Type: application/json" -d '{"username":"yaochenxu","password":"yaochenxu"}' https://www.maiasoft.tk/api/createUser
 
-
-
-
-
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"employee_id":"MA00001","user_name":"yaochenxu","password":"mapw001","auth_id":"1"}' https://www.maiasoft.tk/api/create_user
 
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"user_id":"A0004","employee_id":"MA00004","user_name":"qubo","password":"mapw001","auth_id":"1"}' http://localhost:5000/api/create_user
@@ -34,6 +30,8 @@ curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"e
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","end_longitude":35.68,"end_latitude":139.85,"end_spot_name":"東京都江東く1-1"}' http://localhost:5000/api/MAS0000060
 
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","report_start_time":"09:00:00","report_end_time":"18:30:00","report_exclusive_minutes":60,"report_total_minutes":510}' http://localhost:5000/api/MAS0000070
+
+curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","update_date":"2016-11-20","report_start_time":"09:00:00","report_end_time":"18:30:00","report_exclusive_minutes":120,"report_total_minutes":510}' http://localhost:5000/api/MAS0000071
 
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"enterprise_id":"MAE0001","new_pwd1":"mapw001","new_pwd2":"mapw001"}' http://localhost:5000/api/MAS0000080
 
