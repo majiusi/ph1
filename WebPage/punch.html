@@ -23,12 +23,12 @@
 <div id="container">
 
 <header>
-<h1 id="logo"><a href="index.html"><img src="images/logo.png" width="140" height="20" alt="Sample Company"></a></h1>
+<h1 id="logo"><a href="index.html"><img src="images/logo.png" width="140" height="20" alt="Maiasoft Company"></a></h1>
 <nav id="menubar">
 <ul>
 <li><a href="#">社内情報<span>Company</span></a></li>
 <li class="current"><a href="#">パンチ<span>Punch</span></a></li>
-<li><a href="#">月間<span>Months</span></a></li>
+<li><a href="months.html">月間<span>Months</span></a></li>
 <li><a href="#">設定<span>Setting</span></a></li>
 </ul>
 </nav>
@@ -43,7 +43,6 @@
 <h2>パンチ</h2>
 
     <section class="list">
-	<figure><img src="images/sample1.jpg" alt=""></figure>
     <table>
     <tr>
     <th>名前</th>
@@ -64,6 +63,29 @@
 	<td><label id="sysTime"></label></td>
     </tr>
     </table>
+	<div id="punch1" style="display:none">
+		<figure><img src="images/icon/6.png" alt=""></figure>
+	</div>
+	<div id="punch2" style="display:none">
+		<figure><img src="images/icon/7.png" alt=""></figure>
+	</div>
+	<div id="punch3" style="display:none">
+		<ul class="submenu mb10">
+		<li><p class="c">開始:<input type="time"/></p></li>
+		<li><p class="c">終了:<input type="time"></p></li>
+		<li><p class="c">控除:<input type="time"></p></li>
+		<li><p class="c">合計:08:00</p></li>
+		<li><p class="c"><input type="submit" value="提出"></p></li>
+	</div>
+	<div id="punch4" style="display:none">
+		<ul class="submenu mb10">
+		<li><p class="c">開始:<input type="time"/></p></li>
+		<li><p class="c">終了:<input type="time"></p></li>
+		<li><p class="c">控除:<input type="time"></p></li>
+		<li><p class="c">合計:<input type="time"></p></li>
+		<li><label>提出しました、お疲れ様でした。</label></li>
+		</ul>
+	</div>
     </section>
 </section>
 

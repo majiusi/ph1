@@ -1,12 +1,32 @@
 // 画面初期化時
 $(function(){
-	TOKEN=$.cookie('token');  
+	TOKEN=$.cookie('token');
 	getPageFlag();
 	getNameJP();
 	getWorkTime();
 	getSysDate();
 	getLoaction();
 });
+
+function initPage(pageFlag){
+	switch(pageFlag)
+	{
+		case 1:
+		  $("#punch3").show();
+		  break;
+		case 2:
+		  $("#punch2").show();
+		  break;
+		case 3:
+		  $("#punch3").show();
+		  break;
+		case 4:
+		  $("#punch4").show();
+		  break;
+		default:
+		  alert(pageFlag);
+	}
+}
 
 function BasicAuthorizationCode(username, password){
 	var safeStr = unescape(encodeURIComponent(username + ':' + password));
@@ -65,7 +85,8 @@ function getPageFlag(){
 		},
 		complete: function(xhr, ts){
 			var data=eval("("+xhr.responseText+")");
-			pageFlag=data["page_flag"];
+			var pageFlag=data["page_flag"];
+			initPage(pageFlag);
 		},
 		error: function(data, textStatus, errorThrown){
 			 alert(data + textStatus + errorThrown);
