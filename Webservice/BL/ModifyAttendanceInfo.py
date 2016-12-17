@@ -148,9 +148,19 @@ def update_attendance_report_info_by_date():
     from Entity import DBTransaction, Attendances, Dispatches
     logger.info('update_attendance_report_info_by_date() start.')
     try:
+
         # 更新日付の取得
         update_date_string = request.json.get('update_date')
         update_date = datetime.datetime.strptime(update_date_string, "%Y-%m-%d")
+
+        # 一般ユーザの場合、当月しか更新できない
+        # !! 権限決めてから修正要、################
+        if g.user.auth_id != '2' and g.user.auth_id != '3':
+            system_date = datetime.datetime.now()
+            if system_date.year != update_date.year or system_date.month != update_date.month:
+                logger.error('利用者は当月しか更新できない')
+                return jsonify({'result_code': -1})
+
         # 出勤時間の前に年月日を付け
         report_start_time_string = update_date_string + ' ' + request.json.get('report_start_time')
         report_end_time_string = update_date_string + ' ' + request.json.get('report_end_time')
