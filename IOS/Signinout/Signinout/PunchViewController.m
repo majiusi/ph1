@@ -7,23 +7,19 @@
 //
 
 #import "PunchViewController.h"
+#import "WebServiceAPI.h"
 
 @interface PunchViewController ()
 
-
-
-
 - (IBAction)setStartTime:(UIButton *)sender;
-
 - (IBAction)submitPage1:(UIButton *)sender;
 - (IBAction)submitPage2:(UIButton *)sender;
 
-
-@property (weak, nonatomic) IBOutlet UILabel *positionInfo;
-@property (weak, nonatomic) IBOutlet UIButton *submitPage1Btn;
-@property (weak, nonatomic) IBOutlet UIButton *submitPage2Btn;
+@property (weak, nonatomic) IBOutlet UILabel     *positionInfo;
+@property (weak, nonatomic) IBOutlet UIButton    *submitPage1Btn;
+@property (weak, nonatomic) IBOutlet UIButton    *submitPage2Btn;
 @property (weak, nonatomic) IBOutlet UIStackView *page3Stack;
-@property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
+@property (weak, nonatomic) IBOutlet UIButton    *startTimeBtn;
 
 @end
 
@@ -57,30 +53,49 @@
     
     self.positionInfo.hidden = YES;
     self.submitPage1Btn.hidden = YES;
-    self.submitPage1Btn.hidden = YES;
+    self.submitPage2Btn.hidden = YES;
     self.page3Stack.hidden = YES;
     
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     
-    NSLog(@"nextPage:%ld",(long)[userDefault integerForKey:@"nextPage"]);
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        NSNumber *pageFlagObj = [object objectForKey:@"page_flag"];
+        if ([resultCodeObj integerValue] < 0)
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+//            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        } else {
+            if ([pageFlagObj integerValue] == 1)
+            {
+                //[self performSegueWithIdentifier:@"id1" sender:self];
+                self.positionInfo.hidden = NO;
+                self.submitPage1Btn.hidden = NO;
+            }
+            else if ([pageFlagObj integerValue] == 2)
+            {
+                //[self performSegueWithIdentifier:@"id2" sender:self];
+                self.positionInfo.hidden = NO;
+                self.submitPage2Btn.hidden = NO;
+            }
+            else if ([pageFlagObj integerValue] == 3)
+            {
+                //[self performSegueWithIdentifier:@"id2" sender:self];
+                self.page3Stack.hidden = NO;
+            }
+        }
+    } failBlock:^(int statusCode, int errorCode) {
+//        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }] getPageFlagWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@""];
     
-    if ([userDefault integerForKey:@"nextPage"] == 1)
-    {
-        //[self performSegueWithIdentifier:@"id1" sender:self];
-        self.positionInfo.hidden = NO;
-        self.submitPage1Btn.hidden = NO;
-    }
-    else if ([userDefault integerForKey:@"nextPage"] == 2)
-    {
-        //[self performSegueWithIdentifier:@"id2" sender:self];
-        self.positionInfo.hidden = NO;
-        self.submitPage2Btn.hidden = NO;
-    }
-    else if ([userDefault integerForKey:@"nextPage"] == 3)
-    {
-        //[self performSegueWithIdentifier:@"id2" sender:self];
-        self.page3Stack.hidden = NO;
-    }
+    
+    
+    
+    
+    
+
 }
 
 //- (IBAction)SubmitPage1:(id)sender {

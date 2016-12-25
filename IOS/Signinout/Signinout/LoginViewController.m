@@ -91,8 +91,10 @@
         } else {
             NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
             [userDefault setObject:[object objectForKey:@"token"] forKey:@"token"];
+            [userDefault setObject:self.EnterpriseID.text forKey:@"enterpriseId"];
+            [userDefault setObject:self.UserName.text forKey:@"userName"];
             
-            [userDefault setInteger:1 forKey:@"nextPage"];
+//            [userDefault setInteger:1 forKey:@"nextPage"];
             
             UITabBarController *tabControl = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginAfter"];
             [self.navigationController pushViewController:tabControl animated:YES];

@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X2e-1J-Q5J" id="lKT-D8-Vvh">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="punchDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd5-PB-Ml3">
@@ -177,8 +177,8 @@
                                     <action selector="submitPage1:" destination="yUd-n8-Qdk" eventType="touchUpInside" id="V09-Zi-2Ew"/>
                                 </connections>
                             </button>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0XZ-RJ-6JF">
-                                <rect key="frame" x="36" y="167" width="300" height="305"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0XZ-RJ-6JF">
+                                <rect key="frame" x="37" y="112" width="300" height="345"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5O-xa-gxK">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
@@ -201,7 +201,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ic-AW-ssJ">
-                                        <rect key="frame" x="0.0" y="65" width="300" height="45"/>
+                                        <rect key="frame" x="0.0" y="75" width="300" height="45"/>
                                         <color key="backgroundColor" red="0.98881644010543823" green="0.52197718620300293" blue="0.55001604557037354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="6M3-th-tUb"/>
@@ -218,7 +218,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZP-X4-8US">
-                                        <rect key="frame" x="0.0" y="130" width="300" height="45"/>
+                                        <rect key="frame" x="0.0" y="150" width="300" height="45"/>
                                         <color key="backgroundColor" red="0.98881644010543823" green="0.52197718620300293" blue="0.55001604557037354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="Ef0-EC-zsI"/>
@@ -235,7 +235,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" text="合計：HH：SS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbu-59-bQb">
-                                        <rect key="frame" x="0.0" y="195" width="300" height="45"/>
+                                        <rect key="frame" x="0.0" y="225" width="300" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="G3e-Oh-xH8"/>
                                             <constraint firstAttribute="height" constant="45" id="qZR-go-FSJ"/>
@@ -245,7 +245,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gM-Xi-VmX">
-                                        <rect key="frame" x="0.0" y="260" width="300" height="45"/>
+                                        <rect key="frame" x="0.0" y="300" width="300" height="45"/>
                                         <color key="backgroundColor" red="0.98881644010543823" green="0.52197718620300293" blue="0.55001604557037354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="x8B-lA-VHY"/>
@@ -270,8 +270,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="top" secondItem="hj2-bs-VQk" secondAttribute="bottom" constant="103" id="Wsq-7k-06P"/>
-                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="20" id="xo9-ld-ERd"/>
+                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="top" secondItem="hj2-bs-VQk" secondAttribute="bottom" constant="48" id="Wsq-7k-06P"/>
+                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="xo9-ld-ERd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zIU-Ib-b17"/>

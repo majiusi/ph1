@@ -19,4 +19,5 @@
 + (WebServiceAPI *) requestWithFinishBlock:(void (^)(id object))finishBlockToRun failBlock:(void (^)(int statusCode,int errorCode))failBlockToRun;
 
 - (void) doLoginGetTokenWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password;
+- (void) getPageFlagWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password;
 @end
