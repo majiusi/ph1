@@ -8,6 +8,7 @@
 
 #import "PunchListTableViewController.h"
 #import "PunchListTableViewCell.h"
+#import "EditMonthlyDataViewController.h"
 
 @interface PunchListTableViewController ()
 
@@ -76,7 +77,7 @@
     [param setValue:@"2016" forKey:@"search_year"];
     [param setValue:@"11" forKey:@"search_month"];
     
-    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"54.199.240.10" customHeaderFields:nil];
+    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"127.0.0.1:5000" customHeaderFields:nil];
     MKNetworkOperation *op = [engine operationWithPath:@"api/MAS0000040" params:param httpMethod:@"POST" ssl:NO];
     [op setUsername:@"yaochenxu" password:@"mapw001" basicAuth:YES];
     [op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
@@ -156,14 +157,20 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"EditMonthlyDataIdentifier"])
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSMutableDictionary *dict = self.objects[indexPath.row - 1];
+        
+        EditMonthlyDataViewController *editMonthlyData = segue.destinationViewController;
+        editMonthlyData.workDate = [dict objectForKey:@"work_date"];
+    }
 }
-*/
+
 
 @end
