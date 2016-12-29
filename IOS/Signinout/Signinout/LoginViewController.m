@@ -10,13 +10,12 @@
 #import "WebServiceAPI.h"
 
 @interface LoginViewController ()
-- (IBAction)LoginButton:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UITextField *EnterpriseID;
 @property (weak, nonatomic) IBOutlet UITextField *UserName;
 @property (weak, nonatomic) IBOutlet UITextField *Password;
 @property (weak, nonatomic) IBOutlet UILabel *ErrorMessage;
 - (IBAction)ResetPasswd:(UIButton *)sender;
-
+- (IBAction)LoginButton:(UIButton *)sender;
 @end
 
 @implementation LoginViewController

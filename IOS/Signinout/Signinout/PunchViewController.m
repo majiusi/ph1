@@ -8,8 +8,9 @@
 
 #import "PunchViewController.h"
 #import "WebServiceAPI.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface PunchViewController ()
+@interface PunchViewController ()<CLLocationManagerDelegate>
 
 - (IBAction)setStartTime:(UIButton *)sender;
 - (IBAction)submitPage1:(UIButton *)sender;
@@ -20,16 +21,19 @@
 @property (weak, nonatomic) IBOutlet UIButton    *submitPage2Btn;
 @property (weak, nonatomic) IBOutlet UIStackView *page3Stack;
 @property (weak, nonatomic) IBOutlet UIButton    *startTimeBtn;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
 
 @implementation PunchViewController 
 
+NSString *strLongitude = nil;
+NSString *strLatitude = nil;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     NSLog(@"token:%@",[userDefault stringForKey:@"token"]);
-    
     
     // Do any additional setup after loading the view.
 }
@@ -38,7 +42,39 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
- 
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    CLLocation *currLocation = [locations lastObject];
+    strLongitude = [NSString stringWithFormat:@"%3.11f", currLocation.coordinate.longitude];
+    strLatitude = [NSString stringWithFormat:@"%3.11f", currLocation.coordinate.latitude];
+    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
+    
+    [geocoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if(error)
+        {
+            self.positionInfo.text = @"位置情報取得失敗";
+        }
+        else if([placemarks count] > 0)
+        {
+            CLPlacemark *placemrk = placemarks[0];
+            self.positionInfo.text = placemrk.name;
+        }
+    }];
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"locationManager error:%@",error);
+}
+
 /*
 #pragma mark - Navigation
 
@@ -50,6 +86,13 @@
 */
 
 - (void)viewDidAppear:(BOOL)animated{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 100.0f;
+    
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startUpdatingLocation];
     
     self.positionInfo.hidden = YES;
     self.submitPage1Btn.hidden = YES;
@@ -89,35 +132,42 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
         
     }] getPageFlagWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@""];
-    
-    
-    
-    
-    
-    
-
 }
 
-//- (IBAction)SubmitPage1:(id)sender {
-    
-    
 
-    //UINavigationController * navControl = [self.storyboard instantiateViewControllerWithIdentifier:@"PunchPageReDirect"];
-    //self.navigationController.viewControllers = @[navControl ];
-    
-//    [self.navigationController popViewControllerAnimated:YES];
-//    UINavigationController * navControl = [self.storyboard instantiateViewControllerWithIdentifier:@"PunchPageReDirect"];
-//    [navControl viewDidLoad];
-    
+/**
+ submit work start infomation.
 
-//}
-
-
+ @param sender <#sender description#>
+ */
 - (IBAction)submitPage1:(UIButton *)sender {
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setInteger:2 forKey:@"nextPage"];
-    self.submitPage1Btn.hidden = YES;
-    self.submitPage2Btn.hidden = NO;
+
+    if(strLatitude != nil)
+    {
+        [[WebServiceAPI requestWithFinishBlock:^(id object) {
+            NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+            if ([resultCodeObj integerValue] < 0)
+            {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            } else {
+                self.submitPage1Btn.hidden = YES;
+                self.submitPage2Btn.hidden = NO;
+            }
+        } failBlock:^(int statusCode, int errorCode) {
+            //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
+    }
+    else
+    {
+        self.positionInfo.text = @"位置情報取得中・・・";
+    }
+    strLatitude = nil;
+    strLongitude = nil;
 }
 
 - (IBAction)submitPage2:(UIButton *)sender {
@@ -136,12 +186,11 @@
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-        //实例化一个NSDateFormatter对象
-        [dateFormat setDateFormat:@"HH:SS"];//设定时间格式
-        NSString *dateString = [dateFormat stringFromDate:datePicker.date];
-        //求出当天的时间字符串
-        self.startTimeBtn.titleLabel.text = dateString;
-        NSLog(@"%@",dateString);
+        // create NSDateFormatter instance and set time format
+        [dateFormat setDateFormat:@"HH:SS"];
+        NSString *timeString = [dateFormat stringFromDate:datePicker.date];
+        // get and show time
+        self.startTimeBtn.titleLabel.text = timeString;
     }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
