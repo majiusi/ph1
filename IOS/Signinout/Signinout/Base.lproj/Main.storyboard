@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X2e-1J-Q5J" id="lKT-D8-Vvh">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="punchDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd5-PB-Ml3">
@@ -216,6 +216,9 @@
                                                 <integer key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="setEndTime:" destination="yUd-n8-Qdk" eventType="touchUpInside" id="1kQ-mK-bXT"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZP-X4-8US">
                                         <rect key="frame" x="0.0" y="150" width="300" height="45"/>
@@ -233,6 +236,9 @@
                                                 <integer key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="setExceptTime:" destination="yUd-n8-Qdk" eventType="touchUpInside" id="o7b-Rt-8qF"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" text="合計：HH：SS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbu-59-bQb">
                                         <rect key="frame" x="0.0" y="225" width="300" height="45"/>
@@ -276,9 +282,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="zIU-Ib-b17"/>
                     <connections>
+                        <outlet property="endTimeBtn" destination="9Ic-AW-ssJ" id="7tJ-2D-eZP"/>
+                        <outlet property="exceptTimeBtn" destination="iZP-X4-8US" id="5Wx-1W-8yZ"/>
                         <outlet property="page3Stack" destination="0XZ-RJ-6JF" id="dqe-oy-Dxu"/>
                         <outlet property="positionInfo" destination="CJq-fW-IQt" id="rUR-jg-h1k"/>
-                        <outlet property="startTimeBtn" destination="X5O-xa-gxK" id="VOy-0l-Vzp"/>
+                        <outlet property="startTimeBtn" destination="X5O-xa-gxK" id="uQJ-jX-LUL"/>
                         <outlet property="submitPage1Btn" destination="dfx-Fu-Z3c" id="oGn-ky-12a"/>
                         <outlet property="submitPage2Btn" destination="tkV-BO-sNT" id="Wjc-YE-Vod"/>
                     </connections>
@@ -362,7 +370,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="message area">
                                         <attributes>
-                                            <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.071350239217281342" green="0.37503451108932495" blue="0.62002456188201904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" metaFont="system" size="17"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>

@@ -182,4 +182,49 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         self.failBlock((int)statusCode, (int)errorCode);
     }];
 }
+
+/**
+ Call Restful WebService to submit user's work end info.
+ 
+ @param enterpriseId <#enterpriseId description#>
+ @param userName <#userName description#>
+ @param password <#password description#>
+ @param startLongitude <#startLongitude description#>
+ @param startLatitude <#startLatitude description#>
+ @param startSpotName <#startSpotName description#>
+ */
+- (void) submitWorkEndInfoWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withLongitude:(NSString *)startLongitude withLatitude:(NSString *)startLatitude spotName:(NSString *)startSpotName{
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", baseUrl,urlSubmitWorkEndInfo];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"enterprise_id"] = enterpriseId;
+    params[@"end_longitude"] = startLongitude;
+    params[@"end_latitude"] = startLatitude;
+    params[@"end_spot_name"] = startSpotName;
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.validatesDomainName = NO;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:userName password:password];
+    
+    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
+        
+        self.finishBlock(responseObject);
+        
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        NSInteger statusCode = getErrorStatusCode(task);
+        NSInteger errorCode = getErrorCode(error);
+        NSDictionary *errorDict = getError(error);
+        NSString * errorMessage = errorDict[@"message"];
+        NSLog(@"error : %@", errorMessage);
+        
+        self.failBlock((int)statusCode, (int)errorCode);
+    }];
+}
 @end

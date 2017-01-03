@@ -23,4 +23,6 @@
 - (void) getPageFlagWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password;
 
 - (void) submitWorkStartInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withLongitude:(NSString *)startLongitude withLatitude:(NSString *)startLatitude spotName:(NSString *)startSpotName;
+
+- (void) submitWorkEndInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withLongitude:(NSString *)startLongitude withLatitude:(NSString *)startLatitude spotName:(NSString *)startSpotName;
 @end

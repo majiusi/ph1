@@ -13,6 +13,9 @@
 @interface PunchViewController ()<CLLocationManagerDelegate>
 
 - (IBAction)setStartTime:(UIButton *)sender;
+- (IBAction)setEndTime:(UIButton *)sender;
+- (IBAction)setExceptTime:(UIButton *)sender;
+
 - (IBAction)submitPage1:(UIButton *)sender;
 - (IBAction)submitPage2:(UIButton *)sender;
 
@@ -21,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIButton    *submitPage2Btn;
 @property (weak, nonatomic) IBOutlet UIStackView *page3Stack;
 @property (weak, nonatomic) IBOutlet UIButton    *startTimeBtn;
+@property (weak, nonatomic) IBOutlet UIButton    *endTimeBtn;
+@property (weak, nonatomic) IBOutlet UIButton    *exceptTimeBtn;
+
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
@@ -49,6 +55,13 @@ NSString *strLatitude = nil;
     [self.locationManager stopUpdatingLocation];
 }
 
+/**
+ Get location information and set strLongitude/strLatitude.
+ Get placemarks by Longitude/Latitude.
+
+ @param manager <#manager description#>
+ @param locations <#locations description#>
+ */
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
     CLLocation *currLocation = [locations lastObject];
@@ -142,8 +155,7 @@ NSString *strLatitude = nil;
  */
 - (IBAction)submitPage1:(UIButton *)sender {
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault setInteger:2 forKey:@"nextPage"];
-
+    
     if(strLatitude != nil)
     {
         [[WebServiceAPI requestWithFinishBlock:^(id object) {
@@ -170,19 +182,51 @@ NSString *strLatitude = nil;
     strLongitude = nil;
 }
 
+/**
+ submit work end infomation.
+
+ @param sender <#sender description#>
+ */
 - (IBAction)submitPage2:(UIButton *)sender {
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault setInteger:3 forKey:@"nextPage"];
-    self.submitPage1Btn.hidden = YES;
-    self.submitPage2Btn.hidden = YES;
-    self.positionInfo.hidden = YES;
-    self.page3Stack.hidden = NO;
+    
+    if(strLatitude != nil)
+    {
+        [[WebServiceAPI requestWithFinishBlock:^(id object) {
+            NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+            if ([resultCodeObj integerValue] < 0)
+            {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            } else {
+                self.submitPage1Btn.hidden = YES;
+                self.submitPage2Btn.hidden = YES;
+                self.positionInfo.hidden = YES;
+                self.page3Stack.hidden = NO;
+            }
+        } failBlock:^(int statusCode, int errorCode) {
+            //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
+    }
+    else
+    {
+        self.positionInfo.text = @"位置情報取得中・・・";
+    }
+    strLatitude = nil;
+    strLongitude = nil;
 }
 
+/**
+ Show a dialog to setup report time for work start.
+
+ @param sender <#sender description#>
+ */
 - (IBAction)setStartTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"start\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
@@ -191,6 +235,46 @@ NSString *strLatitude = nil;
         NSString *timeString = [dateFormat stringFromDate:datePicker.date];
         // get and show time
         self.startTimeBtn.titleLabel.text = timeString;
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:^{ }];
+}
+
+- (IBAction)setEndTime:(UIButton *)sender {
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"end\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert.view addSubview:datePicker];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+        // create NSDateFormatter instance and set time format
+        [dateFormat setDateFormat:@"HH:SS"];
+        NSString *timeString = [dateFormat stringFromDate:datePicker.date];
+        // get and show time
+        self.endTimeBtn.titleLabel.text = timeString;
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:^{ }];
+}
+
+- (IBAction)setExceptTime:(UIButton *)sender {
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"except\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert.view addSubview:datePicker];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+        // create NSDateFormatter instance and set time format
+        [dateFormat setDateFormat:@"HH:SS"];
+        NSString *timeString = [dateFormat stringFromDate:datePicker.date];
+        // get and show time
+        self.exceptTimeBtn.titleLabel.text = timeString;
     }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
