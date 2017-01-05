@@ -139,6 +139,99 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
 }
 
 /**
+ Call Restful WebService to authenticate user's password.
+ Get Employee base infomation and attendances infomation.
+ 
+ @param enterpriseId <#enterpriseId description#>
+ @param userName <#userName description#>
+ @param password <#password description#>
+ */
+- (void) getEmployeeBaseInfoWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password{
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", baseUrl,urlGetBaseInfo];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"enterprise_id"] = enterpriseId;
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.validatesDomainName = NO;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:userName password:password];
+    
+    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
+        
+        self.finishBlock(responseObject);
+        
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        NSInteger statusCode = getErrorStatusCode(task);
+        NSInteger errorCode = getErrorCode(error);
+        NSDictionary *errorDict = getError(error);
+        NSString * errorMessage = errorDict[@"message"];
+        NSLog(@"error : %@", errorMessage);
+        
+        self.failBlock((int)statusCode, (int)errorCode);
+    }];
+}
+
+/**
+ Call Restful WebService to authenticate user's password.
+ Get Employee monthly attendances infomation.
+ 
+ @param enterpriseId <#enterpriseId description#>
+ @param userName <#userName description#>
+ @param password <#password description#>
+ */
+- (void) getEmployeeMonthlyInfoWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password{
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", baseUrl,urlGetMonthlyInfo];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    
+    // get NSCalendar object
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // get system date
+    NSDate* dt = [NSDate date];
+    // define flags to get system year and month
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
+
+    params[@"enterprise_id"] = enterpriseId;
+    params[@"search_year"] = [NSString stringWithFormat:@"%ld",(long)comp.year];
+    params[@"search_month"] = [NSString stringWithFormat:@"%ld",(long)comp.month];
+
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.validatesDomainName = NO;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:userName password:password];
+    
+    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
+        
+        self.finishBlock(responseObject);
+        
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        NSInteger statusCode = getErrorStatusCode(task);
+        NSInteger errorCode = getErrorCode(error);
+        NSDictionary *errorDict = getError(error);
+        NSString * errorMessage = errorDict[@"message"];
+        NSLog(@"error : %@", errorMessage);
+        
+        self.failBlock((int)statusCode, (int)errorCode);
+    }];
+}
+
+/**
  Call Restful WebService to submit user's work start info.
 
  @param enterpriseId <#enterpriseId description#>

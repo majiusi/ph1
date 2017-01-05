@@ -124,7 +124,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="位置情報" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJq-fW-IQt">
-                                <rect key="frame" x="21" y="480" width="332" height="64"/>
+                                <rect key="frame" x="21" y="538" width="332" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.333293438" green="0.33335629109999998" blue="0.33328947419999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
@@ -132,7 +132,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkV-BO-sNT" userLabel="SubmitPage2Btn">
-                                <rect key="frame" x="80" y="183" width="203" height="203"/>
+                                <rect key="frame" x="80" y="241" width="203" height="203"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
@@ -155,7 +155,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Fu-Z3c" userLabel="SubmitPage1Btn">
-                                <rect key="frame" x="80" y="183" width="203" height="203"/>
+                                <rect key="frame" x="80" y="241" width="203" height="203"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
@@ -178,7 +178,7 @@
                                 </connections>
                             </button>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0XZ-RJ-6JF">
-                                <rect key="frame" x="37" y="112" width="300" height="345"/>
+                                <rect key="frame" x="37" y="170" width="300" height="345"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5O-xa-gxK">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
@@ -240,7 +240,7 @@
                                             <action selector="setExceptTime:" destination="yUd-n8-Qdk" eventType="touchUpInside" id="o7b-Rt-8qF"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" text="合計：HH：SS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbu-59-bQb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" text="合計：00：00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbu-59-bQb">
                                         <rect key="frame" x="0.0" y="225" width="300" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="G3e-Oh-xH8"/>
@@ -273,10 +273,24 @@
                                     <constraint firstItem="X5O-xa-gxK" firstAttribute="leading" secondItem="0XZ-RJ-6JF" secondAttribute="leading" id="qqZ-oy-GDQ"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名前：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjt-lZ-iVh">
+                                <rect key="frame" x="37" y="64" width="300" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="出勤情報：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hub-V1-c8k">
+                                <rect key="frame" x="37" y="101" width="300" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="top" secondItem="hj2-bs-VQk" secondAttribute="bottom" constant="48" id="Wsq-7k-06P"/>
+                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="top" secondItem="hj2-bs-VQk" secondAttribute="bottom" constant="106" id="Wsq-7k-06P"/>
                             <constraint firstItem="0XZ-RJ-6JF" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="xo9-ld-ERd"/>
                         </constraints>
                     </view>
@@ -289,6 +303,8 @@
                         <outlet property="startTimeBtn" destination="X5O-xa-gxK" id="uQJ-jX-LUL"/>
                         <outlet property="submitPage1Btn" destination="dfx-Fu-Z3c" id="oGn-ky-12a"/>
                         <outlet property="submitPage2Btn" destination="tkV-BO-sNT" id="Wjc-YE-Vod"/>
+                        <outlet property="userMonthlyInfo" destination="hub-V1-c8k" id="3tO-Ie-i3g"/>
+                        <outlet property="userNameJP" destination="Gjt-lZ-iVh" id="QdW-on-pXg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWL-W2-fTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
