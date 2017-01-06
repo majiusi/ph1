@@ -35,6 +35,7 @@
 @property (nonatomic, retain) NSString *strEndTime;
 @property (nonatomic, retain) NSString *strExceptTime;
 
+
 @end
 
 @implementation PunchViewController 
@@ -46,7 +47,7 @@ NSString *strLatitude = nil;
     [super viewDidLoad];
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     
-    // get employee base info, and show name.
+    // get employee base info, and show name of JP, show defalut work start/end/except time.
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
@@ -55,6 +56,22 @@ NSString *strLatitude = nil;
             //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
         } else {
             self.userNameJP.text = [object objectForKey:@"name_jp"];
+            
+            self.strStartTime = [object objectForKey:@"default_work_start_time"];
+            NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
+            [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
+            
+            self.strEndTime = [object objectForKey:@"default_work_end_time"];
+            NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+            [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
+            
+            self.strExceptTime = [object objectForKey:@"default_except_minutes"];
+            int intDefalutWorkExceptTime = [self.strExceptTime intValue];
+            int hour = intDefalutWorkExceptTime / 60;
+            int minut = intDefalutWorkExceptTime % 60;
+            
+            NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%02d:%02d      ＞",hour, minut];
+            [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
         }
     } failBlock:^(int statusCode, int errorCode) {
         //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
