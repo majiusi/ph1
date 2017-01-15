@@ -6,6 +6,10 @@ $(function(){
 	getWorkTime();
 	getSysDate();
 	getLoaction();
+
+	// bindClick
+	$("#startWork").click(startWork());
+	$("#endWork").click(endWork());
 });
 
 function initPage(pageFlag){
@@ -33,7 +37,7 @@ function BasicAuthorizationCode(username, password){
 	var btoaCode = btoa(safeStr);
 	return 'Basic ' + btoaCode;
 };
- 
+
 // 日付表示
 function getSysDate(){
 		var seperator1 = "-";
@@ -48,11 +52,11 @@ function getSysDate(){
 		// 曜日の表記
 		var weekDayList = [ "日", "月", "火", "水", "木", "金", "土" ];
 		var day = weekDayList[dateObj.getDay()] + "曜日" ;
-		
+
 		//日付の表記
 		var currentDate = year + seperator1 + mouth + seperator1 + date;
 		$("#sysDate").text( day + seperator3 + currentDate);
-		 
+
 		// 時間の表記
 		var hours=dateObj.getHours();
 		var minutes=dateObj.getMinutes();
@@ -67,7 +71,7 @@ function getSysDate(){
 			minutes="0"+minutes;
 		var ctime=dn + seperator3 + hours + seperator2 + minutes;
 		$("#sysTime").text(ctime);
-		 
+
 }
 
 // 初期状態
@@ -134,7 +138,55 @@ function getWorkTime(){
 			var data=eval("("+xhr.responseText+")");
 			$("#totalDays").text(data["total_days"] + "日");
 			$("#totalHours").text(data["total_hours"]　+ "時間");
-			
+
+		},
+		error: function(data, textStatus, errorThrown){
+			 alert(data + textStatus + errorThrown);
+	  }
+	});
+}
+
+// パンチ開始
+function startWork(){
+	var json_data={"enterprise_id":"MAE0001","start_longitude":gpsLat,"start_latitude":gpsLng,"start_spot_name":"TmpLocationName"};
+	$.ajax({
+		url: "http://54.199.240.10/api/MAS0000050",
+		type: 'post',
+		contentType: "application/json; charset=utf-8",
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader ('Authorization', BasicAuthorizationCode(TOKEN, ''));
+		},
+		data:JSON.stringify(json_data),
+		success: function(data){
+		},
+		complete: function(xhr, ts){
+			var data=eval("("+xhr.responseText+")");
+			var resultCode=data["result_code"];
+			alert("result_code:"+resultCode);
+		},
+		error: function(data, textStatus, errorThrown){
+			 alert(data + textStatus + errorThrown);
+	  }
+	});
+}
+
+// パンチ終了
+function endWork(){
+	var json_data={"enterprise_id":"MAE0001","end_longitude":gpsLat,"end_latitude":gpsLng,"end_spot_name":"TmpLocationName"};
+	$.ajax({
+		url: "http://54.199.240.10/api/MAS0000060",
+		type: 'post',
+		contentType: "application/json; charset=utf-8",
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader ('Authorization', BasicAuthorizationCode(TOKEN, ''));
+		},
+		data:JSON.stringify(json_data),
+		success: function(data){
+		},
+		complete: function(xhr, ts){
+			var data=eval("("+xhr.responseText+")");
+			var resultCode=data["result_code"];
+			alert("result_code:"+resultCode);
 		},
 		error: function(data, textStatus, errorThrown){
 			 alert(data + textStatus + errorThrown);
@@ -155,8 +207,8 @@ function getLoaction(){
 			// [第1引数] 取得に成功した場合の関数
 			function( position )
 			{
-				var gpsLat = position.coords.latitude;
-				var gpsLng = position.coords.longitude;
+				gpsLat = position.coords.latitude;
+				gpsLng = position.coords.longitude;
 				gmap_init(gpsLat,gpsLng);
 			},
 
@@ -203,7 +255,7 @@ function getLoaction(){
 function gmap_init(gpsLat,gpsLng) {
 	geocoder = new google.maps.Geocoder();
 	var latlng = new google.maps.LatLng(gpsLat,gpsLng);
- 
+
 	geocoder.geocode({'latLng':latlng},function(results,status){
 		if (status == google.maps.GeocoderStatus.OK) {
 			console.log(results[1].address);
