@@ -120,8 +120,8 @@ def update_attendance_report_info():
         report_start_time = date_string + request.json.get('report_start_time')
         report_end_time = date_string + request.json.get('report_end_time')
         # 出勤情報更新
-        attendances.report_start_time = datetime.datetime.strptime(report_start_time, "%Y-%m-%d %H:%M:%S")
-        attendances.report_end_time = datetime.datetime.strptime(report_end_time, "%Y-%m-%d %H:%M:%S")
+        attendances.report_start_time = datetime.datetime.strptime(report_start_time, "%Y-%m-%d %H:%M")
+        attendances.report_end_time = datetime.datetime.strptime(report_end_time, "%Y-%m-%d %H:%M")
         attendances.exclusive_minutes = request.json.get('report_exclusive_minutes')
         attendances.total_minutes = request.json.get('report_total_minutes')
         attendances.update_by = g.user.name
