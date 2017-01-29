@@ -252,7 +252,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gM-Xi-VmX">
                                         <rect key="frame" x="0.0" y="300" width="300" height="45"/>
-                                        <color key="backgroundColor" red="0.98881644010543823" green="0.52197718620300293" blue="0.55001604557037354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.61100703477859497" green="0.80169326066970825" blue="0.39806681871414185" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="x8B-lA-VHY"/>
                                             <constraint firstAttribute="height" constant="45" id="zbo-H2-YyP"/>
@@ -266,6 +266,9 @@
                                                 <integer key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="submitPage3:" destination="yUd-n8-Qdk" eventType="touchUpInside" id="qEv-tc-DSQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -303,6 +306,8 @@
                         <outlet property="startTimeBtn" destination="X5O-xa-gxK" id="uQJ-jX-LUL"/>
                         <outlet property="submitPage1Btn" destination="dfx-Fu-Z3c" id="oGn-ky-12a"/>
                         <outlet property="submitPage2Btn" destination="tkV-BO-sNT" id="Wjc-YE-Vod"/>
+                        <outlet property="submitPage3Btn" destination="7gM-Xi-VmX" id="iBc-jE-qxv"/>
+                        <outlet property="totalTime" destination="Gbu-59-bQb" id="jlF-24-Ol6"/>
                         <outlet property="userMonthlyInfo" destination="hub-V1-c8k" id="3tO-Ie-i3g"/>
                         <outlet property="userNameJP" destination="Gjt-lZ-iVh" id="QdW-on-pXg"/>
                     </connections>

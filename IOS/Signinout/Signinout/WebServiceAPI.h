@@ -30,4 +30,6 @@
 
 - (void) getEmployeeMonthlyInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password;
 
+- (void) submitWorkReportInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password withStartTime:(NSString *)startTime withEndTime:(NSString *)endTime withExclusiveMinutes:(NSString *)exclusiveMinutes withTotalMinutes:(NSString *) totalMinutes;
+
 @end

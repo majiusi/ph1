@@ -18,22 +18,28 @@
 
 - (IBAction)submitPage1:(UIButton *)sender;
 - (IBAction)submitPage2:(UIButton *)sender;
+- (IBAction)submitPage3:(UIButton *)sender;
+
 
 @property (weak, nonatomic) IBOutlet UILabel     *positionInfo;
 @property (weak, nonatomic) IBOutlet UIButton    *submitPage1Btn;
 @property (weak, nonatomic) IBOutlet UIButton    *submitPage2Btn;
+@property (weak, nonatomic) IBOutlet UIButton *submitPage3Btn;
+
 @property (weak, nonatomic) IBOutlet UIStackView *page3Stack;
 @property (weak, nonatomic) IBOutlet UIButton    *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton    *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton    *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel     *userNameJP;
 @property (weak, nonatomic) IBOutlet UILabel     *userMonthlyInfo;
+@property (weak, nonatomic) IBOutlet UILabel *totalTime;
 
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSString *strStartTime;
 @property (nonatomic, retain) NSString *strEndTime;
 @property (nonatomic, retain) NSString *strExceptTime;
+@property (nonatomic, retain) NSString *strTotalMinute;
 
 
 @end
@@ -72,6 +78,9 @@ NSString *strLatitude = nil;
             
             NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%02d:%02d      ＞",hour, minut];
             [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
+            
+            // calculate total time
+            self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
         }
     } failBlock:^(int statusCode, int errorCode) {
         //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
@@ -165,6 +174,18 @@ NSString *strLatitude = nil;
     self.submitPage2Btn.hidden = YES;
     self.page3Stack.hidden = YES;
     
+    self.startTimeBtn.enabled = YES;
+    self.endTimeBtn.enabled = YES;
+    [[self endTimeBtn] setBackgroundColor:[UIColor colorWithRed:252 green:133 blue:140 alpha:1.0]];
+
+    self.exceptTimeBtn.enabled = YES;
+    [[self exceptTimeBtn] setBackgroundColor:[UIColor colorWithRed:252 green:133 blue:140 alpha:1.0]];
+    
+    self.submitPage3Btn.enabled = YES;
+    self.submitPage3Btn.backgroundColor = [UIColor blueColor];
+    
+    [self.submitPage3Btn setTitle:@"提出" forState:UIControlStateNormal];
+    
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
@@ -191,6 +212,23 @@ NSString *strLatitude = nil;
             {
                 //[self performSegueWithIdentifier:@"id2" sender:self];
                 self.page3Stack.hidden = NO;
+            }
+            else if ([pageFlagObj integerValue] == 4)
+            {
+                //[self performSegueWithIdentifier:@"id2" sender:self];
+                self.page3Stack.hidden = NO;
+                
+                self.startTimeBtn.enabled = NO;
+                self.startTimeBtn.backgroundColor = [UIColor grayColor];
+                self.endTimeBtn.enabled = NO;
+                self.endTimeBtn.backgroundColor = [UIColor grayColor];
+                self.exceptTimeBtn.enabled = NO;
+                self.exceptTimeBtn.backgroundColor = [UIColor grayColor];
+                
+                self.submitPage3Btn.enabled = NO;
+                self.submitPage3Btn.backgroundColor = [UIColor grayColor];
+                [self.submitPage3Btn setTitle:@"お疲れ様でした。" forState:UIControlStateNormal];
+                
             }
         }
     } failBlock:^(int statusCode, int errorCode) {
@@ -273,6 +311,68 @@ NSString *strLatitude = nil;
 }
 
 /**
+ submit work report infomation.
+ 
+ @param sender <#sender description#>
+ */
+- (IBAction)submitPage3:(UIButton *)sender {
+    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] < 0)
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            // Todo: can not return the before window
+        } else {
+            self.submitPage1Btn.hidden = YES;
+            self.submitPage2Btn.hidden = YES;
+            self.positionInfo.hidden = YES;
+            self.page3Stack.hidden = NO;
+        }
+    } failBlock:^(int statusCode, int errorCode) {
+        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }] submitWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
+}
+
+/**
+ calculate total minute with start/end/except time.
+
+ @param startTime <#startTime description#>
+ @param endTime <#endTime description#>
+ @param exceptTime <#exceptTime description#>
+ @return <#return value description#>
+ */
+- (NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime exceptTime:(NSString *)exceptTime{
+    NSDateFormatter *date = [[NSDateFormatter alloc]init];
+    [date setDateFormat:@"HH:mm"];
+    
+    NSDate *startD =[date dateFromString:startTime];
+    NSDate *endD = [date dateFromString:endTime];
+    NSTimeInterval start = [startD timeIntervalSince1970]*1;
+    NSTimeInterval end = [endD timeIntervalSince1970]*1;
+    NSTimeInterval value = end - start;
+    
+    //int second = (int)value %60;
+    int minute = (int)value /60%60;
+    int house = (int)value / 3600%3600;
+    //int day = (int)value / (24 * 3600);
+    
+    int totalMinute = (house*60) + minute;
+    totalMinute = totalMinute - [exceptTime intValue];
+    
+    house = totalMinute / 60;
+    minute = totalMinute % 60;
+    self.totalTime.text = [NSString stringWithFormat:@"合計：%02d：%02d",house,minute];
+    
+    NSString *str = [NSString stringWithFormat:@"%d",totalMinute];
+    return str;
+}
+
+/**
  Show a dialog to setup report time for work start.
 
  @param sender <#sender description#>
@@ -288,7 +388,10 @@ NSString *strLatitude = nil;
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in startTimeBtn
         self.strStartTime = [dateFormat stringFromDate:datePicker.date];
-        [self.startTimeBtn setTitle:self.strStartTime forState:UIControlStateNormal];
+        NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
+        [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
+        // calculate total time
+        self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
     }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
@@ -313,7 +416,10 @@ NSString *strLatitude = nil;
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in endTimeBtn
         self.strEndTime = [dateFormat stringFromDate:datePicker.date];
-        [self.endTimeBtn setTitle:self.strEndTime forState:UIControlStateNormal];
+        NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+        [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
+        // calculate total time
+        self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
     }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
@@ -339,7 +445,16 @@ NSString *strLatitude = nil;
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in exceptTimeBtn
         self.strExceptTime = [dateFormat stringFromDate:datePicker.date];
-        [self.exceptTimeBtn setTitle:self.strExceptTime forState:UIControlStateNormal];
+        NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%@      ＞",self.strExceptTime];
+        [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
+        
+        // convert time to minutes
+        NSArray *array = [self.strExceptTime componentsSeparatedByString:@":"];
+        int intExceptTime = [array[0] intValue] * 60 + [array[1] intValue];
+        self.strExceptTime = [NSString stringWithFormat:@"%d",intExceptTime];
+        
+        // calculate total time
+        self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
     }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];

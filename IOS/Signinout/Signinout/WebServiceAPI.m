@@ -320,4 +320,51 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         self.failBlock((int)statusCode, (int)errorCode);
     }];
 }
+
+/**
+ Call Restful WebService to submit user's work report info.
+ 
+ @param enterpriseId <#enterpriseId description#>
+ @param userName <#userName description#>
+ @param password <#password description#>
+ @param startTime <#startTime description#>
+ @param endTime <#endTime description#>
+ @param exclusiveMinutes <#exclusiveMinutes description#>
+ @param totalMinutes <#totalMinutes description#>
+ */
+- (void) submitWorkReportInfoWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withStartTime:(NSString *)startTime withEndTime:(NSString *)endTime withExclusiveMinutes:(NSString *)exclusiveMinutes withTotalMinutes:(NSString *) totalMinutes{
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", baseUrl,urlSubmitReportInfo];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"enterprise_id"] = enterpriseId;
+    params[@"report_start_time"] = startTime;
+    params[@"report_end_time"] = endTime;
+    params[@"report_exclusive_minutes"] = exclusiveMinutes;
+    params[@"report_total_minutes"] = totalMinutes;
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.validatesDomainName = NO;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:userName password:password];
+    
+    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
+        
+        self.finishBlock(responseObject);
+        
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        NSInteger statusCode = getErrorStatusCode(task);
+        NSInteger errorCode = getErrorCode(error);
+        NSDictionary *errorDict = getError(error);
+        NSString * errorMessage = errorDict[@"message"];
+        NSLog(@"error : %@", errorMessage);
+        
+        self.failBlock((int)statusCode, (int)errorCode);
+    }];
+}
 @end
