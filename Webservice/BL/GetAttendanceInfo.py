@@ -73,7 +73,7 @@ def get_attendance_info_by_year_month():
         return (jsonify(
             {'result_code': 0,
              'total_days': total_days,
-             'total_hours': float(total_hours) / float(60),
+             'total_hours': total_hours,
              'monthly_work_time_list': monthly_work_time_list}))
     except Exception, e:
         logger.error(e)
