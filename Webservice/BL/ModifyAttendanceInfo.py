@@ -41,7 +41,7 @@ def insert_attendance_work_start_info():
         attendances.dispatch_id = dispatch_id
         attendances.enterprise_id = g.user.enterprise_id
         attendances.employee_id = g.user.employee_id
-        attendances.date = datetime.datetime.now()
+        attendances.date = datetime.datetime.now().strftime("%Y-%m-%d ")
         attendances.start_time = datetime.datetime.now()
         attendances.start_longitude = request.json.get('start_longitude')
         attendances.start_latitude = request.json.get('start_latitude')
