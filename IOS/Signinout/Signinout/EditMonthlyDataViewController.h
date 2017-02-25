@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface EditMonthlyDataViewController : UIViewController
-@property (nonatomic, weak) NSString *workDate;
+@property (nonatomic, retain) NSString *workDate;
+@property (nonatomic, retain) NSString *strStartTime;
+@property (nonatomic, retain) NSString *strEndTime;
+@property (nonatomic, retain) NSString *strExceptTime;
+@property (nonatomic, retain) NSString *strTotalMinute;
 @end

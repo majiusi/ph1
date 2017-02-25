@@ -346,7 +346,6 @@ NSString *strLatitude = nil;
                     [self.navigationController popToRootViewControllerAnimated:YES];
                     //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
                 } else {
-                    NSLog(@"%@",[NSString stringWithFormat:@"出勤：%@日　　出勤：%@時間", [object objectForKey:@"total_days"],[object objectForKey:@"total_hours"]]);
                     self.userMonthlyInfo.text = [NSString stringWithFormat:@"当月出勤：%@日　　出勤：%.2f時間", [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
                 }
             } failBlock:^(int statusCode, int errorCode) {

@@ -87,12 +87,117 @@
                     <view key="view" contentMode="scaleToFill" id="s2q-sL-POm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="uff-6d-YVl">
+                                <rect key="frame" x="37" y="123.5" width="301" height="420"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMz-GD-pIZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="301" height="45"/>
+                                        <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="＜      開始：HH：MM      ＞">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="setStartTime:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="Iaa-Q5-7sP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6g-JB-lUi">
+                                        <rect key="frame" x="0.0" y="75" width="301" height="45"/>
+                                        <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="＜      終了：HH：MM      ＞">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="setEndTime:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="hZf-4o-QbH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Y1-3T-uuP">
+                                        <rect key="frame" x="0.0" y="150" width="301" height="45"/>
+                                        <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="＜      控除：HH：MM      ＞">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="setExceptTime:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="9Yr-An-VHK"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" text="合計：00：00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTH-ge-2wd">
+                                        <rect key="frame" x="0.0" y="225" width="301" height="45"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UyK-cv-nQ2">
+                                        <rect key="frame" x="0.0" y="300" width="301" height="45"/>
+                                        <color key="backgroundColor" red="0.61100703479999996" green="0.80169326070000002" blue="0.39806681869999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="変更">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmn-0Z-sbl">
+                                        <rect key="frame" x="0.5" y="375" width="300" height="45"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="キャンセル">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="HMz-GD-pIZ" firstAttribute="leading" secondItem="uff-6d-YVl" secondAttribute="leading" id="c6m-DA-7ld"/>
+                                    <constraint firstItem="HMz-GD-pIZ" firstAttribute="leading" secondItem="e6g-JB-lUi" secondAttribute="leading" id="ebA-M1-8Sf"/>
+                                    <constraint firstItem="eTH-ge-2wd" firstAttribute="leading" secondItem="UyK-cv-nQ2" secondAttribute="leading" id="pjH-aw-Vb6"/>
+                                    <constraint firstItem="6Y1-3T-uuP" firstAttribute="leading" secondItem="eTH-ge-2wd" secondAttribute="leading" id="rE9-zM-FZK"/>
+                                    <constraint firstItem="e6g-JB-lUi" firstAttribute="leading" secondItem="6Y1-3T-uuP" secondAttribute="leading" id="u0J-Yf-U6d"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uff-6d-YVl" firstAttribute="centerX" secondItem="s2q-sL-POm" secondAttribute="centerX" id="7Js-hh-57f"/>
+                            <constraint firstItem="uff-6d-YVl" firstAttribute="centerY" secondItem="s2q-sL-POm" secondAttribute="centerY" id="c8l-fZ-erP"/>
+                            <constraint firstItem="uff-6d-YVl" firstAttribute="leading" secondItem="s2q-sL-POm" secondAttribute="leadingMargin" constant="21" id="ulb-Yw-Z3S"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="endTimeBtn" destination="e6g-JB-lUi" id="RXq-vl-lbD"/>
+                        <outlet property="exceptTimeBtn" destination="6Y1-3T-uuP" id="5DD-mJ-bHY"/>
+                        <outlet property="startTimeBtn" destination="HMz-GD-pIZ" id="dhN-W3-8PO"/>
+                        <outlet property="totalTime" destination="eTH-ge-2wd" id="QmS-5p-kFo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="guy-8R-h4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3889" y="304"/>
+            <point key="canvasLocation" x="3888.8000000000002" y="303.59820089955025"/>
         </scene>
         <!--Monthly-->
         <scene sceneID="d47-0C-GcO">
@@ -188,7 +293,7 @@
                                             <constraint firstAttribute="height" constant="45" id="xxg-0b-ZbV"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="＜      開始：HH：SS      ＞">
+                                        <state key="normal" title="＜      開始：HH：MM      ＞">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -208,7 +313,7 @@
                                             <constraint firstAttribute="width" constant="300" id="ZPe-zJ-rJL"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="＜      終了：HH：SS      ＞">
+                                        <state key="normal" title="＜      終了：HH：MM      ＞">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -228,7 +333,7 @@
                                             <constraint firstAttribute="height" constant="45" id="pPb-WW-ftE"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="＜      控除：HH：SS      ＞">
+                                        <state key="normal" title="＜      控除：HH：MM      ＞">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>

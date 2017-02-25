@@ -9,6 +9,7 @@
 #import "PunchListTableViewController.h"
 #import "PunchListTableViewCell.h"
 #import "EditMonthlyDataViewController.h"
+#import "WebServiceAPI.h"
 
 @interface PunchListTableViewController ()
 
@@ -72,28 +73,22 @@
 
 -(void)startRequest
 {
-    NSMutableDictionary *param=[[NSMutableDictionary alloc]init];
-    [param setValue:@"MAE0001" forKey:@"enterprise_id"];
-    [param setValue:@"2016" forKey:@"search_year"];
-    [param setValue:@"11" forKey:@"search_month"];
-    
-    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"127.0.0.1:5000" customHeaderFields:nil];
-    MKNetworkOperation *op = [engine operationWithPath:@"api/MAS0000040" params:param httpMethod:@"POST" ssl:NO];
-    [op setUsername:@"yaochenxu" password:@"mapw001" basicAuth:YES];
-    [op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
-    
-    
-    [op addCompletionHandler:^(MKNetworkOperation *operation) {
+    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+    // show monthly attendances infomation
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] < 0)
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        } else {
+            [self reloadView:object];
+        }
+    } failBlock:^(int statusCode, int errorCode) {
+        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
-        NSLog(@"responseData : %@", [operation responseString]);
-        NSData *data  = [operation responseData];
-        NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        [self reloadView:resDict];
-        
-    } errorHandler:^(MKNetworkOperation *errorOp, NSError* err) {
-        NSLog(@"MKNetwork request error : %@", [err localizedDescription]);
-    }];
-    [engine enqueueOperation:op];
+    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
     
 }
 
@@ -105,7 +100,7 @@
         self.objects = [res objectForKey:@"monthly_work_time_list"];
         [self.tableView reloadData];
     } else {
-        NSString *errorStr = [@"Return code:" stringByAppendingString:[resultCodeObj stringValue]];
+        NSString *errorStr = [@"return code:" stringByAppendingString:[resultCodeObj stringValue]];
 
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Not data" message:errorStr preferredStyle:UIAlertControllerStyleAlert ];
         
@@ -169,6 +164,10 @@
         
         EditMonthlyDataViewController *editMonthlyData = segue.destinationViewController;
         editMonthlyData.workDate = [dict objectForKey:@"work_date"];
+        editMonthlyData.strStartTime = [dict objectForKey:@"report_start_time"];
+        editMonthlyData.strEndTime = [dict objectForKey:@"report_end_time"];
+        editMonthlyData.strExceptTime = [dict objectForKey:@"report_exclusive_minutes"];
+        editMonthlyData.strTotalMinute = [dict objectForKey:@"report_total_minutes"];
     }
 }
 

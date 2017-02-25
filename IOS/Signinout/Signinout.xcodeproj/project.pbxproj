@@ -14,15 +14,6 @@
 		B6014E151D55B8C90092F688 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6014E141D55B8C90092F688 /* CFNetwork.framework */; };
 		B6014E171D55B8D40092F688 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6014E161D55B8D40092F688 /* SystemConfiguration.framework */; };
 		B6014E191D55B8DE0092F688 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6014E181D55B8DE0092F688 /* Security.framework */; };
-		B6014EBC1D560EBD0092F688 /* NSAlert+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EA71D560EBD0092F688 /* NSAlert+MKNetworkKitAdditions.m */; };
-		B6014EBD1D560EBD0092F688 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EA91D560EBD0092F688 /* NSData+MKBase64.m */; };
-		B6014EBE1D560EBD0092F688 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EAB1D560EBD0092F688 /* NSDate+RFC1123.m */; };
-		B6014EBF1D560EBD0092F688 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EAD1D560EBD0092F688 /* NSDictionary+RequestEncoding.m */; };
-		B6014EC11D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EB11D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.m */; };
-		B6014EC21D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EB31D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.m */; };
-		B6014EC31D560EBD0092F688 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EB51D560EBD0092F688 /* MKNetworkEngine.m */; };
-		B6014EC41D560EBD0092F688 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EB81D560EBD0092F688 /* MKNetworkOperation.m */; };
-		B6014EC51D560EBD0092F688 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B6014EBB1D560EBD0092F688 /* Reachability.m */; };
 		B606EE6D1DF39911001EC317 /* PunchNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B606EE6C1DF39911001EC317 /* PunchNavigationController.m */; };
 		B606EE701DF3B831001EC317 /* CALayer+LayerColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B606EE6F1DF3B831001EC317 /* CALayer+LayerColor.m */; };
 		B6550ED91E0F583E00CEB007 /* EditMonthlyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6550ED81E0F583E00CEB007 /* EditMonthlyDataViewController.m */; };
@@ -70,26 +61,6 @@
 		B6014E141D55B8C90092F688 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B6014E161D55B8D40092F688 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B6014E181D55B8DE0092F688 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		B6014EA31D55ED0D0092F688 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		B6014EA61D560EBD0092F688 /* NSAlert+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
-		B6014EA71D560EBD0092F688 /* NSAlert+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
-		B6014EA81D560EBD0092F688 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
-		B6014EA91D560EBD0092F688 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
-		B6014EAA1D560EBD0092F688 /* NSDate+RFC1123.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC1123.h"; sourceTree = "<group>"; };
-		B6014EAB1D560EBD0092F688 /* NSDate+RFC1123.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RFC1123.m"; sourceTree = "<group>"; };
-		B6014EAC1D560EBD0092F688 /* NSDictionary+RequestEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+RequestEncoding.h"; sourceTree = "<group>"; };
-		B6014EAD1D560EBD0092F688 /* NSDictionary+RequestEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+RequestEncoding.m"; sourceTree = "<group>"; };
-		B6014EB01D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
-		B6014EB11D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
-		B6014EB21D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
-		B6014EB31D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
-		B6014EB41D560EBD0092F688 /* MKNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkEngine.h; sourceTree = "<group>"; };
-		B6014EB51D560EBD0092F688 /* MKNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkEngine.m; sourceTree = "<group>"; };
-		B6014EB61D560EBD0092F688 /* MKNetworkKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkKit.h; sourceTree = "<group>"; };
-		B6014EB71D560EBD0092F688 /* MKNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkOperation.h; sourceTree = "<group>"; };
-		B6014EB81D560EBD0092F688 /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
-		B6014EBA1D560EBD0092F688 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		B6014EBB1D560EBD0092F688 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B606EE6B1DF39911001EC317 /* PunchNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchNavigationController.h; sourceTree = "<group>"; };
 		B606EE6C1DF39911001EC317 /* PunchNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchNavigationController.m; sourceTree = "<group>"; };
 		B606EE6E1DF3B831001EC317 /* CALayer+LayerColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LayerColor.h"; sourceTree = "<group>"; };
@@ -170,52 +141,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B6014EA41D560EBD0092F688 /* MKNetworkKit */ = {
-			isa = PBXGroup;
-			children = (
-				B6014EA51D560EBD0092F688 /* Categories */,
-				B6014EB41D560EBD0092F688 /* MKNetworkEngine.h */,
-				B6014EB51D560EBD0092F688 /* MKNetworkEngine.m */,
-				B6014EB61D560EBD0092F688 /* MKNetworkKit.h */,
-				B6014EB71D560EBD0092F688 /* MKNetworkOperation.h */,
-				B6014EB81D560EBD0092F688 /* MKNetworkOperation.m */,
-				B6014EB91D560EBD0092F688 /* Reachability */,
-			);
-			path = MKNetworkKit;
-			sourceTree = "<group>";
-		};
-		B6014EA51D560EBD0092F688 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				B6014EA61D560EBD0092F688 /* NSAlert+MKNetworkKitAdditions.h */,
-				B6014EA71D560EBD0092F688 /* NSAlert+MKNetworkKitAdditions.m */,
-				B6014EA81D560EBD0092F688 /* NSData+MKBase64.h */,
-				B6014EA91D560EBD0092F688 /* NSData+MKBase64.m */,
-				B6014EAA1D560EBD0092F688 /* NSDate+RFC1123.h */,
-				B6014EAB1D560EBD0092F688 /* NSDate+RFC1123.m */,
-				B6014EAC1D560EBD0092F688 /* NSDictionary+RequestEncoding.h */,
-				B6014EAD1D560EBD0092F688 /* NSDictionary+RequestEncoding.m */,
-				B6014EB01D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.h */,
-				B6014EB11D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.m */,
-				B6014EB21D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.h */,
-				B6014EB31D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		B6014EB91D560EBD0092F688 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				B6014EBA1D560EBD0092F688 /* Reachability.h */,
-				B6014EBB1D560EBD0092F688 /* Reachability.m */,
-			);
-			path = Reachability;
-			sourceTree = "<group>";
-		};
 		B66709C91D503C71009B0A3A = {
 			isa = PBXGroup;
 			children = (
-				B6014EA41D560EBD0092F688 /* MKNetworkKit */,
 				B66709D41D503C71009B0A3A /* Signinout */,
 				B66709F11D503C71009B0A3A /* SigninoutTests */,
 				B66709FC1D503C71009B0A3A /* SigninoutUITests */,
@@ -241,7 +169,6 @@
 		B66709D41D503C71009B0A3A /* Signinout */ = {
 			isa = PBXGroup;
 			children = (
-				B6014EA31D55ED0D0092F688 /* PrefixHeader.pch */,
 				B66709D81D503C71009B0A3A /* AppDelegate.h */,
 				B66709D91D503C71009B0A3A /* AppDelegate.m */,
 				B66709E11D503C71009B0A3A /* Main.storyboard */,
@@ -486,24 +413,15 @@
 				B6550EDF1E0FA68300CEB007 /* WebServiceAPI.m in Sources */,
 				B6550EEE1E0FBF0E00CEB007 /* HttpResponseErrorCode.m in Sources */,
 				B6014DB91D5587080092F688 /* PunchListTableViewController.m in Sources */,
-				B6014EC31D560EBD0092F688 /* MKNetworkEngine.m in Sources */,
-				B6014EC41D560EBD0092F688 /* MKNetworkOperation.m in Sources */,
 				B6550ED91E0F583E00CEB007 /* EditMonthlyDataViewController.m in Sources */,
 				B66709DA1D503C71009B0A3A /* AppDelegate.m in Sources */,
-				B6014EBD1D560EBD0092F688 /* NSData+MKBase64.m in Sources */,
-				B6014EBE1D560EBD0092F688 /* NSDate+RFC1123.m in Sources */,
 				B606EE701DF3B831001EC317 /* CALayer+LayerColor.m in Sources */,
 				B6670A131D50436C009B0A3A /* SetupViewController.m in Sources */,
 				B6EA79CC1DE9736C00F64C9A /* LoginViewController.m in Sources */,
 				B6014DBC1D5587D20092F688 /* PunchListTableViewCell.m in Sources */,
 				B6014DEC1D55B3EF0092F688 /* PunchViewController.m in Sources */,
 				B6B167CD1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m in Sources */,
-				B6014EC11D560EBD0092F688 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				B6014EC21D560EBD0092F688 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				B66709D71D503C71009B0A3A /* main.m in Sources */,
-				B6014EBF1D560EBD0092F688 /* NSDictionary+RequestEncoding.m in Sources */,
-				B6014EBC1D560EBD0092F688 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
-				B6014EC51D560EBD0092F688 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +571,7 @@
 			baseConfigurationReference = 3FBB80FB409530A6CF5B05DD /* Pods-Signinout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Signinout/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.maiasoft.Signinout;
@@ -666,7 +584,7 @@
 			baseConfigurationReference = 7225D7C502CABEF8068450FD /* Pods-Signinout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Signinout/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.maiasoft.Signinout;

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 maiasoft. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 @interface CALayer (LayerColor)
