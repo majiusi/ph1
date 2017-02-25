@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wkm-Nj-eSS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wkm-Nj-eSS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -125,7 +125,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="位置情報" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJq-fW-IQt">
                                 <rect key="frame" x="21" y="538" width="332" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.333293438" green="0.33335629109999998" blue="0.33328947419999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,7 +133,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkV-BO-sNT" userLabel="SubmitPage2Btn">
                                 <rect key="frame" x="80" y="241" width="203" height="203"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <state key="normal" title="■">
@@ -156,7 +156,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Fu-Z3c" userLabel="SubmitPage1Btn">
                                 <rect key="frame" x="80" y="241" width="203" height="203"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <state key="normal" title="▶">
@@ -276,38 +276,139 @@
                                     <constraint firstItem="X5O-xa-gxK" firstAttribute="leading" secondItem="0XZ-RJ-6JF" secondAttribute="leading" id="qqZ-oy-GDQ"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名前：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjt-lZ-iVh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名前：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjt-lZ-iVh">
                                 <rect key="frame" x="37" y="64" width="300" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="rfn-lH-bfX"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="出勤情報：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hub-V1-c8k">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出勤情報：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hub-V1-c8k">
                                 <rect key="frame" x="37" y="101" width="300" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="nhl-lm-veh"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Suu-zB-WXh" userLabel="Page4 Stack">
+                                <rect key="frame" x="37" y="180" width="300" height="345"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="40" text="開始：HH：MM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTP-bv-sGv">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="K2m-aS-DcD"/>
+                                            <constraint firstAttribute="width" constant="300" id="Kbp-U7-Lhm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="40" text="終了：HH：MM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOh-ff-8x9">
+                                        <rect key="frame" x="0.0" y="75" width="300" height="45"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="rHK-1w-ON0"/>
+                                            <constraint firstAttribute="height" constant="45" id="wFA-Jz-3Hy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="40" text="控除：HH：MM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Acf-6V-7uC">
+                                        <rect key="frame" x="0.0" y="150" width="300" height="45"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="MRg-7d-YlO"/>
+                                            <constraint firstAttribute="height" constant="45" id="n3s-3f-1zy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="40" text="合計：HH：MM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vp4-vX-WHt">
+                                        <rect key="frame" x="0.0" y="225" width="300" height="45"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="A5n-Nv-CgO"/>
+                                            <constraint firstAttribute="width" constant="300" id="y2f-AT-NnK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" text="お疲れ様でした。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lk8-ix-PXt">
+                                        <rect key="frame" x="0.0" y="300" width="300" height="45"/>
+                                        <color key="backgroundColor" red="0.26663362979888916" green="0.26668566465377808" blue="0.26663035154342651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="HT0-dc-Ezs"/>
+                                            <constraint firstAttribute="height" constant="45" id="q6Z-xU-dYi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="top" secondItem="hj2-bs-VQk" secondAttribute="bottom" constant="106" id="Wsq-7k-06P"/>
-                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="xo9-ld-ERd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gjt-lZ-iVh" secondAttribute="trailing" constant="22" id="3JO-qd-h0d"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hub-V1-c8k" secondAttribute="trailing" constant="22" id="GvY-Ie-IBw"/>
+                            <constraint firstItem="hub-V1-c8k" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="J1g-z2-Pmm"/>
+                            <constraint firstItem="Gjt-lZ-iVh" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="dMz-ST-85x"/>
+                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="top" secondItem="hub-V1-c8k" secondAttribute="bottom" constant="48" id="pAd-43-A8w"/>
+                            <constraint firstItem="hub-V1-c8k" firstAttribute="top" secondItem="Gjt-lZ-iVh" secondAttribute="bottom" constant="8" id="tMc-9n-PkC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0XZ-RJ-6JF" secondAttribute="trailing" constant="22" id="uoD-lP-T94"/>
+                            <constraint firstItem="Gjt-lZ-iVh" firstAttribute="top" secondItem="hj2-bs-VQk" secondAttribute="bottom" id="wqv-do-b0m"/>
+                            <constraint firstItem="0XZ-RJ-6JF" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="xBI-Bz-As7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zIU-Ib-b17"/>
                     <connections>
                         <outlet property="endTimeBtn" destination="9Ic-AW-ssJ" id="7tJ-2D-eZP"/>
+                        <outlet property="endTimeLab" destination="wOh-ff-8x9" id="g9Y-Ef-YgO"/>
                         <outlet property="exceptTimeBtn" destination="iZP-X4-8US" id="5Wx-1W-8yZ"/>
+                        <outlet property="exceptTimeLab" destination="Acf-6V-7uC" id="AWt-Fe-tW3"/>
                         <outlet property="page3Stack" destination="0XZ-RJ-6JF" id="dqe-oy-Dxu"/>
+                        <outlet property="page4Stack" destination="Suu-zB-WXh" id="8fm-zk-H3g"/>
                         <outlet property="positionInfo" destination="CJq-fW-IQt" id="rUR-jg-h1k"/>
                         <outlet property="startTimeBtn" destination="X5O-xa-gxK" id="uQJ-jX-LUL"/>
+                        <outlet property="startTimeLab" destination="BTP-bv-sGv" id="7qp-4y-ddT"/>
                         <outlet property="submitPage1Btn" destination="dfx-Fu-Z3c" id="oGn-ky-12a"/>
                         <outlet property="submitPage2Btn" destination="tkV-BO-sNT" id="Wjc-YE-Vod"/>
                         <outlet property="submitPage3Btn" destination="7gM-Xi-VmX" id="iBc-jE-qxv"/>
                         <outlet property="totalTime" destination="Gbu-59-bQb" id="jlF-24-Ol6"/>
+                        <outlet property="totalTimeLab" destination="Vp4-vX-WHt" id="xgU-XE-x5G"/>
                         <outlet property="userMonthlyInfo" destination="hub-V1-c8k" id="3tO-Ie-i3g"/>
                         <outlet property="userNameJP" destination="Gjt-lZ-iVh" id="QdW-on-pXg"/>
                     </connections>

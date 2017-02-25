@@ -27,13 +27,18 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitPage3Btn;
 
 @property (weak, nonatomic) IBOutlet UIStackView *page3Stack;
+@property (weak, nonatomic) IBOutlet UIStackView *page4Stack;
+
 @property (weak, nonatomic) IBOutlet UIButton    *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton    *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton    *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel     *userNameJP;
 @property (weak, nonatomic) IBOutlet UILabel     *userMonthlyInfo;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
-
+@property (weak, nonatomic) IBOutlet UILabel *startTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel *endTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel *exceptTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel *totalTimeLab;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSString *strStartTime;
@@ -51,59 +56,6 @@ NSString *strLatitude = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-    
-    // get employee base info, and show name of JP, show defalut work start/end/except time.
-    [[WebServiceAPI requestWithFinishBlock:^(id object) {
-        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        if ([resultCodeObj integerValue] < 0)
-        {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        } else {
-            self.userNameJP.text = [object objectForKey:@"name_jp"];
-            
-            self.strStartTime = [object objectForKey:@"default_work_start_time"];
-            NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
-            [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
-            
-            self.strEndTime = [object objectForKey:@"default_work_end_time"];
-            NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
-            [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
-            
-            self.strExceptTime = [object objectForKey:@"default_except_minutes"];
-            int intDefalutWorkExceptTime = [self.strExceptTime intValue];
-            int hour = intDefalutWorkExceptTime / 60;
-            int minut = intDefalutWorkExceptTime % 60;
-            
-            NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%02d:%02d      ＞",hour, minut];
-            [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
-            
-            // calculate total time
-            self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
-        }
-    } failBlock:^(int statusCode, int errorCode) {
-        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        
-    }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
-    
-    // show monthly attendances infomation
-    [[WebServiceAPI requestWithFinishBlock:^(id object) {
-        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        if ([resultCodeObj integerValue] < 0)
-        {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        } else {
-            NSLog(@"%@",[NSString stringWithFormat:@"当月出勤：%@日　　当月出勤：%@時間", [object objectForKey:@"total_days"],[object objectForKey:@"total_hours"]]);
-            self.userMonthlyInfo.text = [NSString stringWithFormat:@"当月出勤：%@日　　当月出勤：%@時間", [object objectForKey:@"total_days"],[object objectForKey:@"total_hours"]];
-        }
-    } failBlock:^(int statusCode, int errorCode) {
-        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        
-    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,7 +112,17 @@ NSString *strLatitude = nil;
 }
 */
 
+
+/**
+ 1.Get location info and show it.
+ 2.Get employee base info, and show name of JP, show defalut work start/end/except time.
+ 3.Get and show monthly attendances infomation.
+ 4.show UI Controller&Info according page_flag.
+
+ @param animated <#animated description#>
+ */
 - (void)viewDidAppear:(BOOL)animated{
+    // 1.Get location info and show it.
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -173,21 +135,64 @@ NSString *strLatitude = nil;
     self.submitPage1Btn.hidden = YES;
     self.submitPage2Btn.hidden = YES;
     self.page3Stack.hidden = YES;
+    self.page4Stack.hidden = YES;
     
-    self.startTimeBtn.enabled = YES;
-    self.endTimeBtn.enabled = YES;
-    [[self endTimeBtn] setBackgroundColor:[UIColor colorWithRed:252 green:133 blue:140 alpha:1.0]];
-
-    self.exceptTimeBtn.enabled = YES;
-    [[self exceptTimeBtn] setBackgroundColor:[UIColor colorWithRed:252 green:133 blue:140 alpha:1.0]];
-    
-    self.submitPage3Btn.enabled = YES;
-    self.submitPage3Btn.backgroundColor = [UIColor blueColor];
-    
-    [self.submitPage3Btn setTitle:@"提出" forState:UIControlStateNormal];
     
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     
+    // 2.Get employee base info, and show name of JP, show defalut work start/end/except time.
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] < 0)
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        } else {
+            self.userNameJP.text = [object objectForKey:@"name_jp"];
+            
+            self.strStartTime = [object objectForKey:@"default_work_start_time"];
+            NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
+            [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
+            
+            self.strEndTime = [object objectForKey:@"default_work_end_time"];
+            NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+            [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
+            
+            self.strExceptTime = [NSString stringWithFormat:@"%@",[object objectForKey:@"default_except_minutes"]];
+            int intDefalutWorkExceptTime = [self.strExceptTime intValue];
+            int hour = intDefalutWorkExceptTime / 60;
+            int minut = intDefalutWorkExceptTime % 60;
+            
+            NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%02d:%02d      ＞",hour, minut];
+            [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
+            
+            // calculate total time
+            self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
+        }
+    } failBlock:^(int statusCode, int errorCode) {
+        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
+    
+    // 3.Get and show monthly attendances infomation.
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] < 0)
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        } else {
+            NSLog(@"%@",[NSString stringWithFormat:@"当月出勤：%@日　　当月出勤：%@時間", [object objectForKey:@"total_days"],[object objectForKey:@"total_hours"]]);
+            self.userMonthlyInfo.text = [NSString stringWithFormat:@"当月出勤：%@日　　出勤：%.2f時間", [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+        }
+    } failBlock:^(int statusCode, int errorCode) {
+        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
+    
+    // 4.show UI Controller&Info according page_flag.
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         NSNumber *pageFlagObj = [object objectForKey:@"page_flag"];
@@ -215,20 +220,14 @@ NSString *strLatitude = nil;
             }
             else if ([pageFlagObj integerValue] == 4)
             {
-                //[self performSegueWithIdentifier:@"id2" sender:self];
-                self.page3Stack.hidden = NO;
+                // get reports time and show it
+                self.startTimeLab.text = [NSString stringWithFormat:@"＜      開始：%@      ＞", self.strStartTime];
+                self.endTimeLab.text = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+                self.exceptTimeLab.text = [NSString stringWithFormat:@"＜      控除：%@(分)      ＞",self.strExceptTime];
+                double totalTemp = self.strTotalMinute.integerValue / 60;
+                self.totalTimeLab.text = [NSString stringWithFormat:@"＜      合計：%.1f(時間)      ＞", totalTemp];
                 
-                self.startTimeBtn.enabled = NO;
-                self.startTimeBtn.backgroundColor = [UIColor grayColor];
-                self.endTimeBtn.enabled = NO;
-                self.endTimeBtn.backgroundColor = [UIColor grayColor];
-                self.exceptTimeBtn.enabled = NO;
-                self.exceptTimeBtn.backgroundColor = [UIColor grayColor];
-                
-                self.submitPage3Btn.enabled = NO;
-                self.submitPage3Btn.backgroundColor = [UIColor grayColor];
-                [self.submitPage3Btn setTitle:@"お疲れ様でした。" forState:UIControlStateNormal];
-                
+                self.page4Stack.hidden = NO;
             }
         }
     } failBlock:^(int statusCode, int errorCode) {
@@ -295,6 +294,7 @@ NSString *strLatitude = nil;
                 self.submitPage2Btn.hidden = YES;
                 self.positionInfo.hidden = YES;
                 self.page3Stack.hidden = NO;
+                self.page4Stack.hidden = YES;
             }
         } failBlock:^(int statusCode, int errorCode) {
             //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
@@ -326,10 +326,34 @@ NSString *strLatitude = nil;
             //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
             // Todo: can not return the before window
         } else {
+            self.startTimeLab.text = [NSString stringWithFormat:@"＜      開始：%@      ＞", self.strStartTime];
+            self.endTimeLab.text = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+            self.exceptTimeLab.text = [NSString stringWithFormat:@"＜      控除：%@(分)      ＞",self.strExceptTime];
+            double totalTemp = self.strTotalMinute.integerValue / 60;
+            self.totalTimeLab.text = [NSString stringWithFormat:@"＜      合計：%.1f(時間)      ＞", totalTemp];
+            
             self.submitPage1Btn.hidden = YES;
             self.submitPage2Btn.hidden = YES;
             self.positionInfo.hidden = YES;
-            self.page3Stack.hidden = NO;
+            self.page3Stack.hidden = YES;
+            self.page4Stack.hidden = NO;
+            
+            // show monthly attendances infomation
+            [[WebServiceAPI requestWithFinishBlock:^(id object) {
+                NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+                if ([resultCodeObj integerValue] < 0)
+                {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+                } else {
+                    NSLog(@"%@",[NSString stringWithFormat:@"出勤：%@日　　出勤：%@時間", [object objectForKey:@"total_days"],[object objectForKey:@"total_hours"]]);
+                    self.userMonthlyInfo.text = [NSString stringWithFormat:@"当月出勤：%@日　　出勤：%.2f時間", [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+                }
+            } failBlock:^(int statusCode, int errorCode) {
+                //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
         }
     } failBlock:^(int statusCode, int errorCode) {
         //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
