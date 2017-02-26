@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
+@property (weak, nonatomic) IBOutlet UILabel *workDateLab;
 
 @end
 
@@ -24,6 +25,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
+    
+    self.workDateLab.text = self.workDate;
     
     if(self.strStartTime.length > 5) self.strStartTime = [self.strStartTime substringToIndex:5];
     NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];

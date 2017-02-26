@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *punchDate;
 @property (weak, nonatomic) IBOutlet UILabel *punchCheckinTime;
 @property (weak, nonatomic) IBOutlet UILabel *punchCheckoutTime;
+@property (weak, nonatomic) IBOutlet UILabel *punchExceptTime;
 @property (weak, nonatomic) IBOutlet UILabel *punchTotalTime;
 
 

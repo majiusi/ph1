@@ -23,13 +23,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self startRequest];
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self startRequest];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,18 +58,31 @@
     static NSString *cellIdentifier = @"punchListCell";
     
     PunchListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
     if (indexPath.row == 0) {
         cell.punchDate.text = @"日付";
         cell.punchCheckinTime.text = @"開始";
         cell.punchCheckoutTime.text = @"終了";
-        cell.punchTotalTime.text = @"総時間";
+        cell.punchExceptTime.text = @"控除";
+        cell.punchTotalTime.text = @"出勤時間";
+        
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     } else {
         NSMutableDictionary*  dict = self.objects[indexPath.row - 1];
-        cell.punchDate.text = [dict objectForKey:@"work_date"];
-        cell.punchCheckinTime.text = [dict objectForKey:@"report_start_time"];
-        cell.punchCheckoutTime.text = [dict objectForKey:@"report_end_time"];
-        cell.punchTotalTime.text = [NSString stringWithFormat:@"%@", [dict objectForKey:@"report_total_minutes"]];
+        cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
+        cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
+        cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
+        cell.punchExceptTime.text = [NSString stringWithFormat:@"%@(分)",[dict objectForKey:@"report_exclusive_minutes"]];
         
+        double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
+        cell.punchTotalTime.text = [NSString stringWithFormat:@"%3.2f(時間)", minutesToHours];
+        
+        cell.punchDate.textColor = [UIColor grayColor];
+        cell.punchCheckinTime.textColor = [UIColor grayColor];
+        cell.punchCheckoutTime.textColor = [UIColor grayColor];
+        cell.punchExceptTime.textColor = [UIColor grayColor];
+        cell.punchTotalTime.textColor = [UIColor grayColor];
     }
     
     return cell;
@@ -118,45 +135,28 @@
     }
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+/**
+ Do nothing when table first row be touched.
+ 
+ */
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    if(indexPath.row == 0)
+    {
+        return NO;
+    }
+    return YES;
+}
+
+/**
+ Set parameter and show edit window when row be touched.
+
+ */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
     if([segue.identifier isEqualToString:@"EditMonthlyDataIdentifier"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -170,6 +170,5 @@
         editMonthlyData.strTotalMinute = [dict objectForKey:@"report_total_minutes"];
     }
 }
-
 
 @end
