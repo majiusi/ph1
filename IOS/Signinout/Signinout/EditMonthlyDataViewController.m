@@ -3,10 +3,11 @@
 //  Signinout
 //
 //  Created by yaochenxu on 2016/12/25.
-//  Copyright © 2016年 maiasoft. All rights reserved.
+//  Copyright © 2016年 Yaochenxu. All rights reserved.
 //
 
 #import "EditMonthlyDataViewController.h"
+#import "WebServiceAPI.h"
 
 @interface EditMonthlyDataViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
@@ -14,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel *workDateLab;
+- (IBAction)updateReport:(UIButton *)sender;
 
 @end
 
@@ -188,4 +190,39 @@
 }
 */
 
+- (IBAction)updateReport:(UIButton *)sender {
+    
+    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] < 0)
+        {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"サービスが異常終了になりました。" preferredStyle: UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                // return to before window
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }]];
+            //show dialog box
+            [self presentViewController:alert animated:true completion:nil];
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"修正完了" preferredStyle: UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                // return to before window
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }]];
+            //show dialog box
+            [self presentViewController:alert animated:true completion:nil];
+        }
+    } failBlock:^(int statusCode, int errorCode) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"サービスの利用ができません。" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            // return to before window
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }]];
+        //show dialog box
+        [self presentViewController:alert animated:true completion:nil];
+        
+    }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
+}
 @end

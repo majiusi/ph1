@@ -3,7 +3,7 @@
 //  Signinout
 //
 //  Created by yaochenxu on 2016/12/25.
-//  Copyright © 2016年 maiasoft. All rights reserved.
+//  Copyright © 2016年 Yaochenxu. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -31,5 +31,7 @@
 - (void) getEmployeeMonthlyInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password;
 
 - (void) submitWorkReportInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password withStartTime:(NSString *)startTime withEndTime:(NSString *)endTime withExclusiveMinutes:(NSString *)exclusiveMinutes withTotalMinutes:(NSString *) totalMinutes;
+
+- (void) updateWorkReportInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password withUpdateDate:(NSString*)updateDate withStartTime:(NSString *)startTime withEndTime:(NSString *)endTime withExclusiveMinutes:(NSString *)exclusiveMinutes withTotalMinutes:(NSString *) totalMinutes;
 
 @end

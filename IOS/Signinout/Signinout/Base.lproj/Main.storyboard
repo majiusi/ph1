@@ -157,7 +157,7 @@
                                         <rect key="frame" x="0.0" y="300" width="301" height="45"/>
                                         <color key="backgroundColor" red="0.61100703479999996" green="0.80169326070000002" blue="0.39806681869999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="変更">
+                                        <state key="normal" title="更新">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -165,6 +165,9 @@
                                                 <integer key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="updateReport:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="xov-lI-TGt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmn-0Z-sbl">
                                         <rect key="frame" x="0.0" y="375" width="301" height="45"/>
@@ -190,7 +193,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出勤日：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0w2-a1-fFV">
-                                <rect key="frame" x="37" y="94" width="78" height="21"/>
+                                <rect key="frame" x="37" y="94.5" width="78" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="78" id="1hT-WQ-5ID"/>
                                 </constraints>
@@ -199,7 +202,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="yyyy-mm-dd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKz-hF-VZ8">
-                                <rect key="frame" x="120" y="93" width="134" height="21"/>
+                                <rect key="frame" x="120" y="93.5" width="134" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -234,7 +237,7 @@
             <objects>
                 <navigationController id="WzW-A8-4Q9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Monthly" image="first" selectedImage="first" id="TxA-ym-gqX"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LYg-0m-Jyy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LYg-0m-Jyy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -557,7 +560,7 @@
             <objects>
                 <navigationController storyboardIdentifier="PunchPageReDirect" id="wj1-kG-75s" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Punch" image="first" id="7xn-HZ-5VA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jdA-Uy-ual">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jdA-Uy-ual">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -703,7 +706,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wkm-Nj-eSS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Bw-Q6-8Em">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2Bw-Q6-8Em">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

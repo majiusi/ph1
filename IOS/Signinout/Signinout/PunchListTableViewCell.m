@@ -3,7 +3,7 @@
 //  Signinout
 //
 //  Created by yaochenxu on 2016/08/06.
-//  Copyright © 2016年 maiasoft. All rights reserved.
+//  Copyright © 2016年 Yaochenxu. All rights reserved.
 //
 
 #import "PunchListTableViewCell.h"
