@@ -162,10 +162,11 @@ def update_attendance_report_info_by_date():
                 return jsonify({'result_code': -1})
 
         # 出勤時間の前に年月日を付け
-        report_start_time_string = update_date_string + ' ' + request.json.get('report_start_time')
-        report_end_time_string = update_date_string + ' ' + request.json.get('report_end_time')
-        report_start_time = datetime.datetime.strptime(report_start_time_string, "%Y-%m-%d %H:%M:%S")
-        report_end_time = datetime.datetime.strptime(report_end_time_string, "%Y-%m-%d %H:%M:%S")
+        report_start_time_string = update_date_string + ' ' + request.json.get('report_start_time')[0:5]
+        report_end_time_string = update_date_string + ' ' + request.json.get('report_end_time')[0:5]
+
+        report_start_time = datetime.datetime.strptime(report_start_time_string, "%Y-%m-%d %H:%M")
+        report_end_time = datetime.datetime.strptime(report_end_time_string, "%Y-%m-%d %H:%M")
         # 控除時間、総時間の取得
         exclusive_minutes = request.json.get('report_exclusive_minutes')
         total_minutes = request.json.get('report_total_minutes')
