@@ -6,10 +6,12 @@
 # date: 2016/10/16
 ###################################
 import logging
+import datetime
 
 from flask import Flask, request, jsonify, g
 from sqlalchemy import extract
 from Utility import Jholiday
+from Utility import GetMonthList
 
 # initialization
 app = Flask(__name__)
@@ -24,6 +26,24 @@ def get_attendance_info_by_year_month():
         search_year = request.json.get('search_year')
         search_month = request.json.get('search_month')
 
+        # 月の全日リストの取得
+        month_days_list = GetMonthList.get_month_days(search_year, search_month)
+        # 月間出勤情報リスト
+        monthly_work_time_list = []
+        # 出力の空リスト作成
+        for day in month_days_list:
+            # 出力編集
+            result_dict = {'work_date': day,
+                           'which_day': Jholiday.get_which_day(datetime.datetime.strptime(day, "%Y-%m-%d")),
+                           'report_start_time': 0,
+                           'report_end_time': 0,
+                           'report_exclusive_minutes': 0,
+                           'report_total_minutes': 0
+                           }
+
+            # 月間出勤情報リストに追加
+            monthly_work_time_list.append(result_dict)
+
         # 社員ID、パラメータの年月により、当月の勤務情報を取得
         attendances = Attendances.Attendance()
         attendances = attendances.query.filter(
@@ -35,8 +55,6 @@ def get_attendance_info_by_year_month():
         # 出勤日合計、出勤時間合計
         total_days = len(attendances)
         total_hours = 0
-        # 月間出勤情報リスト
-        monthly_work_time_list = []
 
         # 月間出勤情報リスト取得
         for element in attendances:
@@ -55,19 +73,27 @@ def get_attendance_info_by_year_month():
             if element.total_minutes is not None:
                 report_total_minutes = element.total_minutes
 
+            index = int(element.date.strftime('%d'))
+            monthly_work_time_list[index]['work_date'] = element.date.strftime('%Y-%m-%d')
+            monthly_work_time_list[index]['which_day'] = Jholiday.get_which_day(element.date)
+            monthly_work_time_list[index]['report_start_time'] = report_start_time
+            monthly_work_time_list[index]['report_end_time'] = report_end_time
+            monthly_work_time_list[index]['report_exclusive_minutes'] = report_exclusive_minutes
+            monthly_work_time_list[index]['report_total_minutes'] = report_total_minutes
+
             # 出力編集
-            result_dict = {'work_date': element.date.strftime('%Y-%m-%d'),
-                           'which_day': Jholiday.get_which_day(element.date),
-                           'report_start_time': report_start_time,
-                           'report_end_time': report_end_time,
-                           'report_exclusive_minutes': report_exclusive_minutes,
-                           'report_total_minutes': report_total_minutes
-                           }
+            #result_dict = {'work_date': element.date.strftime('%Y-%m-%d'),
+            #               'which_day': Jholiday.get_which_day(element.date),
+            #               'report_start_time': report_start_time,
+            #               'report_end_time': report_end_time,
+            #               'report_exclusive_minutes': report_exclusive_minutes,
+            #               'report_total_minutes': report_total_minutes
+            #               }
 
             # 出勤時間合計
             total_hours = total_hours + report_total_minutes
             # 月間出勤情報リストに追加
-            monthly_work_time_list.append(result_dict)
+            #monthly_work_time_list.append(result_dict)
 
         logger.info('get_attendance_info_by_year_month() end.')
         return (jsonify(
