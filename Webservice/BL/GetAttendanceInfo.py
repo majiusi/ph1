@@ -35,10 +35,10 @@ def get_attendance_info_by_year_month():
             # 出力編集
             result_dict = {'work_date': day,
                            'which_day': Jholiday.get_which_day(datetime.datetime.strptime(day, "%Y-%m-%d")),
-                           'report_start_time': 0,
-                           'report_end_time': 0,
-                           'report_exclusive_minutes': 0,
-                           'report_total_minutes': 0
+                           'report_start_time': '',
+                           'report_end_time': '',
+                           'report_exclusive_minutes': '',
+                           'report_total_minutes': ''
                            }
 
             # 月間出勤情報リストに追加
@@ -73,9 +73,9 @@ def get_attendance_info_by_year_month():
             if element.total_minutes is not None:
                 report_total_minutes = element.total_minutes
 
-            index = int(element.date.strftime('%d'))
-            monthly_work_time_list[index]['work_date'] = element.date.strftime('%Y-%m-%d')
-            monthly_work_time_list[index]['which_day'] = Jholiday.get_which_day(element.date)
+            index = int(element.date.strftime('%d')) - 1
+            #monthly_work_time_list[index]['work_date'] = element.date.strftime('%Y-%m-%d')
+            #monthly_work_time_list[index]['which_day'] = Jholiday.get_which_day(element.date)
             monthly_work_time_list[index]['report_start_time'] = report_start_time
             monthly_work_time_list[index]['report_end_time'] = report_end_time
             monthly_work_time_list[index]['report_exclusive_minutes'] = report_exclusive_minutes
