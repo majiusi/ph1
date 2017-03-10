@@ -181,6 +181,9 @@
                                                 <integer key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="updateCancle:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="68i-0a-SRb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -237,7 +240,7 @@
             <objects>
                 <navigationController id="WzW-A8-4Q9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Monthly" image="first" selectedImage="first" id="TxA-ym-gqX"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LYg-0m-Jyy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LYg-0m-Jyy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -560,7 +563,7 @@
             <objects>
                 <navigationController storyboardIdentifier="PunchPageReDirect" id="wj1-kG-75s" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Punch" image="first" id="7xn-HZ-5VA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jdA-Uy-ual">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jdA-Uy-ual">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -706,7 +709,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wkm-Nj-eSS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2Bw-Q6-8Em">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Bw-Q6-8Em">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

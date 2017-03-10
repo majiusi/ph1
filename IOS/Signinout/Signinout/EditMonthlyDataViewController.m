@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel *workDateLab;
 - (IBAction)updateReport:(UIButton *)sender;
+- (IBAction)updateCancle:(UIButton *)sender;
 
 @end
 
@@ -224,5 +225,9 @@
         [self presentViewController:alert animated:true completion:nil];
         
     }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
+}
+
+- (IBAction)updateCancle:(UIButton *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

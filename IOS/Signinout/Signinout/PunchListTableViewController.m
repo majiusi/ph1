@@ -58,7 +58,7 @@
     static NSString *cellIdentifier = @"punchListCell";
     
     PunchListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
+    // show table title
     if (indexPath.row == 0) {
         cell.punchDate.text = @"日付";
         cell.punchCheckinTime.text = @"開始";
@@ -69,20 +69,34 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     } else {
+        // show list content
         NSMutableDictionary*  dict = self.objects[indexPath.row - 1];
-        cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
-        cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
-        cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
-        cell.punchExceptTime.text = [NSString stringWithFormat:@"%@(分)",[dict objectForKey:@"report_exclusive_minutes"]];
         
+        cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
+        
+        if([[dict objectForKey:@"report_start_time"] integerValue] == 0)
+            cell.punchCheckinTime.text = @"0";
+        else
+            cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
+        
+        if([[dict objectForKey:@"report_end_time"] integerValue] == 0)
+            cell.punchCheckoutTime.text = @"0";
+        else
+            cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
+        
+        cell.punchExceptTime.text = [NSString stringWithFormat:@"%@(分)",[dict objectForKey:@"report_exclusive_minutes"]];
         double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
         cell.punchTotalTime.text = [NSString stringWithFormat:@"%3.2f(時間)", minutesToHours];
         
+        // set text font color
         cell.punchDate.textColor = [UIColor grayColor];
         cell.punchCheckinTime.textColor = [UIColor grayColor];
         cell.punchCheckoutTime.textColor = [UIColor grayColor];
         cell.punchExceptTime.textColor = [UIColor grayColor];
         cell.punchTotalTime.textColor = [UIColor grayColor];
+        NSString *witchDay = [NSString stringWithFormat:@"%@",[dict objectForKey:@"which_day"]];
+        if([witchDay isEqualToString:@"土"] || [witchDay isEqualToString:@"日"] || [witchDay isEqualToString:@"祝"])
+            cell.punchDate.textColor = [UIColor redColor];
     }
     
     return cell;

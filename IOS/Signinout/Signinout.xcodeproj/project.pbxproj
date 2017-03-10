@@ -171,9 +171,9 @@
 			children = (
 				B66709D81D503C71009B0A3A /* AppDelegate.h */,
 				B66709D91D503C71009B0A3A /* AppDelegate.m */,
+				B66709E61D503C71009B0A3A /* LaunchScreen.storyboard */,
 				B66709E11D503C71009B0A3A /* Main.storyboard */,
 				B66709E41D503C71009B0A3A /* Assets.xcassets */,
-				B66709E61D503C71009B0A3A /* LaunchScreen.storyboard */,
 				B66709E91D503C71009B0A3A /* Info.plist */,
 				B66709D51D503C71009B0A3A /* Supporting Files */,
 				B6014DEA1D55B3EF0092F688 /* PunchViewController.h */,
