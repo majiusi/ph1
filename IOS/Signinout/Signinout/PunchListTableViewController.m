@@ -21,9 +21,8 @@
 @implementation PunchListTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    //[super viewDidLoad];
     
-
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -34,6 +33,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self startRequest];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,7 +96,9 @@
         cell.punchTotalTime.textColor = [UIColor grayColor];
         NSString *witchDay = [NSString stringWithFormat:@"%@",[dict objectForKey:@"which_day"]];
         if([witchDay isEqualToString:@"土"] || [witchDay isEqualToString:@"日"] || [witchDay isEqualToString:@"祝"])
+        {
             cell.punchDate.textColor = [UIColor redColor];
+        }
     }
     
     return cell;
@@ -177,12 +179,14 @@
         NSMutableDictionary *dict = self.objects[indexPath.row - 1];
         
         EditMonthlyDataViewController *editMonthlyData = segue.destinationViewController;
-        editMonthlyData.workDate = [dict objectForKey:@"work_date"];
-        editMonthlyData.strStartTime = [dict objectForKey:@"report_start_time"];
-        editMonthlyData.strEndTime = [dict objectForKey:@"report_end_time"];
-        editMonthlyData.strExceptTime = [dict objectForKey:@"report_exclusive_minutes"];
-        editMonthlyData.strTotalMinute = [dict objectForKey:@"report_total_minutes"];
+        editMonthlyData.workDate = [NSString stringWithFormat:@"%@",[dict objectForKey:@"work_date"]];
+        editMonthlyData.strStartTime = [NSString stringWithFormat:@"%@",[dict objectForKey:@"report_start_time"]];
+        editMonthlyData.strEndTime = [NSString stringWithFormat:@"%@",[dict objectForKey:@"report_end_time"]];
+        editMonthlyData.strExceptTime = [NSString stringWithFormat:@"%@",[dict objectForKey:@"report_exclusive_minutes"]];
+        editMonthlyData.strTotalMinute = [NSString stringWithFormat:@"%@",[dict objectForKey:@"report_total_minutes"]];
     }
 }
+
+
 
 @end

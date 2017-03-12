@@ -29,6 +29,10 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     
+    if([self.strStartTime isEqualToString:@""]) self.strStartTime = @"09:00";
+    if([self.strEndTime isEqualToString:@""]) self.strEndTime = @"18:00";
+    if([self.strExceptTime isEqualToString:@""]) self.strExceptTime = @"60";
+    
     self.workDateLab.text = self.workDate;
     
     if(self.strStartTime.length > 5) self.strStartTime = [self.strStartTime substringToIndex:5];

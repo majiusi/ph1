@@ -153,6 +153,10 @@ def update_attendance_report_info_by_date():
         update_date_string = request.json.get('update_date')
         update_date = datetime.datetime.strptime(update_date_string, "%Y-%m-%d")
 
+        if update_date > datetime.datetime.now():
+            logger.error('未来日の更新ができない')
+            return jsonify({'result_code': -1})
+
         # 一般ユーザの場合、当月しか更新できない
         # !! 権限決めてから修正要、################
         if g.user.auth_id != '2' and g.user.auth_id != '3':
