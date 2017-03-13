@@ -50,55 +50,67 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.objects.count + 1;
+    return self.objects.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 25.0f;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    static NSString *headerSectionID = @"headerSectionID";
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerSectionID];
+    UILabel *label;
+    
+    if (headerView == nil) {
+        headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headerSectionID];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 375, 20)];
+        [headerView addSubview:label];
+    }
+    label.font = [UIFont systemFontOfSize:13];
+
+    // show table title
+    label.text = @"日付                  開始          終了        控除         出勤時間";
+    
+    return headerView;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"punchListCell";
     
     PunchListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    // show table title
-    if (indexPath.row == 0) {
-        cell.punchDate.text = @"日付";
-        cell.punchCheckinTime.text = @"開始";
-        cell.punchCheckoutTime.text = @"終了";
-        cell.punchExceptTime.text = @"控除";
-        cell.punchTotalTime.text = @"出勤時間";
-        
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    } else {
-        // show list content
-        NSMutableDictionary*  dict = self.objects[indexPath.row - 1];
-        
-        cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
-        
-        if([[dict objectForKey:@"report_start_time"] integerValue] == 0)
-            cell.punchCheckinTime.text = @"0";
-        else
-            cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
-        
-        if([[dict objectForKey:@"report_end_time"] integerValue] == 0)
-            cell.punchCheckoutTime.text = @"0";
-        else
-            cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
-        
-        cell.punchExceptTime.text = [NSString stringWithFormat:@"%@(分)",[dict objectForKey:@"report_exclusive_minutes"]];
-        double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
-        cell.punchTotalTime.text = [NSString stringWithFormat:@"%3.2f(時間)", minutesToHours];
-        
-        // set text font color
-        cell.punchDate.textColor = [UIColor grayColor];
-        cell.punchCheckinTime.textColor = [UIColor grayColor];
-        cell.punchCheckoutTime.textColor = [UIColor grayColor];
-        cell.punchExceptTime.textColor = [UIColor grayColor];
-        cell.punchTotalTime.textColor = [UIColor grayColor];
-        NSString *witchDay = [NSString stringWithFormat:@"%@",[dict objectForKey:@"which_day"]];
-        if([witchDay isEqualToString:@"土"] || [witchDay isEqualToString:@"日"] || [witchDay isEqualToString:@"祝"])
-        {
-            cell.punchDate.textColor = [UIColor redColor];
-        }
+    
+    NSMutableDictionary*  dict = self.objects[indexPath.row];
+    
+    // set cell content
+    cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
+    
+    if([[dict objectForKey:@"report_start_time"] integerValue] == 0)
+        cell.punchCheckinTime.text = @"0";
+    else
+        cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
+    
+    if([[dict objectForKey:@"report_end_time"] integerValue] == 0)
+        cell.punchCheckoutTime.text = @"0";
+    else
+        cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
+    
+    cell.punchExceptTime.text = [NSString stringWithFormat:@"%@(分)",[dict objectForKey:@"report_exclusive_minutes"]];
+    double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
+    cell.punchTotalTime.text = [NSString stringWithFormat:@"%3.2f(時間)", minutesToHours];
+    
+    // set text font color
+    cell.punchDate.textColor = [UIColor grayColor];
+    cell.punchCheckinTime.textColor = [UIColor grayColor];
+    cell.punchCheckoutTime.textColor = [UIColor grayColor];
+    cell.punchExceptTime.textColor = [UIColor grayColor];
+    cell.punchTotalTime.textColor = [UIColor grayColor];
+    NSString *witchDay = [NSString stringWithFormat:@"%@",[dict objectForKey:@"which_day"]];
+    if([witchDay isEqualToString:@"土"] || [witchDay isEqualToString:@"日"] || [witchDay isEqualToString:@"祝"])
+    {
+        cell.punchDate.textColor = [UIColor redColor];
     }
     
     return cell;
@@ -157,15 +169,15 @@
  Do nothing when table first row be touched.
  
  */
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    if(indexPath.row == 0)
-    {
-        return NO;
-    }
-    return YES;
-}
+//-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+//{
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    if(indexPath.row == 0)
+//    {
+//        return NO;
+//    }
+//    return YES;
+//}
 
 /**
  Set parameter and show edit window when row be touched.
@@ -176,7 +188,8 @@
     if([segue.identifier isEqualToString:@"EditMonthlyDataIdentifier"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSMutableDictionary *dict = self.objects[indexPath.row - 1];
+//        NSMutableDictionary *dict = self.objects[indexPath.row - 1];
+        NSMutableDictionary *dict = self.objects[indexPath.row];
         
         EditMonthlyDataViewController *editMonthlyData = segue.destinationViewController;
         editMonthlyData.workDate = [NSString stringWithFormat:@"%@",[dict objectForKey:@"work_date"]];
