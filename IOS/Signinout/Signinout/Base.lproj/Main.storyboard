@@ -78,7 +78,18 @@
                             <outlet property="delegate" destination="qHd-dV-q6X" id="mad-gi-E35"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="月間出勤情報" id="fC5-fd-s1k"/>
+                    <navigationItem key="navigationItem" title="月間出勤情報" id="fC5-fd-s1k">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; 前月" id="TAe-Q8-4z7">
+                            <connections>
+                                <action selector="beforeMonth:" destination="qHd-dV-q6X" id="Jp3-5o-V5h"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="次月 &gt;" id="QdA-0I-PCI">
+                            <connections>
+                                <action selector="nextMonth:" destination="qHd-dV-q6X" id="thi-cM-jZS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49t-li-X5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

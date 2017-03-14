@@ -28,7 +28,7 @@
 
 - (void) getEmployeeBaseInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password;
 
-- (void) getEmployeeMonthlyInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password;
+- (void) getEmployeeMonthlyInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password withSearchYear:(NSString *)searchYear withSearchMonth:(NSString *)searchMonth;
 
 - (void) submitWorkReportInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password withStartTime:(NSString *)startTime withEndTime:(NSString *)endTime withExclusiveMinutes:(NSString *)exclusiveMinutes withTotalMinutes:(NSString *) totalMinutes;
 

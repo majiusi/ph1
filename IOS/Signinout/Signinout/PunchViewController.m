@@ -176,6 +176,17 @@ NSString *strLatitude = nil;
     }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
     
     // 3.Get and show monthly attendances infomation.
+    // get NSCalendar object
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // get system date
+    NSDate* dt = [NSDate date];
+    // define flags to get system year and month
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
+    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
+    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+    
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
@@ -190,7 +201,7 @@ NSString *strLatitude = nil;
         //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
         [self.navigationController popToRootViewControllerAnimated:YES];
         
-    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
+    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
     
     // 4.show UI Controller&Info according page_flag.
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
@@ -339,6 +350,16 @@ NSString *strLatitude = nil;
             self.page4Stack.hidden = NO;
             
             // show monthly attendances infomation
+            NSCalendar *gregorian = [[NSCalendar alloc]
+                                     initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            // get system date
+            NSDate* dt = [NSDate date];
+            // define flags to get system year and month
+            unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+            NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
+            NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
+            NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+            
             [[WebServiceAPI requestWithFinishBlock:^(id object) {
                 NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
                 if ([resultCodeObj integerValue] < 0)
@@ -352,7 +373,7 @@ NSString *strLatitude = nil;
                 //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 
-            }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
+            }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";

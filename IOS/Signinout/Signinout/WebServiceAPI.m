@@ -186,24 +186,14 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
  @param userName <#userName description#>
  @param password <#password description#>
  */
-- (void) getEmployeeMonthlyInfoWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password{
+- (void) getEmployeeMonthlyInfoWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withSearchYear:(NSString *)searchYear withSearchMonth:(NSString *)searchMonth{
     
     NSString * url = [NSString stringWithFormat:@"%@%@", baseUrl,urlGetMonthlyInfo];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     
-    // get NSCalendar object
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    // get system date
-    NSDate* dt = [NSDate date];
-    // define flags to get system year and month
-    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
-    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
-    
     params[@"enterprise_id"] = enterpriseId;
-    params[@"search_year"] = [NSString stringWithFormat:@"%ld",(long)comp.year];
-    params[@"search_month"] = [NSString stringWithFormat:@"%ld",(long)comp.month];
-    
+    params[@"search_year"] = searchYear;
+    params[@"search_month"] = searchMonth;
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     

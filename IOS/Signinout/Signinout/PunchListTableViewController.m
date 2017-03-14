@@ -12,6 +12,8 @@
 #import "WebServiceAPI.h"
 
 @interface PunchListTableViewController ()
+- (IBAction)nextMonth:(UIBarButtonItem *)sender;
+- (IBAction)beforeMonth:(UIBarButtonItem *)sender;
 
 // list data
 @property (nonatomic,strong) NSMutableArray* objects;
@@ -32,7 +34,18 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self startRequest];
+    // get NSCalendar object
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // get system date
+    NSDate* dt = [NSDate date];
+    // define flags to get system year and month
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
+    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
+    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+    
+    [self startRequest:searchYear withSearchMonth:searchMonth];
 
 }
 
@@ -66,7 +79,7 @@
     
     if (headerView == nil) {
         headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headerSectionID];
-        label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 375, 20)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 450, 20)];
         [headerView addSubview:label];
     }
     label.font = [UIFont systemFontOfSize:13];
@@ -75,6 +88,26 @@
     label.text = @"日付                  開始          終了        控除         出勤時間";
     
     return headerView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 25.0f;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    static NSString *footSectionID = @"footSectionID";
+    UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:footSectionID];
+    UILabel *label;
+    
+    if (footerView == nil) {
+        footerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:footSectionID];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 450, 20)];
+        label.font = [UIFont systemFontOfSize:13];
+        [footerView addSubview:label];
+    }
+    
+    label.text = @"                     合計：";
+    
+    return footerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,7 +149,7 @@
     return cell;
 }
 
--(void)startRequest
+-(void)startRequest:(NSString *)searchYear withSearchMonth:(NSString *)searchMonth
 {
     NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
     // show monthly attendances infomation
@@ -133,7 +166,7 @@
         //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
         [self.navigationController popToRootViewControllerAnimated:YES];
         
-    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
+    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth ];
     
 }
 
@@ -202,4 +235,33 @@
 
 
 
+- (IBAction)nextMonth:(UIBarButtonItem *)sender {
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // get system date
+    NSDate* dt = [NSDate date];
+    // define flags to get system year and month
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
+    [comp setMonth:[comp month] + 1 ];
+    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
+    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+    
+    [self startRequest:searchYear withSearchMonth:searchMonth];
+}
+
+- (IBAction)beforeMonth:(UIBarButtonItem *)sender {
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // get system date
+    NSDate* dt = [NSDate date];
+    // define flags to get system year and month
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
+    [comp setMonth:[comp month] - 1 ];
+    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
+    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+    
+    [self startRequest:searchYear withSearchMonth:searchMonth];
+}
 @end
