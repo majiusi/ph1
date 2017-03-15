@@ -17,13 +17,14 @@
 
 // list data
 @property (nonatomic,strong) NSMutableArray* objects;
+@property (nonatomic,strong) NSString* totalHoursByMinutesUnit;
 
 @end
 
 @implementation PunchListTableViewController
 
 - (void)viewDidLoad {
-    //[super viewDidLoad];
+    [super viewDidLoad];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -97,15 +98,17 @@
     static NSString *footSectionID = @"footSectionID";
     UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:footSectionID];
     UILabel *label;
+   
+    footerView = nil;
+    footerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:footSectionID];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 450, 20)];
+    label.font = [UIFont systemFontOfSize:13];
+    [footerView addSubview:label];
     
-    if (footerView == nil) {
-        footerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:footSectionID];
-        label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 450, 20)];
-        label.font = [UIFont systemFontOfSize:13];
-        [footerView addSubview:label];
-    }
     
-    label.text = @"                     合計：";
+    double minuteToHours = [self.totalHoursByMinutesUnit doubleValue] / 60.0f;
+    
+    label.text = [NSString stringWithFormat:@"                                                                 合計：%.2f", minuteToHours];
     
     return footerView;
 }
@@ -176,6 +179,7 @@
     if ([resultCodeObj integerValue] >=0)
     {
         self.objects = [res objectForKey:@"monthly_work_time_list"];
+        self.totalHoursByMinutesUnit = [res objectForKey:@"total_hours"];
         [self.tableView reloadData];
     } else {
         NSString *errorStr = [@"return code:" stringByAppendingString:[resultCodeObj stringValue]];
