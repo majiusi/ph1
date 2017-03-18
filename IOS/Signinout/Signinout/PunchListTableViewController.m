@@ -18,6 +18,7 @@
 // list data
 @property (nonatomic,strong) NSMutableArray* objects;
 @property (nonatomic,strong) NSString* totalHoursByMinutesUnit;
+@property (nonatomic, retain) NSDateComponents* comp;
 
 @end
 
@@ -25,7 +26,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // get NSCalendar object
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // get system date
+    NSDate* dt = [NSDate date];
+    // define flags to get system year and month
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+    self.comp = [gregorian components: unitFlags fromDate:dt];
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -35,16 +44,8 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    // get NSCalendar object
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    // get system date
-    NSDate* dt = [NSDate date];
-    // define flags to get system year and month
-    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
-    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
-    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
-    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)self.comp.year];
+    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)self.comp.month];
     
     [self startRequest:searchYear withSearchMonth:searchMonth];
 
@@ -240,31 +241,29 @@
 
 
 - (IBAction)nextMonth:(UIBarButtonItem *)sender {
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    // get system date
-    NSDate* dt = [NSDate date];
-    // define flags to get system year and month
-    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
-    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
-    [comp setMonth:[comp month] + 1 ];
-    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
-    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+    // get next month
+    [self.comp setMonth:[self.comp month] + 1 ];
+    if([self.comp month] > 12)
+    {
+        [self.comp setYear:[self.comp year] + 1 ];
+        [self.comp setMonth:1 ];
+    }
+    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)self.comp.year];
+    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)self.comp.month];
     
     [self startRequest:searchYear withSearchMonth:searchMonth];
 }
 
 - (IBAction)beforeMonth:(UIBarButtonItem *)sender {
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    // get system date
-    NSDate* dt = [NSDate date];
-    // define flags to get system year and month
-    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
-    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
-    [comp setMonth:[comp month] - 1 ];
-    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
-    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+    // get before month
+    [self.comp setMonth:[self.comp month] - 1 ];
+    if([self.comp month] < 1)
+    {
+        [self.comp setYear:[self.comp year] - 1 ];
+        [self.comp setMonth:12 ];
+    }
+    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)self.comp.year];
+    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)self.comp.month];
     
     [self startRequest:searchYear withSearchMonth:searchMonth];
 }
