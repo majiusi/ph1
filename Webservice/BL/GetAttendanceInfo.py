@@ -56,11 +56,11 @@ def get_attendance_info_by_year_month():
         total_days = len(attendances)
         total_hours = 0
 
-        # 月間出勤情報リスト取得
+        # 月間出勤情報リスト設定（出勤データがある日のみ）
         for element in attendances:
             # NULL対策
-            report_start_time = ''
-            report_end_time = ''
+            report_start_time = 0
+            report_end_time = 0
             report_exclusive_minutes = 0
             report_total_minutes = 0
 
@@ -73,27 +73,15 @@ def get_attendance_info_by_year_month():
             if element.total_minutes is not None:
                 report_total_minutes = element.total_minutes
 
+            # 日付によりインデクスを作成し、出勤データがある日を月リストに設定
             index = int(element.date.strftime('%d')) - 1
-            #monthly_work_time_list[index]['work_date'] = element.date.strftime('%Y-%m-%d')
-            #monthly_work_time_list[index]['which_day'] = Jholiday.get_which_day(element.date)
             monthly_work_time_list[index]['report_start_time'] = report_start_time
             monthly_work_time_list[index]['report_end_time'] = report_end_time
             monthly_work_time_list[index]['report_exclusive_minutes'] = report_exclusive_minutes
             monthly_work_time_list[index]['report_total_minutes'] = report_total_minutes
 
-            # 出力編集
-            #result_dict = {'work_date': element.date.strftime('%Y-%m-%d'),
-            #               'which_day': Jholiday.get_which_day(element.date),
-            #               'report_start_time': report_start_time,
-            #               'report_end_time': report_end_time,
-            #               'report_exclusive_minutes': report_exclusive_minutes,
-            #               'report_total_minutes': report_total_minutes
-            #               }
-
             # 出勤時間合計
             total_hours = total_hours + report_total_minutes
-            # 月間出勤情報リストに追加
-            #monthly_work_time_list.append(result_dict)
 
         logger.info('get_attendance_info_by_year_month() end.')
         return (jsonify(

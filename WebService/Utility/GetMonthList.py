@@ -11,6 +11,8 @@ import calendar
 
 def get_month_days(begin_year, begin_month):
     date_list = []
+    if len(begin_month) < 2:
+        begin_month = "0" + begin_month
     begin_date = datetime.datetime.strptime(str(begin_year) + str(begin_month) + "01", "%Y%m%d")
     month_range = calendar.monthrange(int(begin_year), int(begin_month))
     end_date = datetime.datetime.strptime(str(begin_year) + str(begin_month) + str(month_range[1]), "%Y%m%d")
