@@ -28,6 +28,8 @@
 		B66709FE1D503C71009B0A3A /* SigninoutUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B66709FD1D503C71009B0A3A /* SigninoutUITests.m */; };
 		B6670A131D50436C009B0A3A /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6670A121D50436C009B0A3A /* SetupViewController.m */; };
 		B6B167CD1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B167CC1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m */; };
+		B6D165A51E80163E00404813 /* SetupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D165A41E80163E00404813 /* SetupTableViewController.m */; };
+		B6D165A81E81266A00404813 /* PasswordChangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D165A71E81266A00404813 /* PasswordChangeTableViewController.m */; };
 		B6EA79CC1DE9736C00F64C9A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,10 @@
 		B6B167CC1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAfterUITabBarViewController.m; sourceTree = "<group>"; };
 		B6B167CE1DE9A931008212D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		B6B167CF1DE9A932008212D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B6D165A31E80163E00404813 /* SetupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupTableViewController.h; sourceTree = "<group>"; };
+		B6D165A41E80163E00404813 /* SetupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupTableViewController.m; sourceTree = "<group>"; };
+		B6D165A61E81266A00404813 /* PasswordChangeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeTableViewController.h; sourceTree = "<group>"; };
+		B6D165A71E81266A00404813 /* PasswordChangeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeTableViewController.m; sourceTree = "<group>"; };
 		B6EA79CA1DE9736C00F64C9A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +190,10 @@
 				B6014DBB1D5587D20092F688 /* PunchListTableViewCell.m */,
 				B6014DB71D5587080092F688 /* PunchListTableViewController.h */,
 				B6014DB81D5587080092F688 /* PunchListTableViewController.m */,
+				B6D165A31E80163E00404813 /* SetupTableViewController.h */,
+				B6D165A41E80163E00404813 /* SetupTableViewController.m */,
+				B6D165A61E81266A00404813 /* PasswordChangeTableViewController.h */,
+				B6D165A71E81266A00404813 /* PasswordChangeTableViewController.m */,
 				B6EA79CA1DE9736C00F64C9A /* LoginViewController.h */,
 				B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */,
 				B6B167CB1DE97FCC008212D8 /* LoginAfterUITabBarViewController.h */,
@@ -415,7 +425,9 @@
 				B6014DB91D5587080092F688 /* PunchListTableViewController.m in Sources */,
 				B6550ED91E0F583E00CEB007 /* EditMonthlyDataViewController.m in Sources */,
 				B66709DA1D503C71009B0A3A /* AppDelegate.m in Sources */,
+				B6D165A81E81266A00404813 /* PasswordChangeTableViewController.m in Sources */,
 				B606EE701DF3B831001EC317 /* CALayer+LayerColor.m in Sources */,
+				B6D165A51E80163E00404813 /* SetupTableViewController.m in Sources */,
 				B6670A131D50436C009B0A3A /* SetupViewController.m in Sources */,
 				B6EA79CC1DE9736C00F64C9A /* LoginViewController.m in Sources */,
 				B6014DBC1D5587D20092F688 /* PunchListTableViewCell.m in Sources */,
