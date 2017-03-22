@@ -34,4 +34,6 @@
 
 - (void) updateWorkReportInfoWithEnterpriseId:(NSString *) enterpriseId withUserName:(NSString *) userName withPassword:(NSString *) password withUpdateDate:(NSString*)updateDate withStartTime:(NSString *)startTime withEndTime:(NSString *)endTime withExclusiveMinutes:(NSString *)exclusiveMinutes withTotalMinutes:(NSString *) totalMinutes;
 
+- (void) changePasswordWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withPassword1:(NSString*)password1 withPassword2:(NSString *)password2;
+
 @end

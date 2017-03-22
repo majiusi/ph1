@@ -203,7 +203,7 @@
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"サービスが異常終了になりました。" preferredStyle: UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"出勤情報の更新に失敗しました。" message:@"サービスが異常終了になりました。" preferredStyle: UIAlertControllerStyleActionSheet];
             [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 // return to before window
                 [self.navigationController popToRootViewControllerAnimated:YES];
@@ -211,7 +211,7 @@
             //show dialog box
             [self presentViewController:alert animated:true completion:nil];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"修正完了" preferredStyle: UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"修正完了" preferredStyle: UIAlertControllerStyleActionSheet];
             [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 // return to before window
                 [self.navigationController popToRootViewControllerAnimated:YES];
@@ -220,7 +220,7 @@
             [self presentViewController:alert animated:true completion:nil];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"サービスの利用ができません。" preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"サービスの利用ができません。" preferredStyle: UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             // return to before window
             [self.navigationController popToRootViewControllerAnimated:YES];

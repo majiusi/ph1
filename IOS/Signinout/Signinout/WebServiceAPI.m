@@ -406,4 +406,49 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     }];
 }
 
+
+/**
+ Call Restful WebService to change user's password.
+ 
+ @param enterpriseId enterpriseId
+ @param userName user name
+ @param password old password
+ @param password1 new passowrd
+ @param password2 confirm password
+ 
+ */
+- (void) changePasswordWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withPassword1:(NSString*)password1 withPassword2:(NSString *)password2{
+
+    NSString * url = [NSString stringWithFormat:@"%@%@", baseUrl,urlResetPassword];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"enterprise_id"] = enterpriseId;
+    params[@"new_pwd1"] = password1;
+    params[@"new_pwd2"] = password2;
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.validatesDomainName = NO;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:userName password:password];
+    
+    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
+        
+        self.finishBlock(responseObject);
+        
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        NSInteger statusCode = getErrorStatusCode(task);
+        NSInteger errorCode = getErrorCode(error);
+        NSDictionary *errorDict = getError(error);
+        NSString * errorMessage = errorDict[@"message"];
+        NSLog(@"error : %@", errorMessage);
+        
+        self.failBlock((int)statusCode, (int)errorCode);
+    }];
+}
+
 @end
