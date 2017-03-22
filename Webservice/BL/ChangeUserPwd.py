@@ -28,7 +28,7 @@ def change_password_for_employee():
         new_pwd2 = request.json.get('new_pwd2')
 
         # 入力値検証
-        if new_pwd1 is None or new_pwd2 is None:
+        if new_pwd1 is None or new_pwd2 is None or new_pwd1 != new_pwd2:
             logger.error('入力検証エラー')
             return jsonify({'result_code': -1})
 
@@ -70,7 +70,7 @@ def change_password_for_Manager():
         new_pwd2 = request.json.get('new_pwd2')
 
         # 入力値検証
-        if new_pwd1 is None or new_pwd2 is None:
+        if new_pwd1 is None or new_pwd2 is None or new_pwd1 != new_pwd2:
             logger.error('入力検証エラー')
             return jsonify({'result_code': -1})
 
