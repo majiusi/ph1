@@ -19,11 +19,19 @@
 @end
 
 @implementation LoginViewController
+NSUserDefaults  * userDefault;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.ErrorMessage.text = @"";
-    // Do any additional setup after loading the view.
+    
+    userDefault = [NSUserDefaults standardUserDefaults];
+    if([userDefault stringForKey:@"token"]!=nil)
+    {
+        self.EnterpriseID.text = [userDefault stringForKey:@"enterpriseId"];
+        self.UserName.text = [userDefault stringForKey:@"userName"];
+        self.Password.text = @"******";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,30 +39,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)LoginButton:(UIButton *)sender {
     self.ErrorMessage.text = @"";
+    
+    // set username depending on have or not have the token
+    NSString * userName = self.UserName.text;
+    if([userDefault stringForKey:@"token"]!=nil) userName = [userDefault stringForKey:@"token"];
+    
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
             self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
         } else {
-            NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
+            userDefault = [NSUserDefaults standardUserDefaults];
             [userDefault setObject:[object objectForKey:@"token"] forKey:@"token"];
             [userDefault setObject:self.EnterpriseID.text forKey:@"enterpriseId"];
             [userDefault setObject:self.UserName.text forKey:@"userName"];
-            
-//            [userDefault setInteger:1 forKey:@"nextPage"];
             
             UITabBarController *tabControl = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginAfter"];
             [self.navigationController pushViewController:tabControl animated:YES];
@@ -62,7 +63,7 @@
     } failBlock:^(int statusCode, int errorCode) {
         self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
         
-    }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:self.UserName.text withPassword:self.Password.text];
+    }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
     
     
     

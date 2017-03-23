@@ -3,11 +3,12 @@
 //  Signinout
 //
 //  Created by yaochenxu on 2017/3/21.
-//  Copyright © 2017年 maiasoft. All rights reserved.
+//  Copyright © 2017年 Yaochenxu. All rights reserved.
 //
 
 #import "PasswordChangeTableViewController.h"
 #import "WebServiceAPI.h"
+#import "Constant.h"
 
 @interface PasswordChangeTableViewController ()
 - (IBAction)cancle:(UIButton *)sender;
@@ -49,15 +50,13 @@
         if ([resultCodeObj integerValue] < 0)
         {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"パスワードの変更に失敗しました。" message:@"入力値を確認してください。" preferredStyle: UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                // return to before window
-                [self.navigationController popToRootViewControllerAnimated:YES];
+            [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             }]];
             //show dialog box
             [self presentViewController:alert animated:true completion:nil];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"パスワード変更しました。" preferredStyle: UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"パスワードが変更されました。" preferredStyle: UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 // return to before window
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }]];
@@ -65,8 +64,8 @@
             [self presentViewController:alert animated:true completion:nil];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"サービスの利用ができません。" preferredStyle: UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:CONST_SERVICE_NOT_AVAILABLE preferredStyle: UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             // return to before window
             [self.navigationController popToRootViewControllerAnimated:YES];
         }]];

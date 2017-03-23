@@ -31,6 +31,7 @@
 		B6D165A51E80163E00404813 /* SetupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D165A41E80163E00404813 /* SetupTableViewController.m */; };
 		B6D165A81E81266A00404813 /* PasswordChangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D165A71E81266A00404813 /* PasswordChangeTableViewController.m */; };
 		B6EA79CC1DE9736C00F64C9A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */; };
+		B6ED57F91E83FE6600203E33 /* Message.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6ED57F81E83FE6600203E33 /* Message.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,8 @@
 		B6D165A71E81266A00404813 /* PasswordChangeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeTableViewController.m; sourceTree = "<group>"; };
 		B6EA79CA1DE9736C00F64C9A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B6EA79CB1DE9736C00F64C9A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B6ED57F81E83FE6600203E33 /* Message.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Message.plist; sourceTree = "<group>"; };
+		B6ED57FA1E84007300203E33 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,7 @@
 				B66709E11D503C71009B0A3A /* Main.storyboard */,
 				B66709E41D503C71009B0A3A /* Assets.xcassets */,
 				B66709E91D503C71009B0A3A /* Info.plist */,
+				B6ED57F81E83FE6600203E33 /* Message.plist */,
 				B66709D51D503C71009B0A3A /* Supporting Files */,
 				B6014DEA1D55B3EF0092F688 /* PunchViewController.h */,
 				B6014DEB1D55B3EF0092F688 /* PunchViewController.m */,
@@ -208,6 +212,7 @@
 				B6550EDE1E0FA68300CEB007 /* WebServiceAPI.m */,
 				B6550EE01E0FAA8500CEB007 /* HttpResponseErrorCode.h */,
 				B6550EED1E0FBF0E00CEB007 /* HttpResponseErrorCode.m */,
+				B6ED57FA1E84007300203E33 /* Constant.h */,
 			);
 			path = Signinout;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6ED57F91E83FE6600203E33 /* Message.plist in Resources */,
 				B66709E81D503C71009B0A3A /* LaunchScreen.storyboard in Resources */,
 				B66709E51D503C71009B0A3A /* Assets.xcassets in Resources */,
 				B66709E31D503C71009B0A3A /* Main.storyboard in Resources */,
