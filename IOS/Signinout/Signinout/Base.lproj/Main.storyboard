@@ -589,7 +589,7 @@
         <!--勤務記録-->
         <scene sceneID="6dh-Nd-mBj">
             <objects>
-                <viewController id="7Yr-NT-ixj" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Yr-NT-ixj" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QRo-vg-Svs"/>
                         <viewControllerLayoutGuide type="bottom" id="Va8-Wt-PM4"/>

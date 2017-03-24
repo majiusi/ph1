@@ -49,21 +49,27 @@
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"パスワードの変更に失敗しました。" message:@"入力値を確認してください。" preferredStyle: UIAlertControllerStyleActionSheet];
+            // password update error
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:CONST_PASSWORD_UPDATE_ERROR_TITLE message:CONST_PASSWORD_UPDATE_ERROR_MSG preferredStyle: UIAlertControllerStyleActionSheet];
             [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             }]];
             //show dialog box
             [self presentViewController:alert animated:true completion:nil];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"パスワードが変更されました。" preferredStyle: UIAlertControllerStyleActionSheet];
+            // password update successed
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:CONST_PASSWORD_UPDATE_SUCCESSED_MSG preferredStyle: UIAlertControllerStyleActionSheet];
             [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                // clear old token
+                [userDefault removeObjectForKey:@"token"];
+                
                 // return to before window
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }]];
-            //show dialog box
+            // show dialog box
             [self presentViewController:alert animated:true completion:nil];
         }
     } failBlock:^(int statusCode, int errorCode) {
+        // web service not available
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:CONST_SERVICE_NOT_AVAILABLE preferredStyle: UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             // return to before window

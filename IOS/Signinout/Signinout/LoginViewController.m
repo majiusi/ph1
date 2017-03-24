@@ -25,8 +25,9 @@ NSUserDefaults  * userDefault;
     [super viewDidLoad];
     self.ErrorMessage.text = @"";
     
+    // show login info when next login
     userDefault = [NSUserDefaults standardUserDefaults];
-    if([userDefault stringForKey:@"token"]!=nil)
+    if([userDefault stringForKey:@"userName"]!=nil)
     {
         self.EnterpriseID.text = [userDefault stringForKey:@"enterpriseId"];
         self.UserName.text = [userDefault stringForKey:@"userName"];
