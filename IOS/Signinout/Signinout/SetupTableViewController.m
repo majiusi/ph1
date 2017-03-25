@@ -7,8 +7,11 @@
 //
 
 #import "SetupTableViewController.h"
+#import "LoginViewController.h"
 
 @interface SetupTableViewController ()
+- (IBAction)logoff:(UIButton *)sender;
+- (IBAction)about:(UIButton *)sender;
 
 @end
 
@@ -95,4 +98,18 @@
 }
 */
 
+- (IBAction)logoff:(UIButton *)sender {
+    // TODO: logoff 
+    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    //[self.navigationController pushViewController:loginViewController animated:YES];
+}
+
+- (IBAction)about:(UIButton *)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"(beta 1.0)" message:@"Copyright © 2017 Yaochenxu. All rights reserved. " preferredStyle: UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    //show dialog box
+    [self presentViewController:alert animated:true completion:nil];
+}
 @end

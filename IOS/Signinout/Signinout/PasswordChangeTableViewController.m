@@ -50,15 +50,11 @@
         if ([resultCodeObj integerValue] < 0)
         {
             // password update error
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:CONST_PASSWORD_UPDATE_ERROR_TITLE message:CONST_PASSWORD_UPDATE_ERROR_MSG preferredStyle: UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            }]];
-            //show dialog box
-            [self presentViewController:alert animated:true completion:nil];
+            SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_PASSWORD_UPDATE_ERROR_MSG, self);
         } else {
             // password update successed
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:CONST_PASSWORD_UPDATE_SUCCESSED_MSG preferredStyle: UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 // clear old token
                 [userDefault removeObjectForKey:@"token"];
                 
@@ -70,13 +66,7 @@
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:CONST_SERVICE_NOT_AVAILABLE preferredStyle: UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction actionWithTitle:CONST_CLOSE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            // return to before window
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }]];
-        //show dialog box
-        [self presentViewController:alert animated:true completion:nil];
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] changePasswordWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"userName"] withPassword:self.oldPassword.text withPassword1:self.password1.text withPassword2:self.password2.text ];
 }

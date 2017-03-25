@@ -10,6 +10,7 @@
 #import "PunchListTableViewCell.h"
 #import "EditMonthlyDataViewController.h"
 #import "WebServiceAPI.h"
+#import "Constant.h"
 
 @interface PunchListTableViewController ()
 - (IBAction)nextMonth:(UIBarButtonItem *)sender;
@@ -161,17 +162,16 @@
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            // get EmployeeMonthlyInfo error
+            SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
         } else {
             [self reloadView:object];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        // web service not available
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth ];
-    
 }
 
 -(void)reloadView:(NSDictionary*)res
@@ -204,20 +204,6 @@
 #pragma mark - Navigation
 
 /**
- Do nothing when table first row be touched.
- 
- */
-//-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-//{
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    if(indexPath.row == 0)
-//    {
-//        return NO;
-//    }
-//    return YES;
-//}
-
-/**
  Set parameter and show edit window when row be touched.
 
  */
@@ -226,7 +212,6 @@
     if([segue.identifier isEqualToString:@"EditMonthlyDataIdentifier"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        NSMutableDictionary *dict = self.objects[indexPath.row - 1];
         NSMutableDictionary *dict = self.objects[indexPath.row];
         
         EditMonthlyDataViewController *editMonthlyData = segue.destinationViewController;

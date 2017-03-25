@@ -8,6 +8,7 @@
 
 #import "EditMonthlyDataViewController.h"
 #import "WebServiceAPI.h"
+#import "Constant.h"
 
 @interface EditMonthlyDataViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
@@ -36,17 +37,17 @@
     self.workDateLab.text = self.workDate;
     
     if(self.strStartTime.length > 5) self.strStartTime = [self.strStartTime substringToIndex:5];
-    NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
+    NSString *strDefalutWorkStartTime = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
     [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
     
     if(self.strEndTime.length > 5) self.strEndTime = [self.strEndTime substringToIndex:5];
-    NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+    NSString *strDefalutWorkEndTime = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
     [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
     
     int intDefalutWorkExceptTime = [self.strExceptTime intValue];
     int hour = intDefalutWorkExceptTime / 60;
     int minut = intDefalutWorkExceptTime % 60;
-    NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%02d:%02d      ＞",hour, minut];
+    NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:CONST_EXCEPT_FORMAT_3, hour, minut];
     [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
     
     // calculate total time
@@ -88,7 +89,7 @@
     
     house = totalMinute / 60;
     minute = totalMinute % 60;
-    self.totalTime.text = [NSString stringWithFormat:@"合計：%02d：%02d",house,minute];
+    self.totalTime.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT_2, house,minute];
     
     NSString *str = [NSString stringWithFormat:@"%d",totalMinute];
     return str;
@@ -110,7 +111,7 @@
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in startTimeBtn
         self.strStartTime = [dateFormat stringFromDate:datePicker.date];
-        NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
+        NSString *strDefalutWorkStartTime = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
         [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
         // calculate total time
         self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
@@ -138,7 +139,7 @@
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in endTimeBtn
         self.strEndTime = [dateFormat stringFromDate:datePicker.date];
-        NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+        NSString *strDefalutWorkEndTime = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
         [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
         // calculate total time
         self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
@@ -167,7 +168,7 @@
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in exceptTimeBtn
         self.strExceptTime = [dateFormat stringFromDate:datePicker.date];
-        NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%@      ＞",self.strExceptTime];
+        NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:CONST_EXCEPT_FORMAT_2, self.strExceptTime];
         [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
         
         // convert time to minutes
@@ -203,15 +204,10 @@
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"出勤情報の更新に失敗しました。" message:@"サービスが異常終了になりました。" preferredStyle: UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                // return to before window
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            }]];
-            //show dialog box
-            [self presentViewController:alert animated:true completion:nil];
+            // change work report fail
+            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_WORK_REPORT_FAIL_MSG, self);
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"修正完了" preferredStyle: UIAlertControllerStyleActionSheet];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"修正完了。" preferredStyle: UIAlertControllerStyleActionSheet];
             [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 // return to before window
                 [self.navigationController popToRootViewControllerAnimated:YES];
@@ -220,13 +216,8 @@
             [self presentViewController:alert animated:true completion:nil];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"サービスの利用ができません。" preferredStyle: UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            // return to before window
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }]];
-        //show dialog box
-        [self presentViewController:alert animated:true completion:nil];
+        // web service not available
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
 }

@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "WebServiceAPI.h"
+#import "Constant.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *EnterpriseID;
@@ -51,7 +52,8 @@ NSUserDefaults  * userDefault;
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            // login fail
+            self.ErrorMessage.text = CONST_LOGIN_FAIL_MSG;
         } else {
             userDefault = [NSUserDefaults standardUserDefaults];
             [userDefault setObject:[object objectForKey:@"token"] forKey:@"token"];
@@ -62,12 +64,11 @@ NSUserDefaults  * userDefault;
             [self.navigationController pushViewController:tabControl animated:YES];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+        // web service not available
+        self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
         
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
-    
-    
-    
+
 }
 - (IBAction)ResetPasswd:(UIButton *)sender {
 }

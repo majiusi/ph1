@@ -8,6 +8,7 @@
 
 #import "PunchViewController.h"
 #import "WebServiceAPI.h"
+#import "Constant.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface PunchViewController ()<CLLocationManagerDelegate>
@@ -24,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel     *positionInfo;
 @property (weak, nonatomic) IBOutlet UIButton    *submitPage1Btn;
 @property (weak, nonatomic) IBOutlet UIButton    *submitPage2Btn;
-@property (weak, nonatomic) IBOutlet UIButton *submitPage3Btn;
+@property (weak, nonatomic) IBOutlet UIButton    *submitPage3Btn;
 
 @property (weak, nonatomic) IBOutlet UIStackView *page3Stack;
 @property (weak, nonatomic) IBOutlet UIStackView *page4Stack;
@@ -34,17 +35,17 @@
 @property (weak, nonatomic) IBOutlet UIButton    *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel     *userNameJP;
 @property (weak, nonatomic) IBOutlet UILabel     *userMonthlyInfo;
-@property (weak, nonatomic) IBOutlet UILabel *totalTime;
-@property (weak, nonatomic) IBOutlet UILabel *startTimeLab;
-@property (weak, nonatomic) IBOutlet UILabel *endTimeLab;
-@property (weak, nonatomic) IBOutlet UILabel *exceptTimeLab;
-@property (weak, nonatomic) IBOutlet UILabel *totalTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel    *totalTime;
+@property (weak, nonatomic) IBOutlet UILabel    *startTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel    *endTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel    *exceptTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel    *totalTimeLab;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, retain) NSString *strStartTime;
-@property (nonatomic, retain) NSString *strEndTime;
-@property (nonatomic, retain) NSString *strExceptTime;
-@property (nonatomic, retain) NSString *strTotalMinute;
+@property (nonatomic, retain) NSString  *strStartTime;
+@property (nonatomic, retain) NSString  *strEndTime;
+@property (nonatomic, retain) NSString  *strExceptTime;
+@property (nonatomic, retain) NSString  *strTotalMinute;
 
 
 @end
@@ -60,7 +61,6 @@ NSString *strLatitude = nil;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -86,7 +86,7 @@ NSString *strLatitude = nil;
     [geocoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if(error)
         {
-            self.positionInfo.text = @"位置情報取得失敗";
+            self.positionInfo.text = CONST_LOCATION_INTELLIGENCE_FAILURE;
         }
         else if([placemarks count] > 0)
         {
@@ -145,17 +145,17 @@ NSString *strLatitude = nil;
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            // get EmployeeBaseInfo error
+            SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
         } else {
             self.userNameJP.text = [object objectForKey:@"name_jp"];
             
             self.strStartTime = [object objectForKey:@"default_work_start_time"];
-            NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
+            NSString *strDefalutWorkStartTime = [NSString stringWithFormat:CONST_START_FORMAT,self.strStartTime];
             [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
             
             self.strEndTime = [object objectForKey:@"default_work_end_time"];
-            NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+            NSString *strDefalutWorkEndTime = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
             [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
             
             self.strExceptTime = [NSString stringWithFormat:@"%@",[object objectForKey:@"default_except_minutes"]];
@@ -163,15 +163,15 @@ NSString *strLatitude = nil;
             int hour = intDefalutWorkExceptTime / 60;
             int minut = intDefalutWorkExceptTime % 60;
             
-            NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%02d:%02d      ＞",hour, minut];
+            NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:CONST_EXCEPT_FORMAT_3, hour, minut];
             [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
             
             // calculate total time
             self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        // web service not available
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
     
@@ -191,15 +191,14 @@ NSString *strLatitude = nil;
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            // get EmployeeMonthlyInfo error
+            SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
         } else {
-            NSLog(@"%@",[NSString stringWithFormat:@"当月出勤：%@日　　当月出勤：%@時間", [object objectForKey:@"total_days"],[object objectForKey:@"total_hours"]]);
-            self.userMonthlyInfo.text = [NSString stringWithFormat:@"当月出勤：%@日　　出勤：%.2f時間", [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+            self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        // web service not available
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
     
@@ -209,8 +208,8 @@ NSString *strLatitude = nil;
         NSNumber *pageFlagObj = [object objectForKey:@"page_flag"];
         if ([resultCodeObj integerValue] < 0)
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-//            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+            // get page flag error
+            SHOW_MSG(@"", CONST_GET_PAGE_FLAG_ERROR, self);
         } else {
             if ([pageFlagObj integerValue] == 1)
             {
@@ -232,18 +231,18 @@ NSString *strLatitude = nil;
             else if ([pageFlagObj integerValue] == 4)
             {
                 // get reports time and show it
-                self.startTimeLab.text = [NSString stringWithFormat:@"＜      開始：%@      ＞", self.strStartTime];
-                self.endTimeLab.text = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
-                self.exceptTimeLab.text = [NSString stringWithFormat:@"＜      控除：%@(分)      ＞",self.strExceptTime];
+                self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
+                self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
+                self.exceptTimeLab.text = [NSString stringWithFormat:CONST_EXCEPT_FORMAT, self.strExceptTime];
                 double totalTemp = self.strTotalMinute.integerValue / 60;
-                self.totalTimeLab.text = [NSString stringWithFormat:@"＜      合計：%.1f(時間)      ＞", totalTemp];
+                self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
                 
                 self.page4Stack.hidden = NO;
             }
         }
     } failBlock:^(int statusCode, int errorCode) {
-//        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        // web service not available
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getPageFlagWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@""];
 }
@@ -264,21 +263,21 @@ NSString *strLatitude = nil;
             NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
             if ([resultCodeObj integerValue] < 0)
             {
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+                // WorkStartInfo submit error
+                SHOW_MSG(@"", CONST_SUBMIT_WORKSTART_INFO_ERROR, self);
             } else {
                 self.submitPage1Btn.hidden = YES;
                 self.submitPage2Btn.hidden = NO;
             }
         } failBlock:^(int statusCode, int errorCode) {
-            //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            // web service not available
+            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
             
         }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
     }
     else
     {
-        self.positionInfo.text = @"位置情報取得中・・・";
+        self.positionInfo.text = CONST_POSITION_INFO_MSG;
     }
     strLatitude = nil;
     strLongitude = nil;
@@ -298,8 +297,8 @@ NSString *strLatitude = nil;
             NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
             if ([resultCodeObj integerValue] < 0)
             {
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+                // WorkEndInfo submit error
+                SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
             } else {
                 self.submitPage1Btn.hidden = YES;
                 self.submitPage2Btn.hidden = YES;
@@ -308,14 +307,14 @@ NSString *strLatitude = nil;
                 self.page4Stack.hidden = YES;
             }
         } failBlock:^(int statusCode, int errorCode) {
-            //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            // web service not available
+            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
             
         }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
     }
     else
     {
-        self.positionInfo.text = @"位置情報取得中・・・";
+        self.positionInfo.text = CONST_POSITION_INFO_MSG;
     }
     strLatitude = nil;
     strLongitude = nil;
@@ -333,15 +332,14 @@ NSString *strLatitude = nil;
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-            // Todo: can not return the before window
+            // WorkReportInfo submit error
+            SHOW_MSG(@"", CONST_SUBMIT_REPORT_INFO_ERROR, self);
         } else {
-            self.startTimeLab.text = [NSString stringWithFormat:@"＜      開始：%@      ＞", self.strStartTime];
-            self.endTimeLab.text = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
-            self.exceptTimeLab.text = [NSString stringWithFormat:@"＜      控除：%@(分)      ＞",self.strExceptTime];
+            self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
+            self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
+            self.exceptTimeLab.text = [NSString stringWithFormat:CONST_EXCEPT_FORMAT, self.strExceptTime];
             double totalTemp = self.strTotalMinute.integerValue / 60;
-            self.totalTimeLab.text = [NSString stringWithFormat:@"＜      合計：%.1f(時間)      ＞", totalTemp];
+            self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
             
             self.submitPage1Btn.hidden = YES;
             self.submitPage2Btn.hidden = YES;
@@ -364,20 +362,20 @@ NSString *strLatitude = nil;
                 NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
                 if ([resultCodeObj integerValue] < 0)
                 {
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    //            self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
+                    // get EmployeeMonthlyInfo error
+                    SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
                 } else {
-                    self.userMonthlyInfo.text = [NSString stringWithFormat:@"当月出勤：%@日　　出勤：%.2f時間", [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+                    self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
                 }
             } failBlock:^(int statusCode, int errorCode) {
-                //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                // web service not available
+                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
                 
             }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
-        //        self.ErrorMessage.text = @"企業ID、ユーザID、パスワード不正";
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        // web service not available
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] submitWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
 }
@@ -410,7 +408,7 @@ NSString *strLatitude = nil;
     
     house = totalMinute / 60;
     minute = totalMinute % 60;
-    self.totalTime.text = [NSString stringWithFormat:@"合計：%02d：%02d",house,minute];
+    self.totalTime.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT_2, house, minute];
     
     NSString *str = [NSString stringWithFormat:@"%d",totalMinute];
     return str;
@@ -432,7 +430,7 @@ NSString *strLatitude = nil;
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in startTimeBtn
         self.strStartTime = [dateFormat stringFromDate:datePicker.date];
-        NSString *strDefalutWorkStartTime = [NSString stringWithFormat:@"＜      開始：%@      ＞",self.strStartTime];
+        NSString *strDefalutWorkStartTime = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
         [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
         // calculate total time
         self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
@@ -460,7 +458,7 @@ NSString *strLatitude = nil;
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in endTimeBtn
         self.strEndTime = [dateFormat stringFromDate:datePicker.date];
-        NSString *strDefalutWorkEndTime = [NSString stringWithFormat:@"＜      終了：%@      ＞",self.strEndTime];
+        NSString *strDefalutWorkEndTime = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
         [self.endTimeBtn setTitle:strDefalutWorkEndTime forState:UIControlStateNormal];
         // calculate total time
         self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
@@ -489,7 +487,7 @@ NSString *strLatitude = nil;
         [dateFormat setDateFormat:@"HH:mm"];
         // show the time in exceptTimeBtn
         self.strExceptTime = [dateFormat stringFromDate:datePicker.date];
-        NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:@"＜      控除：%@      ＞",self.strExceptTime];
+        NSString *strDefalutWorkExceptTime = [NSString stringWithFormat:CONST_EXCEPT_FORMAT_2,self.strExceptTime];
         [self.exceptTimeBtn setTitle:strDefalutWorkExceptTime forState:UIControlStateNormal];
         
         // convert time to minutes
@@ -506,6 +504,5 @@ NSString *strLatitude = nil;
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:^{ }];
 }
-
 
 @end
