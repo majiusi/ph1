@@ -57,6 +57,7 @@ NSString *strLatitude = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidAppear:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,6 +68,10 @@ NSString *strLatitude = nil;
 {
     [super viewWillDisappear:animated];
     [self.locationManager stopUpdatingLocation];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /**
@@ -194,7 +199,33 @@ NSString *strLatitude = nil;
             // get EmployeeMonthlyInfo error
             SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
         } else {
+            // show monthly info
             self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+            
+            // get today's work report info from [monthly_work_time_list]
+            NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"d"];
+            NSString *strCurrentDay = [dateFormatter stringFromDate:[NSDate date]];
+            int dayIndex = [strCurrentDay intValue] - 1;
+            NSMutableArray* objects = [object objectForKey:@"monthly_work_time_list"];
+            NSMutableDictionary*  dict = objects[dayIndex];
+            // get report info from dictionary and make format to HH:MM
+            self.strStartTime = [dict objectForKey:@"report_start_time"];
+            if([self.strStartTime intValue] != 0){
+                if([self.strStartTime length] > 5)
+                    self.strStartTime = [self.strStartTime substringToIndex:5];
+                self.strEndTime = [dict objectForKey:@"report_end_time"];
+                if([self.strEndTime length] > 5)
+                    self.strEndTime = [self.strEndTime substringToIndex:5];
+                self.strExceptTime = [dict objectForKey:@"report_exclusive_minutes"];
+                self.strTotalMinute = [dict objectForKey:@"report_total_minutes"];
+            }
+            // show report info
+            self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
+            self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
+            self.exceptTimeLab.text = [NSString stringWithFormat:CONST_EXCEPT_FORMAT, self.strExceptTime];
+            double totalTemp = self.strTotalMinute.integerValue / 60.0f;
+            self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
@@ -213,30 +244,24 @@ NSString *strLatitude = nil;
         } else {
             if ([pageFlagObj integerValue] == 1)
             {
-                //[self performSegueWithIdentifier:@"id1" sender:self];
+                // show page1
                 self.positionInfo.hidden = NO;
                 self.submitPage1Btn.hidden = NO;
             }
             else if ([pageFlagObj integerValue] == 2)
             {
-                //[self performSegueWithIdentifier:@"id2" sender:self];
+                // show page2
                 self.positionInfo.hidden = NO;
                 self.submitPage2Btn.hidden = NO;
             }
             else if ([pageFlagObj integerValue] == 3)
             {
-                //[self performSegueWithIdentifier:@"id2" sender:self];
+                // show page3
                 self.page3Stack.hidden = NO;
             }
             else if ([pageFlagObj integerValue] == 4)
             {
-                // get reports time and show it
-                self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
-                self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
-                self.exceptTimeLab.text = [NSString stringWithFormat:CONST_EXCEPT_FORMAT, self.strExceptTime];
-                double totalTemp = self.strTotalMinute.integerValue / 60;
-                self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
-                
+                // show page4
                 self.page4Stack.hidden = NO;
             }
         }
@@ -338,7 +363,7 @@ NSString *strLatitude = nil;
             self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
             self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
             self.exceptTimeLab.text = [NSString stringWithFormat:CONST_EXCEPT_FORMAT, self.strExceptTime];
-            double totalTemp = self.strTotalMinute.integerValue / 60;
+            double totalTemp = self.strTotalMinute.integerValue / 60.0f;
             self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
             
             self.submitPage1Btn.hidden = YES;

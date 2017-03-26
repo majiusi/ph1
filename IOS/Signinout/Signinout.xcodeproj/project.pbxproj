@@ -313,6 +313,7 @@
 				TargetAttributes = {
 					B66709D11D503C71009B0A3A = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 4M7C2SMVHZ;
 					};
 					B66709ED1D503C71009B0A3A = {
 						CreatedOnToolsVersion = 7.3;
@@ -589,8 +590,10 @@
 			baseConfigurationReference = 3FBB80FB409530A6CF5B05DD /* Pods-Signinout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4M7C2SMVHZ;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.maiasoft.Signinout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -602,8 +605,10 @@
 			baseConfigurationReference = 7225D7C502CABEF8068450FD /* Pods-Signinout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4M7C2SMVHZ;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.maiasoft.Signinout;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -48,7 +48,7 @@ static NSString* const CONST_EXCEPT_FORMAT_2 = @"＜      控除：%@      ＞";
 /** ＜      控除：%02d:%02d      ＞ */
 static NSString* const CONST_EXCEPT_FORMAT_3 = @"＜      控除：%02d:%02d      ＞";
 /** ＜      合計：%.1f(時間)      ＞ */
-static NSString* const CONST_TOTAL_TIME_FORMAT = @"＜      合計：%.1f(時間)      ＞";
+static NSString* const CONST_TOTAL_TIME_FORMAT = @"＜      合計：%.2f(時間)      ＞";
 /** 合計：%02d：%02d */
 static NSString* const CONST_TOTAL_TIME_FORMAT_2 = @"合計：%02d：%02d";
 /** 当月出勤：%@日　　出勤：%.2f時間 */
