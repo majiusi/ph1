@@ -20,7 +20,7 @@
 
 @implementation WebServiceAPI
 
-static NSString * const baseUrl = @"http://127.0.0.1:5000/api/";
+static NSString * const baseUrl = @"https://www.maiasoft.info/api/";
 static NSString * const urlDoLoginGetToken     =   @"MAS0000010";
 static NSString * const urlGetPageFlag         =   @"MAS0000020";
 static NSString * const urlGetBaseInfo         =   @"MAS0000030";
@@ -74,7 +74,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -114,7 +114,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -154,7 +154,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -197,7 +197,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -242,7 +242,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -287,7 +287,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -334,7 +334,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -382,7 +382,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -427,7 +427,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];

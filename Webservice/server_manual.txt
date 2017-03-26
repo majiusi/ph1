@@ -69,3 +69,11 @@ tcp6       0      0 ::1:25                  :::*                    LISTEN      
 [root@ip-172-31-30-207 nginx]# vi conf.d/ssl.conf 
 [root@ip-172-31-30-207 nginx]# nginx -s reload
 
+
+##### CA update
+nginx -s stop
+#certbot renew --quiet
+certbot renew --dry-run
+nginx -c /etc/nginx/nginx.conf
+nginx -s reload
+
