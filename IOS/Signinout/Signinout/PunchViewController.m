@@ -88,6 +88,11 @@ NSString *strLatitude = nil;
     strLatitude = [NSString stringWithFormat:@"%3.11f", currLocation.coordinate.latitude];
     CLGeocoder * geocoder = [[CLGeocoder alloc] init];
     
+    // save Device language
+    NSMutableArray *userDefaultLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+    // set to jpn
+    [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObjects:@"jpn",nil] forKey:@"AppleLanguages"];
+    
     [geocoder reverseGeocodeLocation:currLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if(error)
         {
@@ -98,6 +103,9 @@ NSString *strLatitude = nil;
             CLPlacemark *placemrk = placemarks[0];
             self.positionInfo.text = placemrk.name;
         }
+        // restore Device language
+        [[NSUserDefaults standardUserDefaults] setObject:userDefaultLanguages forKey:@"AppleLanguages"];
+        
     }];
 
 }
@@ -173,65 +181,64 @@ NSString *strLatitude = nil;
             
             // calculate total time
             self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
+            
+            
+            // 3.Get and show monthly attendances infomation. --- it move to [2.] better than serial
+            // get NSCalendar object
+            NSCalendar *gregorian = [[NSCalendar alloc]
+                                     initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            // get system date
+            NSDate* dt = [NSDate date];
+            // define flags to get system year and month
+            unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
+            NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
+            NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
+            NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
+            
+            [[WebServiceAPI requestWithFinishBlock:^(id object) {
+                NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+                if ([resultCodeObj integerValue] < 0)
+                {
+                    // get EmployeeMonthlyInfo error
+                    SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                } else {
+                    // show monthly info
+                    self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+                    
+                    // get today's work report info from [monthly_work_time_list]
+                    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setDateFormat:@"d"];
+                    NSString *strCurrentDay = [dateFormatter stringFromDate:[NSDate date]];
+                    int dayIndex = [strCurrentDay intValue] - 1;
+                    NSMutableArray* objects = [object objectForKey:@"monthly_work_time_list"];
+                    NSMutableDictionary*  dict = objects[dayIndex];
+                    // get report info from dictionary and make format to HH:MM (be used by relogin)
+                    NSString* startTimeForPage4 = [dict objectForKey:@"report_start_time"];
+                    NSString* endTimeForPage4 = [dict objectForKey:@"report_end_time"];
+                    if([startTimeForPage4 intValue] != 0 && [startTimeForPage4 length] > 5){
+                        self.strStartTime = [startTimeForPage4 substringToIndex:5];
+                        if([endTimeForPage4 length] > 5) self.strEndTime = [endTimeForPage4 substringToIndex:5];
+                        self.strExceptTime = [dict objectForKey:@"report_exclusive_minutes"];
+                        self.strTotalMinute = [dict objectForKey:@"report_total_minutes"];
+                    }
+                    // show report info
+                    self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
+                    self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
+                    self.exceptTimeLab.text = [NSString stringWithFormat:CONST_EXCEPT_FORMAT, self.strExceptTime];
+                    double totalTemp = self.strTotalMinute.integerValue / 60.0f;
+                    self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
+                }
+            } failBlock:^(int statusCode, int errorCode) {
+                // web service not available
+                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                
+            }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
-    
-    // 3.Get and show monthly attendances infomation.
-    // get NSCalendar object
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    // get system date
-    NSDate* dt = [NSDate date];
-    // define flags to get system year and month
-    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth;
-    NSDateComponents* comp = [gregorian components: unitFlags fromDate:dt];
-    NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)comp.year];
-    NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)comp.month];
-    
-    [[WebServiceAPI requestWithFinishBlock:^(id object) {
-        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        if ([resultCodeObj integerValue] < 0)
-        {
-            // get EmployeeMonthlyInfo error
-            SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
-        } else {
-            // show monthly info
-            self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
-            
-            // get today's work report info from [monthly_work_time_list]
-            NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"d"];
-            NSString *strCurrentDay = [dateFormatter stringFromDate:[NSDate date]];
-            int dayIndex = [strCurrentDay intValue] - 1;
-            NSMutableArray* objects = [object objectForKey:@"monthly_work_time_list"];
-            NSMutableDictionary*  dict = objects[dayIndex];
-            // get report info from dictionary and make format to HH:MM
-            self.strStartTime = [dict objectForKey:@"report_start_time"];
-            if([self.strStartTime intValue] != 0){
-                if([self.strStartTime length] > 5)
-                    self.strStartTime = [self.strStartTime substringToIndex:5];
-                self.strEndTime = [dict objectForKey:@"report_end_time"];
-                if([self.strEndTime length] > 5)
-                    self.strEndTime = [self.strEndTime substringToIndex:5];
-                self.strExceptTime = [dict objectForKey:@"report_exclusive_minutes"];
-                self.strTotalMinute = [dict objectForKey:@"report_total_minutes"];
-            }
-            // show report info
-            self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
-            self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];
-            self.exceptTimeLab.text = [NSString stringWithFormat:CONST_EXCEPT_FORMAT, self.strExceptTime];
-            double totalTemp = self.strTotalMinute.integerValue / 60.0f;
-            self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
-        }
-    } failBlock:^(int statusCode, int errorCode) {
-        // web service not available
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
-        
-    }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
     
     // 4.show UI Controller&Info according page_flag.
     [[WebServiceAPI requestWithFinishBlock:^(id object) {

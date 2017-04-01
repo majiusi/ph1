@@ -70,6 +70,18 @@ NSUserDefaults  * userDefault;
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
 
 }
+
+
+/**
+ close keyboard.
+
+ @param touches <#touches description#>
+ @param event <#event description#>
+ */
+-(IBAction)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 - (IBAction)ResetPasswd:(UIButton *)sender {
 }
 @end
