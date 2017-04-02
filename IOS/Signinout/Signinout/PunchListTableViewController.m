@@ -156,6 +156,8 @@
 
 -(void)startRequest:(NSString *)searchYear withSearchMonth:(NSString *)searchMonth
 {
+    SHOW_PROGRESS(self.navigationController.view);
+    
     NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
     // show monthly attendances infomation
     [[WebServiceAPI requestWithFinishBlock:^(id object) {

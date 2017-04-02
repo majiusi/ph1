@@ -124,6 +124,10 @@ NSString *strLatitude = nil;
     // Pass the selected object to the new view controller.
 }
 */
+- (void)doSomeWork {
+    // Simulate by just waiting.
+    sleep(3.);
+}
 
 
 /**
@@ -135,6 +139,8 @@ NSString *strLatitude = nil;
  @param animated <#animated description#>
  */
 - (void)viewDidAppear:(BOOL)animated{
+    SHOW_PROGRESS(self.navigationController.view);
+
     // 1.Get location info and show it.
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -272,6 +278,7 @@ NSString *strLatitude = nil;
                 self.page4Stack.hidden = NO;
             }
         }
+
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
@@ -286,6 +293,8 @@ NSString *strLatitude = nil;
  @param sender <#sender description#>
  */
 - (IBAction)submitPage1:(UIButton *)sender {
+    SHOW_PROGRESS(self.navigationController.view);
+    
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     [self.locationManager startUpdatingLocation];
 
@@ -321,6 +330,8 @@ NSString *strLatitude = nil;
  @param sender <#sender description#>
  */
 - (IBAction)submitPage2:(UIButton *)sender {
+    SHOW_PROGRESS(self.navigationController.view);
+    
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     [self.locationManager startUpdatingLocation];
     if(strLatitude != nil)
@@ -358,8 +369,9 @@ NSString *strLatitude = nil;
  @param sender <#sender description#>
  */
 - (IBAction)submitPage3:(UIButton *)sender {
-    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+    SHOW_PROGRESS(self.navigationController.view);
     
+    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] < 0)

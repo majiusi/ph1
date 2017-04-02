@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MBProgressHUD.h"
 
 /** サービスの利用ができません。 */
 static NSString* const CONST_SERVICE_NOT_AVAILABLE = @"サービスの利用ができません。";
@@ -65,3 +65,18 @@ static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_MSG = @"出勤情報の更�
 #define SHOW_MSG(TITLE, MESSAGE, QUVC) UIAlertController *alert = [UIAlertController alertControllerWithTitle:TITLE message:MESSAGE preferredStyle: UIAlertControllerStyleActionSheet]; \
     [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) { }]]; \
     [QUVC presentViewController:alert animated:true completion:nil];
+
+/** プロセスダイアログの表示 */
+#define SHOW_PROGRESS(QUVC) MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:QUVC animated:YES]; \
+    /* Set the label text. */  \
+    hud.label.text = NSLocalizedString(@"Loading...", @"HUD loading title"); \
+    /* You can also adjust other label properties if needed. */ \
+    /* hud.label.font = [UIFont italicSystemFontOfSize:16.f]; */ \
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{ \
+        /* Simulate by just waiting. */ \
+        sleep(3.); \
+        dispatch_async(dispatch_get_main_queue(), ^{ \
+            [hud hideAnimated:YES]; \
+        }); \
+    });
+

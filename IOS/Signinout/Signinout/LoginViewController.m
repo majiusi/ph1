@@ -42,6 +42,8 @@ NSUserDefaults  * userDefault;
 }
 
 - (IBAction)LoginButton:(UIButton *)sender {
+    SHOW_PROGRESS(self.navigationController.view);
+    
     self.ErrorMessage.text = @"";
     
     // set username depending on have or not have the token

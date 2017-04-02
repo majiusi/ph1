@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Signinout/LoginViewController.m"
-            timestampString = "512209138.419269"
+            timestampString = "512833543.584776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "-LoginButton:"
             landmarkType = "7">
          </BreakpointContent>
@@ -54,47 +54,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Signinout/PunchViewController.m"
-            timestampString = "512400419.234525"
+            timestampString = "512832923.555353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "-submitPage3:"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[PunchViewController submitPage3:]"
                   moduleName = "Signinout"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yaochenxu/github/ph1/IOS/Signinout/Signinout/PunchViewController.m"
-                  timestampString = "512403192.328455"
+                  timestampString = "512831061.053728"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "363"
-                  endingLineNumber = "363"
-                  offsetFromSymbolStart = "132">
+                  startingLineNumber = "384"
+                  endingLineNumber = "384"
+                  offsetFromSymbolStart = "106">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__35-[PunchViewController submitPage3:]_block_invoke"
                   moduleName = "Signinout"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yaochenxu/github/ph1/IOS/Signinout/Signinout/PunchViewController.m"
-                  timestampString = "512403192.332097"
+                  timestampString = "512831061.056262"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "364"
-                  endingLineNumber = "364"
-                  offsetFromSymbolStart = "68">
+                  startingLineNumber = "385"
+                  endingLineNumber = "385"
+                  offsetFromSymbolStart = "61">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Signinout/PunchViewController.m"
-            timestampString = "512400419.234525"
+            timestampString = "512832923.555353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "-viewDidAppear:"
             landmarkType = "7">
          </BreakpointContent>

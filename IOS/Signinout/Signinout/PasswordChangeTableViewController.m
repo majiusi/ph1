@@ -42,6 +42,7 @@
 
 
 - (IBAction)changePassword:(UIButton *)sender {
+    SHOW_PROGRESS(self.navigationController.view);
     
     NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
     
