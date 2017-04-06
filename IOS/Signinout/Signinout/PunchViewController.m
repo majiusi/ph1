@@ -139,6 +139,7 @@ NSString *strLatitude = nil;
  @param animated <#animated description#>
  */
 - (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
     SHOW_PROGRESS(self.navigationController.view);
 
     // 1.Get location info and show it.

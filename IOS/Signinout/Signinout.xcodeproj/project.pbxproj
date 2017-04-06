@@ -590,6 +590,7 @@
 			baseConfigurationReference = 3FBB80FB409530A6CF5B05DD /* Pods-Signinout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				DEVELOPMENT_TEAM = 4M7C2SMVHZ;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;
@@ -606,6 +607,7 @@
 			baseConfigurationReference = 7225D7C502CABEF8068450FD /* Pods-Signinout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				DEVELOPMENT_TEAM = 4M7C2SMVHZ;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;

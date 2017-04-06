@@ -29,7 +29,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    
+    [super viewDidAppear:YES];
     if([self.strStartTime isEqualToString:@""]) self.strStartTime = @"09:00";
     if([self.strEndTime isEqualToString:@""]) self.strEndTime = @"18:00";
     if([self.strExceptTime isEqualToString:@""]) self.strExceptTime = @"60";

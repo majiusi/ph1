@@ -58,6 +58,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     return [[WebServiceAPI alloc] initWithFinishBlock:finishBlockToRun failBlock:failBlockToRun];
 }
 
+
 /**
  Call Restful WebService to authenticate user's password.
  Hold a token in responseObject when the authentication is successful.
@@ -86,6 +87,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
+        [manager.session finishTasksAndInvalidate];
         
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
@@ -93,8 +95,9 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSDictionary *errorDict = getError(error);
         NSString * errorMessage = errorDict[@"message"];
         NSLog(@"error : %@", errorMessage);
-        
+
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 
@@ -126,7 +129,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -135,6 +138,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 
@@ -166,7 +170,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -175,6 +179,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 
@@ -209,7 +214,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -218,6 +223,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 
@@ -254,7 +260,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -263,6 +269,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 
@@ -299,7 +306,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -308,6 +315,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 
@@ -346,7 +354,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -355,6 +363,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 
@@ -394,7 +403,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -403,7 +412,10 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
+    
+    
 }
 
 
@@ -439,7 +451,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         self.finishBlock(responseObject);
-        
+        [manager.session finishTasksAndInvalidate];
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
         NSInteger statusCode = getErrorStatusCode(task);
         NSInteger errorCode = getErrorCode(error);
@@ -448,6 +460,7 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
         NSLog(@"error : %@", errorMessage);
         
         self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
     }];
 }
 

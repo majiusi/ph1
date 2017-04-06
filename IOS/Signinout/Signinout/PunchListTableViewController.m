@@ -45,6 +45,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:YES];
     NSString *searchYear = [NSString stringWithFormat:@"%ld",(long)self.comp.year];
     NSString *searchMonth = [NSString stringWithFormat:@"%ld",(long)self.comp.month];
     
@@ -97,6 +98,8 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
+    // [value stored to 'footerView' during its initialization is never read] in Analyze. But,
+    // in order to show the [total work time] in real time, this code required.
     static NSString *footSectionID = @"footSectionID";
     UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:footSectionID];
     UILabel *label;

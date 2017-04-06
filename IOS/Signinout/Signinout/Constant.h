@@ -80,3 +80,4 @@ static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_MSG = @"出勤情報の更�
         }); \
     });
 
+#define GetLocalStr(key, ...) [NSString stringWithFormat:localize(key), ##__VA_ARGS__]
