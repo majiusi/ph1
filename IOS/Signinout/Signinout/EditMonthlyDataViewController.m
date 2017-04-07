@@ -103,6 +103,7 @@
 - (IBAction)setStartTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -131,6 +132,7 @@
 - (IBAction)setEndTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -160,6 +162,7 @@
 - (IBAction)setExceptTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeCountDownTimer;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"]; 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -203,6 +206,7 @@
     
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        HIDE_PROGRESS
         if ([resultCodeObj integerValue] < 0)
         {
             // change work report fail
@@ -218,6 +222,7 @@
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
+        HIDE_PROGRESS
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];

@@ -157,7 +157,6 @@ NSString *strLatitude = nil;
     self.page3Stack.hidden = YES;
     self.page4Stack.hidden = YES;
     
-    
     NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
     
     // 2.Get employee base info, and show name of JP, show defalut work start/end/except time.
@@ -235,18 +234,23 @@ NSString *strLatitude = nil;
                     double totalTemp = self.strTotalMinute.integerValue / 60.0f;
                     self.totalTimeLab.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT, totalTemp];
                 }
+                HIDE_PROGRESS
+                
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
+                HIDE_PROGRESS
                 SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
                 
             }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
+        HIDE_PROGRESS
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
     
+    RESHOW_PROGRESS
     // 4.show UI Controller&Info according page_flag.
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
@@ -279,9 +283,11 @@ NSString *strLatitude = nil;
                 self.page4Stack.hidden = NO;
             }
         }
+        HIDE_PROGRESS
 
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
+        HIDE_PROGRESS
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getPageFlagWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@""];
@@ -311,8 +317,10 @@ NSString *strLatitude = nil;
                 self.submitPage1Btn.hidden = YES;
                 self.submitPage2Btn.hidden = NO;
             }
+            HIDE_PROGRESS
         } failBlock:^(int statusCode, int errorCode) {
             // web service not available
+            HIDE_PROGRESS
             SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
             
         }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
@@ -350,8 +358,10 @@ NSString *strLatitude = nil;
                 self.page3Stack.hidden = NO;
                 self.page4Stack.hidden = YES;
             }
+            HIDE_PROGRESS
         } failBlock:^(int statusCode, int errorCode) {
             // web service not available
+            HIDE_PROGRESS
             SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
             
         }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
@@ -412,14 +422,17 @@ NSString *strLatitude = nil;
                 } else {
                     self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
                 }
+                HIDE_PROGRESS
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
+                HIDE_PROGRESS
                 SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
                 
             }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
+        HIDE_PROGRESS
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] submitWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
@@ -467,6 +480,7 @@ NSString *strLatitude = nil;
 - (IBAction)setStartTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -495,6 +509,7 @@ NSString *strLatitude = nil;
 - (IBAction)setEndTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -524,6 +539,7 @@ NSString *strLatitude = nil;
 - (IBAction)setExceptTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeCountDownTimer;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"]; 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

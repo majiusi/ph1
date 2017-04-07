@@ -172,8 +172,10 @@
         } else {
             [self reloadView:object];
         }
+        HIDE_PROGRESS
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
+        HIDE_PROGRESS
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth ];

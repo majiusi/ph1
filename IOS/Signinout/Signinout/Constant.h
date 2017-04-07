@@ -57,7 +57,7 @@ static NSString* const CONST_MONTHLY_WORK_INFO_FORMAT = @"当月出勤：%@日�
 static NSString* const CONST_POSITION_INFO_MSG = @"位置情報取得中・・・";
 
 /** 出勤情報の更新に失敗しました。 */
-static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_TITLE = @"出勤情報の更新に失敗しました。";
+static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_TITLE = @"更新失敗";
 /** 出勤情報の更新に失敗しました。 */
 static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_MSG = @"出勤情報の更新に失敗しました。";
 
@@ -72,12 +72,15 @@ static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_MSG = @"出勤情報の更�
     hud.label.text = NSLocalizedString(@"Loading...", @"HUD loading title"); \
     /* You can also adjust other label properties if needed. */ \
     /* hud.label.font = [UIFont italicSystemFontOfSize:16.f]; */ \
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{ \
-        /* Simulate by just waiting. */ \
+/*    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{ \
+         Simulate by just waiting. \
         sleep(3.); \
         dispatch_async(dispatch_get_main_queue(), ^{ \
             [hud hideAnimated:YES]; \
-        }); \
+        });  \
     });
+*/
 
-#define GetLocalStr(key, ...) [NSString stringWithFormat:localize(key), ##__VA_ARGS__]
+/** プロセスダイアログの表示非表示 */
+#define HIDE_PROGRESS [hud hideAnimated:YES];
+#define RESHOW_PROGRESS [hud showAnimated:YES];

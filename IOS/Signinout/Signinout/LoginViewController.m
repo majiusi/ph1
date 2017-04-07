@@ -65,8 +65,10 @@ NSUserDefaults  * userDefault;
             UITabBarController *tabControl = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginAfter"];
             [self.navigationController pushViewController:tabControl animated:YES];
         }
+        HIDE_PROGRESS
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
+        HIDE_PROGRESS
         self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
         
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];

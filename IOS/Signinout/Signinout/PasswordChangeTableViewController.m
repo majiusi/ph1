@@ -48,6 +48,7 @@
     
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        HIDE_PROGRESS
         if ([resultCodeObj integerValue] < 0)
         {
             // password update error
@@ -67,6 +68,7 @@
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
+        HIDE_PROGRESS
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] changePasswordWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"userName"] withPassword:self.oldPassword.text withPassword1:self.password1.text withPassword2:self.password2.text ];
