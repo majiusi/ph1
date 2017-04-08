@@ -289,7 +289,7 @@
             </objects>
             <point key="canvasLocation" x="2129" y="306"/>
         </scene>
-        <!--Punch View Controller-->
+        <!--勤務記録-->
         <scene sceneID="SW3-JO-yd6">
             <objects>
                 <viewController id="yUd-n8-Qdk" customClass="PunchViewController" sceneMemberID="viewController">
@@ -312,7 +312,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkV-BO-sNT" userLabel="SubmitPage2Btn">
-                                <rect key="frame" x="80" y="241" width="203" height="203"/>
+                                <rect key="frame" x="91" y="241" width="203" height="203"/>
                                 <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="203" id="ZSx-iK-0Br"/>
@@ -338,7 +338,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Fu-Z3c" userLabel="SubmitPage1Btn">
-                                <rect key="frame" x="80" y="241" width="203" height="203"/>
+                                <rect key="frame" x="91" y="241" width="203" height="203"/>
                                 <color key="backgroundColor" red="0.98881644010000003" green="0.5219771862" blue="0.55001604559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="203" id="HdI-re-URu"/>
@@ -572,7 +572,7 @@
                             <constraint firstItem="tkV-BO-sNT" firstAttribute="top" secondItem="dfx-Fu-Z3c" secondAttribute="top" id="j0C-nU-7Yi"/>
                             <constraint firstItem="0XZ-RJ-6JF" firstAttribute="top" secondItem="Gjt-lZ-iVh" secondAttribute="bottom" constant="55" id="lUi-pb-0m7"/>
                             <constraint firstItem="tkV-BO-sNT" firstAttribute="baseline" secondItem="dfx-Fu-Z3c" secondAttribute="firstBaseline" id="llq-5D-DXj"/>
-                            <constraint firstItem="dfx-Fu-Z3c" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="64" id="owI-Ix-os4"/>
+                            <constraint firstItem="dfx-Fu-Z3c" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="75" id="owI-Ix-os4"/>
                             <constraint firstItem="4yo-gr-noC" firstAttribute="top" secondItem="CJq-fW-IQt" secondAttribute="bottom" constant="16" id="qQ1-rc-Ar6"/>
                             <constraint firstItem="0XZ-RJ-6JF" firstAttribute="leading" secondItem="Suu-zB-WXh" secondAttribute="leading" id="sFs-gv-Gxg"/>
                             <constraint firstItem="Suu-zB-WXh" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="tro-hj-0b0"/>
@@ -581,7 +581,7 @@
                             <constraint firstItem="0XZ-RJ-6JF" firstAttribute="leading" secondItem="XYK-Hr-KAm" secondAttribute="leadingMargin" constant="21" id="xBI-Bz-As7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="zIU-Ib-b17"/>
+                    <navigationItem key="navigationItem" title="勤務記録" id="zIU-Ib-b17"/>
                     <connections>
                         <outlet property="endTimeBtn" destination="9Ic-AW-ssJ" id="7tJ-2D-eZP"/>
                         <outlet property="endTimeLab" destination="wOh-ff-8x9" id="g9Y-Ef-YgO"/>
