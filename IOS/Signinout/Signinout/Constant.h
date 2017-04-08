@@ -51,11 +51,12 @@ static NSString* const CONST_EXCEPT_FORMAT_3 = @"＜      控除：%02d:%02d    
 static NSString* const CONST_TOTAL_TIME_FORMAT = @"＜      合計：%.2f(時間)      ＞";
 /** 合計：%02d：%02d */
 static NSString* const CONST_TOTAL_TIME_FORMAT_2 = @"合計：%02d：%02d";
-/** 当月出勤：%@日　　出勤：%.2f時間 */
-static NSString* const CONST_MONTHLY_WORK_INFO_FORMAT = @"当月出勤：%@日　　出勤：%.2f時間";
+/** 名前%@　　出勤合計：%.2f時間 */
+static NSString* const CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT = @"      %@　　出勤：%.2f時間";
 /** 位置情報取得中・・・ */
 static NSString* const CONST_POSITION_INFO_MSG = @"位置情報取得中・・・";
-
+/** 変更の出勤日：%@ */
+static NSString* const CONST_WORK_INFO_EDIT_DATE_FORMAT = @"      変更の出勤日：%@";
 /** 出勤情報の更新に失敗しました。 */
 static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_TITLE = @"更新失敗";
 /** 出勤情報の更新に失敗しました。 */

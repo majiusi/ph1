@@ -34,7 +34,6 @@
 @property (weak, nonatomic) IBOutlet UIButton    *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton    *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel     *userNameJP;
-@property (weak, nonatomic) IBOutlet UILabel     *userMonthlyInfo;
 @property (weak, nonatomic) IBOutlet UILabel    *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel    *startTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel    *endTimeLab;
@@ -46,6 +45,7 @@
 @property (nonatomic, retain) NSString  *strEndTime;
 @property (nonatomic, retain) NSString  *strExceptTime;
 @property (nonatomic, retain) NSString  *strTotalMinute;
+@property (nonatomic, retain) NSString  *strUserNameJP;
 
 
 @end
@@ -167,8 +167,7 @@ NSString *strLatitude = nil;
             // get EmployeeBaseInfo error
             SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
         } else {
-            self.userNameJP.text = [object objectForKey:@"name_jp"];
-            
+            self.strUserNameJP = [object objectForKey:@"name_jp"];
             self.strStartTime = [object objectForKey:@"default_work_start_time"];
             NSString *strDefalutWorkStartTime = [NSString stringWithFormat:CONST_START_FORMAT,self.strStartTime];
             [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
@@ -208,8 +207,9 @@ NSString *strLatitude = nil;
                     // get EmployeeMonthlyInfo error
                     SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
                 } else {
-                    // show monthly info
-                    self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+                    // show name and monthly work total time
+                    self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
+                                            self.strUserNameJP, [[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
                     
                     // get today's work report info from [monthly_work_time_list]
                     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
@@ -420,7 +420,9 @@ NSString *strLatitude = nil;
                     // get EmployeeMonthlyInfo error
                     SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
                 } else {
-                    self.userMonthlyInfo.text = [NSString stringWithFormat:CONST_MONTHLY_WORK_INFO_FORMAT, [object objectForKey:@"total_days"],[[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+                    // show name and monthly work total time
+                    self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
+                                            self.strUserNameJP, [[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
                 }
                 HIDE_PROGRESS
             } failBlock:^(int statusCode, int errorCode) {

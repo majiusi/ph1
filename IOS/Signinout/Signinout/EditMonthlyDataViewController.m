@@ -30,12 +30,15 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    if([self.strStartTime isEqualToString:@""]) self.strStartTime = @"09:00";
-    if([self.strEndTime isEqualToString:@""]) self.strEndTime = @"18:00";
-    if([self.strExceptTime isEqualToString:@""]) self.strExceptTime = @"60";
+    // set default. [they will be set up by table value in future]
+    if([self.strStartTime isEqualToString:@""] || [self.strStartTime isEqualToString:@"0"]) self.strStartTime = @"09:00";
+    if([self.strEndTime isEqualToString:@""] || [self.strEndTime isEqualToString:@"0"]) self.strEndTime = @"18:00";
+    if([self.strExceptTime isEqualToString:@""] || [self.strExceptTime isEqualToString:@"0"]) self.strExceptTime = @"60";
     
-    self.workDateLab.text = self.workDate;
+    // show date
+    self.workDateLab.text = [NSString stringWithFormat:CONST_WORK_INFO_EDIT_DATE_FORMAT, self.workDate];
     
+    // to adjust time format to hh:mm.[table's value always hh:mm:ss] 
     if(self.strStartTime.length > 5) self.strStartTime = [self.strStartTime substringToIndex:5];
     NSString *strDefalutWorkStartTime = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
     [self.startTimeBtn setTitle:strDefalutWorkStartTime forState:UIControlStateNormal];
