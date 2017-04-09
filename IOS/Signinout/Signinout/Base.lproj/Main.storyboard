@@ -633,38 +633,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="企業ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EEq-I1-pIp">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="企業ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EEq-I1-pIp">
                                 <rect key="frame" x="48" y="166" width="278" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザ名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-dj-Wl3">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザ名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-dj-Wl3">
                                 <rect key="frame" x="48" y="233" width="278" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIg-Lb-tWk">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIg-Lb-tWk">
                                 <rect key="frame" x="48" y="307" width="278" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb5-0J-S5t">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb5-0J-S5t">
                                 <rect key="frame" x="48" y="498" width="278" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
                                 <state key="normal" title="パスワードをお忘れの方はこちら">
                                     <color key="titleColor" red="0.071350239217281342" green="0.37503451108932495" blue="0.62002456188201904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="ResetPasswd:" destination="7Yr-NT-ixj" eventType="touchUpInside" id="6tW-kf-G2R"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cf-ga-EkK">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cf-ga-EkK">
                                 <rect key="frame" x="48" y="395" width="278" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Uqj-8B-iRL"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="ログイン">
                                     <color key="titleColor" red="0.071350239217281342" green="0.37503451108932495" blue="0.62002456188201904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -673,9 +674,8 @@
                                     <action selector="LoginButton:" destination="7Yr-NT-ixj" eventType="touchUpInside" id="CSt-Ks-UNm"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C77-i0-yw8">
-                                <rect key="frame" x="48" y="137" width="278" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C77-i0-yw8">
+                                <rect key="frame" x="26" y="137" width="333" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="message area">
                                         <attributes>
@@ -689,6 +689,26 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C77-i0-yw8" firstAttribute="leading" secondItem="HwR-db-1NH" secondAttribute="leadingMargin" constant="10" id="8Xj-ht-E2D"/>
+                            <constraint firstItem="qIg-Lb-tWk" firstAttribute="trailing" secondItem="7Cf-ga-EkK" secondAttribute="trailing" id="90J-hH-y3V"/>
+                            <constraint firstItem="0DN-dj-Wl3" firstAttribute="leading" secondItem="qIg-Lb-tWk" secondAttribute="leading" id="9N7-6z-VmF"/>
+                            <constraint firstItem="qIg-Lb-tWk" firstAttribute="top" secondItem="0DN-dj-Wl3" secondAttribute="bottom" constant="44" id="AZg-3z-bpH"/>
+                            <constraint firstItem="0DN-dj-Wl3" firstAttribute="top" secondItem="EEq-I1-pIp" secondAttribute="bottom" constant="37" id="B3Z-uy-yJv"/>
+                            <constraint firstItem="qIg-Lb-tWk" firstAttribute="leading" secondItem="7Cf-ga-EkK" secondAttribute="leading" id="EGW-4h-f8M"/>
+                            <constraint firstItem="EEq-I1-pIp" firstAttribute="trailing" secondItem="0DN-dj-Wl3" secondAttribute="trailing" id="FFv-rE-6gn"/>
+                            <constraint firstItem="C77-i0-yw8" firstAttribute="trailing" secondItem="HwR-db-1NH" secondAttribute="trailingMargin" id="FNq-fX-I6o"/>
+                            <constraint firstItem="EEq-I1-pIp" firstAttribute="top" secondItem="C77-i0-yw8" secondAttribute="bottom" constant="8" symbolic="YES" id="K0P-FX-RDd"/>
+                            <constraint firstItem="0DN-dj-Wl3" firstAttribute="trailing" secondItem="qIg-Lb-tWk" secondAttribute="trailing" id="L21-un-3rx"/>
+                            <constraint firstItem="Fb5-0J-S5t" firstAttribute="top" secondItem="7Cf-ga-EkK" secondAttribute="bottom" constant="73" id="Oiq-K1-teF"/>
+                            <constraint firstItem="EEq-I1-pIp" firstAttribute="leading" secondItem="0DN-dj-Wl3" secondAttribute="leading" id="RZQ-N6-1hV"/>
+                            <constraint firstItem="EEq-I1-pIp" firstAttribute="leading" secondItem="HwR-db-1NH" secondAttribute="leadingMargin" constant="32" id="UAp-r9-bry"/>
+                            <constraint firstItem="EEq-I1-pIp" firstAttribute="centerX" secondItem="HwR-db-1NH" secondAttribute="centerX" id="baP-fW-Xgb"/>
+                            <constraint firstItem="7Cf-ga-EkK" firstAttribute="top" secondItem="qIg-Lb-tWk" secondAttribute="bottom" constant="58" id="n3c-1R-Lb9"/>
+                            <constraint firstItem="7Cf-ga-EkK" firstAttribute="trailing" secondItem="Fb5-0J-S5t" secondAttribute="trailing" id="tKJ-f7-ui2"/>
+                            <constraint firstItem="C77-i0-yw8" firstAttribute="top" secondItem="QRo-vg-Svs" secondAttribute="bottom" constant="73" id="zZn-YF-Dbe"/>
+                            <constraint firstItem="7Cf-ga-EkK" firstAttribute="leading" secondItem="Fb5-0J-S5t" secondAttribute="leading" id="zxi-S0-Hbw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="勤務記録" id="jdn-Cj-yk8"/>
                     <connections>
@@ -786,30 +806,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="about:" destination="rij-5G-0fk" eventType="touchUpInside" id="5pM-PS-oCs"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle=" " footerTitle=" " id="6aF-sY-Pph">
-                                <cells>
-                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="61" id="FJA-KN-Gem">
-                                        <rect key="frame" x="0.0" y="294" width="375" height="61"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FJA-KN-Gem" id="a46-br-4O7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfR-1S-3U2">
-                                                    <rect key="frame" x="18" y="8" width="316" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="ログオフ">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="logoff:" destination="rij-5G-0fk" eventType="touchUpInside" id="CQT-vX-woR"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

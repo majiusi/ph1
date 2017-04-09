@@ -15,17 +15,16 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    /*在 AppDelegate.m 中*/
-//    //设置导航条颜色 美团导航栏颜色
+//    // set navigationBar color
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:18.0/255 green:96.0/255 blue:158.0/255 alpha:1.0]];
 //    
-//    //设置导航条文字颜色 白色
+//    // set navigationBar font color
 //    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 //    
-//    //设置按钮文字颜色 白色
+//    // set navigationBar button color to white
 //    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 //    
-//    //设置导航栏按钮字体大小
+//    // set navigationBar button font size
 //    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:15], NSFontAttributeName,nil] forState:UIControlStateNormal];
 
     
@@ -53,6 +52,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(UIInterfaceOrientationMask) application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    // Force to vertical screen
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

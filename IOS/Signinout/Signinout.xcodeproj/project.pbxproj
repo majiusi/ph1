@@ -27,6 +27,7 @@
 		B66709F31D503C71009B0A3A /* SigninoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B66709F21D503C71009B0A3A /* SigninoutTests.m */; };
 		B66709FE1D503C71009B0A3A /* SigninoutUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B66709FD1D503C71009B0A3A /* SigninoutUITests.m */; };
 		B6670A131D50436C009B0A3A /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6670A121D50436C009B0A3A /* SetupViewController.m */; };
+		B685A01A1E99DAC9000B484E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B685A0191E99DAC9000B484E /* MessageUI.framework */; };
 		B6B167CD1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B167CC1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m */; };
 		B6D165A51E80163E00404813 /* SetupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D165A41E80163E00404813 /* SetupTableViewController.m */; };
 		B6D165A81E81266A00404813 /* PasswordChangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D165A71E81266A00404813 /* PasswordChangeTableViewController.m */; };
@@ -90,6 +91,7 @@
 		B66709FF1D503C71009B0A3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6670A111D50436C009B0A3A /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
 		B6670A121D50436C009B0A3A /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
+		B685A0191E99DAC9000B484E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B6B167CB1DE97FCC008212D8 /* LoginAfterUITabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAfterUITabBarViewController.h; sourceTree = "<group>"; };
 		B6B167CC1DE97FCC008212D8 /* LoginAfterUITabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAfterUITabBarViewController.m; sourceTree = "<group>"; };
 		B6B167CE1DE9A931008212D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B685A01A1E99DAC9000B484E /* MessageUI.framework in Frameworks */,
 				B6014E191D55B8DE0092F688 /* Security.framework in Frameworks */,
 				B6014E171D55B8D40092F688 /* SystemConfiguration.framework in Frameworks */,
 				B6014E151D55B8C90092F688 /* CFNetwork.framework in Frameworks */,
@@ -145,6 +148,7 @@
 		B5E1545050350994395CF6D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B685A0191E99DAC9000B484E /* MessageUI.framework */,
 				9F86FAA9088E2078D4B70699 /* libPods-Signinout.a */,
 			);
 			name = Frameworks;

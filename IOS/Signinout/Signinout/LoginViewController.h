@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface LoginViewController : UIViewController
+#import <MessageUI/MFMailComposeViewController.h>
+@interface LoginViewController : UIViewController<MFMailComposeViewControllerDelegate>
 
 @end

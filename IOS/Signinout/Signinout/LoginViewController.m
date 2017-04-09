@@ -10,6 +10,7 @@
 #import "WebServiceAPI.h"
 #import "Constant.h"
 
+
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *EnterpriseID;
 @property (weak, nonatomic) IBOutlet UITextField *UserName;
@@ -87,5 +88,59 @@ NSUserDefaults  * userDefault;
 }
 
 - (IBAction)ResetPasswd:(UIButton *)sender {
+    [self sendEmailAction];
 }
+
+- (void)sendEmailAction
+{
+
+    Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+    if (!mailClass) {
+        self.ErrorMessage.text = CONST_MAIL_SEND_UNSUPPORTED_MSG;
+        return;
+    }
+    if (![mailClass canSendMail]) {
+        self.ErrorMessage.text = CONST_MAIL_ACCOUNT_NULL_MSG;
+        return;
+    }
+    
+    MFMailComposeViewController *mailSender = [[MFMailComposeViewController alloc] init];
+    [mailSender setMailComposeDelegate:self];
+    // title
+    [mailSender setSubject:CONST_MAIL_TITLE];
+    // reciver
+    [mailSender setToRecipients:@[@"yaochenxu@maiasoft.co.jp"]];
+    // mail context
+    NSString *emailContent = CONST_MAIL_CONTEXT;
+    // is HTML?
+    [mailSender setMessageBody:emailContent isHTML:NO];
+    // popup view and shwo mail
+    [self presentViewController:mailSender animated:YES completion:nil];
+    
+}
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled: // canceled by user
+            NSLog(@"Mail send canceled...");
+            break;
+        case MFMailComposeResultSaved: // saved by user
+            NSLog(@"Mail saved...");
+            break;
+        case MFMailComposeResultSent: // sent by user
+            NSLog(@"Mail sent...");
+            break;
+        case MFMailComposeResultFailed: // send failed
+            NSLog(@"Mail send errored: %@...", [error localizedDescription]);
+            break;
+    }
+    // close mail view
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

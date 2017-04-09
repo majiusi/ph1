@@ -62,6 +62,21 @@ static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_TITLE = @"更新失敗";
 /** 出勤情報の更新に失敗しました。 */
 static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_MSG = @"出勤情報の更新に失敗しました。";
 
+/** メール送信機能がサポートされていません。 */
+static NSString* const CONST_MAIL_SEND_UNSUPPORTED_MSG = @"メール送信機能がサポートされていません。";
+/** メールアカウントが設定されていません。 */
+static NSString* const CONST_MAIL_ACCOUNT_NULL_MSG = @"メールアカウントが設定されていません。";
+/** メールタイトル */
+static NSString* const CONST_MAIL_TITLE = @"【パスワード初期化申し込み】";
+/** メール本文 */
+static NSString* const CONST_MAIL_CONTEXT = @"ご担当者様\n\n \
+企業ID：xxxxxxx\n \
+ユーザID：xxxxxxxxx\n\n \
+社員氏名：○○　○○のパスワードのリセットをお願いします。\n\n \
+以上\n \
+※パスワードが社内メールに送信されます。";
+
+
 /** メッセージ表示ダイアログ */
 #define SHOW_MSG(TITLE, MESSAGE, QUVC) UIAlertController *alert = [UIAlertController alertControllerWithTitle:TITLE message:MESSAGE preferredStyle: UIAlertControllerStyleActionSheet]; \
     [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) { }]]; \
