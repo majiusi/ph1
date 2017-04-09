@@ -109,7 +109,8 @@ NSUserDefaults  * userDefault;
     // title
     [mailSender setSubject:CONST_MAIL_TITLE];
     // reciver
-    [mailSender setToRecipients:@[@"yaochenxu@maiasoft.co.jp"]];
+    [mailSender setToRecipients:@[@"info@maiasoft.co.jp"]];
+    [mailSender setCcRecipients:@[@"yaochenxu@maiasoft.co.jp"]];
     // mail context
     NSString *emailContent = CONST_MAIL_CONTEXT;
     // is HTML?

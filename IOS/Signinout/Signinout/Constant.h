@@ -71,7 +71,7 @@ static NSString* const CONST_MAIL_TITLE = @"【パスワード初期化申し込
 /** メール本文 */
 static NSString* const CONST_MAIL_CONTEXT = @"ご担当者様\n\n \
 企業ID：xxxxxxx\n \
-ユーザID：xxxxxxxxx\n\n \
+ユーザID：xxxxxxxxx\n \
 社員氏名：○○　○○のパスワードのリセットをお願いします。\n\n \
 以上\n \
 ※パスワードが社内メールに送信されます。";
