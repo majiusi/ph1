@@ -151,8 +151,8 @@ NSString *strLatitude = nil;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
-    self.positionInfo.hidden = YES;
-    self.submitPage1Btn.hidden = YES;
+    self.positionInfo.hidden = NO;
+    self.submitPage1Btn.hidden = NO;
     self.submitPage2Btn.hidden = YES;
     self.page3Stack.hidden = YES;
     self.page4Stack.hidden = YES;
@@ -268,17 +268,30 @@ NSString *strLatitude = nil;
             }
             else if ([pageFlagObj integerValue] == 2)
             {
+                // hide page1
+                self.submitPage1Btn.hidden = YES;
+                
                 // show page2
                 self.positionInfo.hidden = NO;
                 self.submitPage2Btn.hidden = NO;
+                
+
             }
             else if ([pageFlagObj integerValue] == 3)
             {
+                // hide page1
+                self.positionInfo.hidden = YES;
+                self.submitPage1Btn.hidden = YES;
+                
                 // show page3
                 self.page3Stack.hidden = NO;
             }
             else if ([pageFlagObj integerValue] == 4)
             {
+                // hide page1
+                self.positionInfo.hidden = YES;
+                self.submitPage1Btn.hidden = YES;
+                
                 // show page4
                 self.page4Stack.hidden = NO;
             }
