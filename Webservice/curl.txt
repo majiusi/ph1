@@ -1,4 +1,4 @@
-curl -i -X POST -H "Content-Type: application/json" -d '{"username":"yaochenxu","password":"yaochenxu"}' https://www.maiasoft.tk/api/createUser
+qwcurl -i -X POST -H "Content-Type: application/json" -d '{"username":"yaochenxu","password":"yaochenxu"}' https://www.maiasoft.tk/api/createUser
 
 curl -u yaochenxu:mapw001 -i -X POST -H "Content-Type: application/json" -d '{"employee_id":"MA00001","user_name":"yaochenxu","password":"mapw001","auth_id":"1"}' https://www.maiasoft.tk/api/create_user
 
