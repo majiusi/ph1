@@ -117,8 +117,8 @@ def update_attendance_report_info():
 
         # 出勤時間の前に年月日を付け
         date_string = datetime.datetime.now().strftime("%Y-%m-%d ")
-        report_start_time = date_string + request.json.get('report_start_time')
-        report_end_time = date_string + request.json.get('report_end_time')
+        report_start_time = date_string + request.json.get('report_start_time')[0:5]
+        report_end_time = date_string + request.json.get('report_end_time')[0:5]
         # 出勤情報更新
         attendances.report_start_time = datetime.datetime.strptime(report_start_time, "%Y-%m-%d %H:%M")
         attendances.report_end_time = datetime.datetime.strptime(report_end_time, "%Y-%m-%d %H:%M")

@@ -6,11 +6,11 @@
 # date: 2016/10/09
 ###################################
 import logging
+import DBTransaction
 
 from flask import Flask
 from passlib.apps import custom_app_context as pwd_context
 
-import DBTransaction
 
 # initialization
 app = Flask(__name__)

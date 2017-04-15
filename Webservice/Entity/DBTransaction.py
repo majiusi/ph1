@@ -50,6 +50,7 @@ def session_close():
     try:
         logger.info('DBSession close.')
         DBSession.db_instance.session.close()
+        DBSession.db_instance.session.remove()
     except Exception, e:
         DBSession.db_instance.session.rollback()
         raise e

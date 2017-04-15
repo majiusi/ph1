@@ -6,9 +6,9 @@
 # date: 2016/10/09
 ###################################
 import logging
+import DBTransaction
 
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 
 # initialization
 app = Flask(__name__)
@@ -16,7 +16,7 @@ app.config.from_object('config')
 logger = logging.getLogger('MaiaService.Entity.Dispatches')
 
 # extensions
-db = SQLAlchemy(app)
+db = DBTransaction.session_open()
 
 
 class Dispatch(db.Model):
