@@ -209,7 +209,7 @@ NSString *strLatitude = nil;
                 } else {
                     // show name and monthly work total time
                     self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
-                                            self.strUserNameJP, [[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+                                            self.strUserNameJP, [[object objectForKey:@"total_hours"] doubleValue] / 60.0f ];
                     
                     // get today's work report info from [monthly_work_time_list]
                     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
@@ -435,7 +435,7 @@ NSString *strLatitude = nil;
                 } else {
                     // show name and monthly work total time
                     self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
-                                            self.strUserNameJP, [[object objectForKey:@"total_hours"] floatValue] / 60.0f ];
+                                            self.strUserNameJP, [[object objectForKey:@"total_hours"] doubleValue] / 60.0f ];
                 }
                 HIDE_PROGRESS
             } failBlock:^(int statusCode, int errorCode) {

@@ -600,7 +600,7 @@
 				DEVELOPMENT_TEAM = 4M7C2SMVHZ;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.maiasoft.Signinout.V2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -620,7 +620,7 @@
 				DEVELOPMENT_TEAM = 4M7C2SMVHZ;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Signinout/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.maiasoft.Signinout.V2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
