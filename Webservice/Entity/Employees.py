@@ -25,6 +25,7 @@ class Employee(db.Model):
     enterprise_id = db.Column(db.String(10), primary_key=True, nullable=False)
     employee_id = db.Column(db.String(10), primary_key=True, nullable=False)
     name_in_law = db.Column(db.String(20), nullable=False)
+    mail_addr = db.Column(db.String(255), nullable=False)
     name_cn = db.Column(db.String(20), nullable=False)
     name_en = db.Column(db.String(20), nullable=False)
     name_jp = db.Column(db.String(20), nullable=False)
