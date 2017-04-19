@@ -8,7 +8,7 @@
 
 #import "LoginAfterUITabBarViewController.h"
 
-@interface LoginAfterUITabBarViewController ()
+@interface LoginAfterUITabBarViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -27,6 +27,23 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.navigationController.navigationBar.hidden = YES;
+    
+    // Disable swipe to go back
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
+}
+// Disable swipe to go back
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
+}
+// Disable swipe to go back
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return NO;
 }
 /*
 #pragma mark - Navigation
