@@ -44,6 +44,7 @@ CREATE OR REPLACE TABLE employees ( /* 社員 */
   mobile varchar(11) NOT NULL COMMENT '携帯番号',
   mobile_cn varchar(11) COMMENT '携帯番号（中国）',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
+  mail_addr varchar(255) NOT NULL COMMENT 'メールアドレス',
   create_by varchar(10) NOT NULL COMMENT '登録者',
   create_at datetime NOT NULL DEFAULT now() COMMENT '登録時間',
   update_by varchar(10) NOT NULL COMMENT '更新者',
