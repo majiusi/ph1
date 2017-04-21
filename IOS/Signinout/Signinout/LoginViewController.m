@@ -35,11 +35,24 @@ NSUserDefaults  * userDefault;
         self.UserName.text = [userDefault stringForKey:@"userName"];
         self.Password.text = @"******";
     }
+    // clean saved token when login info changed
+    [self.EnterpriseID addTarget:self action:@selector(TextValueChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.UserName addTarget:self action:@selector(TextValueChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.Password addTarget:self action:@selector(TextValueChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/**
+ clean saved token when login info changed
+
+ @param sender <#sender description#>
+ */
+- (IBAction)TextValueChanged:(UITextField *)sender {
+    [userDefault setObject:nil forKey:@"token"];
 }
 
 - (IBAction)LoginButton:(UIButton *)sender {
