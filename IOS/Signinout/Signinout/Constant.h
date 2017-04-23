@@ -54,7 +54,7 @@ static NSString* const CONST_TOTAL_TIME_FORMAT_2 = @"合計：%02d：%02d";
 /** 名前%@　　出勤合計：%.2f時間 */
 static NSString* const CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT = @"%@　　出勤合計：%.2f時間";
 /** 位置情報取得中・・・ */
-static NSString* const CONST_POSITION_INFO_MSG = @"位置情報取得中・・・";
+static NSString* const CONST_POSITION_INFO_MSG = @"提出不可（位置情報なし）";
 /** 変更の出勤日：%@ */
 static NSString* const CONST_WORK_INFO_EDIT_DATE_FORMAT = @"          変更の出勤日：%@";
 /** 出勤情報の更新に失敗しました。 */
