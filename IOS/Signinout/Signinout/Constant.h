@@ -85,9 +85,9 @@ static NSString* const CONST_MAIL_CONTEXT = @"ご担当者様\n\n \
 /** プロセスダイアログの表示 */
 #define SHOW_PROGRESS(QUVC) MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:QUVC animated:YES]; \
     /* Set the label text. */  \
-    hud.label.text = NSLocalizedString(@"Loading...", @"HUD loading title"); \
-    /* You can also adjust other label properties if needed. */ \
-    /* hud.label.font = [UIFont italicSystemFontOfSize:16.f]; */ \
+    hud.label.text = NSLocalizedString(@"Loading...", @"HUD loading title"); 
+    /* You can also adjust other label properties if needed. */
+    /* hud.label.font = [UIFont italicSystemFontOfSize:16.f]; */
 /*    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{ \
          Simulate by just waiting. \
         sleep(3.); \

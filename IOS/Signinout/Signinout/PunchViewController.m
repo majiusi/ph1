@@ -154,8 +154,8 @@ NSString *strLatitude = nil;
     // 1.Get location info and show it.
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.distanceFilter = 100.0f;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    self.locationManager.distanceFilter = 1.0f;
     
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
@@ -570,54 +570,50 @@ NSString *strLatitude = nil;
  */
 -(void)timerFiredForPage1:(NSTimer *)timer {
     
-    switch (_countDown) {
-        case 1:
-            // reset button
-//            NSLog(@"重新发送");
-            [self.submitPage1Btn setTitle:@"▶" forState:UIControlStateNormal];
-            [self stopTimerForPage1];
-            
-            // call webservice
-            {
-            SHOW_PROGRESS(self.navigationController.view);
-            
-            NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-            
-            if(strLatitude != nil)
-            {
-                [[WebServiceAPI requestWithFinishBlock:^(id object) {
-                    NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-                    if ([resultCodeObj integerValue] < 0)
-                    {
-                        // WorkStartInfo submit error
-                        SHOW_MSG(@"", CONST_SUBMIT_WORKSTART_INFO_ERROR, self);
-                    } else {
-                        self.submitPage1Btn.hidden = YES;
-                        self.submitPage2Btn.hidden = NO;
-                    }
-                    HIDE_PROGRESS
-                } failBlock:^(int statusCode, int errorCode) {
-                    // web service not available
-                    HIDE_PROGRESS
-                    SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
-                    
-                }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
-            }
-            else
-            {
-                self.positionInfo.text = CONST_POSITION_INFO_MSG;
+    if(_countDown == 1) {
+        // reset button
+        // NSLog(@"request start");
+        [self.submitPage1Btn setTitle:@"▶" forState:UIControlStateNormal];
+        [self stopTimerForPage1];
+        
+        // call webservice
+        SHOW_PROGRESS(self.navigationController.view);
+        NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
+        
+        if(strLatitude != nil)
+        {
+            [[WebServiceAPI requestWithFinishBlock:^(id object) {
+                NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+                if ([resultCodeObj integerValue] < 0)
+                {
+                    // WorkStartInfo submit error
+                    SHOW_MSG(@"", CONST_SUBMIT_WORKSTART_INFO_ERROR, self);
+                } else {
+                    self.submitPage1Btn.hidden = YES;
+                    self.submitPage2Btn.hidden = NO;
+                }
                 HIDE_PROGRESS
-            }
-            strLatitude = nil;
-            strLongitude = nil;
-            }
-            break;
-        default:
-            // show countdown number
-            _countDown -=1;
-            [self.submitPage1Btn setTitle:[NSString stringWithFormat:@"%d", _countDown] forState:UIControlStateNormal];
-//            NSLog(@"倒计时中：%d",_countDown);
-            break;
+            } failBlock:^(int statusCode, int errorCode) {
+                // web service not available
+                HIDE_PROGRESS
+                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                
+            }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
+        }
+        else
+        {
+            self.positionInfo.text = CONST_POSITION_INFO_MSG;
+            HIDE_PROGRESS
+        }
+        strLatitude = nil;
+        strLongitude = nil;
+    }else{
+        
+        // show countdown number
+        _countDown -=1;
+        [self.submitPage1Btn setTitle:[NSString stringWithFormat:@"%d", _countDown] forState:UIControlStateNormal];
+        // NSLog(@"conutdown：%d",_countDown);
+        
     }
 }
 
@@ -647,54 +643,51 @@ NSString *strLatitude = nil;
  */
 -(void)timerFiredForPage2:(NSTimer *)timer {
     
-    switch (_countDown) {
-        case 1:
-            // reset button
-//            NSLog(@"重新发送");
-            [self.submitPage2Btn setTitle:@"■" forState:UIControlStateNormal];
-            [self stopTimerForPage2];
-            
-            // call webservice
-            {
-            SHOW_PROGRESS(self.navigationController.view);
-            
-            NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-            if(strLatitude != nil)
-            {
-                [[WebServiceAPI requestWithFinishBlock:^(id object) {
-                    NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-                    if ([resultCodeObj integerValue] < 0)
-                    {
-                        // WorkEndInfo submit error
-                        SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
-                    } else {
-                        self.submitPage1Btn.hidden = YES;
-                        self.submitPage2Btn.hidden = YES;
-                        self.positionInfo.hidden = YES;
-                        self.page3Stack.hidden = NO;
-                        self.page4Stack.hidden = YES;
-                    }
-                    HIDE_PROGRESS
-                } failBlock:^(int statusCode, int errorCode) {
-                    // web service not available
-                    HIDE_PROGRESS
-                    SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
-                    
-                }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
-            }
-            else
-            {
-                self.positionInfo.text = CONST_POSITION_INFO_MSG;
+    if(_countDown == 1) {
+        // reset button
+        // NSLog(@"request start");
+        [self.submitPage2Btn setTitle:@"■" forState:UIControlStateNormal];
+        [self stopTimerForPage2];
+        
+        // call webservice
+        SHOW_PROGRESS(self.navigationController.view);
+        
+        NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
+        if(strLatitude != nil)
+        {
+            [[WebServiceAPI requestWithFinishBlock:^(id object) {
+                NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+                if ([resultCodeObj integerValue] < 0)
+                {
+                    // WorkEndInfo submit error
+                    SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
+                } else {
+                    self.submitPage1Btn.hidden = YES;
+                    self.submitPage2Btn.hidden = YES;
+                    self.positionInfo.hidden = YES;
+                    self.page3Stack.hidden = NO;
+                    self.page4Stack.hidden = YES;
+                }
                 HIDE_PROGRESS
-            }
-            }
-            break;
-        default:
-            // show countdown number
-            _countDown -=1;
-            [self.submitPage2Btn setTitle:[NSString stringWithFormat:@"%d", _countDown] forState:UIControlStateNormal];
-//            NSLog(@"倒计时中：%d",_countDown);
-            break;
+            } failBlock:^(int statusCode, int errorCode) {
+                // web service not available
+                HIDE_PROGRESS
+                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                
+            }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
+        }
+        else
+        {
+            self.positionInfo.text = CONST_POSITION_INFO_MSG;
+            HIDE_PROGRESS
+        }
+        strLatitude = nil;
+        strLongitude = nil;
+    }else{
+        // show countdown number
+        _countDown -=1;
+        [self.submitPage2Btn setTitle:[NSString stringWithFormat:@"%d", _countDown] forState:UIControlStateNormal];
+        // NSLog(@"conutdown：%d",_countDown);
     }
 }
 
