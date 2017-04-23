@@ -175,6 +175,7 @@ NSString *strLatitude = nil;
         {
             // get EmployeeBaseInfo error
             SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+            HIDE_PROGRESS
         } else {
             self.strUserNameJP = [object objectForKey:@"name_jp"];
             self.strStartTime = [object objectForKey:@"default_work_start_time"];
@@ -362,6 +363,7 @@ NSString *strLatitude = nil;
         {
             // WorkReportInfo submit error
             SHOW_MSG(@"", CONST_SUBMIT_REPORT_INFO_ERROR, self);
+            HIDE_PROGRESS
         } else {
             self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
             self.endTimeLab.text = [NSString stringWithFormat:CONST_END_FORMAT, self.strEndTime];

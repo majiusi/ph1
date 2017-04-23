@@ -48,7 +48,6 @@
     
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        HIDE_PROGRESS
         if ([resultCodeObj integerValue] < 0)
         {
             // password update error
@@ -66,6 +65,7 @@
             // show dialog box
             [self presentViewController:alert animated:true completion:nil];
         }
+        HIDE_PROGRESS
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
