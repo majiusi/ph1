@@ -28,7 +28,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="workDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd5-PB-Ml3">
-                                            <rect key="frame" x="2" y="11" width="91" height="21"/>
+                                            <rect key="frame" x="6" y="11" width="91" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -193,7 +193,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="updateReport:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="xov-lI-TGt"/>
+                                            <action selector="updateReport:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="wIa-c9-dGD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmn-0Z-sbl">
@@ -264,6 +264,7 @@
                         <outlet property="exceptTimeBtn" destination="6Y1-3T-uuP" id="5DD-mJ-bHY"/>
                         <outlet property="startTimeBtn" destination="HMz-GD-pIZ" id="dhN-W3-8PO"/>
                         <outlet property="totalTime" destination="eTH-ge-2wd" id="QmS-5p-kFo"/>
+                        <outlet property="updateReportBtn" destination="UyK-cv-nQ2" id="6ke-fl-TRd"/>
                         <outlet property="workDateLab" destination="lKz-hF-VZ8" id="PdX-gT-0Yq"/>
                     </connections>
                 </viewController>

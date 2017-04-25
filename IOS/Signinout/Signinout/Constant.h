@@ -20,6 +20,12 @@ static NSString* const CONST_PASSWORD_UPDATE_ERROR_TITLE = @"パスワードの�
 static NSString* const CONST_PASSWORD_UPDATE_ERROR_MSG = @"入力値を確認してください。";
 /** パスワードが変更されました。 */
 static NSString* const CONST_PASSWORD_UPDATE_SUCCESSED_MSG = @"パスワードが変更されました。";
+/** 合計負数　提出不可 */
+static NSString* const CONST_REPORT_CANNOT_UPDATE_MSG = @"合計負数(提出不可)";
+/** 更新 */
+static NSString* const CONST_REPORT_UPDATE_BTN = @"更新";
+/** 提出 */
+static NSString* const CONST_REPORT_SUBMIT_BTN = @"提出";
 
 /////////////////////////////////////PunchViewController
 

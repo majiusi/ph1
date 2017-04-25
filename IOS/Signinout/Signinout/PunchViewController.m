@@ -443,6 +443,13 @@ NSString *strLatitude = nil;
     
     house = totalMinute / 60;
     minute = totalMinute % 60;
+    if( minute < 0 || house < 0) {
+        [self.submitPage3Btn setTitle:CONST_REPORT_CANNOT_UPDATE_MSG forState:UIControlStateNormal];
+        self.submitPage3Btn.enabled = NO;
+    }else{
+        [self.submitPage3Btn setTitle:CONST_REPORT_SUBMIT_BTN forState:UIControlStateNormal];
+        self.submitPage3Btn.enabled = YES;
+    }
     self.totalTime.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT_2, house, minute];
     
     NSString *str = [NSString stringWithFormat:@"%d",totalMinute];

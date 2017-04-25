@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *exceptTimeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *updateReportBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel *workDateLab;
 - (IBAction)updateReport:(UIButton *)sender;
@@ -92,6 +93,13 @@
     
     house = totalMinute / 60;
     minute = totalMinute % 60;
+    if( minute < 0 || house < 0) {
+        [self.updateReportBtn setTitle:CONST_REPORT_CANNOT_UPDATE_MSG forState:UIControlStateNormal];
+        self.updateReportBtn.enabled = NO;
+    }else{
+        [self.updateReportBtn setTitle:CONST_REPORT_UPDATE_BTN forState:UIControlStateNormal];
+        self.updateReportBtn.enabled = YES;
+    }
     self.totalTime.text = [NSString stringWithFormat:CONST_TOTAL_TIME_FORMAT_2, house,minute];
     
     NSString *str = [NSString stringWithFormat:@"%d",totalMinute];
