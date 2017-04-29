@@ -6,7 +6,7 @@
 CREATE OR REPLACE TABLE users ( /* ユーザー */
   enterprise_id varchar(10) NOT NULL COMMENT '企業ID',
   employee_id varchar(10) NOT NULL COMMENT '社員ID',
-  name varchar(20) NOT NULL UNIQUE KEY COMMENT 'ユーザー名',
+  name varchar(255) NOT NULL UNIQUE KEY COMMENT 'ユーザー名',
   pwd varchar(256) NOT NULL COMMENT 'パスワード',
   auth_id varchar(10) NOT NULL COMMENT '権限ID',
   last_login_at datetime NOT NULL COMMENT '最後登録時間',
