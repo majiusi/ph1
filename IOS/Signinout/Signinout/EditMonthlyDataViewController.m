@@ -32,9 +32,9 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     // set default. [they will be set up by table value in future]
-    if([self.strStartTime isEqualToString:@""] || [self.strStartTime isEqualToString:@"0"]) self.strStartTime = @"09:00";
-    if([self.strEndTime isEqualToString:@""] || [self.strEndTime isEqualToString:@"0"]) self.strEndTime = @"18:00";
-    if([self.strExceptTime isEqualToString:@""] || [self.strExceptTime isEqualToString:@"0"]) self.strExceptTime = @"60";
+    if([self.strStartTime isEqualToString:@""] || [self.strStartTime isEqualToString:@"0"]) self.strStartTime = self.strDefaultStartTime;
+    if([self.strEndTime isEqualToString:@""] || [self.strEndTime isEqualToString:@"0"]) self.strEndTime = self.strDefaultEndTime;
+    if([self.strExceptTime isEqualToString:@""] || [self.strExceptTime isEqualToString:@"0"]) self.strExceptTime = self.strDefaultExceptTime;
     
     // show date
     self.workDateLab.text = [NSString stringWithFormat:CONST_WORK_INFO_EDIT_DATE_FORMAT, self.workDate];

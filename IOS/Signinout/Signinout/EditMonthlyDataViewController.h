@@ -14,4 +14,7 @@
 @property (nonatomic, strong) NSString *strEndTime;
 @property (nonatomic, strong) NSString *strExceptTime;
 @property (nonatomic, strong) NSString *strTotalMinute;
+@property (nonatomic, strong) NSString *strDefaultStartTime;
+@property (nonatomic, strong) NSString *strDefaultEndTime;
+@property (nonatomic, strong) NSString *strDefaultExceptTime;
 @end

@@ -21,6 +21,10 @@
 @property (nonatomic,strong) NSString* totalHoursByMinutesUnit;
 @property (nonatomic, retain) NSDateComponents* comp;
 
+@property (nonatomic, strong) NSString *strDefaultStartTime;
+@property (nonatomic, strong) NSString *strDefaultEndTime;
+@property (nonatomic, strong) NSString *strDefaultExceptTime;
+
 @end
 
 @implementation PunchListTableViewController
@@ -159,9 +163,28 @@
 
 -(void)startRequest:(NSString *)searchYear withSearchMonth:(NSString *)searchMonth
 {
-    SHOW_PROGRESS(self.navigationController.view);
-    
     NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    // Get employee base info, and show name of JP, show defalut work start/end/except time.
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] < 0)
+        {
+            // get EmployeeBaseInfo error
+            SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+        } else {
+            self.strDefaultStartTime = [object objectForKey:@"default_work_start_time"];
+            self.strDefaultEndTime = [object objectForKey:@"default_work_end_time"];
+            self.strDefaultExceptTime = [NSString stringWithFormat:@"%@",[object objectForKey:@"default_except_minutes"]];
+        }
+    } failBlock:^(int statusCode, int errorCode) {
+        // web service not available
+        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        
+    }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
+
+    
+    SHOW_PROGRESS(self.navigationController.view);
     // show monthly attendances infomation
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
@@ -179,6 +202,7 @@
         SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
         
     }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth ];
+    
 }
 
 -(void)reloadView:(NSDictionary*)res
@@ -227,6 +251,10 @@
         editMonthlyData.strEndTime = [NSString stringWithFormat:@"%@",[dict objectForKey:@"report_end_time"]];
         editMonthlyData.strExceptTime = [NSString stringWithFormat:@"%@",[dict objectForKey:@"report_exclusive_minutes"]];
         editMonthlyData.strTotalMinute = [NSString stringWithFormat:@"%@",[dict objectForKey:@"report_total_minutes"]];
+        editMonthlyData.strDefaultStartTime = self.strDefaultStartTime;
+        editMonthlyData.strDefaultEndTime = self.strDefaultEndTime;
+        editMonthlyData.strDefaultExceptTime = self.strDefaultExceptTime;
+        
     }
 }
 
