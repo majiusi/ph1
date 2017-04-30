@@ -585,12 +585,12 @@ NSString *strLatitude = nil;
         [self.submitPage1Btn setTitle:@"▶" forState:UIControlStateNormal];
         [self stopTimerForPage1];
         
-        // call webservice
-        SHOW_PROGRESS(self.navigationController.view);
         NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
         
         if(strLatitude != nil)
         {
+            // call webservice
+            SHOW_PROGRESS(self.navigationController.view);
             [[WebServiceAPI requestWithFinishBlock:^(id object) {
                 NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
                 if ([resultCodeObj integerValue] < 0)
@@ -612,7 +612,6 @@ NSString *strLatitude = nil;
         else
         {
             self.positionInfo.text = CONST_POSITION_INFO_MSG;
-            HIDE_PROGRESS
         }
         strLatitude = nil;
         strLongitude = nil;
@@ -658,12 +657,11 @@ NSString *strLatitude = nil;
         [self.submitPage2Btn setTitle:@"■" forState:UIControlStateNormal];
         [self stopTimerForPage2];
         
-        // call webservice
-        SHOW_PROGRESS(self.navigationController.view);
-        
         NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
         if(strLatitude != nil)
         {
+            // call webservice
+            SHOW_PROGRESS(self.navigationController.view);
             [[WebServiceAPI requestWithFinishBlock:^(id object) {
                 NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
                 if ([resultCodeObj integerValue] < 0)
@@ -688,7 +686,6 @@ NSString *strLatitude = nil;
         else
         {
             self.positionInfo.text = CONST_POSITION_INFO_MSG;
-            HIDE_PROGRESS
         }
         strLatitude = nil;
         strLongitude = nil;
