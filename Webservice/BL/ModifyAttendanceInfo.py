@@ -188,8 +188,15 @@ def update_attendance_report_info_by_date():
             update_history_user_id = g.user.employee_id
 
             # レポート開始時間変更履歴
-            time_compare = attendances.report_start_time - report_start_time
-            if time_compare.seconds != 0:
+            updated = False
+            if attendances.report_start_time is None:
+                updated = True
+            else:
+                time_compare = attendances.report_start_time - report_start_time
+                if time_compare.seconds != 0:
+                    updated = True
+
+            if updated:
                 update_history_field_name = 'report_start_time'
                 update_history_before = attendances.report_start_time
                 update_history_after = report_start_time
@@ -199,8 +206,15 @@ def update_attendance_report_info_by_date():
                 attendances.report_start_time = report_start_time
 
             # レポート終了時間変更履歴
-            time_compare = attendances.report_end_time - report_end_time
-            if time_compare.seconds != 0:
+            updated = False
+            if attendances.report_end_time is None:
+                updated = True
+            else:
+                time_compare = attendances.report_end_time - report_end_time
+                if time_compare.seconds != 0:
+                    updated = True
+
+            if updated:
                 update_history_field_name = 'report_end_time'
                 update_history_before = attendances.report_end_time
                 update_history_after = report_end_time
