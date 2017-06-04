@@ -111,14 +111,30 @@ NSString *strLatitude = nil;
         }
         else if([placemarks count] > 0)
         {
-            CLPlacemark *placemrk = placemarks[0];
-            self.positionInfo.text = placemrk.name;
+            for(int i=0;i<[placemarks count];i++)
+            {
+                // to fix show all number problem when at high speed & high floor
+                CLPlacemark *placemrk = placemarks[i];
+                if(![self isPureInt:placemrk.name])
+                {
+                    self.positionInfo.text = placemrk.name;
+                    break;
+                }
+            }
+            
+            
         }
         // restore Device language
         [[NSUserDefaults standardUserDefaults] setObject:userDefaultLanguages forKey:@"AppleLanguages"];
         
     }];
 
+}
+
+- (BOOL)isPureInt:(NSString *)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

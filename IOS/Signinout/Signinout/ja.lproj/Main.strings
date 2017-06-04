@@ -15,7 +15,7 @@
 "DOL-Y1-BS1.title" = "Title";
 
 /* Class = "UITextField"; placeholder = "企業ID"; ObjectID = "EEq-I1-pIp"; */
-"EEq-I1-pIp.placeholder" = "企業ID";
+"EEq-I1-pIp.placeholder" = "チームID";
 
 /* Class = "UILabel"; text = "punchDate"; ObjectID = "Ezh-GI-Ef6"; */
 "Ezh-GI-Ef6.text" = "punchDate";
