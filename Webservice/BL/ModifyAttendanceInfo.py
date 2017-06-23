@@ -310,3 +310,35 @@ def make_log_string(update_history_time, update_history_user_id,
                  unicode(update_history_after) + update_history_end
 
     return log_string
+
+
+###################################
+# -description: レポート出勤情報削除
+# -author: Yaochenxu
+# -date: 2017/06/23
+###################################
+def delete_attendance_report_info():
+    from Entity import DBTransaction, Attendances
+    logger.info('delete_attendance_report_info() start.')
+    try:
+        # 社員ID、日付により、更新の勤務情報を取得
+        search_ymd_string = request.json.get('delete_work_date')
+        search_ymd = datetime.datetime.strptime(search_ymd_string, "%Y-%m-%d")
+
+        attendances = Attendances.Attendance()
+        attendances = attendances.query.filter_by(
+            enterprise_id=g.user.enterprise_id,
+            employee_id=g.user.employee_id, date=search_ymd).first()
+
+        # 取得した勤務情報を削除
+        DBTransaction.del_table_object(attendances)
+
+        DBTransaction.session_commit()
+
+        logger.info('delete_attendance_report_info() end.')
+        return jsonify({'result_code': 0})
+    except Exception, e:
+        logger.error(e)
+        return jsonify({'result_code': -1})
+    finally:
+        DBTransaction.session_close()

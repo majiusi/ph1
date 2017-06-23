@@ -92,6 +92,13 @@ def update_attendance_report_info_by_date():
     return ModifyAttendanceInfo.update_attendance_report_info_by_date()
 
 
+# レポート出勤情報削除
+@app.route('/api/MAS0000072', methods=['POST'])
+@auth.login_required
+def delete_attendance_report_info_by_date():
+    return ModifyAttendanceInfo.delete_attendance_report_info()
+
+
 # パスワード更新(社員用)
 @app.route('/api/MAS0000080', methods=['POST'])
 @auth.login_required
