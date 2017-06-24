@@ -42,7 +42,9 @@ Archive:  maia.zip
 ##### start gunicorn and webservice
 [maiasoft@ip-172-31-30-207 WebService]$ pwd
 /home/maiasoft/WebService
-[maiasoft@ip-172-31-30-207 WebService]$ gunicorn -k gevent -b localhost:8000 MaiaCheckinoutWebService:app
+[maiasoft@ip-172-31-30-207 WebService]$ gunicorn -k gevent -b localhost:8000 MaiaCheckinoutWebService:app --reload
+
+nohup gunicorn -k gevent -b localhost:8000 MaiaCheckinoutWebService:app --reload &
 
 ##### nginx stop start
 [root@ip-172-31-30-207 nginx]# nginx -s stop
