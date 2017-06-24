@@ -21,8 +21,8 @@
 
 @implementation WebServiceAPI
 
-//static NSString * const baseUrl = @"https://www.maiasoft.info/api/";
-static NSString * const baseUrl = @"http://localhost:5000/api/";
+static NSString * const baseUrl = @"https://www.maiasoft.info/api/";
+//static NSString * const baseUrl = @"http://localhost:5000/api/";
 static NSString * const urlDoLoginGetToken     =   @"MAS0000010";
 static NSString * const urlGetPageFlag         =   @"MAS0000020";
 static NSString * const urlGetBaseInfo         =   @"MAS0000030";
