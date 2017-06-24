@@ -172,8 +172,16 @@
  */
 - (IBAction)setExceptTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.datePickerMode = UIDatePickerModeCountDownTimer;
-    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"]; 
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
+    // make the defalut time with 01:10
+    NSString *str = @"1970-1-01 01:00";
+    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm"];
+    [formatter1 setTimeZone:[NSTimeZone localTimeZone]];
+    NSDate *date = [formatter1 dateFromString:str];
+    datePicker.date =  date;
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
