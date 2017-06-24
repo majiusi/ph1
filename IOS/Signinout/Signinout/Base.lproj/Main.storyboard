@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wkm-Nj-eSS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wkm-Nj-eSS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -85,7 +85,7 @@
                                 <action selector="beforeMonth:" destination="qHd-dV-q6X" id="Jp3-5o-V5h"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="次月 &gt;" id="QdA-0I-PCI">
+                        <barButtonItem key="rightBarButtonItem" title="翌月 &gt;" id="QdA-0I-PCI">
                             <connections>
                                 <action selector="nextMonth:" destination="qHd-dV-q6X" id="thi-cM-jZS"/>
                             </connections>
@@ -203,7 +203,7 @@
                                             <constraint firstAttribute="height" constant="45" id="17C-Aq-apt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="キャンセル">
+                                        <state key="normal" title="削除">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -212,7 +212,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="updateCancle:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="68i-0a-SRb"/>
+                                            <action selector="deleteReport:" destination="TfY-oQ-jHv" eventType="touchUpInside" id="Nl2-4S-t46"/>
                                         </connections>
                                     </button>
                                 </subviews>

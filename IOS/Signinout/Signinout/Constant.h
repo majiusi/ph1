@@ -11,8 +11,8 @@
 
 /** サービスの利用ができません。 */
 static NSString* const CONST_SERVICE_NOT_AVAILABLE = @"サービスの利用ができません。";
-/** 企業ID、ユーザID、パスワード不正 */
-static NSString* const CONST_LOGIN_FAIL_MSG = @"企業ID、ユーザID、パスワード不正";
+/** チームID、ユーザID、パスワード不正 */
+static NSString* const CONST_LOGIN_FAIL_MSG = @"チームID、ユーザID、パスワード不正";
 
 /** パスワードの変更に失敗しました。 */
 static NSString* const CONST_PASSWORD_UPDATE_ERROR_TITLE = @"パスワードの変更に失敗しました。";
@@ -63,10 +63,14 @@ static NSString* const CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT = @"%@　　出勤�
 static NSString* const CONST_POSITION_INFO_MSG = @"提出不可（位置情報なし）";
 /** 変更の出勤日：%@ */
 static NSString* const CONST_WORK_INFO_EDIT_DATE_FORMAT = @"          変更の出勤日：%@";
-/** 出勤情報の更新に失敗しました。 */
+/** 更新失敗 */
 static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_TITLE = @"更新失敗";
 /** 出勤情報の更新に失敗しました。 */
 static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_MSG = @"出勤情報の更新に失敗しました。";
+/** 削除失敗 */
+static NSString* const CONST_DELETE_WORK_REPORT_FAIL_TITLE = @"削除失敗";
+/** 出勤情報の削除に失敗しました。 */
+static NSString* const CONST_DELETE_WORK_REPORT_FAIL_MSG = @"出勤情報の削除に失敗しました。";
 
 /** メール送信機能がサポートされていません。 */
 static NSString* const CONST_MAIL_SEND_UNSUPPORTED_MSG = @"メール送信機能がサポートされていません。";

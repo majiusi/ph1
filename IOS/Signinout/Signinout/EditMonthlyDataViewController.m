@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel *workDateLab;
 - (IBAction)updateReport:(UIButton *)sender;
-- (IBAction)updateCancle:(UIButton *)sender;
+- (IBAction)deleteReport:(UIButton *)sender;
 
 @end
 
@@ -239,7 +239,42 @@
     }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
 }
 
-- (IBAction)updateCancle:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (IBAction)deleteReport:(UIButton *)sender {
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"削除しますか" preferredStyle: UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"削除する" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // to be delete
+        SHOW_PROGRESS(self.navigationController.view);
+        
+        NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+        
+        [[WebServiceAPI requestWithFinishBlock:^(id object) {
+            NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+            if ([resultCodeObj integerValue] < 0)
+            {
+                // change work report fail
+                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_WORK_REPORT_FAIL_MSG, self);
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"削除完了。" preferredStyle: UIAlertControllerStyleActionSheet];
+                [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    // return to before window
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }]];
+                //show dialog box
+                [self presentViewController:alert animated:true completion:nil];
+            }
+            HIDE_PROGRESS
+        } failBlock:^(int statusCode, int errorCode) {
+            // web service not available
+            HIDE_PROGRESS
+            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            
+        }] deleteWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withDeleteDate:self.workDate];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // do nothing
+    }]];
+    //show dialog box
+    [self presentViewController:alert animated:true completion:nil];
 }
 @end

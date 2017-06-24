@@ -13,6 +13,7 @@
 //  MAS0000060  Submit work end infomation
 //  MAS0000070  Submit report infomation
 //  MAS0000071  Update report infomation
+//  MAS0000071  Delete report infomation
 //  MAS0000080  Reset password
 
 #import "WebServiceAPI.h"
@@ -20,7 +21,8 @@
 
 @implementation WebServiceAPI
 
-static NSString * const baseUrl = @"https://www.maiasoft.info/api/";
+//static NSString * const baseUrl = @"https://www.maiasoft.info/api/";
+static NSString * const baseUrl = @"http://localhost:5000/api/";
 static NSString * const urlDoLoginGetToken     =   @"MAS0000010";
 static NSString * const urlGetPageFlag         =   @"MAS0000020";
 static NSString * const urlGetBaseInfo         =   @"MAS0000030";
@@ -29,6 +31,7 @@ static NSString * const urlSubmitWorkStartInfo =   @"MAS0000050";
 static NSString * const urlSubmitWorkEndInfo   =   @"MAS0000060";
 static NSString * const urlSubmitReportInfo    =   @"MAS0000070";
 static NSString * const urlUpdateReportInfo    =   @"MAS0000071";
+static NSString * const urlDeleteReportInfo    =   @"MAS0000072";
 static NSString * const urlResetPassword       =   @"MAS0000080";
 
 /**
@@ -369,10 +372,11 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
 
 /**
  Call Restful WebService to update user's work report info.
- 
+
  @param enterpriseId <#enterpriseId description#>
  @param userName <#userName description#>
  @param password <#password description#>
+ @param updateDate <#updateDate description#>
  @param startTime <#startTime description#>
  @param endTime <#endTime description#>
  @param exclusiveMinutes <#exclusiveMinutes description#>
@@ -388,6 +392,51 @@ static NSString * const urlResetPassword       =   @"MAS0000080";
     params[@"report_end_time"] = endTime;
     params[@"report_exclusive_minutes"] = exclusiveMinutes;
     params[@"report_total_minutes"] = totalMinutes;
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    manager.securityPolicy.validatesDomainName = NO;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:userName password:password];
+    
+    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
+        
+        self.finishBlock(responseObject);
+        [manager.session finishTasksAndInvalidate];
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        NSInteger statusCode = getErrorStatusCode(task);
+        NSInteger errorCode = getErrorCode(error);
+        NSDictionary *errorDict = getError(error);
+        NSString * errorMessage = errorDict[@"message"];
+        NSLog(@"error : %@", errorMessage);
+        
+        self.failBlock((int)statusCode, (int)errorCode);
+        [manager.session finishTasksAndInvalidate];
+    }];
+    
+    
+}
+
+
+/**
+ Call Restful WebService to delete user's work report info.
+ 
+ @param enterpriseId <#enterpriseId description#>
+ @param userName <#userName description#>
+ @param password <#password description#>
+ @param deleteWorkDate <#deleteWorkDate description#>
+ */
+- (void) deleteWorkReportInfoWithEnterpriseId:(NSString *)enterpriseId withUserName:(NSString *)userName withPassword:(NSString *)password withDeleteDate:(NSString*)deleteWorkDate{
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", baseUrl,urlDeleteReportInfo];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"enterprise_id"] = enterpriseId;
+    params[@"delete_work_date"] = deleteWorkDate;
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
