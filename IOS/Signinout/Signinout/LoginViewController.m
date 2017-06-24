@@ -83,7 +83,12 @@ NSUserDefaults  * userDefault;
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
+        if(statusCode == 401)
+            // login fail
+            self.ErrorMessage.text = CONST_LOGIN_FAIL_MSG;
+        else
+            // service fail
+            self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
         
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
 

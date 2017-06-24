@@ -23,7 +23,7 @@ def verify_password(username_or_token, password):
 
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'result_code': -999}), 403)
+    return make_response(jsonify({'result_code': -999}), 401)
 
 
 ####################################################################
