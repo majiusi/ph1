@@ -11,9 +11,9 @@ CREATE OR REPLACE TABLE users ( /* ユーザー */
   auth_id varchar(10) NOT NULL COMMENT '権限ID',
   last_login_at datetime NOT NULL COMMENT '最後登録時間',
   valid tinyint(1) NOT NULL DEFAULT 1 COMMENT '有効',
-  create_by varchar(10) NOT NULL COMMENT '登録者',
+  create_by varchar(100) NOT NULL COMMENT '登録者',
   create_at datetime NOT NULL DEFAULT now() COMMENT '登録時間',
-  update_by varchar(10) NOT NULL COMMENT '更新者',
+  update_by varchar(100) NOT NULL COMMENT '更新者',
   update_at datetime NOT NULL DEFAULT now() COMMENT '更新時間',
   update_cnt int(5) NOT NULL DEFAULT 1 COMMENT '更新回数',
   PRIMARY KEY(`enterprise_id`, `employee_id`)
