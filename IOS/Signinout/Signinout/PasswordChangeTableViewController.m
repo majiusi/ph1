@@ -48,11 +48,22 @@
     
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        if ([resultCodeObj integerValue] < 0)
+        if ([resultCodeObj integerValue] == -1)
         {
             // password update error
             SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_PASSWORD_UPDATE_ERROR_MSG, self);
-        } else {
+        }
+        else if ([resultCodeObj integerValue] == -2)
+        {
+            // password update error
+            SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_PASSWORD_UPDATE_USER_NOT_EXSIST_MSG, self);
+        }
+        else if ([resultCodeObj integerValue] < -2)
+        {
+            // password update error
+            SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_USER_NOT_EXSIST_MSG, self);
+        }
+        else {
             // password update successed
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:CONST_PASSWORD_UPDATE_SUCCESSED_MSG preferredStyle: UIAlertControllerStyleActionSheet];
             [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -69,7 +80,14 @@
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        if(statusCode == 401)
+        {
+            SHOW_MSG(@"", CONST_LOGIN_FAIL_MSG, self);
+        }
+        else
+        {
+            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        }
         
     }] changePasswordWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"userName"] withPassword:self.oldPassword.text withPassword1:self.password1.text withPassword2:self.password2.text ];
 }

@@ -59,7 +59,7 @@ def insert_attendance_work_start_info():
         return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()
 
@@ -95,7 +95,7 @@ def update_attendance_work_end_info():
         return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()
 
@@ -134,7 +134,7 @@ def update_attendance_report_info():
         return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()
 
@@ -163,7 +163,7 @@ def update_attendance_report_info_by_date():
             system_date = datetime.datetime.now()
             if system_date.year != update_date.year or system_date.month != update_date.month:
                 logger.error('利用者は当月しか更新できない')
-                return jsonify({'result_code': -1})
+                return jsonify({'result_code': -2})
 
         # 出勤時間の前に年月日を付け
         report_start_time_string = update_date_string + ' ' + request.json.get('report_start_time')[0:5]
@@ -290,7 +290,7 @@ def update_attendance_report_info_by_date():
         return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()
 
@@ -325,6 +325,18 @@ def delete_attendance_report_info():
         search_ymd_string = request.json.get('delete_work_date')
         search_ymd = datetime.datetime.strptime(search_ymd_string, "%Y-%m-%d")
 
+        if search_ymd > datetime.datetime.now():
+            logger.error('未来日の更新ができない')
+            return jsonify({'result_code': -1})
+
+        # 一般ユーザの場合、当月しか更新できない
+        # !! 権限決めてから修正要、################
+        if g.user.auth_id != '2' and g.user.auth_id != '3':
+            system_date = datetime.datetime.now()
+            if system_date.year != search_ymd.year or system_date.month != search_ymd.month:
+                logger.error('利用者は当月しか更新できない')
+                return jsonify({'result_code': -2})
+
         attendances = Attendances.Attendance()
         attendances = attendances.query.filter_by(
             enterprise_id=g.user.enterprise_id,
@@ -339,6 +351,6 @@ def delete_attendance_report_info():
         return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()

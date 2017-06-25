@@ -18,6 +18,10 @@ static NSString* const CONST_LOGIN_FAIL_MSG = @"チームID、ユーザID、パ�
 static NSString* const CONST_PASSWORD_UPDATE_ERROR_TITLE = @"パスワードの変更に失敗しました。";
 /** 入力値を確認してください。 */
 static NSString* const CONST_PASSWORD_UPDATE_ERROR_MSG = @"入力値を確認してください。";
+/** 【ユーザ存在しない】：ユーザ情報異常、再ログインしてください。 */
+static NSString* const CONST_PASSWORD_UPDATE_USER_NOT_EXSIST_MSG = @"ユーザ情報異常、再ログインしてください。";
+/** パスワードの変更は異常になりました */
+static NSString* const CONST_USER_NOT_EXSIST_MSG = @"パスワードの変更は異常になりました。";
 /** パスワードが変更されました。 */
 static NSString* const CONST_PASSWORD_UPDATE_SUCCESSED_MSG = @"パスワードが変更されました。";
 /** 合計負数　提出不可 */
@@ -63,14 +67,24 @@ static NSString* const CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT = @"%@　　出勤�
 static NSString* const CONST_POSITION_INFO_MSG = @"提出不可（位置情報なし）";
 /** 変更の出勤日：%@ */
 static NSString* const CONST_WORK_INFO_EDIT_DATE_FORMAT = @"          変更の出勤日：%@";
+
 /** 更新失敗 */
 static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_TITLE = @"更新失敗";
 /** 出勤情報の更新に失敗しました。 */
 static NSString* const CONST_CHANGE_WORK_REPORT_FAIL_MSG = @"出勤情報の更新に失敗しました。";
+/** 未来日の更新ができません。 */
+static NSString* const CONST_CHANGE_FUTURE_DATE_MSG = @"未来日の更新ができません。";
+/** 利用者は当月しか更新できません。 */
+static NSString* const CONST_CHANGE_NOT_CURRENT_MONTH_MSG = @"利用者は当月しか更新できません。";
+
 /** 削除失敗 */
 static NSString* const CONST_DELETE_WORK_REPORT_FAIL_TITLE = @"削除失敗";
 /** 出勤情報の削除に失敗しました。 */
 static NSString* const CONST_DELETE_WORK_REPORT_FAIL_MSG = @"出勤情報の削除に失敗しました。";
+/** 未来日の削除ができません。 */
+static NSString* const CONST_DELETE_FUTURE_DATE_MSG = @"未来日の削除ができません。";
+/** 利用者は当月しか削除できません。 */
+static NSString* const CONST_DELETE_NOT_CURRENT_MONTH_MSG = @"利用者は当月しか削除できません。";
 
 /** メール送信機能がサポートされていません。 */
 static NSString* const CONST_MAIL_SEND_UNSUPPORTED_MSG = @"メール送信機能がサポートされていません。";

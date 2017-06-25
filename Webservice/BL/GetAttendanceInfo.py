@@ -91,6 +91,6 @@ def get_attendance_info_by_year_month():
              'monthly_work_time_list': monthly_work_time_list}))
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()

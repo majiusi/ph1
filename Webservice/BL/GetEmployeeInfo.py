@@ -89,6 +89,6 @@ def get_employee_info():
              }))
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()

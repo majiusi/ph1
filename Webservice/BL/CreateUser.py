@@ -36,7 +36,7 @@ def create_user():
         user = Users.User.query.filter_by(enterprise_id=enterprise_id, name=new_user_name).first()
         if user is not None:
             logger.error('ユーザ存在')
-            return jsonify({'result_code': -1})
+            return jsonify({'result_code': -2})
 
         # ユーザ情報作成
         newUser = Users.User(name=new_user_name)
@@ -55,6 +55,6 @@ def create_user():
         return jsonify({'result_code': 0, 'new_user_name': new_user_name})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1, 'new_user_name': new_user_name})
+        return jsonify({'result_code': -9, 'new_user_name': new_user_name})
     finally:
         DBTransaction.session_close()

@@ -225,7 +225,15 @@
     
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        if ([resultCodeObj integerValue] < 0)
+        if ([resultCodeObj integerValue] == -1)
+        {
+            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_FUTURE_DATE_MSG, self);
+        }
+        else if ([resultCodeObj integerValue] == -2)
+        {
+            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_NOT_CURRENT_MONTH_MSG, self);
+        }
+        else if ([resultCodeObj integerValue] < -2)
         {
             // change work report fail
             SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_WORK_REPORT_FAIL_MSG, self);
@@ -258,7 +266,15 @@
         
         [[WebServiceAPI requestWithFinishBlock:^(id object) {
             NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-            if ([resultCodeObj integerValue] < 0)
+            if ([resultCodeObj integerValue] == -1)
+            {
+                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_FUTURE_DATE_MSG, self);
+            }
+            else if ([resultCodeObj integerValue] == -2)
+            {
+                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_NOT_CURRENT_MONTH_MSG, self);
+            }
+            else if ([resultCodeObj integerValue] < -2)
             {
                 // change work report fail
                 SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_WORK_REPORT_FAIL_MSG, self);

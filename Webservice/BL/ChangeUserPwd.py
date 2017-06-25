@@ -36,7 +36,7 @@ def change_password_for_employee():
             enterprise_id=g.user.enterprise_id, name=g.user.name).first()
         if user is None:
             logger.error('ユーザ存在しない')
-            return jsonify({'result_code': -1})
+            return jsonify({'result_code': -2})
 
         # パスワード更新
         user.hash_password(new_pwd1)
@@ -50,7 +50,7 @@ def change_password_for_employee():
         return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()
 
@@ -78,12 +78,12 @@ def change_password_for_Manager():
             enterprise_id=g.user.enterprise_id, name=user_name_for_changed).first()
         if user is None:
             logger.error('ユーザ存在しない')
-            return jsonify({'result_code': -1})
+            return jsonify({'result_code': -2})
 
         # !! 権限決めてから修正要、################
         if g.user.auth_id != '2' and g.user.auth_id != '3':
             logger.error('権限たりない')
-            return jsonify({'result_code': -1})
+            return jsonify({'result_code': -3})
 
         # パスワード更新
         user.hash_password(new_pwd1)
@@ -97,6 +97,6 @@ def change_password_for_Manager():
         return jsonify({'result_code': 0})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1})
+        return jsonify({'result_code': -9})
     finally:
         DBTransaction.session_close()

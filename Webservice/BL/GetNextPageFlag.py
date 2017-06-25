@@ -47,6 +47,6 @@ def get_next_page_flag():
         return jsonify({'result_code': result_code, 'page_flag': page_flag})
     except Exception, e:
         logger.error(e)
-        return jsonify({'result_code': -1, 'page_flag': -1})
+        return jsonify({'result_code': -9, 'page_flag': -1})
     finally:
         DBTransaction.session_close()
