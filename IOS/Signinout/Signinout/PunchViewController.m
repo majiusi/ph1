@@ -603,7 +603,7 @@ NSString *strLatitude = nil;
         
         NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
         
-        if(strLatitude != nil)
+        if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
         {
             // call webservice
             SHOW_PROGRESS(self.navigationController.view);
@@ -627,7 +627,7 @@ NSString *strLatitude = nil;
         }
         else
         {
-            self.positionInfo.text = CONST_POSITION_INFO_MSG;
+            [self.positionInfo setText:CONST_POSITION_INFO_MSG];
         }
         strLatitude = nil;
         strLongitude = nil;
@@ -674,7 +674,7 @@ NSString *strLatitude = nil;
         [self stopTimerForPage2];
         
         NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-        if(strLatitude != nil)
+        if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
         {
             // call webservice
             SHOW_PROGRESS(self.navigationController.view);
@@ -701,7 +701,7 @@ NSString *strLatitude = nil;
         }
         else
         {
-            self.positionInfo.text = CONST_POSITION_INFO_MSG;
+            [self.positionInfo setText:CONST_POSITION_INFO_MSG];
         }
         strLatitude = nil;
         strLongitude = nil;
