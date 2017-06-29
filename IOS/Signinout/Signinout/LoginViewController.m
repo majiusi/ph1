@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "WebServiceAPI.h"
 #import "Constant.h"
+#import "UICustomActionSheet.h"
 
 
 @interface LoginViewController ()
@@ -89,6 +90,17 @@ NSUserDefaults  * userDefault;
         else
             // service fail
             self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
+        
+        UICustomActionSheet* actionSheet = [[UICustomActionSheet alloc] initWithTitle:@"Menu Title" delegate:nil buttonTitles:@[@"Cancel",@"Okay"]];
+        
+        [actionSheet setButtonColors:@[[UIColor redColor]]];
+        [actionSheet setBackgroundColor:[UIColor clearColor]];
+        
+        [actionSheet setSubtitle:@"Cool subtitle message"];
+        [actionSheet setSubtitleColor:[UIColor whiteColor]];
+        
+        [actionSheet showInView:self.view];
+        
         
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
 

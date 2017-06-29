@@ -16,6 +16,8 @@
 		B6014E191D55B8DE0092F688 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6014E181D55B8DE0092F688 /* Security.framework */; };
 		B606EE6D1DF39911001EC317 /* PunchNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B606EE6C1DF39911001EC317 /* PunchNavigationController.m */; };
 		B606EE701DF3B831001EC317 /* CALayer+LayerColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B606EE6F1DF3B831001EC317 /* CALayer+LayerColor.m */; };
+		B611DD9E1F029A9400E3A433 /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B611DD9B1F029A9400E3A433 /* ILTranslucentView.m */; };
+		B611DD9F1F029A9400E3A433 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B611DD9D1F029A9400E3A433 /* UICustomActionSheet.m */; };
 		B6550ED91E0F583E00CEB007 /* EditMonthlyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6550ED81E0F583E00CEB007 /* EditMonthlyDataViewController.m */; };
 		B6550EDF1E0FA68300CEB007 /* WebServiceAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B6550EDE1E0FA68300CEB007 /* WebServiceAPI.m */; };
 		B6550EEE1E0FBF0E00CEB007 /* HttpResponseErrorCode.m in Sources */ = {isa = PBXBuildFile; fileRef = B6550EED1E0FBF0E00CEB007 /* HttpResponseErrorCode.m */; };
@@ -69,6 +71,10 @@
 		B606EE6C1DF39911001EC317 /* PunchNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchNavigationController.m; sourceTree = "<group>"; };
 		B606EE6E1DF3B831001EC317 /* CALayer+LayerColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LayerColor.h"; sourceTree = "<group>"; };
 		B606EE6F1DF3B831001EC317 /* CALayer+LayerColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LayerColor.m"; sourceTree = "<group>"; };
+		B611DD9A1F029A9400E3A433 /* ILTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILTranslucentView.h; path = UICustomSheetClasses/ILTranslucentView.h; sourceTree = "<group>"; };
+		B611DD9B1F029A9400E3A433 /* ILTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILTranslucentView.m; path = UICustomSheetClasses/ILTranslucentView.m; sourceTree = "<group>"; };
+		B611DD9C1F029A9400E3A433 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomActionSheet.h; path = UICustomSheetClasses/UICustomActionSheet.h; sourceTree = "<group>"; };
+		B611DD9D1F029A9400E3A433 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICustomActionSheet.m; path = UICustomSheetClasses/UICustomActionSheet.m; sourceTree = "<group>"; };
 		B6550ED71E0F583E00CEB007 /* EditMonthlyDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMonthlyDataViewController.h; sourceTree = "<group>"; };
 		B6550ED81E0F583E00CEB007 /* EditMonthlyDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMonthlyDataViewController.m; sourceTree = "<group>"; };
 		B6550EDD1E0FA68300CEB007 /* WebServiceAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceAPI.h; sourceTree = "<group>"; };
@@ -154,9 +160,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B611DD991F0299E100E3A433 /* UICustomActionSheetClasses */ = {
+			isa = PBXGroup;
+			children = (
+				B611DD9A1F029A9400E3A433 /* ILTranslucentView.h */,
+				B611DD9B1F029A9400E3A433 /* ILTranslucentView.m */,
+				B611DD9C1F029A9400E3A433 /* UICustomActionSheet.h */,
+				B611DD9D1F029A9400E3A433 /* UICustomActionSheet.m */,
+			);
+			name = UICustomActionSheetClasses;
+			sourceTree = "<group>";
+		};
 		B66709C91D503C71009B0A3A = {
 			isa = PBXGroup;
 			children = (
+				B611DD991F0299E100E3A433 /* UICustomActionSheetClasses */,
 				B66709D41D503C71009B0A3A /* Signinout */,
 				B66709F11D503C71009B0A3A /* SigninoutTests */,
 				B66709FC1D503C71009B0A3A /* SigninoutUITests */,
@@ -432,11 +450,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B606EE6D1DF39911001EC317 /* PunchNavigationController.m in Sources */,
+				B611DD9E1F029A9400E3A433 /* ILTranslucentView.m in Sources */,
 				B6550EDF1E0FA68300CEB007 /* WebServiceAPI.m in Sources */,
 				B6550EEE1E0FBF0E00CEB007 /* HttpResponseErrorCode.m in Sources */,
 				B6014DB91D5587080092F688 /* PunchListTableViewController.m in Sources */,
 				B6550ED91E0F583E00CEB007 /* EditMonthlyDataViewController.m in Sources */,
 				B66709DA1D503C71009B0A3A /* AppDelegate.m in Sources */,
+				B611DD9F1F029A9400E3A433 /* UICustomActionSheet.m in Sources */,
 				B6D165A81E81266A00404813 /* PasswordChangeTableViewController.m in Sources */,
 				B606EE701DF3B831001EC317 /* CALayer+LayerColor.m in Sources */,
 				B6D165A51E80163E00404813 /* SetupTableViewController.m in Sources */,
