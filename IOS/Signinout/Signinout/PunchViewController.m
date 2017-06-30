@@ -172,7 +172,7 @@ NSString *strLatitude = nil;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.distanceFilter = 10.0f;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
     
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
