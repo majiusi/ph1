@@ -9,6 +9,7 @@
 #import "EditMonthlyDataViewController.h"
 #import "WebServiceAPI.h"
 #import "Constant.h"
+#import "DateUtils.h"
 
 @interface EditMonthlyDataViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
@@ -115,6 +116,11 @@
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
     datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
+    // convert defalut start time(HH:mm),
+    // then show it at the dataPicker
+    NSDate * startTime = [[DateUtils sharedDateUtilsByGCD] ConvertToHoursAndMinutesWithStringOfHHmm:self.strStartTime withStartYmd:@"1971/01/01" withFormat:@"yyyy/mm/dd HH:mm"];
+    [datePicker setDate:startTime];
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -174,13 +180,10 @@
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
     datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
-    // make the defalut time with 01:10
-    NSString *str = @"1970-1-01 01:00";
-    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
-    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm"];
-    [formatter1 setTimeZone:[NSTimeZone localTimeZone]];
-    NSDate *date = [formatter1 dateFromString:str];
-    datePicker.date =  date;
+    // convert defalut except total minute to hour and minutes.
+    // then show it at the dataPicker
+    NSDate * exceptTime = [[DateUtils sharedDateUtilsByGCD] ConvertToHoursAndMinutesWithTotalMinutes:[self.strExceptTime intValue] withStartYmd:@"1971/01/01" withFormat:@"yyyy/mm/dd HH:mm"];
+    [datePicker setDate:exceptTime];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
