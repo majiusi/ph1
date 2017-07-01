@@ -6,6 +6,14 @@ IOS/Signinout/.DS_Store
 *.pyc
 *.DS_Store
 
+*.xcuserstate  
+
+project.xcworkspace  
+
+xcuserdata  
+
+UserInterfaceState.xcuserstate
+
 WebService/.idea/workspace.xml
 
 WebService/.idea/workspace.xml

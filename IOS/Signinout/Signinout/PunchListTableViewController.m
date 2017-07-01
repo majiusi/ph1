@@ -141,8 +141,8 @@
         cell.punchCheckoutTime.text = @"0";
     else
         cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
-    
-    cell.punchExceptTime.text = [NSString stringWithFormat:@"%@(分)",[dict objectForKey:@"report_exclusive_minutes"]];
+
+    cell.punchExceptTime.text = [NSString stringWithFormat:@"%0d(分)",[[dict objectForKey:@"report_exclusive_minutes"] intValue]];
     double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
     cell.punchTotalTime.text = [NSString stringWithFormat:@"%3.2f(時間)", minutesToHours];
     
