@@ -9,6 +9,7 @@
 #import "PunchViewController.h"
 #import "WebServiceAPI.h"
 #import "Constant.h"
+#import "DateUtils.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface PunchViewController ()<CLLocationManagerDelegate>
@@ -171,7 +172,7 @@ NSString *strLatitude = nil;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.distanceFilter = 10.0f;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
     
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
@@ -481,6 +482,11 @@ NSString *strLatitude = nil;
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeTime;
     datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
+    // convert defalut start time(HH:mm),
+    // then show it at the dataPicker
+    NSDate * startTime = [[DateUtils sharedDateUtilsByGCD] ConvertToHoursAndMinutesWithStringOfHHmm:self.strStartTime withStartYmd:@"1971/01/01" withFormat:@"yyyy/mm/dd HH:mm"];
+    [datePicker setDate:startTime];
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -538,8 +544,14 @@ NSString *strLatitude = nil;
  */
 - (IBAction)setExceptTime:(UIButton *)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.datePickerMode = UIDatePickerModeCountDownTimer;
-    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"]; 
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
+    
+    // convert defalut except total minute to hour and minutes.
+    // then show it at the dataPicker
+    NSDate * exceptTime = [[DateUtils sharedDateUtilsByGCD] ConvertToHoursAndMinutesWithTotalMinutes:[self.strExceptTime intValue] withStartYmd:@"1971/01/01" withFormat:@"yyyy/mm/dd HH:mm"];
+    [datePicker setDate:exceptTime];
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert.view addSubview:datePicker];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
