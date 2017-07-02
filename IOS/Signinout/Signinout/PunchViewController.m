@@ -11,6 +11,8 @@
 #import "Constant.h"
 #import "DateUtils.h"
 #import <CoreLocation/CoreLocation.h>
+#import <POPAnimation.h>
+#import <POP.h>
 
 @interface PunchViewController ()<CLLocationManagerDelegate>
 
@@ -143,6 +145,38 @@ NSString *strLatitude = nil;
     NSLog(@"locationManager error:%@",error);
 }
 
+-(void)showLikeButton
+{
+    
+    POPSpringAnimation *spin = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
+    
+    spin.fromValue = @(M_PI / 4);
+    spin.toValue = @(0);
+    spin.springBounciness = 20;
+    spin.velocity = @(10);
+    [self.self.submitPage1Btn.layer pop_addAnimation:spin forKey:@"likeAnimation"];
+}
+
+
+- (void)performAnimation
+{
+    
+    [self.submitPage1Btn.layer pop_removeAllAnimations];
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    //anim.beginTime = CACurrentMediaTime() + 1.0f;
+    anim.duration = 1.5f;
+    static BOOL ani = YES;
+    if (ani) {
+        anim.toValue = [NSValue valueWithCGPoint:CGPointMake(0.9, 0.9)];
+    }else{
+        anim.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+    }
+    ani = !ani;
+    anim.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+        if (finished) { [self performAnimation]; }
+    };
+    [self.submitPage1Btn.layer pop_addAnimation:anim forKey:@"Animation"];
+}
 
 /*
 #pragma mark - Navigation
@@ -292,6 +326,7 @@ NSString *strLatitude = nil;
                 // show page1
                 self.positionInfo.hidden = NO;
                 self.submitPage1Btn.hidden = NO;
+                [self performAnimation];
             }
             else if ([pageFlagObj integerValue] == 2)
             {

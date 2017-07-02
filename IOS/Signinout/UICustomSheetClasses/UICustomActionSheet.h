@@ -13,7 +13,7 @@
 
 @protocol UICustomActionSheetDelegate <NSObject>
 
--(void)customActionSheet:(UICustomActionSheet *)customActionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+-(void)customActionSheet:(UICustomActionSheet *)customActionSheet clickedButtonTitle:(NSString *)buttonTitle;
 
 @end
 

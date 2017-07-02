@@ -12,7 +12,7 @@
 /** サービスの利用ができません。 */
 static NSString* const CONST_SERVICE_NOT_AVAILABLE = @"サービスの利用ができません。";
 /** チームID、ユーザID、パスワード不正 */
-static NSString* const CONST_LOGIN_FAIL_MSG = @"チームID、ユーザID、パスワード不正";
+static NSString* const CONST_LOGIN_FAIL_MSG = @"入力されたログイン情報が不正です。";
 
 /** パスワードの変更に失敗しました。 */
 static NSString* const CONST_PASSWORD_UPDATE_ERROR_TITLE = @"パスワードの変更に失敗しました。";
@@ -30,6 +30,8 @@ static NSString* const CONST_REPORT_CANNOT_UPDATE_MSG = @"合計負数(提出不
 static NSString* const CONST_REPORT_UPDATE_BTN = @"更新";
 /** 提出 */
 static NSString* const CONST_REPORT_SUBMIT_BTN = @"提出";
+/** 閉じる */
+static NSString* const CONST_CLOSE_BTN = @"閉じる";
 
 /////////////////////////////////////PunchViewController
 

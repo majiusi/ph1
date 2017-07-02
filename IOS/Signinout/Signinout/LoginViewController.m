@@ -84,21 +84,27 @@ NSUserDefaults  * userDefault;
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        if(statusCode == 401)
+        UICustomActionSheet* actionSheet = nil;
+        if(statusCode == 401) {
             // login fail
             self.ErrorMessage.text = CONST_LOGIN_FAIL_MSG;
-        else
+            actionSheet = [[UICustomActionSheet alloc] initWithTitle:CONST_LOGIN_FAIL_MSG delegate:nil buttonTitles:@[CONST_CLOSE_BTN]];
+            
+            [actionSheet setSubtitle:@" "];
+        }
+        else{
             // service fail
             self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
+            actionSheet = [[UICustomActionSheet alloc] initWithTitle:CONST_SERVICE_NOT_AVAILABLE delegate:nil buttonTitles:@[CONST_CLOSE_BTN]];
+            
+            [actionSheet setSubtitle:@" "];
+        }
         
-        UICustomActionSheet* actionSheet = [[UICustomActionSheet alloc] initWithTitle:@"Menu Title" delegate:nil buttonTitles:@[@"Cancel",@"Okay"]];
-        
+        [actionSheet setExclusiveTouch:YES];
+        //[actionSheet setBlurredBackground:YES];
         [actionSheet setButtonColors:@[[UIColor redColor]]];
         [actionSheet setBackgroundColor:[UIColor clearColor]];
-        
-        [actionSheet setSubtitle:@"Cool subtitle message"];
         [actionSheet setSubtitleColor:[UIColor whiteColor]];
-        
         [actionSheet showInView:self.view];
         
         

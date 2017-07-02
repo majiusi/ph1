@@ -305,7 +305,7 @@
 
 - (void)actionButtonPressed:(UIButton *)button {
     
-    [_delegate customActionSheet:self clickedButtonAtIndex:[buttonTitles indexOfObject:button.currentTitle]];
+    [_delegate customActionSheet:self clickedButtonTitle:button.currentTitle];
     [self hideAlert];
     
 }

@@ -10,6 +10,8 @@
 #import "WebServiceAPI.h"
 #import "Constant.h"
 #import "DateUtils.h"
+#import <POPAnimation.h>
+#import <POP.h>
 
 @interface EditMonthlyDataViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
@@ -57,6 +59,8 @@
     
     // calculate total time
     self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
+    
+    [self scaleAnimationStartBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -304,4 +308,49 @@
     //show dialog box
     [self presentViewController:alert animated:true completion:nil];
 }
+
+- (void) scaleAnimationStartBtn {
+    //动画过程中取消用户的交互，防止用户重复点击
+//    self.userInteractionEnabled = NO;
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    //它会先缩小到(0.5,0.5),然后再去放大到(1.0,1.0)
+    springAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
+    springAnimation.toValue =[NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+    springAnimation.springSpeed = 1;
+    springAnimation.springBounciness = 10;
+
+    //动画结束之后的回调方法
+    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
+        
+//        self.userInteractionEnabled = true;
+        if (finished) {
+            [self scaleAnimationUpdateBtn];
+        }
+    }];
+    [self.startTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation"];
+    
+}
+
+- (void) scaleAnimationUpdateBtn {
+    //动画过程中取消用户的交互，防止用户重复点击
+    //    self.userInteractionEnabled = NO;
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    //它会先缩小到(0.5,0.5),然后再去放大到(1.0,1.0)
+    springAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
+    springAnimation.toValue =[NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+    springAnimation.springSpeed = 1;
+    springAnimation.springBounciness = 10;
+    //动画结束之后的回调方法
+    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
+        
+        //        self.userInteractionEnabled = true;
+        if (finished) {
+            [self scaleAnimationStartBtn];
+        }
+    }];
+    [self.updateReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation"];
+    
+}
+
+
 @end
