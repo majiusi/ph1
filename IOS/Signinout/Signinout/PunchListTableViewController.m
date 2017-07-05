@@ -116,8 +116,10 @@
     
     
     double minuteToHours = [self.totalHoursByMinutesUnit doubleValue] / 60.0f;
+    int hour = [self.totalHoursByMinutesUnit intValue] / 60;
+    int minute = [self.totalHoursByMinutesUnit intValue] % 60;
     
-    label.text = [NSString stringWithFormat:@"                                                                 合計：%.2f", minuteToHours];
+    label.text = [NSString stringWithFormat:@"                                                               合計：%02d:%02d (%.2f)",hour, minute, minuteToHours];
     
     return footerView;
 }
@@ -143,8 +145,10 @@
         cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
 
     cell.punchExceptTime.text = [NSString stringWithFormat:@"%0d(分)",[[dict objectForKey:@"report_exclusive_minutes"] intValue]];
-    double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
-    cell.punchTotalTime.text = [NSString stringWithFormat:@"%3.2f(時間)", minutesToHours];
+    //double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
+    int hour = [[dict objectForKey:@"report_total_minutes"] intValue] / 60;
+    int minute = [[dict objectForKey:@"report_total_minutes"] intValue]  % 60;
+    cell.punchTotalTime.text = [NSString stringWithFormat:@"%02d:%02d", hour, minute];
     
     // set text font color
     cell.punchDate.textColor = [UIColor grayColor];
