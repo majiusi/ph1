@@ -119,7 +119,8 @@
     int hour = [self.totalHoursByMinutesUnit intValue] / 60;
     int minute = [self.totalHoursByMinutesUnit intValue] % 60;
     
-    label.text = [NSString stringWithFormat:@"                                                               合計：%02d:%02d (%.2f)",hour, minute, minuteToHours];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = [NSString stringWithFormat:@"合計：%02d:%02d (%.2f)",hour, minute, minuteToHours];
     
     return footerView;
 }
@@ -133,21 +134,17 @@
     
     // set cell content
     cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
-    NSLog(@"start:%@",[dict objectForKey:@"report_start_time"]);
-    NSLog(@"end:%@",[dict objectForKey:@"report_end_time"]);
     
     NSString *strReportStartTime = [dict objectForKey:@"report_start_time"] ;
     NSString *strReportEndTime = [dict objectForKey:@"report_end_time"] ;
     
-    if([strReportStartTime isEqualToString:@"00:00:00"] || [strReportStartTime length] == 0)
-        cell.punchCheckinTime.text = @"00:00";
-    else
-        cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
+    cell.punchCheckinTime.text = @"00:00";
+    if( strReportStartTime != nil && ![strReportStartTime isEqualToString:@"00:00:00"] && [strReportStartTime length] > 0)
+        cell.punchCheckinTime.text = [strReportStartTime substringToIndex:5];
     
-    if([strReportEndTime isEqualToString:@"00:00:00"] || [strReportEndTime length] == 0)
-        cell.punchCheckoutTime.text = @"00:00";
-    else
-        cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
+    cell.punchCheckoutTime.text = @"00:00";
+    if( strReportEndTime != nil && ![strReportEndTime isEqualToString:@"00:00:00"] && [strReportEndTime length] > 0)
+        cell.punchCheckoutTime.text = [strReportEndTime substringToIndex:5];
 
     cell.punchExceptTime.text = [NSString stringWithFormat:@"%0d(分)",[[dict objectForKey:@"report_exclusive_minutes"] intValue]];
     //double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
