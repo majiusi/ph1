@@ -133,14 +133,19 @@
     
     // set cell content
     cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
+    NSLog(@"start:%@",[dict objectForKey:@"report_start_time"]);
+    NSLog(@"end:%@",[dict objectForKey:@"report_end_time"]);
     
-    if([[dict objectForKey:@"report_start_time"] integerValue] == 0)
-        cell.punchCheckinTime.text = @"0";
+    NSString *strReportStartTime = [dict objectForKey:@"report_start_time"] ;
+    NSString *strReportEndTime = [dict objectForKey:@"report_end_time"] ;
+    
+    if([strReportStartTime isEqualToString:@"00:00:00"] || [strReportStartTime length] == 0)
+        cell.punchCheckinTime.text = @"00:00";
     else
         cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
     
-    if([[dict objectForKey:@"report_end_time"] integerValue] == 0)
-        cell.punchCheckoutTime.text = @"0";
+    if([strReportEndTime isEqualToString:@"00:00:00"] || [strReportEndTime length] == 0)
+        cell.punchCheckoutTime.text = @"00:00";
     else
         cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
 
