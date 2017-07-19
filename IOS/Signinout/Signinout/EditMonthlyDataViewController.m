@@ -13,7 +13,7 @@
 #import <POPAnimation.h>
 #import <POP.h>
 
-@interface EditMonthlyDataViewController ()
+@interface EditMonthlyDataViewController () <UICustomActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *exceptTimeBtn;
@@ -225,47 +225,10 @@
 }
 */
 
-- (IBAction)updateReport:(UIButton *)sender {
-    SHOW_PROGRESS(self.navigationController.view);
-    
-    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
-    
-    [[WebServiceAPI requestWithFinishBlock:^(id object) {
-        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        if ([resultCodeObj integerValue] == -1)
-        {
-            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_FUTURE_DATE_MSG, self);
-        }
-        else if ([resultCodeObj integerValue] == -2)
-        {
-            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_NOT_CURRENT_MONTH_MSG, self);
-        }
-        else if ([resultCodeObj integerValue] < -2)
-        {
-            // change work report fail
-            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_WORK_REPORT_FAIL_MSG, self);
-        } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"修正完了。" preferredStyle: UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                // return to before window
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            }]];
-            //show dialog box
-            [self presentViewController:alert animated:true completion:nil];
-        }
-        HIDE_PROGRESS
-    } failBlock:^(int statusCode, int errorCode) {
-        // web service not available
-        HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
-        
-    }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
-}
 
-- (IBAction)deleteReport:(UIButton *)sender {
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"削除しますか" preferredStyle: UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"削除する" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+-(void)customActionSheet:(UICustomActionSheet *)customActionSheet clickedButtonTitle:(NSString *)buttonTitle{
+    NSLog(@"%@",buttonTitle);
+    if([buttonTitle isEqualToString:CONST_DELETE_BTN]){
         // to be delete
         SHOW_PROGRESS(self.navigationController.view);
         
@@ -275,38 +238,82 @@
             NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
             if ([resultCodeObj integerValue] == -1)
             {
-                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_FUTURE_DATE_MSG, self);
+                //SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_FUTURE_DATE_MSG, self);
+                SHOW_MSG_STYLE(CONST_DELETE_FUTURE_DATE_MSG, @" ")
             }
             else if ([resultCodeObj integerValue] == -2)
             {
-                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_NOT_CURRENT_MONTH_MSG, self);
+                //SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_NOT_CURRENT_MONTH_MSG, self);
+                SHOW_MSG_STYLE(CONST_DELETE_NOT_CURRENT_MONTH_MSG, @" ")
             }
             else if ([resultCodeObj integerValue] < -2)
             {
                 // change work report fail
-                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_WORK_REPORT_FAIL_MSG, self);
+                // SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_WORK_REPORT_FAIL_MSG, self);
+                SHOW_MSG_STYLE(CONST_DELETE_WORK_REPORT_FAIL_MSG, @" ")
             } else {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"削除完了。" preferredStyle: UIAlertControllerStyleActionSheet];
-                [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    // return to before window
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                }]];
-                //show dialog box
-                [self presentViewController:alert animated:true completion:nil];
+                SHOW_MSG_STYLE(CONST_REPORT_DELETE_MSG, @" ")
+                // return to before window
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
             HIDE_PROGRESS
         } failBlock:^(int statusCode, int errorCode) {
             // web service not available
             HIDE_PROGRESS
-            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
             
         }] deleteWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withDeleteDate:self.workDate];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // do nothing
-    }]];
-    //show dialog box
-    [self presentViewController:alert animated:true completion:nil];
+    }
+}
+
+- (IBAction)updateReport:(UIButton *)sender {
+    SHOW_PROGRESS(self.navigationController.view);
+    
+    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] == -1)
+        {
+            //SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_FUTURE_DATE_MSG, self);
+            SHOW_MSG_STYLE(CONST_CHANGE_FUTURE_DATE_MSG, @" ")
+        }
+        else if ([resultCodeObj integerValue] == -2)
+        {
+            //SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_NOT_CURRENT_MONTH_MSG, self);
+            SHOW_MSG_STYLE(CONST_CHANGE_NOT_CURRENT_MONTH_MSG, @" ")
+        }
+        else if ([resultCodeObj integerValue] < -2)
+        {
+            // change work report fail
+            //SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_WORK_REPORT_FAIL_MSG, self);
+            SHOW_MSG_STYLE(CONST_CHANGE_WORK_REPORT_FAIL_MSG, @" ")
+        } else {
+            SHOW_MSG_STYLE(CONST_REPORT_UPDATED_MSG, @" ")
+            // return to before window
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        HIDE_PROGRESS
+    } failBlock:^(int statusCode, int errorCode) {
+        // web service not available
+        HIDE_PROGRESS
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
+        
+    }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
+}
+
+- (IBAction)deleteReport:(UIButton *)sender {
+    
+    UICustomActionSheet* actionSheet = [[UICustomActionSheet alloc] initWithTitle:@"削除しますか" delegate:self buttonTitles:@[CONST_CLOSE_BTN,CONST_DELETE_BTN]];
+    
+    [actionSheet setButtonColors:@[[UIColor grayColor],[UIColor redColor]]];
+    [actionSheet setBackgroundColor:[UIColor clearColor]];
+    
+    [actionSheet setSubtitle:@" "];
+    [actionSheet setSubtitleColor:[UIColor whiteColor]];
+    [actionSheet showInView:self.view ];
 }
 
 - (void) scaleAnimationStartBtn {

@@ -82,7 +82,9 @@
 
 -(void)showInView:(UIView *)view{
     
-    [view addSubview:self];
+   // [view addSubview:self];
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    [window addSubview:self];
     
     panel.backgroundColor = _backgroundColor;
     

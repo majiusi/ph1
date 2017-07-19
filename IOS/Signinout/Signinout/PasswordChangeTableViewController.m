@@ -45,23 +45,26 @@
     SHOW_PROGRESS(self.navigationController.view);
     
     NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
-    
+
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
         NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
         if ([resultCodeObj integerValue] == -1)
         {
             // password update error
-            SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_PASSWORD_UPDATE_ERROR_MSG, self);
+            //SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_PASSWORD_UPDATE_ERROR_MSG, self);
+            SHOW_MSG_STYLE(CONST_PASSWORD_UPDATE_ERROR_MSG, @" ")
         }
         else if ([resultCodeObj integerValue] == -2)
         {
             // password update error
-            SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_PASSWORD_UPDATE_USER_NOT_EXSIST_MSG, self);
+            //SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_PASSWORD_UPDATE_USER_NOT_EXSIST_MSG, self);
+            SHOW_MSG_STYLE(CONST_PASSWORD_UPDATE_USER_NOT_EXSIST_MSG, @" ")
         }
         else if ([resultCodeObj integerValue] < -2)
         {
             // password update error
-            SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_USER_NOT_EXSIST_MSG, self);
+            //SHOW_MSG(CONST_PASSWORD_UPDATE_ERROR_TITLE, CONST_USER_NOT_EXSIST_MSG, self);
+            SHOW_MSG_STYLE(CONST_USER_NOT_EXSIST_MSG, @" ")
         }
         else {
             // password update successed
@@ -82,11 +85,13 @@
         HIDE_PROGRESS
         if(statusCode == 401)
         {
-            SHOW_MSG(@"", CONST_LOGIN_FAIL_MSG, self);
+            //SHOW_MSG(@"", CONST_LOGIN_FAIL_MSG, self);
+            SHOW_MSG_STYLE(CONST_LOGIN_FAIL_MSG, @" ")
         }
         else
         {
-            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+//            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         }
         
     }] changePasswordWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"userName"] withPassword:self.oldPassword.text withPassword1:self.password1.text withPassword2:self.password2.text ];

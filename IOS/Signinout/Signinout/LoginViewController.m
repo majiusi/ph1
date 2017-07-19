@@ -9,8 +9,6 @@
 #import "LoginViewController.h"
 #import "WebServiceAPI.h"
 #import "Constant.h"
-#import "UICustomActionSheet.h"
-
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *EnterpriseID;
@@ -84,29 +82,19 @@ NSUserDefaults  * userDefault;
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        UICustomActionSheet* actionSheet = nil;
+
         if(statusCode == 401) {
             // login fail
             self.ErrorMessage.text = CONST_LOGIN_FAIL_MSG;
-            actionSheet = [[UICustomActionSheet alloc] initWithTitle:CONST_LOGIN_FAIL_MSG delegate:nil buttonTitles:@[CONST_CLOSE_BTN]];
-            
-            [actionSheet setSubtitle:@" "];
+
+            SHOW_MSG_STYLE(CONST_LOGIN_FAIL_MSG, @" ")
         }
         else{
             // service fail
             self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
-            actionSheet = [[UICustomActionSheet alloc] initWithTitle:CONST_SERVICE_NOT_AVAILABLE delegate:nil buttonTitles:@[CONST_CLOSE_BTN]];
             
-            [actionSheet setSubtitle:@" "];
+            SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         }
-        
-        [actionSheet setExclusiveTouch:YES];
-        //[actionSheet setBlurredBackground:YES];
-        [actionSheet setButtonColors:@[[UIColor redColor]]];
-        [actionSheet setBackgroundColor:[UIColor clearColor]];
-        [actionSheet setSubtitleColor:[UIColor whiteColor]];
-        [actionSheet showInView:self.view];
-        
         
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
 

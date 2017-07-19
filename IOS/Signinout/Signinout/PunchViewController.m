@@ -176,6 +176,7 @@ NSString *strLatitude = nil;
         if (finished) { [self performAnimation]; }
     };
     [self.submitPage1Btn.layer pop_addAnimation:anim forKey:@"Animation"];
+    [self.submitPage2Btn.layer pop_addAnimation:anim forKey:@"Animation"];
 }
 
 /*
@@ -225,7 +226,8 @@ NSString *strLatitude = nil;
         if ([resultCodeObj integerValue] < 0)
         {
             // get EmployeeBaseInfo error
-            SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+            //SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+            SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_BASEINFO_ERROR, @" ")
             HIDE_PROGRESS
         } else {
             self.strUserNameJP = [object objectForKey:@"name_jp"];
@@ -266,7 +268,8 @@ NSString *strLatitude = nil;
                 if ([resultCodeObj integerValue] < 0)
                 {
                     // get EmployeeMonthlyInfo error
-                    SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    // SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, @" ")
                 } else {
                     // show name and monthly work total time
                     self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
@@ -300,17 +303,19 @@ NSString *strLatitude = nil;
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
                 HIDE_PROGRESS
-                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
-    
+
     RESHOW_PROGRESS
     // 4.show UI Controller&Info according page_flag.
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
@@ -319,7 +324,8 @@ NSString *strLatitude = nil;
         if ([resultCodeObj integerValue] < 0)
         {
             // get page flag error
-            SHOW_MSG(@"", CONST_GET_PAGE_FLAG_ERROR, self);
+            //SHOW_MSG(@"", CONST_GET_PAGE_FLAG_ERROR, self);
+            SHOW_MSG_STYLE(CONST_GET_PAGE_FLAG_ERROR, @" ")
         } else {
             if ([pageFlagObj integerValue] == 1)
             {
@@ -336,7 +342,7 @@ NSString *strLatitude = nil;
                 // show page2
                 self.positionInfo.hidden = NO;
                 self.submitPage2Btn.hidden = NO;
-                
+                [self performAnimation];
 
             }
             else if ([pageFlagObj integerValue] == 3)
@@ -363,7 +369,8 @@ NSString *strLatitude = nil;
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] getPageFlagWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@""];
 }
@@ -414,7 +421,8 @@ NSString *strLatitude = nil;
         if ([resultCodeObj integerValue] < 0)
         {
             // WorkReportInfo submit error
-            SHOW_MSG(@"", CONST_SUBMIT_REPORT_INFO_ERROR, self);
+            //SHOW_MSG(@"", CONST_SUBMIT_REPORT_INFO_ERROR, self);
+            SHOW_MSG_STYLE(CONST_SUBMIT_REPORT_INFO_ERROR, @" ")
             HIDE_PROGRESS
         } else {
             self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
@@ -445,7 +453,8 @@ NSString *strLatitude = nil;
                 if ([resultCodeObj integerValue] < 0)
                 {
                     // get EmployeeMonthlyInfo error
-                    SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    //SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, @" ")
                 } else {
                     // show name and monthly work total time
                     self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
@@ -455,14 +464,16 @@ NSString *strLatitude = nil;
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
                 HIDE_PROGRESS
-                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] submitWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
 }
@@ -659,7 +670,8 @@ NSString *strLatitude = nil;
                 if ([resultCodeObj integerValue] < 0)
                 {
                     // WorkStartInfo submit error
-                    SHOW_MSG(@"", CONST_SUBMIT_WORKSTART_INFO_ERROR, self);
+                    //SHOW_MSG(@"", CONST_SUBMIT_WORKSTART_INFO_ERROR, self);
+                    SHOW_MSG_STYLE(CONST_SUBMIT_WORKSTART_INFO_ERROR, @" ")
                 } else {
                     self.submitPage1Btn.hidden = YES;
                     self.submitPage2Btn.hidden = NO;
@@ -668,7 +680,8 @@ NSString *strLatitude = nil;
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
                 HIDE_PROGRESS
-                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
         }
@@ -730,7 +743,8 @@ NSString *strLatitude = nil;
                 if ([resultCodeObj integerValue] < 0)
                 {
                     // WorkEndInfo submit error
-                    SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
+                    //SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
+                    SHOW_MSG_STYLE(CONST_SUBMIT_WORKEND_INFO_ERROR, @" ")
                 } else {
                     self.submitPage1Btn.hidden = YES;
                     self.submitPage2Btn.hidden = YES;
@@ -742,7 +756,8 @@ NSString *strLatitude = nil;
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
                 HIDE_PROGRESS
-                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
         }
