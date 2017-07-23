@@ -585,7 +585,7 @@ NSString *strLatitude = nil;
  *  start countdown for Page1
  */
 -(void)startCountDownForPage1 {
-    if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
+    if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame  && [self.positionInfo.text compare:CONST_LOCATION_INTELLIGENCE_FAILURE] != NSOrderedSame)
     {
         _countDown = tick; //< 重置计时
         
@@ -663,7 +663,7 @@ NSString *strLatitude = nil;
  *  start countdown for Page2
  */
 -(void)startCountDownForPage2 {
-    if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
+    if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame && [self.positionInfo.text compare:CONST_LOCATION_INTELLIGENCE_FAILURE] != NSOrderedSame)
     {
         // reset countdown
         _countDown = tick;

@@ -125,6 +125,30 @@
     return footerView;
 }
 
+- (int)isLocalSystemDate:(NSString *)dateString
+{
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateTime=[formatter stringFromDate:[NSDate date]];
+    NSDate *localDate = [formatter dateFromString:dateTime];
+    
+    NSDate *inputDate = [formatter dateFromString:dateString];
+    
+    NSComparisonResult result = [localDate compare:inputDate];
+    
+    if (result == NSOrderedDescending) {
+        //NSLog(@"Date1  is in the future");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //NSLog(@"Date1 is in the past");
+        return -1;
+    }
+    //NSLog(@"Both dates are the same");
+    return 0;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"punchListCell";
     
@@ -162,6 +186,15 @@
     if([witchDay isEqualToString:@"土"] || [witchDay isEqualToString:@"日"] || [witchDay isEqualToString:@"祝"])
     {
         cell.punchDate.textColor = [UIColor redColor];
+    }
+    UIColor *currentDateColour = [UIColor colorWithRed:30.f/255.f green:144.f/255.f blue:255.f/255.f alpha:1.0];
+    if( [self isLocalSystemDate:[dict objectForKey:@"work_date"]] == 0)
+    {
+        cell.punchCheckinTime.textColor = currentDateColour;
+        cell.punchCheckoutTime.textColor = currentDateColour;
+        cell.punchExceptTime.textColor = currentDateColour;
+        cell.punchTotalTime.textColor = currentDateColour;
+    
     }
     
     return cell;
