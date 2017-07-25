@@ -123,6 +123,13 @@ def new_user():
     return CreateUser.create_user()
 
 
+# ユーザー勤務一覧取得
+@app.route('/api/MAS1000030', methods=['POST'])
+@auth.login_required
+def get_user_list():
+    return GetUserList.get_user_list()
+
+
 ####################################################################
 # WebService　URI声明（BL ロジック呼出し終了）
 ####################################################################
