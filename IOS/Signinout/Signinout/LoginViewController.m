@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "WebServiceAPI.h"
 #import "Constant.h"
+#import "UICustomActionSheet.h"
 
 
 @interface LoginViewController ()
@@ -83,12 +84,29 @@ NSUserDefaults  * userDefault;
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        if(statusCode == 401)
+        UICustomActionSheet* actionSheet = nil;
+        if(statusCode == 401) {
             // login fail
             self.ErrorMessage.text = CONST_LOGIN_FAIL_MSG;
-        else
+            actionSheet = [[UICustomActionSheet alloc] initWithTitle:CONST_LOGIN_FAIL_MSG delegate:nil buttonTitles:@[CONST_CLOSE_BTN]];
+            
+            [actionSheet setSubtitle:@" "];
+        }
+        else{
             // service fail
             self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
+            actionSheet = [[UICustomActionSheet alloc] initWithTitle:CONST_SERVICE_NOT_AVAILABLE delegate:nil buttonTitles:@[CONST_CLOSE_BTN]];
+            
+            [actionSheet setSubtitle:@" "];
+        }
+        
+        [actionSheet setExclusiveTouch:YES];
+        //[actionSheet setBlurredBackground:YES];
+        [actionSheet setButtonColors:@[[UIColor redColor]]];
+        [actionSheet setBackgroundColor:[UIColor clearColor]];
+        [actionSheet setSubtitleColor:[UIColor whiteColor]];
+        [actionSheet showInView:self.view];
+        
         
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
 

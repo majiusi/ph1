@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9D9A0FB0F356CC41CA26E9F540625ACF'
+               BlueprintIdentifier = '99126DDAC9C3DC2C23D402ED5FC131CB'
                BlueprintName = 'Pods-Signinout'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-Signinout.a'>
