@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *updateReportBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deleteReportBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel *workDateLab;
 - (IBAction)updateReport:(UIButton *)sender;
@@ -34,6 +35,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
+    
     // set default. [they will be set up by table value in future]
     if([self.strStartTime isEqualToString:@""] || [self.strStartTime isEqualToString:@"0"]) self.strStartTime = self.strDefaultStartTime;
     if([self.strEndTime isEqualToString:@""] || [self.strEndTime isEqualToString:@"0"]) self.strEndTime = self.strDefaultEndTime;
@@ -60,7 +62,13 @@
     // calculate total time
     self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
     
-    [self scaleAnimationStartBtn];
+    [self scaleAnimationStartBtn ];
+    [self scaleAnimationEndBtn ];
+    [self scaleAnimationExceptBtn ];
+    [self scaleAnimationTotalTime ];
+    [self scaleAnimationUpdateReportBtn ];
+    [self scaleAnimationDeleteReportBtn ];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -317,47 +325,90 @@
 }
 
 - (void) scaleAnimationStartBtn {
-    //动画过程中取消用户的交互，防止用户重复点击
-//    self.userInteractionEnabled = NO;
-    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-    //它会先缩小到(0.5,0.5),然后再去放大到(1.0,1.0)
-    springAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
-    springAnimation.toValue =[NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-    springAnimation.springSpeed = 1;
-    springAnimation.springBounciness = 10;
 
-    //动画结束之后的回调方法
-    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
-        
-//        self.userInteractionEnabled = true;
-        if (finished) {
-            [self scaleAnimationUpdateBtn];
-        }
-    }];
-    [self.startTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation"];
-    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.10f;
+    springAnimation.springBounciness = 15.0f;
+
+    [self.startTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation1"];
+ 
 }
 
-- (void) scaleAnimationUpdateBtn {
-    //动画过程中取消用户的交互，防止用户重复点击
-    //    self.userInteractionEnabled = NO;
-    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-    //它会先缩小到(0.5,0.5),然后再去放大到(1.0,1.0)
-    springAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
-    springAnimation.toValue =[NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-    springAnimation.springSpeed = 1;
-    springAnimation.springBounciness = 10;
-    //动画结束之后的回调方法
-    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
-        
-        //        self.userInteractionEnabled = true;
-        if (finished) {
-            [self scaleAnimationStartBtn];
-        }
-    }];
-    [self.updateReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation"];
+- (void) scaleAnimationEndBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.20f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.endTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation2"];
+}
+- (void) scaleAnimationExceptBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.30f;
+    springAnimation.springBounciness = 15.0f;
+
+    [self.exceptTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation3"];
+}
+
+- (void) scaleAnimationTotalTime {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.40f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.totalTime.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation4"];
     
 }
+- (void) scaleAnimationUpdateReportBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.50f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.updateReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+}
+- (void) scaleAnimationDeleteReportBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.60f;
+    springAnimation.springBounciness = 15.0f;
+    
+//    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
+//        if (finished) {
+//            [self scaleAnimationUpdateBtn];
+//        }
+//    }];
+    
+    [self.deleteReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation6"];
+}
+
+//- (void) scaleAnimationUpdateBtn {
+//
+//    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//
+//    springAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
+//    springAnimation.toValue =[NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+//    springAnimation.beginTime = CACurrentMediaTime() + 3.0f;
+//    springAnimation.springSpeed = 12;
+//    springAnimation.springBounciness = 20;
+//
+//    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
+//        
+//
+//        if (finished) {
+//            [self scaleAnimationUpdateBtn];
+//        }
+//    }];
+//    [self.updateReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation"];
+//    
+//}
 
 
 @end
