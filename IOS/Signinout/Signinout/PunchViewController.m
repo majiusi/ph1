@@ -38,10 +38,12 @@
 @property (weak, nonatomic) IBOutlet UIButton    *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel     *userNameJP;
 @property (weak, nonatomic) IBOutlet UILabel    *totalTime;
+
 @property (weak, nonatomic) IBOutlet UILabel    *startTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel    *endTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel    *exceptTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel    *totalTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel    *submitEndMsgLab;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSString  *strStartTime;
@@ -351,6 +353,13 @@ NSString *strLatitude = nil;
                 self.positionInfo.hidden = YES;
                 self.submitPage1Btn.hidden = YES;
                 
+                // start Facebook pop animation
+                [self scaleAnimationStartBtn ];
+                [self scaleAnimationEndBtn ];
+                [self scaleAnimationExceptBtn ];
+                [self scaleAnimationTotalTime ];
+                [self scaleAnimationSubmitPage3Btn];
+                
                 // show page3
                 self.page3Stack.hidden = NO;
             }
@@ -360,8 +369,16 @@ NSString *strLatitude = nil;
                 self.positionInfo.hidden = YES;
                 self.submitPage1Btn.hidden = YES;
                 
+                // play Facebook pop animation
+                [self scaleAnimationStartLab ];
+                [self scaleAnimationEndTimeLab ];
+                [self scaleAnimationExceptTimeLab ];
+                [self scaleAnimationTotalTimeLab ];
+                [self scaleAnimationSubmitEndMsgLab ];
+                
                 // show page4
                 self.page4Stack.hidden = NO;
+                
             }
         }
         HIDE_PROGRESS
@@ -435,7 +452,16 @@ NSString *strLatitude = nil;
             self.submitPage2Btn.hidden = YES;
             self.positionInfo.hidden = YES;
             self.page3Stack.hidden = YES;
+
+            // play Facebook pop animation
+            [self scaleAnimationStartLab ];
+            [self scaleAnimationEndTimeLab ];
+            [self scaleAnimationExceptTimeLab ];
+            [self scaleAnimationTotalTimeLab ];
+            [self scaleAnimationSubmitEndMsgLab ];
+            
             self.page4Stack.hidden = NO;
+
             
             // show monthly attendances infomation
             NSCalendar *gregorian = [[NSCalendar alloc]
@@ -749,6 +775,14 @@ NSString *strLatitude = nil;
                     self.submitPage1Btn.hidden = YES;
                     self.submitPage2Btn.hidden = YES;
                     self.positionInfo.hidden = YES;
+                    
+                    // start Facebook pop animation
+                    [self scaleAnimationStartBtn ];
+                    [self scaleAnimationEndBtn ];
+                    [self scaleAnimationExceptBtn ];
+                    [self scaleAnimationTotalTime ];
+                    [self scaleAnimationSubmitPage3Btn];
+                    
                     self.page3Stack.hidden = NO;
                     self.page4Stack.hidden = YES;
                 }
@@ -774,5 +808,117 @@ NSString *strLatitude = nil;
         // NSLog(@"conutdown：%d",_countDown);
     }
 }
+
+#pragma mark - facebook pop animation block ↓
+- (void) scaleAnimationStartBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.10f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.startTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation1"];
+    
+}
+
+- (void) scaleAnimationEndBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.20f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.endTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation2"];
+}
+- (void) scaleAnimationExceptBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.30f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.exceptTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation3"];
+}
+
+- (void) scaleAnimationTotalTime {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.40f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.totalTime.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation4"];
+}
+
+- (void) scaleAnimationSubmitPage3Btn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.50f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.submitPage3Btn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+}
+
+//- (void) scaleAnimation {
+//    
+//    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionY];
+//    springAnimation.fromValue = @(self.view.frame.origin.y - 400);
+//    springAnimation.beginTime = CACurrentMediaTime();
+//    springAnimation.springBounciness = 15.0f;
+//    
+//    [self.page4Stack.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+//}
+
+- (void) scaleAnimationStartLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.10f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.startTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation1"];
+    
+}
+
+- (void) scaleAnimationEndTimeLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.20f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.endTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation2"];
+}
+- (void) scaleAnimationExceptTimeLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.30f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.exceptTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation3"];
+}
+
+- (void) scaleAnimationTotalTimeLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.40f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.totalTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation4"];
+}
+
+- (void) scaleAnimationSubmitEndMsgLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.50f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.submitEndMsgLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+}
+
 
 @end

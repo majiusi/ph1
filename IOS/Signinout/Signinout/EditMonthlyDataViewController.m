@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *deleteReportBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel *workDateLab;
+@property (weak, nonatomic) IBOutlet UIStackView *stackView;
+
 - (IBAction)updateReport:(UIButton *)sender;
 - (IBAction)deleteReport:(UIButton *)sender;
 
@@ -62,12 +64,15 @@
     // calculate total time
     self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
     
+    // start Facebook pop animation
     [self scaleAnimationStartBtn ];
     [self scaleAnimationEndBtn ];
     [self scaleAnimationExceptBtn ];
     [self scaleAnimationTotalTime ];
     [self scaleAnimationUpdateReportBtn ];
     [self scaleAnimationDeleteReportBtn ];
+    
+    self.stackView.hidden = NO;
 
 }
 
@@ -324,6 +329,7 @@
     [actionSheet showInView:self.view ];
 }
 
+#pragma mark - facebook pop animation block ↓
 - (void) scaleAnimationStartBtn {
 
     POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
