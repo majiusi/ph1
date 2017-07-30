@@ -13,6 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <POPAnimation.h>
 #import <POP.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface PunchViewController ()<CLLocationManagerDelegate>
 
@@ -399,6 +400,9 @@ NSString *strLatitude = nil;
  @param sender <#sender description#>
  */
 - (IBAction)submitPage1:(UIButton *)sender {
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
     [self.locationManager startUpdatingLocation];
     if (self.timer.isValid) {
         [self stopTimerForPage1];
@@ -414,6 +418,9 @@ NSString *strLatitude = nil;
  @param sender <#sender description#>
  */
 - (IBAction)submitPage2:(UIButton *)sender {
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
     [self.locationManager startUpdatingLocation];
     
     if (self.timer.isValid) {
@@ -657,11 +664,17 @@ NSString *strLatitude = nil;
  *  start countdown for Page1
  */
 -(void)startCountDownForPage1 {
-    
-    _countDown = tick; //< 重置计时
-    
-    _timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timerFiredForPage1:) userInfo:nil repeats:YES]; //< 需要加入手动RunLoop，需要注意的是在NSTimer工作期间self是被强引用的
-    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes]; //< 使用NSRunLoopCommonModes才能保证RunLoop切换模式时，NSTimer能正常工作。
+    if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame  && [self.positionInfo.text compare:CONST_LOCATION_INTELLIGENCE_FAILURE] != NSOrderedSame)
+    {
+        _countDown = tick; //< 重置计时
+        
+        _timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timerFiredForPage1:) userInfo:nil repeats:YES]; //< 需要加入手动RunLoop，需要注意的是在NSTimer工作期间self是被强引用的
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes]; //< 使用NSRunLoopCommonModes才能保证RunLoop切换模式时，NSTimer能正常工作。
+    }
+    else
+    {
+        [self.positionInfo setText:CONST_POSITION_INFO_MSG];
+    }
 }
 
 /**
@@ -677,18 +690,18 @@ NSString *strLatitude = nil;
 /**
  *  countdown logic for Page2
  */
--(void)timerFiredForPage1:(NSTimer *)timer {
-    
-    if(_countDown == 1) {
-        // reset button
-        // NSLog(@"request start");
-        [self.submitPage1Btn setTitle:@"▶" forState:UIControlStateNormal];
-        [self stopTimerForPage1];
+    -(void)timerFiredForPage1:(NSTimer *)timer {
         
-        NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-        
-        if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
-        {
+        if(_countDown == 1) {
+            // reset button
+            // NSLog(@"request start");
+            [self.submitPage1Btn setTitle:@"▶" forState:UIControlStateNormal];
+            [self stopTimerForPage1];
+            
+            NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
+            
+            //        if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
+            //        {
             // call webservice
             SHOW_PROGRESS(self.navigationController.view);
             [[WebServiceAPI requestWithFinishBlock:^(id object) {
@@ -710,42 +723,50 @@ NSString *strLatitude = nil;
                 SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
+            //        }
+            //        else
+            //        {
+            //            [self.positionInfo setText:CONST_POSITION_INFO_MSG];
+            //        }
+            strLatitude = nil;
+            strLongitude = nil;
+        }else{
+            
+            // show countdown number
+            _countDown -=1;
+            [self.submitPage1Btn setTitle:[NSString stringWithFormat:@"%d", _countDown] forState:UIControlStateNormal];
+            // NSLog(@"conutdown：%d",_countDown);
+            
         }
-        else
-        {
-            [self.positionInfo setText:CONST_POSITION_INFO_MSG];
-        }
-        strLatitude = nil;
-        strLongitude = nil;
-    }else{
-        
-        // show countdown number
-        _countDown -=1;
-        [self.submitPage1Btn setTitle:[NSString stringWithFormat:@"%d", _countDown] forState:UIControlStateNormal];
-        // NSLog(@"conutdown：%d",_countDown);
-        
     }
-}
 
 /**
  *  start countdown for Page2
  */
 -(void)startCountDownForPage2 {
-    // reset countdown
-    _countDown = tick;
-    
-    _timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timerFiredForPage2:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame && [self.positionInfo.text compare:CONST_LOCATION_INTELLIGENCE_FAILURE] != NSOrderedSame)
+    {
+        // reset countdown
+        _countDown = tick;
+        
+        _timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timerFiredForPage2:) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    }
+    else
+    {
+        [self.positionInfo setText:CONST_POSITION_INFO_MSG];
+    }
 }
 
 /**
  *  stop countdown for Page2
  */
 - (void)stopTimerForPage2 {
-    if (_timer) {
-        [_timer invalidate];
-        [self.submitPage2Btn setTitle:@"■" forState:UIControlStateNormal];
-    }
+
+        if (_timer) {
+            [_timer invalidate];
+            [self.submitPage2Btn setTitle:@"■" forState:UIControlStateNormal];
+        }
 }
 
 /**
@@ -760,45 +781,47 @@ NSString *strLatitude = nil;
         [self stopTimerForPage2];
         
         NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
-        if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
-        {
-            // call webservice
-            SHOW_PROGRESS(self.navigationController.view);
-            [[WebServiceAPI requestWithFinishBlock:^(id object) {
-                NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-                if ([resultCodeObj integerValue] < 0)
-                {
-                    // WorkEndInfo submit error
-                    //SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
-                    SHOW_MSG_STYLE(CONST_SUBMIT_WORKEND_INFO_ERROR, @" ")
-                } else {
-                    self.submitPage1Btn.hidden = YES;
-                    self.submitPage2Btn.hidden = YES;
-                    self.positionInfo.hidden = YES;
-                    
-                    // start Facebook pop animation
-                    [self scaleAnimationStartBtn ];
-                    [self scaleAnimationEndBtn ];
-                    [self scaleAnimationExceptBtn ];
-                    [self scaleAnimationTotalTime ];
-                    [self scaleAnimationSubmitPage3Btn];
-                    
-                    self.page3Stack.hidden = NO;
-                    self.page4Stack.hidden = YES;
-                }
-                HIDE_PROGRESS
-            } failBlock:^(int statusCode, int errorCode) {
-                // web service not available
-                HIDE_PROGRESS
-                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
-                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
+        
+        //        if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
+        //        {
+        // call webservice
+        SHOW_PROGRESS(self.navigationController.view);
+        [[WebServiceAPI requestWithFinishBlock:^(id object) {
+            NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+            if ([resultCodeObj integerValue] < 0)
+            {
+                // WorkEndInfo submit error
+                //SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
+                SHOW_MSG_STYLE(CONST_SUBMIT_WORKEND_INFO_ERROR, @" ")
+            } else {
+                self.submitPage1Btn.hidden = YES;
+                self.submitPage2Btn.hidden = YES;
+                self.positionInfo.hidden = YES;
                 
-            }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
-        }
-        else
-        {
-            [self.positionInfo setText:CONST_POSITION_INFO_MSG];
-        }
+                // start Facebook pop animation
+                [self scaleAnimationStartBtn ];
+                [self scaleAnimationEndBtn ];
+                [self scaleAnimationExceptBtn ];
+                [self scaleAnimationTotalTime ];
+                [self scaleAnimationSubmitPage3Btn];
+                
+                self.page3Stack.hidden = NO;
+                self.page4Stack.hidden = YES;
+            }
+            HIDE_PROGRESS
+        } failBlock:^(int statusCode, int errorCode) {
+            // web service not available
+            HIDE_PROGRESS
+            //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
+            
+        }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
+        //        }
+        //        else
+        //        {
+        //            [self.positionInfo setText:CONST_POSITION_INFO_MSG];
+        //        }
+        
         strLatitude = nil;
         strLongitude = nil;
     }else{

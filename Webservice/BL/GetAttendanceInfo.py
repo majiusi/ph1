@@ -59,8 +59,8 @@ def get_attendance_info_by_year_month():
         # 月間出勤情報リスト設定（出勤データがある日のみ）
         for element in attendances:
             # NULL対策
-            report_start_time = 0
-            report_end_time = 0
+            report_start_time = ''
+            report_end_time = ''
             report_exclusive_minutes = 0
             report_total_minutes = 0
 

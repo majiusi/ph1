@@ -116,11 +116,38 @@
     
     
     double minuteToHours = [self.totalHoursByMinutesUnit doubleValue] / 60.0f;
+    int hour = [self.totalHoursByMinutesUnit intValue] / 60;
+    int minute = [self.totalHoursByMinutesUnit intValue] % 60;
     
-    label.text = [NSString stringWithFormat:@"                                                                 合計：%.2f", minuteToHours];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = [NSString stringWithFormat:@"合計：%02d:%02d (%.2f)",hour, minute, minuteToHours];
     
     return footerView;
 }
+
+- (int)isLocalSystemDate:(NSString *)dateString
+{
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateTime=[formatter stringFromDate:[NSDate date]];
+    NSDate *localDate = [formatter dateFromString:dateTime];
+    
+    NSDate *inputDate = [formatter dateFromString:dateString];
+    
+    NSComparisonResult result = [localDate compare:inputDate];
+    
+    if (result == NSOrderedDescending) {
+        //NSLog(@"Date1  is in the future");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //NSLog(@"Date1 is in the past");
+        return -1;
+    }
+    //NSLog(@"Both dates are the same");
+    return 0;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"punchListCell";
@@ -132,19 +159,22 @@
     // set cell content
     cell.punchDate.text = [NSString stringWithFormat:@"%@(%@)", [dict objectForKey:@"work_date"],[dict objectForKey:@"which_day"]];
     
-    if([[dict objectForKey:@"report_start_time"] integerValue] == 0)
-        cell.punchCheckinTime.text = @"0";
-    else
-        cell.punchCheckinTime.text = [[dict objectForKey:@"report_start_time"] substringToIndex:5];
+    NSString *strReportStartTime = [dict objectForKey:@"report_start_time"] ;
+    NSString *strReportEndTime = [dict objectForKey:@"report_end_time"] ;
     
-    if([[dict objectForKey:@"report_end_time"] integerValue] == 0)
-        cell.punchCheckoutTime.text = @"0";
-    else
-        cell.punchCheckoutTime.text = [[dict objectForKey:@"report_end_time"] substringToIndex:5];
+    cell.punchCheckinTime.text = @"00:00";
+    if( strReportStartTime != nil && ![strReportStartTime isEqualToString:@"00:00:00"] && [strReportStartTime length] > 0)
+        cell.punchCheckinTime.text = [strReportStartTime substringToIndex:5];
+    
+    cell.punchCheckoutTime.text = @"00:00";
+    if( strReportEndTime != nil && ![strReportEndTime isEqualToString:@"00:00:00"] && [strReportEndTime length] > 0)
+        cell.punchCheckoutTime.text = [strReportEndTime substringToIndex:5];
 
     cell.punchExceptTime.text = [NSString stringWithFormat:@"%0d(分)",[[dict objectForKey:@"report_exclusive_minutes"] intValue]];
-    double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
-    cell.punchTotalTime.text = [NSString stringWithFormat:@"%3.2f(時間)", minutesToHours];
+    //double minutesToHours = [[dict objectForKey:@"report_total_minutes"] doubleValue] / 60.0f;
+    int hour = [[dict objectForKey:@"report_total_minutes"] intValue] / 60;
+    int minute = [[dict objectForKey:@"report_total_minutes"] intValue]  % 60;
+    cell.punchTotalTime.text = [NSString stringWithFormat:@"%02d:%02d", hour, minute];
     
     // set text font color
     cell.punchDate.textColor = [UIColor grayColor];
@@ -156,6 +186,15 @@
     if([witchDay isEqualToString:@"土"] || [witchDay isEqualToString:@"日"] || [witchDay isEqualToString:@"祝"])
     {
         cell.punchDate.textColor = [UIColor redColor];
+    }
+    UIColor *currentDateColour = [UIColor colorWithRed:30.f/255.f green:144.f/255.f blue:255.f/255.f alpha:1.0];
+    if( [self isLocalSystemDate:[dict objectForKey:@"work_date"]] == 0)
+    {
+        cell.punchCheckinTime.textColor = currentDateColour;
+        cell.punchCheckoutTime.textColor = currentDateColour;
+        cell.punchExceptTime.textColor = currentDateColour;
+        cell.punchTotalTime.textColor = currentDateColour;
+    
     }
     
     return cell;
