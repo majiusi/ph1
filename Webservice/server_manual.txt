@@ -42,7 +42,7 @@ Archive:  maia.zip
 ##### start gunicorn and webservice
 [maiasoft@ip-172-31-30-207 WebService]$ pwd
 /home/maiasoft/WebService
-[maiasoft@ip-172-31-30-207 WebService]$ gunicorn -k gevent -b localhost:8000 MaiaCheckinoutWebService:app --reload
+[maiasoft@ip-172-31-30-207 WebService]$ gunicorn -k gevent -b localhost:8000 MaiaCheckinoutWebService:app --reload > ./fwInfo.log
 
 nohup gunicorn -k gevent -b localhost:8000 MaiaCheckinoutWebService:app --reload &
 
