@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wkm-Nj-eSS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wkm-Nj-eSS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -108,7 +108,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="uff-6d-YVl">
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="uff-6d-YVl">
                                 <rect key="frame" x="38" y="124" width="300" height="420"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="45" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMz-GD-pIZ">
@@ -260,8 +260,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="deleteReportBtn" destination="bmn-0Z-sbl" id="jcM-Un-4OY"/>
                         <outlet property="endTimeBtn" destination="e6g-JB-lUi" id="RXq-vl-lbD"/>
                         <outlet property="exceptTimeBtn" destination="6Y1-3T-uuP" id="5DD-mJ-bHY"/>
+                        <outlet property="stackView" destination="uff-6d-YVl" id="uRH-Fk-LqU"/>
                         <outlet property="startTimeBtn" destination="HMz-GD-pIZ" id="dhN-W3-8PO"/>
                         <outlet property="totalTime" destination="eTH-ge-2wd" id="QmS-5p-kFo"/>
                         <outlet property="updateReportBtn" destination="UyK-cv-nQ2" id="6ke-fl-TRd"/>
@@ -598,6 +600,7 @@
                         <outlet property="positionInfo" destination="CJq-fW-IQt" id="rUR-jg-h1k"/>
                         <outlet property="startTimeBtn" destination="X5O-xa-gxK" id="uQJ-jX-LUL"/>
                         <outlet property="startTimeLab" destination="BTP-bv-sGv" id="7qp-4y-ddT"/>
+                        <outlet property="submitEndMsgLab" destination="Lk8-ix-PXt" id="bWg-wD-cKc"/>
                         <outlet property="submitPage1Btn" destination="dfx-Fu-Z3c" id="oGn-ky-12a"/>
                         <outlet property="submitPage2Btn" destination="tkV-BO-sNT" id="Wjc-YE-Vod"/>
                         <outlet property="submitPage3Btn" destination="7gM-Xi-VmX" id="iBc-jE-qxv"/>

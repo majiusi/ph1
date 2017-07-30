@@ -10,7 +10,6 @@
 #import "WebServiceAPI.h"
 #import "Constant.h"
 
-
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *EnterpriseID;
 @property (weak, nonatomic) IBOutlet UITextField *UserName;
@@ -83,12 +82,19 @@ NSUserDefaults  * userDefault;
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        if(statusCode == 401)
+
+        if(statusCode == 401) {
             // login fail
             self.ErrorMessage.text = CONST_LOGIN_FAIL_MSG;
-        else
+
+            SHOW_MSG_STYLE(CONST_LOGIN_FAIL_MSG, @" ")
+        }
+        else{
             // service fail
             self.ErrorMessage.text = CONST_SERVICE_NOT_AVAILABLE;
+            
+            SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
+        }
         
     }] doLoginGetTokenWithEnterpriseId:self.EnterpriseID.text withUserName:userName withPassword:self.Password.text];
 

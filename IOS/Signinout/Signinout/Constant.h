@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "UICustomActionSheet.h"
 
 /** サービスの利用ができません。 */
 static NSString* const CONST_SERVICE_NOT_AVAILABLE = @"サービスの利用ができません。";
 /** チームID、ユーザID、パスワード不正 */
-static NSString* const CONST_LOGIN_FAIL_MSG = @"チームID、ユーザID、パスワード不正";
+static NSString* const CONST_LOGIN_FAIL_MSG = @"入力された情報が不正です。";
 
 /** パスワードの変更に失敗しました。 */
 static NSString* const CONST_PASSWORD_UPDATE_ERROR_TITLE = @"パスワードの変更に失敗しました。";
@@ -30,6 +31,14 @@ static NSString* const CONST_REPORT_CANNOT_UPDATE_MSG = @"合計負数(提出不
 static NSString* const CONST_REPORT_UPDATE_BTN = @"更新";
 /** 提出 */
 static NSString* const CONST_REPORT_SUBMIT_BTN = @"提出";
+/** 閉じる */
+static NSString* const CONST_CLOSE_BTN = @"閉じる";
+/** 削除 */
+static NSString* const CONST_DELETE_BTN = @"削除";
+/** 出勤情報が更新されました。 */
+static NSString* const CONST_REPORT_UPDATED_MSG = @"出勤情報が更新されました。 ";
+/** 出勤情報が削除されました。 */
+static NSString* const CONST_REPORT_DELETE_MSG = @"出勤情報が削除されました。 ";
 
 /////////////////////////////////////PunchViewController
 
@@ -102,9 +111,19 @@ static NSString* const CONST_MAIL_CONTEXT = @"ご担当者様\n\n \
 
 
 /** メッセージ表示ダイアログ */
-#define SHOW_MSG(TITLE, MESSAGE, QUVC) UIAlertController *alert = [UIAlertController alertControllerWithTitle:TITLE message:MESSAGE preferredStyle: UIAlertControllerStyleActionSheet]; \
+#define SHOW_MSG_OLD(TITLE, MESSAGE, QUVC) UIAlertController *alert = [UIAlertController alertControllerWithTitle:TITLE message:MESSAGE preferredStyle: UIAlertControllerStyleActionSheet]; \
     [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) { }]]; \
     [QUVC presentViewController:alert animated:true completion:nil];
+
+
+#define SHOW_MSG_STYLE(TITLE, MESSAGE) UICustomActionSheet* actionSheet = [[UICustomActionSheet alloc] initWithTitle:TITLE delegate:nil buttonTitles:@[CONST_CLOSE_BTN]];  \
+    [actionSheet setSubtitle:MESSAGE]; \
+    [actionSheet setExclusiveTouch:YES]; \
+    [actionSheet setButtonColors:@[[UIColor redColor]]]; \
+    [actionSheet setBackgroundColor:[UIColor clearColor]]; \
+    [actionSheet setSubtitleColor:[UIColor whiteColor]]; \
+    [actionSheet showInView:self.view ];
+
 
 /** プロセスダイアログの表示 */
 #define SHOW_PROGRESS(QUVC) MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:QUVC animated:YES]; \

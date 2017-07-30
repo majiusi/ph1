@@ -210,7 +210,8 @@
         if ([resultCodeObj integerValue] < 0)
         {
             // get EmployeeBaseInfo error
-            SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+            //SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+            SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_BASEINFO_ERROR, @" ")
         } else {
             self.strDefaultStartTime = [object objectForKey:@"default_work_start_time"];
             self.strDefaultEndTime = [object objectForKey:@"default_work_end_time"];
@@ -218,11 +219,11 @@
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
 
-    
     SHOW_PROGRESS(self.navigationController.view);
     // show monthly attendances infomation
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
@@ -230,7 +231,8 @@
         if ([resultCodeObj integerValue] < 0)
         {
             // get EmployeeMonthlyInfo error
-            SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+            //SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+            SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, @" ")
         } else {
             [self reloadView:object];
         }
@@ -238,7 +240,8 @@
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth ];
     

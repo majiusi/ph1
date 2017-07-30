@@ -11,6 +11,9 @@
 #import "Constant.h"
 #import "DateUtils.h"
 #import <CoreLocation/CoreLocation.h>
+#import <POPAnimation.h>
+#import <POP.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface PunchViewController ()<CLLocationManagerDelegate>
 
@@ -36,10 +39,12 @@
 @property (weak, nonatomic) IBOutlet UIButton    *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel     *userNameJP;
 @property (weak, nonatomic) IBOutlet UILabel    *totalTime;
+
 @property (weak, nonatomic) IBOutlet UILabel    *startTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel    *endTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel    *exceptTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel    *totalTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel    *submitEndMsgLab;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSString  *strStartTime;
@@ -143,6 +148,39 @@ NSString *strLatitude = nil;
     NSLog(@"locationManager error:%@",error);
 }
 
+-(void)showLikeButton
+{
+    
+    POPSpringAnimation *spin = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
+    
+    spin.fromValue = @(M_PI / 4);
+    spin.toValue = @(0);
+    spin.springBounciness = 20;
+    spin.velocity = @(10);
+    [self.self.submitPage1Btn.layer pop_addAnimation:spin forKey:@"likeAnimation"];
+}
+
+
+- (void)performAnimation
+{
+    
+    [self.submitPage1Btn.layer pop_removeAllAnimations];
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    //anim.beginTime = CACurrentMediaTime() + 1.0f;
+    anim.duration = 1.5f;
+    static BOOL ani = YES;
+    if (ani) {
+        anim.toValue = [NSValue valueWithCGPoint:CGPointMake(0.9, 0.9)];
+    }else{
+        anim.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+    }
+    ani = !ani;
+    anim.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+        if (finished) { [self performAnimation]; }
+    };
+    [self.submitPage1Btn.layer pop_addAnimation:anim forKey:@"Animation"];
+    [self.submitPage2Btn.layer pop_addAnimation:anim forKey:@"Animation"];
+}
 
 /*
 #pragma mark - Navigation
@@ -191,7 +229,8 @@ NSString *strLatitude = nil;
         if ([resultCodeObj integerValue] < 0)
         {
             // get EmployeeBaseInfo error
-            SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+            //SHOW_MSG(@"", CONST_GET_EMPLOYEE_BASEINFO_ERROR, self);
+            SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_BASEINFO_ERROR, @" ")
             HIDE_PROGRESS
         } else {
             self.strUserNameJP = [object objectForKey:@"name_jp"];
@@ -232,7 +271,8 @@ NSString *strLatitude = nil;
                 if ([resultCodeObj integerValue] < 0)
                 {
                     // get EmployeeMonthlyInfo error
-                    SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    // SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, @" ")
                 } else {
                     // show name and monthly work total time
                     self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
@@ -266,17 +306,19 @@ NSString *strLatitude = nil;
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
                 HIDE_PROGRESS
-                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] getEmployeeBaseInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" ];
-    
+
     RESHOW_PROGRESS
     // 4.show UI Controller&Info according page_flag.
     [[WebServiceAPI requestWithFinishBlock:^(id object) {
@@ -285,13 +327,15 @@ NSString *strLatitude = nil;
         if ([resultCodeObj integerValue] < 0)
         {
             // get page flag error
-            SHOW_MSG(@"", CONST_GET_PAGE_FLAG_ERROR, self);
+            //SHOW_MSG(@"", CONST_GET_PAGE_FLAG_ERROR, self);
+            SHOW_MSG_STYLE(CONST_GET_PAGE_FLAG_ERROR, @" ")
         } else {
             if ([pageFlagObj integerValue] == 1)
             {
                 // show page1
                 self.positionInfo.hidden = NO;
                 self.submitPage1Btn.hidden = NO;
+                [self performAnimation];
             }
             else if ([pageFlagObj integerValue] == 2)
             {
@@ -301,7 +345,7 @@ NSString *strLatitude = nil;
                 // show page2
                 self.positionInfo.hidden = NO;
                 self.submitPage2Btn.hidden = NO;
-                
+                [self performAnimation];
 
             }
             else if ([pageFlagObj integerValue] == 3)
@@ -309,6 +353,13 @@ NSString *strLatitude = nil;
                 // hide page1
                 self.positionInfo.hidden = YES;
                 self.submitPage1Btn.hidden = YES;
+                
+                // start Facebook pop animation
+                [self scaleAnimationStartBtn ];
+                [self scaleAnimationEndBtn ];
+                [self scaleAnimationExceptBtn ];
+                [self scaleAnimationTotalTime ];
+                [self scaleAnimationSubmitPage3Btn];
                 
                 // show page3
                 self.page3Stack.hidden = NO;
@@ -319,8 +370,16 @@ NSString *strLatitude = nil;
                 self.positionInfo.hidden = YES;
                 self.submitPage1Btn.hidden = YES;
                 
+                // play Facebook pop animation
+                [self scaleAnimationStartLab ];
+                [self scaleAnimationEndTimeLab ];
+                [self scaleAnimationExceptTimeLab ];
+                [self scaleAnimationTotalTimeLab ];
+                [self scaleAnimationSubmitEndMsgLab ];
+                
                 // show page4
                 self.page4Stack.hidden = NO;
+                
             }
         }
         HIDE_PROGRESS
@@ -328,7 +387,8 @@ NSString *strLatitude = nil;
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] getPageFlagWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@""];
 }
@@ -340,6 +400,9 @@ NSString *strLatitude = nil;
  @param sender <#sender description#>
  */
 - (IBAction)submitPage1:(UIButton *)sender {
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
     [self.locationManager startUpdatingLocation];
     if (self.timer.isValid) {
         [self stopTimerForPage1];
@@ -355,6 +418,9 @@ NSString *strLatitude = nil;
  @param sender <#sender description#>
  */
 - (IBAction)submitPage2:(UIButton *)sender {
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
     [self.locationManager startUpdatingLocation];
     
     if (self.timer.isValid) {
@@ -379,7 +445,8 @@ NSString *strLatitude = nil;
         if ([resultCodeObj integerValue] < 0)
         {
             // WorkReportInfo submit error
-            SHOW_MSG(@"", CONST_SUBMIT_REPORT_INFO_ERROR, self);
+            //SHOW_MSG(@"", CONST_SUBMIT_REPORT_INFO_ERROR, self);
+            SHOW_MSG_STYLE(CONST_SUBMIT_REPORT_INFO_ERROR, @" ")
             HIDE_PROGRESS
         } else {
             self.startTimeLab.text = [NSString stringWithFormat:CONST_START_FORMAT, self.strStartTime];
@@ -392,7 +459,16 @@ NSString *strLatitude = nil;
             self.submitPage2Btn.hidden = YES;
             self.positionInfo.hidden = YES;
             self.page3Stack.hidden = YES;
+
+            // play Facebook pop animation
+            [self scaleAnimationStartLab ];
+            [self scaleAnimationEndTimeLab ];
+            [self scaleAnimationExceptTimeLab ];
+            [self scaleAnimationTotalTimeLab ];
+            [self scaleAnimationSubmitEndMsgLab ];
+            
             self.page4Stack.hidden = NO;
+
             
             // show monthly attendances infomation
             NSCalendar *gregorian = [[NSCalendar alloc]
@@ -410,7 +486,8 @@ NSString *strLatitude = nil;
                 if ([resultCodeObj integerValue] < 0)
                 {
                     // get EmployeeMonthlyInfo error
-                    SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    //SHOW_MSG(@"", CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, self);
+                    SHOW_MSG_STYLE(CONST_GET_EMPLOYEE_MONTHLY_INFO_ERROR, @" ")
                 } else {
                     // show name and monthly work total time
                     self.userNameJP.text = [NSString stringWithFormat:CONST_NAME_AND_TOTAL_WORK_TIME_FORMAT,
@@ -420,14 +497,16 @@ NSString *strLatitude = nil;
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
                 HIDE_PROGRESS
-                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] getEmployeeMonthlyInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withSearchYear:searchYear withSearchMonth:searchMonth];
         }
     } failBlock:^(int statusCode, int errorCode) {
         // web service not available
         HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
         
     }] submitWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
 }
@@ -630,7 +709,8 @@ NSString *strLatitude = nil;
                 if ([resultCodeObj integerValue] < 0)
                 {
                     // WorkStartInfo submit error
-                    SHOW_MSG(@"", CONST_SUBMIT_WORKSTART_INFO_ERROR, self);
+                    //SHOW_MSG(@"", CONST_SUBMIT_WORKSTART_INFO_ERROR, self);
+                    SHOW_MSG_STYLE(CONST_SUBMIT_WORKSTART_INFO_ERROR, @" ")
                 } else {
                     self.submitPage1Btn.hidden = YES;
                     self.submitPage2Btn.hidden = NO;
@@ -639,7 +719,8 @@ NSString *strLatitude = nil;
             } failBlock:^(int statusCode, int errorCode) {
                 // web service not available
                 HIDE_PROGRESS
-                SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+                SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
                 
             }] submitWorkStartInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
             //        }
@@ -700,6 +781,7 @@ NSString *strLatitude = nil;
         [self stopTimerForPage2];
         
         NSUserDefaults  * userDefault = [NSUserDefaults standardUserDefaults];
+        
         //        if(strLongitude != nil && [self.positionInfo.text compare:CONST_POSITION_INFO_MSG] != NSOrderedSame)
         //        {
         // call webservice
@@ -709,11 +791,20 @@ NSString *strLatitude = nil;
             if ([resultCodeObj integerValue] < 0)
             {
                 // WorkEndInfo submit error
-                SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
+                //SHOW_MSG(@"", CONST_SUBMIT_WORKEND_INFO_ERROR, self);
+                SHOW_MSG_STYLE(CONST_SUBMIT_WORKEND_INFO_ERROR, @" ")
             } else {
                 self.submitPage1Btn.hidden = YES;
                 self.submitPage2Btn.hidden = YES;
                 self.positionInfo.hidden = YES;
+                
+                // start Facebook pop animation
+                [self scaleAnimationStartBtn ];
+                [self scaleAnimationEndBtn ];
+                [self scaleAnimationExceptBtn ];
+                [self scaleAnimationTotalTime ];
+                [self scaleAnimationSubmitPage3Btn];
+                
                 self.page3Stack.hidden = NO;
                 self.page4Stack.hidden = YES;
             }
@@ -721,7 +812,8 @@ NSString *strLatitude = nil;
         } failBlock:^(int statusCode, int errorCode) {
             // web service not available
             HIDE_PROGRESS
-            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
             
         }] submitWorkEndInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withLongitude:strLongitude withLatitude:strLatitude spotName:self.positionInfo.text];
         //        }
@@ -729,6 +821,7 @@ NSString *strLatitude = nil;
         //        {
         //            [self.positionInfo setText:CONST_POSITION_INFO_MSG];
         //        }
+        
         strLatitude = nil;
         strLongitude = nil;
     }else{
@@ -738,5 +831,117 @@ NSString *strLatitude = nil;
         // NSLog(@"conutdown：%d",_countDown);
     }
 }
+
+#pragma mark - facebook pop animation block ↓
+- (void) scaleAnimationStartBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.10f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.startTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation1"];
+    
+}
+
+- (void) scaleAnimationEndBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.20f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.endTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation2"];
+}
+- (void) scaleAnimationExceptBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.30f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.exceptTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation3"];
+}
+
+- (void) scaleAnimationTotalTime {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.40f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.totalTime.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation4"];
+}
+
+- (void) scaleAnimationSubmitPage3Btn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.50f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.submitPage3Btn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+}
+
+//- (void) scaleAnimation {
+//    
+//    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionY];
+//    springAnimation.fromValue = @(self.view.frame.origin.y - 400);
+//    springAnimation.beginTime = CACurrentMediaTime();
+//    springAnimation.springBounciness = 15.0f;
+//    
+//    [self.page4Stack.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+//}
+
+- (void) scaleAnimationStartLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.10f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.startTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation1"];
+    
+}
+
+- (void) scaleAnimationEndTimeLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.20f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.endTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation2"];
+}
+- (void) scaleAnimationExceptTimeLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.30f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.exceptTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation3"];
+}
+
+- (void) scaleAnimationTotalTimeLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.40f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.totalTimeLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation4"];
+}
+
+- (void) scaleAnimationSubmitEndMsgLab {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.50f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.submitEndMsgLab.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+}
+
 
 @end

@@ -10,14 +10,19 @@
 #import "WebServiceAPI.h"
 #import "Constant.h"
 #import "DateUtils.h"
+#import <POPAnimation.h>
+#import <POP.h>
 
-@interface EditMonthlyDataViewController ()
+@interface EditMonthlyDataViewController () <UICustomActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *exceptTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *updateReportBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deleteReportBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UILabel *workDateLab;
+@property (weak, nonatomic) IBOutlet UIStackView *stackView;
+
 - (IBAction)updateReport:(UIButton *)sender;
 - (IBAction)deleteReport:(UIButton *)sender;
 
@@ -32,6 +37,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
+    
     // set default. [they will be set up by table value in future]
     if([self.strStartTime isEqualToString:@""] || [self.strStartTime isEqualToString:@"0"]) self.strStartTime = self.strDefaultStartTime;
     if([self.strEndTime isEqualToString:@""] || [self.strEndTime isEqualToString:@"0"]) self.strEndTime = self.strDefaultEndTime;
@@ -57,6 +63,17 @@
     
     // calculate total time
     self.strTotalMinute = [self dateTimeDifferenceWithStartTime:self.strStartTime endTime:self.strEndTime exceptTime:self.strExceptTime];
+    
+    // start Facebook pop animation
+    [self scaleAnimationStartBtn ];
+    [self scaleAnimationEndBtn ];
+    [self scaleAnimationExceptBtn ];
+    [self scaleAnimationTotalTime ];
+    [self scaleAnimationUpdateReportBtn ];
+    [self scaleAnimationDeleteReportBtn ];
+    
+    self.stackView.hidden = NO;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -221,47 +238,10 @@
 }
 */
 
-- (IBAction)updateReport:(UIButton *)sender {
-    SHOW_PROGRESS(self.navigationController.view);
-    
-    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
-    
-    [[WebServiceAPI requestWithFinishBlock:^(id object) {
-        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
-        if ([resultCodeObj integerValue] == -1)
-        {
-            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_FUTURE_DATE_MSG, self);
-        }
-        else if ([resultCodeObj integerValue] == -2)
-        {
-            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_NOT_CURRENT_MONTH_MSG, self);
-        }
-        else if ([resultCodeObj integerValue] < -2)
-        {
-            // change work report fail
-            SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_WORK_REPORT_FAIL_MSG, self);
-        } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"修正完了。" preferredStyle: UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                // return to before window
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            }]];
-            //show dialog box
-            [self presentViewController:alert animated:true completion:nil];
-        }
-        HIDE_PROGRESS
-    } failBlock:^(int statusCode, int errorCode) {
-        // web service not available
-        HIDE_PROGRESS
-        SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
-        
-    }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
-}
 
-- (IBAction)deleteReport:(UIButton *)sender {
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"削除しますか" preferredStyle: UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"削除する" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+-(void)customActionSheet:(UICustomActionSheet *)customActionSheet clickedButtonTitle:(NSString *)buttonTitle{
+    NSLog(@"%@",buttonTitle);
+    if([buttonTitle isEqualToString:CONST_DELETE_BTN]){
         // to be delete
         SHOW_PROGRESS(self.navigationController.view);
         
@@ -271,37 +251,170 @@
             NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
             if ([resultCodeObj integerValue] == -1)
             {
-                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_FUTURE_DATE_MSG, self);
+                //SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_FUTURE_DATE_MSG, self);
+                SHOW_MSG_STYLE(CONST_DELETE_FUTURE_DATE_MSG, @" ")
             }
             else if ([resultCodeObj integerValue] == -2)
             {
-                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_NOT_CURRENT_MONTH_MSG, self);
+                //SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_NOT_CURRENT_MONTH_MSG, self);
+                SHOW_MSG_STYLE(CONST_DELETE_NOT_CURRENT_MONTH_MSG, @" ")
             }
             else if ([resultCodeObj integerValue] < -2)
             {
                 // change work report fail
-                SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_WORK_REPORT_FAIL_MSG, self);
+                // SHOW_MSG(CONST_DELETE_WORK_REPORT_FAIL_TITLE, CONST_DELETE_WORK_REPORT_FAIL_MSG, self);
+                SHOW_MSG_STYLE(CONST_DELETE_WORK_REPORT_FAIL_MSG, @" ")
             } else {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"削除完了。" preferredStyle: UIAlertControllerStyleActionSheet];
-                [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    // return to before window
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                }]];
-                //show dialog box
-                [self presentViewController:alert animated:true completion:nil];
+                SHOW_MSG_STYLE(CONST_REPORT_DELETE_MSG, @" ")
+                // return to before window
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
             HIDE_PROGRESS
         } failBlock:^(int statusCode, int errorCode) {
             // web service not available
             HIDE_PROGRESS
-            SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+            SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
             
         }] deleteWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"] withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withDeleteDate:self.workDate];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"閉じる" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // do nothing
-    }]];
-    //show dialog box
-    [self presentViewController:alert animated:true completion:nil];
+    }
 }
+
+- (IBAction)updateReport:(UIButton *)sender {
+    SHOW_PROGRESS(self.navigationController.view);
+    
+    NSUserDefaults  *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [[WebServiceAPI requestWithFinishBlock:^(id object) {
+        NSNumber *resultCodeObj = [object objectForKey:@"result_code"];
+        if ([resultCodeObj integerValue] == -1)
+        {
+            //SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_FUTURE_DATE_MSG, self);
+            SHOW_MSG_STYLE(CONST_CHANGE_FUTURE_DATE_MSG, @" ")
+        }
+        else if ([resultCodeObj integerValue] == -2)
+        {
+            //SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_NOT_CURRENT_MONTH_MSG, self);
+            SHOW_MSG_STYLE(CONST_CHANGE_NOT_CURRENT_MONTH_MSG, @" ")
+        }
+        else if ([resultCodeObj integerValue] < -2)
+        {
+            // change work report fail
+            //SHOW_MSG(CONST_CHANGE_WORK_REPORT_FAIL_TITLE, CONST_CHANGE_WORK_REPORT_FAIL_MSG, self);
+            SHOW_MSG_STYLE(CONST_CHANGE_WORK_REPORT_FAIL_MSG, @" ")
+        } else {
+            SHOW_MSG_STYLE(CONST_REPORT_UPDATED_MSG, @" ")
+            // return to before window
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        HIDE_PROGRESS
+    } failBlock:^(int statusCode, int errorCode) {
+        // web service not available
+        HIDE_PROGRESS
+        //SHOW_MSG(@"", CONST_SERVICE_NOT_AVAILABLE, self);
+        SHOW_MSG_STYLE(CONST_SERVICE_NOT_AVAILABLE, @" ")
+        
+    }] updateWorkReportInfoWithEnterpriseId:[userDefault stringForKey:@"enterpriseId"]  withUserName:[userDefault stringForKey:@"token"] withPassword:@"" withUpdateDate:self.workDate withStartTime:self.strStartTime withEndTime:self.strEndTime withExclusiveMinutes:self.strExceptTime withTotalMinutes:self.strTotalMinute];
+}
+
+- (IBAction)deleteReport:(UIButton *)sender {
+    
+    UICustomActionSheet* actionSheet = [[UICustomActionSheet alloc] initWithTitle:@"削除しますか" delegate:self buttonTitles:@[CONST_CLOSE_BTN,CONST_DELETE_BTN]];
+    
+    [actionSheet setButtonColors:@[[UIColor grayColor],[UIColor redColor]]];
+    [actionSheet setBackgroundColor:[UIColor clearColor]];
+    
+    [actionSheet setSubtitle:@" "];
+    [actionSheet setSubtitleColor:[UIColor whiteColor]];
+    [actionSheet showInView:self.view ];
+}
+
+#pragma mark - facebook pop animation block ↓
+- (void) scaleAnimationStartBtn {
+
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.10f;
+    springAnimation.springBounciness = 15.0f;
+
+    [self.startTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation1"];
+ 
+}
+
+- (void) scaleAnimationEndBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.20f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.endTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation2"];
+}
+- (void) scaleAnimationExceptBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.30f;
+    springAnimation.springBounciness = 15.0f;
+
+    [self.exceptTimeBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation3"];
+}
+
+- (void) scaleAnimationTotalTime {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.40f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.totalTime.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation4"];
+    
+}
+- (void) scaleAnimationUpdateReportBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.50f;
+    springAnimation.springBounciness = 15.0f;
+    
+    [self.updateReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation5"];
+}
+- (void) scaleAnimationDeleteReportBtn {
+    
+    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    springAnimation.fromValue = @(self.view.frame.origin.x + 400);
+    springAnimation.beginTime = CACurrentMediaTime() + 0.60f;
+    springAnimation.springBounciness = 15.0f;
+    
+//    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
+//        if (finished) {
+//            [self scaleAnimationUpdateBtn];
+//        }
+//    }];
+    
+    [self.deleteReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation6"];
+}
+
+//- (void) scaleAnimationUpdateBtn {
+//
+//    POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//
+//    springAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
+//    springAnimation.toValue =[NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+//    springAnimation.beginTime = CACurrentMediaTime() + 3.0f;
+//    springAnimation.springSpeed = 12;
+//    springAnimation.springBounciness = 20;
+//
+//    [springAnimation setCompletionBlock:^(POPAnimation * animation, BOOL finished) {
+//        
+//
+//        if (finished) {
+//            [self scaleAnimationUpdateBtn];
+//        }
+//    }];
+//    [self.updateReportBtn.layer pop_addAnimation:springAnimation forKey:@"SpringAnimation"];
+//    
+//}
+
+
 @end
