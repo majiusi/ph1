@@ -93,7 +93,7 @@
     label.font = [UIFont systemFontOfSize:13];
 
     // show table title
-    label.text = @"日付                  開始          終了        控除         出勤時間";
+    label.text = @"日付                   開始           終了        控除      出勤時間";
     
     return headerView;
 }
