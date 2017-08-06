@@ -240,7 +240,7 @@
 
 
 -(void)customActionSheet:(UICustomActionSheet *)customActionSheet clickedButtonTitle:(NSString *)buttonTitle{
-    NSLog(@"%@",buttonTitle);
+      
     if([buttonTitle isEqualToString:CONST_DELETE_BTN]){
         // to be delete
         SHOW_PROGRESS(self.navigationController.view);
