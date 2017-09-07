@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 ###################################
-# description: 连接DB
+# description: DB操作
 # author: Kyoku
 # date: 2017/1/8
 ###################################
@@ -10,30 +10,36 @@ import MySQLdb
 import datetime
 
 class DBSession:
-    #数据库连接字符串
+    #接続情報作成
     conn = None
-    #游标指针（cursor）
+    #カーソル作成（cursor）
     cur = None
     
-    # 连接DB
+    ###################################
+    # DBセッション作成
+    ###################################
     def session_open(self):
         #创建MySQL数据库连接字符串
         self.conn = MySQLdb.connect(
                            host="localhost",
                            user="dbuser",
-                           passwd="Admin001",
+                           passwd="mach2017!!",
                            db="maiaDB",
                            port=3306,
                            charset="utf8")
     
-    # 关闭DB连接
+    ###################################
+    # DBセッションクローズ
+    ###################################
     def session_close(self):
         # 关闭数据库连接
         self.conn.close()
         
-    # 员工信息取得
+    ###################################
+    # 社員情報取得
+    ###################################
     def getEmployeesInfo(self, name):
-        #创建cursor(游标指针)
+        #cursor(カーソル)設定
         cur = self.conn.cursor()
         # 社員情報取得
         sql = " select "
@@ -60,29 +66,28 @@ class DBSession:
             sql += name
             sql += "'"
         sql += " ; "
-        
         #print sql
         cur.execute(sql)
         lines = cur.fetchall()
-        
         return lines
         
-    # 派遣信息取得
+    ###################################
+    # 勤務信息取得
     ## enterpriseId : 企業ID
-    ## dispatchId : 派遣ID
-    ## employeeId : 社員ID
-    ## dateYm : 勤務年月
-    def getDispatchesInfo(self, enterpriseId, dispatchId, employeeId, dateYm):
+    ## dispatchId   : 派遣ID
+    ## employeeId   : 社員ID
+    ## dateYm       : 勤務年月
+    ###################################
+    def getAttendancesInfo(self, enterpriseId, dispatchId, employeeId, dateYm):
         #cursor
         cur = self.conn.cursor()
-        
-        # 派遣情報取得
+        # 勤務情報取得
         sql = " select "
         sql += " dsp.work_start_time, "                #0
         sql += " dsp.work_end_time, "                  #1
         sql += " dsp.day_break_minutes, "              #2
-        sql += " '', "                                 #3
-        sql += " '', "                                 #4
+        sql += " '', "                                 #3 所属会社
+        sql += " '', "                                 #4 プロジェクト名
         sql += " att.report_start_time, "              #5
         sql += " att.report_end_time, "                #6
         sql += " att.start_time, "                     #7
@@ -91,7 +96,7 @@ class DBSession:
         sql += " att.end_spot_name, "                  #10
         sql += " att.exclusive_minutes, "              #11
         sql += " att.total_minutes, "                  #12
-        sql += " '', "                                 #13
+        sql += " '', "                                 #13 備考
         sql += " DATE_FORMAT(att.date, '%d') "         #14
         sql += " from dispatches dsp, attendances att "
         sql += " where "
@@ -121,19 +126,56 @@ class DBSession:
         
         return cur.fetchall()
         
-    # バッチ実行パラメータ取得
+    ###################################
+    # 全員情報出力用基本情報取得
+    ###################################
     def getBatchParamet(self):
         #cursor
         cur = self.conn.cursor()
         
         # 派遣情報取得
         sql = " select distinct "
-        sql += " enterprise_id, "                #0
-        sql += " dispatch_id "                   #1
+        sql += " enterprise_id, "                #0 企業ID
+        sql += " dispatch_id "                   #1 派遣ID
         sql += " from dispatches "
         #print sql
         cur.execute(sql)
         
+        return cur.fetchall()
+        
+    ###################################
+    # メール宛先情報取得
+    ###################################
+    def getDispatchesInfo(self, employeeId = None, enterpriseId = 'MAE0001'):
+        #cursor
+        cur = self.conn.cursor()
+        
+        # 派遣情報取得
+        sql = " select "
+        sql += " emp.employee_id, "      #0 [社員]．社員ID
+        sql += " emp.name_jp, "          #1 [社員]．日本語名
+        sql += " emp.mail_addr, "        #2 [社員]．メールアドレス
+        sql += " dis.dispatch_id "       #3 [派遣]．派遣ID
+        sql += " from "
+        sql += " employees as emp, "
+        sql += " dispatches as dis "
+        sql += " where emp.enterprise_id = dis.enterprise_id "
+        sql += " and emp.employee_id = dis.employee_id "
+        sql += " and emp.enterprise_id = '"
+        sql += enterpriseId
+        sql += "' "
+        if employeeId:
+            sql += " and emp.employee_id = '"
+            sql += employeeId
+            sql += "' "
+        sql += " and ( "
+        sql += " select count(*)  "
+        sql += " from attendances as att "
+        sql += " where att.enterprise_id = dis.enterprise_id "
+        sql += " and att.dispatch_id = dis.dispatch_id "
+        sql += " ) > 0 "
+        #print sql
+        cur.execute(sql)
         return cur.fetchall()
     
 #     def ins(self):
@@ -151,38 +193,37 @@ if(__name__=="__main__"):
     try:
         dbSession.session_open()
     except Exception:
-        dbSession.session_close()
         print u'データベース接続に失敗しました。'
         
-    # バッチ実行パラメータ取得
-    prmtLines = dbSession.getBatchParamet()
-    
-    # 勤務年の設定
-    iYear = str(datetime.datetime.now().year)
-    # 勤務月の設定
-    iMonth = "%02d" % int(datetime.datetime.now().month)
-    
-    # 社員ID
-    customerId = ''#'ENP0000001'
-    
-    for prmtline in prmtLines:
-        #print u'◆バッチ実行パラメータ取得結果'
-        #print prmtline
-        # 企業ID
-        enterpriseId = prmtline[0]
-        # 派遣ID
-        dispatchId = prmtline[1]
-        # 社員情報取得
-        epyLines = dbSession.getEmployeesInfo(customerId)
-    
-        for epyLine in epyLines:
-            #print u'1.社員情報取得結果'
-            #print epyLine
-            dspclines = dbSession.getDispatchesInfo(enterpriseId, dispatchId, epyLine[1], iYear + iMonth)
-    
-            #for dspcline in dspclines:
-                #print u'2.派遣信息取得結果'
-                #print dspcline
+    # メール宛先情報取得
+    prmtLines = dbSession.getDispatchesInfo()
+        
+#     # バッチ実行パラメータ取得
+#     prmtLines = dbSession.getBatchParamet()
+#     
+#     # 勤務年の設定
+#     iYear = str(datetime.datetime.now().year)
+#     # 勤務月の設定
+#     iMonth = "%02d" % int(datetime.datetime.now().month)
+#     # 社員ID
+#     customerId = ''#'C0011'
+#     
+#     for prmtline in prmtLines:
+#         # 企業ID
+#         enterpriseId = prmtline[0]
+#         # 派遣ID
+#         dispatchId = prmtline[1]
+#         # 社員情報取得
+#         epyLines = dbSession.getEmployeesInfo(customerId)
+#     
+#         for epyLine in epyLines:
+#             #print u'1.社員情報取得結果'
+#             #print epyLine
+#             dspclines = dbSession.getInfo(enterpriseId, dispatchId, epyLine[1], iYear + iMonth)
+#     
+#             #for dspcline in dspclines:
+#                 #print u'2.派遣信息取得結果'
+#                 #print dspcline
     
     #セッションクローズ
     dbSession.session_close()
