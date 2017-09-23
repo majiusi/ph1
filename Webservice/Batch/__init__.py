@@ -1,1 +1,1 @@
-__all__ = ["DBTransactionBatch", "MakeWorkbook"]
+__all__ = ["DBTransactionBatch", "MakeWorkbook", "SendMailByMonth"]
