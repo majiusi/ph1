@@ -122,6 +122,11 @@ def change_password_for_Manager():
 def new_user():
     return CreateUser.create_user()
 
+# ============
+@app.route('/api/MAS1000030', methods=['POST'])
+@auth.login_required
+def get_employee_info_list():
+    return GetEmployeeInfoList.get_employee_info_list()
 
 ####################################################################
 # WebService　URI声明（BL ロジック呼出し終了）
