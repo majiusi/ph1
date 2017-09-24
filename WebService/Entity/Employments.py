@@ -29,7 +29,7 @@ class Employment(db.Model):
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     emp_type = db.Column(db.String(20))
-    monthly_salary = db.Column(db.Numeric(10, 0), nullable=False)
+    monthly_salary = db.Column(db.Numeric(10, 0))
     monthly_fee = db.Column(db.Numeric(10, 0))
     ensurance_id = db.Column(db.String(10))
     exclusive_id = db.Column(db.String(10))
