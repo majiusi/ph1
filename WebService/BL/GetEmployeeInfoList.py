@@ -32,7 +32,7 @@ def get_employee_info_list():
             "    users.employee_id as users_employee_id,"
             "    users.name as users_login_name,"
             "    users.auth_id as users_auth_id,"
-            "    users.last_login_at as users_last_login_at"
+            "    users.last_login_at as users_last_login_at,"
             "    users.valid as users_valid,"
             "    employees.name_jp as employees_name_jp,"
             "    employees.resident_addr as employees_resident_addr,"
@@ -51,6 +51,8 @@ def get_employee_info_list():
             " FROM users "
             " JOIN employees ON "
             "      users.enterprise_id = employees.enterprise_id AND users.employee_id = employees.employee_id"
+            " JOIN employments ON "
+            "      users.enterprise_id = employments.enterprise_id AND users.employee_id = employments.employee_id"
             " JOIN dispatches ON "
             "      users.enterprise_id = dispatches.enterprise_id AND users.employee_id = dispatches.employee_id"
             " WHERE users.enterprise_id = '{enterprise_id}'".format(**vars()))
